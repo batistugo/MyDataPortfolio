@@ -1,0 +1,52 @@
+---
+title: "My Data Science Projects Portfolio"
+output: 
+  html_document:
+    theme: cosmo
+---
+
+<style type="text/css">
+.title {
+  display: none;
+}
+
+#getting-started img {
+  margin-right: 10px;
+}
+
+</style>
+
+<div class="row" style="padding-top: 30px;">
+<div class="col-sm-12">
+
+# **My Data Science Portfolio**
+
+Welcome to my portfolio, showcasing my freelance data science projects as well as my personal projects. My name is Hugo Batista da Silva, and I hail from Espírito Santo, Brazil. I hold a Bachelor's degree in [Statistics](https://estatistica.ufes.br/matriz-curricular-ppc-2019) from the Federal University of Espírito Santo.
+
+In this portfolio, you will find a selection of projects that I found particularly interesting and diverse in terms of subject matter. I have carefully curated this collection to avoid repetitive themes and to present a broad spectrum of my work. Please note that the content provided on each project's page, accessible via the links in the projects table, does not represent the final product of those projects (especially for contractual work). The detailed written sections and references have been omitted to enhance readability and dynamism.
+
+
+__________________________________________________________________________________________________
+#### **Contact Info**
+
+Feel free to reach out to me through any of the following channels:
+
+• Phone: +55 (27) 99749-2646
+
+• LinkedIn: [Hugo Batista da Silva](https://www.linkedin.com/in/hugo-batista-da-silva-064715257/)
+
+• GitHub: [Batistugo](https://www.github.com/batistugo)
+
+__________________________________________________________________________________________________
+
+</div>
+<div class="col-sm-5">
+#### **Projects**
+
+|    Name    |    Subject   | Project Type |
+|:----------:|:------------:|:------------:|
+| [Project 01](project01.html) | Linear model |   Contract   |
+| [Project 02](project02.html) |  Theory Test |   Personal   |
+
+</a>
+</div>

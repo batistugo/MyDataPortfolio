@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Hugo Batista da Silva" />
+
+
+<title>Comparison between the non-parametric Wilcoxon test and Binomial Sign test</title>
+
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">MyDataPortfolio</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Profile</a>
+</li>
+<li>
+  <a href="project01.html">Project 01</a>
+</li>
+<li>
+  <a href="project02.html">Project 02</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Comparison between the non-parametric
+Wilcoxon test and Binomial Sign test</h1>
+<h4 class="author">Hugo Batista da Silva</h4>
+
+</div>
+
+
+<p>Before starting the simulation, we will generate two paired samples
+that follow the normal distribution, x and y, where the mean <span
+class="math inline">\(\mu\)</span> of y is algebraically related to the
+value of x. <span class="math display">\[ X \sim N(0, 1)\  \\ \  Y \sim
+N(x + d, 1),\ d = 0.1,\ 0.2,\ ...,\ 1 \]</span> In this simulation we
+will test the power of the tests to detect whether samples have a
+relationship, and to do this we will simulate values where detection is
+more difficult and easier by varying the <span
+class="math inline">\(d\)</span> of <span
+class="math inline">\(Y\)</span> and the <span
+class="math inline">\(n\)</span> for the <span
+class="math inline">\(rnorm\)</span> function. The larger <span
+class="math inline">\(d\)</span> and <span
+class="math inline">\(n\)</span>, the easier to detect. <span
+class="math inline">\(1000\)</span> repetitions were performed for each
+combination of <span class="math inline">\(d\)</span> and <span
+class="math inline">\(n\)</span>.</p>
+<p>For the sign test, a difference was designated between <span
+class="math inline">\(X\)</span> and <span
+class="math inline">\(Y\)</span>, and through this it was dichotomized
+between negative and positive to adjust the numerical values of the test
+support. For the Wilcoxon, it was enough to apply the test with <span
+class="math inline">\(X\)</span> and <span
+class="math inline">\(Y\)</span>.</p>
+<p>reinforcing that the following code is not focused on performance.
+This file also serves to show how it is possible to create data.frame
+objects with different names according to the for loop.</p>
+<pre class="r"><code>library(data.table)
+library(ggplot2)
+library(gridExtra)
+library(reshape2)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;reshape2&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:data.table&#39;:
+## 
+##     dcast, melt</code></pre>
+<pre class="r"><code>set.seed(0)
+for(n in seq(10L, 100L, 10L)){
+  
+  for(d in seq(0.1, 1, 0.1)){
+    soma_rej_bin &lt;- 0L
+    soma_rej_wc &lt;- 0L
+    
+    for(num in 1L:1000L){
+      x &lt;- rnorm(n, 0, 1)
+      y &lt;- rnorm(n, x + d, 1)
+      
+      dif &lt;- ifelse((x - y) &lt; 0, 1L, 0L)
+      
+      neg &lt;- sum(fcase(dif == 1L, 1L), na.rm = T)
+      pos &lt;- sum(fcase(dif == 0L, 1L), na.rm = T)
+      
+      teste_bin &lt;- binom.test(x = c(neg, pos), p = 0.5, alternative = &quot;two.sided&quot;)
+      soma_rej_bin &lt;- soma_rej_bin + ifelse(teste_bin$p.value &lt; 0.1, 1L, 0L)
+      
+      teste_wc &lt;- wilcox.test(x, y, paired = TRUE, exact = TRUE, alternative = &quot;two.sided&quot;)
+      soma_rej_wc &lt;- soma_rej_wc + ifelse(teste_wc$p.value &lt; 0.1, 1L, 0L)
+    }
+    eval(parse(text = paste0(
+      &quot;bin_valores_n&quot;, n, &quot;_d&quot;, d, &quot; &lt;- c()&quot;, &quot; ; &quot;, &quot;wc_valores_n&quot;, n, &quot;_d&quot;, d, &quot; &lt;- c()&quot;, &quot; ; &quot;,
+      &quot;bin_valores_n&quot;, n, &quot;_d&quot;, d, &quot; &lt;- c(bin_valores_n&quot;, n, &quot;_d&quot;, d, &quot;, soma_rej_bin/1000)&quot;, &quot; ; &quot;,
+      &quot;wc_valores_n&quot;, n, &quot;_d&quot;, d, &quot; &lt;- c(wc_valores_n&quot;, n, &quot;_d&quot;, d, &quot;, soma_rej_wc/1000)&quot;
+    )))
+  }
+}
+
+for(n in seq(10L, 100L, 10L)){
+  eval(parse(text = paste0(
+    &quot;wc_valores_n&quot;, n, &quot; &lt;- c() ; &quot;, &quot;bin_valores_n&quot;, n, &quot; &lt;- c() ; &quot;
+  )))
+  
+  for(d in seq(0.1, 1, 0.1)){
+    eval(parse(text = paste0(
+      &quot;wc_valores_n&quot;, n, &quot; &lt;- c(wc_valores_n&quot;, n, &quot;, wc_valores_n&quot;, n, &quot;_d&quot;, d, &quot;) ; &quot;,
+      &quot;bin_valores_n&quot;, n, &quot; &lt;- c(bin_valores_n&quot;, n, &quot;, bin_valores_n&quot;, n, &quot;_d&quot;, d, &quot;)&quot;
+    )))
+  }
+}
+
+dados_bin &lt;- data.table(
+  bin_valores_n10, bin_valores_n20, bin_valores_n30, bin_valores_n40, bin_valores_n50,
+  bin_valores_n60, bin_valores_n70, bin_valores_n80, bin_valores_n90, bin_valores_n100)
+names(dados_bin) &lt;- c(
+  &quot;10 observations&quot;, &quot;20 observations&quot;, &quot;30 observations&quot;, &quot;40 observations&quot;, &quot;50 observations&quot;,
+  &quot;60 observations&quot;, &quot;70 observations&quot;, &quot;80 observations&quot;, &quot;90 observations&quot;, &quot;100 observations&quot;)
+dados_bin[, d := seq(0.1, 1, 0.1)]
+
+dados_wc &lt;- data.table(
+  wc_valores_n10, wc_valores_n20, wc_valores_n30, wc_valores_n40, wc_valores_n50,
+  wc_valores_n60, wc_valores_n70, wc_valores_n80, wc_valores_n90, wc_valores_n100)
+names(dados_wc) &lt;- c(
+  &quot;10 observations&quot;, &quot;20 observations&quot;, &quot;30 observations&quot;, &quot;40 observations&quot;, &quot;50 observations&quot;,
+  &quot;60 observations&quot;, &quot;70 observations&quot;, &quot;80 observations&quot;, &quot;90 observations&quot;, &quot;100 observations&quot;)
+dados_wc[, d := seq(0.1, 1, 0.1)]
+
+#Generating the graphs
+
+grafico_bin &lt;- melt(dados_bin ,  id.vars = &#39;d&#39;, variable.name = &#39;sample&#39;)
+grafico_wc &lt;- melt(dados_wc ,  id.vars = &#39;d&#39;, variable.name = &#39;sample&#39;)
+
+plot_bin &lt;- ggplot(grafico_bin, aes(d, value)) +
+  geom_line(aes(colour = sample), size = .8) +
+  ggtitle(&quot;Signal Test with 1000 repetitions&quot;) + xlab(&quot;Distance from the mean&quot;) + ylab(&quot;Test Power&quot;) +
+  scale_x_continuous(breaks = seq(0.1, 1, 0.1), 
+                     labels = c(&quot;0.1&quot;, &quot;0.2&quot;, &quot;0.3&quot;, &quot;0.4&quot;, &quot;0.5&quot;, &quot;0.6&quot;, &quot;0.7&quot;, &quot;0.8&quot;, &quot;0.9&quot;, &quot;1&quot;))
+
+plot_wc &lt;- ggplot(grafico_wc, aes(d, value)) +
+  geom_line(aes(colour = sample), size = .8) +
+  ggtitle(&quot;Wilcoxon test with 1000 repetitions&quot;) + xlab(&quot;Distance from the mean&quot;) + ylab(&quot;Test Power&quot;) +
+  scale_x_continuous(breaks = seq(0.1, 1, 0.1), 
+                     labels = c(&quot;0.1&quot;, &quot;0.2&quot;, &quot;0.3&quot;, &quot;0.4&quot;, &quot;0.5&quot;, &quot;0.6&quot;, &quot;0.7&quot;, &quot;0.8&quot;, &quot;0.9&quot;, &quot;1&quot;))</code></pre>
+<pre class="r"><code>grid.arrange(plot_bin, plot_wc)</code></pre>
+<p><img src="project02_files/figure-html/unnamed-chunk-2-1.png" width="1248" /></p>
+<p>Observing the graphs we notice that the convergence curve of the test
+power for the value <span class="math inline">\(1\)</span> for the
+Wilcoxon happens earlier than that of the Sign test, in both tests we
+see a weak power of the test for samples with <span
+class="math inline">\(n = 10\)</span> and <span class="math inline">\(n
+= 20\)</span>, however for the Wilcoxon the sample of <span
+class="math inline">\(n = 20\)</span> follows values very close to the
+sample of <span class="math inline">\(n = 30\)</span> of the sign test.
+It is also noted that for the Sign test, from the distance <span
+class="math inline">\(0.8\)</span> the power of the test for <span
+class="math inline">\(n \geq 40\)</span> has already converged to <span
+class="math inline">\(1\)</span> almost completely, whereas in the
+Wilcoxon test this convergence already happens with the distance <span
+class="math inline">\(0.6\)</span>, showing that he is superior in every
+way.</p>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+name: "MyDataPortfolio"
+navbar:
+  title: "MyDataPortfolio"
+  left:
+    - text: "Profile"
+      href: index.html
+    - text: "Project 01"
+      href: project01.html
+    - text: "Project 02"
+      href: project02.html
+output_dir: "docs"
