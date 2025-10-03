@@ -13,7 +13,7 @@
 
 <title>My Data Science Projects Portfolio</title>
 
-<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -268,19 +268,53 @@ $(document).ready(function () {
 </div>
 
 
-<style type="text/css">
-.title {
-  display: none;
+<style>
+
+/* Esconde o título gerado automaticamente pelo YAML (caso apareça) */
+h1.title, .title { 
+  display: none !important;
 }
 
+.table thead th, td { 
+  text-align: center !important;
+}
+
+.custom-table tbody tr:last-child td {
+  border-bottom: 3px double #000 !important;
+}
+
+/* Exemplo de estilo usado no seu snippet */
 #getting-started img {
   margin-right: 10px;
+}
+
+/* Opcional: separador bonito e não clicável */
+hr.sep {
+  
+  border: 0;
+  border-top: 1px solid #ddd;
+  pointer-events: none;
+  clear: both;
+}
+
+.thead-dark {
+background-color: #222222;
+color: #fff;
+}
+
+.description {
+font-size: 20px;
+}
+
+.contacts, .projects {
+font-size: 18px;
 }
 
 </style>
 <div class="row" style="padding-top: 30px;">
 <div id="my-data-science-portfolio" class="section level1 col-sm-12">
 <h1><strong>My Data Science Portfolio</strong></h1>
+<div class="description">
 <p>Welcome to my portfolio, showcasing my freelance data science
 projects as well as my personal projects. My name is Hugo Batista da
 Silva, and I hail from Espírito Santo, Brazil. I hold a Bachelor’s
@@ -290,49 +324,85 @@ from the Federal University of Espírito Santo.</p>
 <p>In this portfolio, you will find a selection of projects that I found
 particularly interesting and diverse in terms of subject matter. I have
 carefully curated this collection to avoid repetitive themes and to
-present a broad spectrum of my work. Please note that the content
-provided on each project’s page, accessible via the links in the
-projects table, does not represent the final product of those projects
-(especially for contractual work). The detailed written sections and
-references have been omitted to enhance readability and dynamism.</p>
-<hr />
-<div id="contact-info" class="section level4">
-<h4><strong>Contact Info</strong></h4>
-<p>Feel free to reach out to me through any of the following
-channels:</p>
-<p>• Phone: +55 (27) 99749-2646</p>
-<p>• LinkedIn: <a
+present a broad spectrum of my work.</p>
+<p>Please note that the content provided on each project’s page,
+accessible via the links in the projects table, does not represent the
+final product of those projects (especially for contractual work). The
+detailed written sections and references have been omitted to enhance
+readability and dynamism.</p>
+</div>
+<hr class="sep">
+<div id="contact-info" class="section level3">
+<h3><strong>Contact Info</strong></h3>
+<div class="contacts">
+<ul>
+<li>LinkedIn: <a
 href="https://www.linkedin.com/in/hugo-batista-da-silva-064715257/">Hugo
-Batista da Silva</a></p>
-<p>• GitHub: <a
-href="https://www.github.com/batistugo">Batistugo</a></p>
-<hr />
+Batista da Silva</a><br />
+</li>
+<li>GitHub: <a href="https://github.com/batistugo/">Batistugo</a><br />
+</li>
+<li>Email: <a href="mailto:batistashugo@gmail.com"
+class="email">batistashugo@gmail.com</a><br />
+</li>
+<li>Phone: +55 (27) 99749-2646<br />
+</li>
+</ul>
+</div>
+<p>Feel free to reach out to me through any of the following
+channels.</p>
+<hr class="sep">
 </div>
 </div>
-<div id="projects" class="section level4 col-sm-5">
-<h4><strong>Projects</strong></h4>
-<table>
-<thead>
-<tr class="header">
-<th align="center">Name</th>
-<th align="center">Subject</th>
-<th align="center">Project Type</th>
+<div id="projects" class="section level3 col-sm-5">
+<h3><strong>Projects</strong></h3>
+<div class="projects">
+<p>Aqui estão alguns dos meus projetos:</p>
+</div>
+<div class="table-responsive">
+<table class="table table-hover custom-table">
+<thead class="thead-dark">
+<tr>
+<th>
+Name
+</th>
+<th>
+Subject
+</th>
+<th>
+Project Type
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="center"><a href="project01.html">Project 01</a></td>
-<td align="center">Linear model</td>
-<td align="center">Contract</td>
+<tr>
+<td>
+<a href="project01.html">Project 01</a>
+</td>
+<td>
+Linear model
+</td>
+<td>
+Contract
+</td>
 </tr>
-<tr class="even">
-<td align="center"><a href="project02.html">Project 02</a></td>
-<td align="center">Theory Test</td>
-<td align="center">Personal</td>
+<tr>
+<td>
+<a href="project02.html">Project 02</a>
+</td>
+<td>
+Theory Test
+</td>
+<td>
+Personal
+</td>
 </tr>
 </tbody>
 </table>
-<p></a></p>
+</div>
+</div>
+</div>
+</div>
 </div>
 
 

@@ -14,7 +14,7 @@
 
 <title>Evaluation of the Efficacy of Using Growth Hormone Therapy in the Treatment of Children with Idiopathic Short Stature and Small for Gestational Age</title>
 
-<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -1056,8 +1056,10 @@ well-balanced. There are only 10 points outside the range of -2 to 2,
 indicating very good residual values.</p>
 <p>Next, we will perform a normality test to finalize the residual
 analysis.</p>
-<pre class="r"><code>t1 &lt;- ks.test(sr,&quot;pnorm&quot;) # KS
-t2 &lt;- lillie.test(sr) # Lilliefors
+<pre class="r"><code>t1 &lt;- ks.test(sr,&quot;pnorm&quot;) # KS</code></pre>
+<pre><code>## Warning in ks.test.default(sr, &quot;pnorm&quot;): ties should not be present for the
+## one-sample Kolmogorov-Smirnov test</code></pre>
+<pre class="r"><code>t2 &lt;- lillie.test(sr) # Lilliefors
 t3 &lt;- cvm.test(sr) # Cramer-von Mises
 t4 &lt;- shapiro.test(sr) # Shapiro-Wilk
 t5 &lt;- sf.test(sr) # Shapiro-Francia

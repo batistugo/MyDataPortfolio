@@ -1,52 +1,115 @@
 ---
 title: "My Data Science Projects Portfolio"
-output: 
+output:
   html_document:
     theme: cosmo
+    md_extensions: +markdown_in_html_blocks
 ---
 
-<style type="text/css">
-.title {
-  display: none;
+<style>
+
+/* Esconde o título gerado automaticamente pelo YAML (caso apareça) */
+h1.title, .title { 
+  display: none !important;
 }
 
+.table thead th, td { 
+  text-align: center !important;
+}
+
+.custom-table tbody tr:last-child td {
+  border-bottom: 3px double #000 !important;
+}
+
+/* Exemplo de estilo usado no seu snippet */
 #getting-started img {
   margin-right: 10px;
+}
+
+/* Opcional: separador bonito e não clicável */
+hr.sep {
+  margin: 24px 0;
+  border: 0;
+  border-top: 1px solid #ddd;
+  pointer-events: none;
+  clear: both;
+}
+
+.thead-dark {
+background-color: #222222;
+color: #fff;
+}
+
+.description {
+font-size: 20px;
+}
+
+.contacts, .projects {
+font-size: 18px;
 }
 
 </style>
 
 <div class="row" style="padding-top: 30px;">
-<div class="col-sm-12">
+  <div class="col-sm-12">
 
 # **My Data Science Portfolio**
 
+<div class="description">
 Welcome to my portfolio, showcasing my freelance data science projects as well as my personal projects. My name is Hugo Batista da Silva, and I hail from Espírito Santo, Brazil. I hold a Bachelor's degree in [Statistics](https://estatistica.ufes.br/matriz-curricular-ppc-2019) from the Federal University of Espírito Santo.
 
-In this portfolio, you will find a selection of projects that I found particularly interesting and diverse in terms of subject matter. I have carefully curated this collection to avoid repetitive themes and to present a broad spectrum of my work. Please note that the content provided on each project's page, accessible via the links in the projects table, does not represent the final product of those projects (especially for contractual work). The detailed written sections and references have been omitted to enhance readability and dynamism.
+In this portfolio, you will find a selection of projects that I found particularly interesting and diverse in terms of subject matter. I have carefully curated this collection to avoid repetitive themes and to present a broad spectrum of my work. 
 
-
-__________________________________________________________________________________________________
-#### **Contact Info**
-
-Feel free to reach out to me through any of the following channels:
-
-• Phone: +55 (27) 99749-2646
-
-• LinkedIn: [Hugo Batista da Silva](https://www.linkedin.com/in/hugo-batista-da-silva-064715257/)
-
-• GitHub: [Batistugo](https://www.github.com/batistugo)
-
-__________________________________________________________________________________________________
-
+Please note that the content provided on each project's page, accessible via the links in the projects table, does not represent the final product of those projects (especially for contractual work). The detailed written sections and references have been omitted to enhance readability and dynamism.
 </div>
-<div class="col-sm-5">
-#### **Projects**
 
-|    Name    |    Subject   | Project Type |
-|:----------:|:------------:|:------------:|
-| [Project 01](project01.html) | Linear model |   Contract   |
-| [Project 02](project02.html) |  Theory Test |   Personal   |
+<hr class="sep">
 
-</a>
+### **Contact Info**
+
+<div class="contacts">
+- LinkedIn: [Hugo Batista da Silva](https://www.linkedin.com/in/hugo-batista-da-silva-064715257/)  
+- GitHub: [Batistugo](https://github.com/batistugo/)  
+- Email: batistashugo@gmail.com  
+- Phone: +55 (27) 99749-2646  
+</div>
+
+Feel free to reach out to me through any of the following channels.
+
+<hr class="sep">
+
+  </div>
+
+  <div class="col-sm-5">
+
+### **Projects**
+<div class="projects">
+Aqui estão alguns dos meus projetos:
+</div>
+
+<div class="table-responsive">
+<table class="table table-hover custom-table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Name</th>
+      <th>Subject</th>
+      <th>Project Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="project01.html">Project 01</a></td>
+      <td>Linear model</td>
+      <td>Contract</td>
+    </tr>
+    <tr>
+      <td><a href="project02.html">Project 02</a></td>
+      <td>Theory Test</td>
+      <td>Personal</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+  </div>
 </div>
