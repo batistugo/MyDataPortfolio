@@ -1,0 +1,60 @@
+---
+title: "Sales Loss Prediction: ranking open orders with XGBoost, without leakage"
+author: "Hugo Batista da Silva"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+---
+
+::: {.callout-note}
+**Language:** Python (pandas, XGBoost, SHAP, scikit-learn) · **Type:** work project, rebuilt with synthetic data · **Code:** [github.com/batistugo/sales-loss-prediction](https://github.com/batistugo/sales-loss-prediction)
+:::
+
+## About the project
+At a distributor of solar energy equipment, the customers are **solar installers** that buy photovoltaic kits. Every quote becomes a sales order that is either won or lost, and the sales team has hundreds of open orders at the same time. The question was: **which open orders are most likely to be lost, and why?**
+
+I built the model and put it into production: a daily job scores the open orders, a weekly job retrains the model, and an API delivers to the sales system a ranking with a priority level and the three main reasons of risk of each order.
+
+The company data cannot be published, so for this portfolio the whole project was rebuilt with **synthetic data** that keeps the structure of the original database. A nice side effect is that we know the **real probability** of loss of each order, which allows comparing the model with the best result theoretically possible.
+
+## The main finding: a leakage hidden in the best variable
+The most important variable of the original model compared the time of the order with the customer's usual time. The problem: in training, this time was the number of days **until the outcome**; in production, it was the number of days **until today**. Same name, two different things.
+
+Since lost orders take much longer to close than won ones (24 days against 12 on average), the model learned from information that only exists after the outcome. The fix was to train with **snapshots**: each closed order is "photographed" at several ages (0, 7, 14, 21, 28, 45 and 60 days) while it was still open, exactly like an open order is seen in production.
+
+![The loss rate of the orders still open grows quickly with their age: an order open for a month is, most of the time, already abandoned.](images/project03/loss_rate_by_age.png)
+
+| Model | Evaluation | AUC |
+|-------|------------|-----|
+| Original approach | its own validation | 0.762 |
+| Original approach | **real conditions of use** | **0.693** |
+| Snapshot approach (final) | **real conditions of use** | **0.752** |
+| Real probability (theoretical ceiling) | at order creation | 0.758 |
+
+The original validation was promising an AUC of 0.76 that the model could not deliver. The snapshot model reaches that level honestly.
+
+## Other lessons about validation
+- **Point-in-time history.** The customer features (usual ticket, discount, kit size, price, loss rate) use only the orders that were **already closed** on the creation date. Cumulative sums ordered by creation date, the classic approach, silently use outcomes from the future.
+- **The order stage is a photo of the outcome.** Adding it as a feature gives **AUC = 1.0**; a perfect model is the clearest symptom of leakage.
+- **The test set never chooses the model.** Early stopping uses a separate validation window.
+- **Recent data is censored.** Orders created in the last 60 days are kept out of the evaluation, because only the fast ones (mostly wins) had time to close.
+- **New customers are not thrown away.** XGBoost handles missing values, so the 15% of orders without any past purchase stay in the training instead of being removed by a `dropna()`.
+
+## Evaluation
+![ROC curve of the final model and AUC inside each age of the order.](images/project03/roc_auc_by_age.png)
+
+The model is well calibrated (in the decile where it predicts 86% on average, 89% of the orders were lost), and at the moment of creation it captures about **80% of the discrimination that is possible** above a random guess, compared with the real probability used to generate the data.
+
+## Explanation with SHAP
+![SHAP values on a test sample.](images/project03/shap_summary.png)
+
+The age of the order, the customer's historical loss rate, a rejected discount and a price above the market of the state are the main drivers of risk. One result looks strange at first: **financing appears reducing the risk**, although financed orders are lost more. It is an interaction with the age: financed orders that are won take longer to close because of the bank analysis, so a financed order still open after two weeks is normal, while a cash order in the same situation is probably abandoned. A good reminder that a variable should never be interpreted in isolation.
+
+## Notebooks
+The full analysis, with all the code, is in four notebooks in the [repository](https://github.com/batistugo/sales-loss-prediction):
+
+1. [Synthetic data](https://github.com/batistugo/sales-loss-prediction/blob/main/notebooks/01_synthetic_data.ipynb)
+2. [Exploratory analysis](https://github.com/batistugo/sales-loss-prediction/blob/main/notebooks/02_exploratory_analysis.ipynb)
+3. [Features](https://github.com/batistugo/sales-loss-prediction/blob/main/notebooks/03_features.ipynb)
+4. [Model](https://github.com/batistugo/sales-loss-prediction/blob/main/notebooks/04_model.ipynb)

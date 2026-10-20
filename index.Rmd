@@ -107,6 +107,11 @@ Aqui estão alguns dos meus projetos:
       <td>Theory Test</td>
       <td>Personal</td>
     </tr>
+    <tr>
+      <td><a href="project03.html">Project 03</a></td>
+      <td>Classification with XGBoost (Python)</td>
+      <td>Work (synthetic data)</td>
+    </tr>
   </tbody>
 </table>
 </div>

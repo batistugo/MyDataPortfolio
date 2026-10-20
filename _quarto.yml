@@ -1,10 +1,13 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - .nojekyll
   render:
     - index.Rmd
     - project01.Rmd
     - project02.Rmd
+    - project03.qmd
 
 execute:
   freeze: auto
@@ -19,6 +22,8 @@ website:
         href: project01.Rmd
       - text: "Project 02"
         href: project02.Rmd
+      - text: "Project 03"
+        href: project03.qmd
 
 format:
   html:
