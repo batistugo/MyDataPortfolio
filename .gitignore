@@ -2,3 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+/.quarto/
+*_cache/
+/project0*_files/
+
+**/*.quarto_ipynb

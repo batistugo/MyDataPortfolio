@@ -1,0 +1,27 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.Rmd
+    - project01.Rmd
+    - project02.Rmd
+
+execute:
+  freeze: auto
+
+website:
+  title: "MyDataPortfolio"
+  navbar:
+    left:
+      - text: "Profile"
+        href: index.Rmd
+      - text: "Project 01"
+        href: project01.Rmd
+      - text: "Project 02"
+        href: project02.Rmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: false

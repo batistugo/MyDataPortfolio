@@ -36,7 +36,7 @@ tail(dataset)
 We have 237 children in the dataset, but as we can see, some of the children did not complete the entire treatment, but all of them at least received the first dose of the hormone.
 
 Table of variables:
-```{table, center}
+
 | Variable     | Description                                 |
 |--------------|---------------------------------------------|
 | SEXO         | Sex; (1) male, (0) female                   |
@@ -47,7 +47,6 @@ Table of variables:
 | HAZ_2ANOS    | Height in zscore after 2 years of treatment |
 | HAZ_3ANOS    | Height in zscore after 3 years of treatment |
 | HAZ_4ANOS    | Height in zscore after 4 years of treatment |
-```
 
 ## Data descriptions, Graphs and Tests
 Before starting the descriptive analysis, it was necessary to create categorical variables for gender and age. Due to the absence of an explanatory variable for the regression model, two additional indicator variables were created: "treatment" (tratamento) and "difference" (diferenca).
@@ -362,30 +361,31 @@ invisible(gc())
 We observed that the age group 0 to 71 months showed the most significant improvement. Regarding sex, differences were not evident in the boxplots. In terms of treatment duration, children who underwent 4 years of treatment exhibited the greatest initial difference in the first year. For diagnosis differences were not evident.
 
 ### Tests
-To assess whether the average heights are significantly different after one year of treatment, we will conduct paired t-tests for each boxplot. However, before applying the test, one of the assumptions is that the data (z-score heights) are normally distributed. To confirm the normality of the data, we will conduct four different normality tests. The paired t-test involves the following hypotheses:
+To assess whether height changed significantly after one year of treatment, we compare each child's initial height with the height of the **same child** after one year. Because the two measurements come from the same individuals, the samples are not independent and the appropriate test is the **paired t-test**, which works on the within-child difference:
 
-$H_0 =$ The means of the two groups are equal.
+$$D_i = \text{HAZ}_{1,i} - \text{HAZ}_{0,i}$$
 
-$H_1 =$ The means of the two groups are different.
+The paired t-test hypotheses are:
 
+$H_0: \mu_D = 0$ (no mean change in height after one year).
 
-For the normality tests below the hypotheses are:
+$H_1: \mu_D \neq 0$ (there is a mean change in height after one year).
 
-$H_0 =$ The data follows a normal distribution.
+The normality assumption of the paired t-test refers to the **differences** $D_i$, not to the original height columns, so that is the variable we test. For the normality tests below the hypotheses are:
 
-$H_1 =$ The data does not follow a normal distribution.
+$H_0 =$ The differences follow a normal distribution.
+
+$H_1 =$ The differences do not follow a normal distribution.
 
 #### Normality Test
 ```{r, warning=FALSE}
-haz_in <- dataset$HAZ_INÍCIO
-haz_1 <- dataset$HAZ_1ANOS
-test <- cbind(haz_in, haz_1)
-
 library(nortest)
-t1 <- ks.test(test,"pnorm", mean=mean(test), sd=sd(test)) # KS
-t2 <- lillie.test(test) # Lilliefors
-t3 <- cvm.test(test) # Cramer-von Mises
-t4 <- ad.test(test) # Anderson-Darling
+dif_1 <- dataset$HAZ_1ANOS - dataset$HAZ_INÍCIO
+
+t1 <- lillie.test(dif_1) # Lilliefors (KS with estimated mean and sd)
+t2 <- cvm.test(dif_1) # Cramer-von Mises
+t3 <- ad.test(dif_1) # Anderson-Darling
+t4 <- shapiro.test(dif_1) # Shapiro-Wilk
 
 # Result Table
 testes <- c(t1$method, t2$method, t3$method, t4$method)
@@ -395,89 +395,56 @@ results <- cbind(estt, pvalue)
 rownames(results) <- testes
 colnames(results) <- c("Statistics", "p-value")
 print(results, digits = 4)
-
 ```
-All tests indicate that there is insufficient evidence to reject the null hypothesis that the data follow a normal distribution. Therefore, based on these results, we can conclude that the data meet the assumption of normality.
+All tests reject the null hypothesis at the 5% level, so the differences are not exactly normally distributed. (The plain Kolmogorov-Smirnov test was not used because it is invalid when the mean and standard deviation are estimated from the same data; Lilliefors is the corrected version.)
 
-#### T-Test for the Age
+This does not invalidate the paired t-test here: with at least 54 children in every group, the Central Limit Theorem guarantees that the **sample mean** of the differences is approximately normal, which is what the test actually relies on. Even so, as a robustness check we also report the **Wilcoxon signed-rank test**, the non-parametric alternative for paired data, which does not assume normality.
+
+#### Paired tests by group
+To avoid repeating the same code for every variable, a helper function runs both tests for each level of a grouping variable:
 ```{r}
-t071 <- t.test(dataset[grupo_idade_t0 == "0-71", "HAZ_INÍCIO"], 
-               dataset[grupo_idade_t0 == "0-71", "HAZ_1ANOS"])
-t72119 <- t.test(dataset[grupo_idade_t0 == "72-119", "HAZ_INÍCIO"], 
-                 dataset[grupo_idade_t0 == "72-119", "HAZ_1ANOS"])
-t120 <- t.test(dataset[grupo_idade_t0 == "120+", "HAZ_INÍCIO"], 
-               dataset[grupo_idade_t0 == "120+", "HAZ_1ANOS"])
-
-group <- c("0 to 71", "72 to 119", "120+")
-ci1 <- as.numeric(c(t071$conf.int[1], t72119$conf.int[1], t120$conf.int[1]))
-ci2 <- as.numeric(c(t071$conf.int[2], t72119$conf.int[2], t120$conf.int[2]))
-pvalue <- c(t071$p.value, t72119$p.value, t120$p.value)
-results <- cbind(ci1, ci2, pvalue)
-rownames(results) <- paste0("t-test age ", group)
-colnames(results) <- c("ci_lower", "ci_upper", "p-value")
-print(results, digits = 4)
+paired_tests <- function(data, group_var) {
+  results <- data[, {
+    tt <- t.test(HAZ_1ANOS, HAZ_INÍCIO, paired = TRUE)
+    wt <- wilcox.test(HAZ_1ANOS, HAZ_INÍCIO, paired = TRUE, exact = FALSE)
+    .(n = .N,
+      mean_diff = unname(tt$estimate),
+      ci_lower = tt$conf.int[1],
+      ci_upper = tt$conf.int[2],
+      p_ttest = tt$p.value,
+      p_wilcoxon = wt$p.value)
+  }, by = group_var]
+  setorderv(results, group_var)
+  print(results, digits = 4)
+}
 ```
 
-#### T-Test for the Sex
+#### Age
 ```{r}
-male <- t.test(dataset[sexo_cat == "Male", "HAZ_INÍCIO"], 
-               dataset[sexo_cat == "Male", "HAZ_1ANOS"])
-female <- t.test(dataset[sexo_cat == "Female", "HAZ_INÍCIO"], 
-                 dataset[sexo_cat == "Female", "HAZ_1ANOS"])
-
-group <- c("male", "female")
-ci1 <- as.numeric(c(male$conf.int[1], female$conf.int[1]))
-ci2 <- as.numeric(c(male$conf.int[2], female$conf.int[2]))
-pvalue <- c(male$p.value, female$p.value)
-results <- cbind(ci1, ci2, pvalue)
-rownames(results) <- paste0("t-test for ", group)
-colnames(results) <- c("ci_lower", "ci_upper", "p-value")
-print(results, digits = 4)
+paired_tests(dataset, "grupo_idade_t0")
 ```
 
-#### T-Test for the Diagnosis
+#### Sex
 ```{r}
-bei <- t.test(dataset[ID_DIAG == "BEI", "HAZ_INÍCIO"], 
-              dataset[ID_DIAG == "BEI", "HAZ_1ANOS"])
-pig <- t.test(dataset[ID_DIAG == "PIG", "HAZ_INÍCIO"], 
-              dataset[ID_DIAG == "PIG", "HAZ_1ANOS"])
-
-group <- c("bei", "pig")
-ci1 <- as.numeric(c(bei$conf.int[1], pig$conf.int[1]))
-ci2 <- as.numeric(c(bei$conf.int[2], pig$conf.int[2]))
-pvalue <- c(bei$p.value, pig$p.value)
-results <- cbind(ci1, ci2, pvalue)
-rownames(results) <- paste0("t-test for ", group)
-colnames(results) <- c("ci_lower", "ci_upper", "p-value")
-print(results, digits = 4)
+paired_tests(dataset, "sexo_cat")
 ```
 
-#### T-Test for the Years of Treatment
+#### Diagnosis
 ```{r}
-t1 <- t.test(dataset[tratamento == 1, "HAZ_INÍCIO"], 
-             dataset[tratamento == 1, "HAZ_1ANOS"])
-t2 <- t.test(dataset[tratamento == 2, "HAZ_INÍCIO"], 
-             dataset[tratamento == 2, "HAZ_1ANOS"])
-t3 <- t.test(dataset[tratamento == 3, "HAZ_INÍCIO"], 
-             dataset[tratamento == 3, "HAZ_1ANOS"])
-t4 <- t.test(dataset[tratamento == 4, "HAZ_INÍCIO"], 
-             dataset[tratamento == 4, "HAZ_1ANOS"])
-
-group <- c("1yrs treatment", "2yrs treatment", "3yrs treatment", "4yrs treatment")
-ci1 <- as.numeric(c(t1$conf.int[1], t2$conf.int[1], t3$conf.int[1], t4$conf.int[1]))
-ci2 <- as.numeric(c(t1$conf.int[2], t2$conf.int[2], t3$conf.int[2], t4$conf.int[2]))
-pvalue <- c(t1$p.value, t2$p.value, t3$p.value, t4$p.value)
-results <- cbind(ci1, ci2, pvalue)
-rownames(results) <- paste0("t-test for ", group)
-colnames(results) <- c("ci_lower", "ci_upper", "p-value")
-print(results, digits = 4)
+paired_tests(dataset, "ID_DIAG")
 ```
-We observe that for all variable groups, the confidence intervals of the tests do not contain zero, indicating a significant difference between the mean heights at the beginning and after 1 year of treatment. The p-values for all groups are extremely small, suggesting a statistically significant difference and indicating a significant increase in height across all groups. Particularly, the age group 0 to 71 months had the lowest p-value among the age groups, and this trend applies similarly to males, those with a BEI diagnosis, and those who underwent 4 years of treatment.
+
+#### Years of Treatment
+```{r}
+paired_tests(dataset, "tratamento")
+```
+In every group the confidence interval of the mean difference lies entirely above zero and both the paired t-test and the Wilcoxon test give extremely small p-values. This means there is a significant **increase** in height z-score after one year of treatment in all groups, and the conclusion does not depend on the normality assumption.
+
+Since every p-value is practically zero, comparing p-values between groups is not informative. The **size of the effect** (`mean_diff`) is what matters. The 0 to 71 months age group shows the largest mean gain (about 1.03 z-score, against 0.63 for 120+ months), and boys gain more than girls (0.85 against 0.68). The two diagnoses have very similar gains (0.79 for BEI and 0.76 for PIG). Children who completed 4 years of treatment had the largest first-year gain (0.95).
 
 ```{r}
 #Cleaning the environment
-rm(results, pvalue, ci2, ci1, group, t4, t3, t2, t1, pig, bei, female, 
-   male, t120, t72119, t071, estt, testes, test, haz_1, haz_in)
+rm(results, pvalue, estt, testes, t4, t3, t2, t1, dif_1)
 invisible(gc())
 ```
 
@@ -612,10 +579,12 @@ $$Y = 0.4777 + 0.2547X_1 - 0.198X_2 - 0.0422X_3 + 0.2422X_4 - 0.1499X_5$$
 |    X1    | Number of treatments                                                                                              |
 |    X2    | Height in zscore at the start of treatment                                                                        |
 |    X3    | Age in years at the start of treatment                                                                            |
-|    X4    | Sex (male)                                                                                                        |
-|    X5    | Diagnosis (PIG)                                                                                                   |
+|    X4    | Sex; 1 = male, 0 = female (reference)                                                                             |
+|    X5    | Diagnosis; 1 = PIG (SGA), 0 = BEI (ISS, reference)                                                                |
 
-We observe that the intercept value indicates that the height difference will be 0.4777, meaning the child will grow by 0.477 in z-score, regardless of the other variables.
+Each coefficient is interpreted **holding the other variables constant**. Sex and diagnosis are dummy variables, so their coefficients are measured against a **reference category**: girls (X4 = 0) and ISS/BEI (X5 = 0).
+
+The intercept (0.4777) is the expected difference for a girl diagnosed with ISS when all numeric variables are zero (zero treatments, initial z-score 0 and age 0). This combination does not exist in the data (every child received at least one treatment), so the intercept works as the model's anchor point and has no direct practical meaning on its own.
 
 The "number of treatments" variable has the most significant impact on this difference. Each year of hormone treatment results in an increase of 0.2547 in the difference, which can reach up to 1.0188.
 
@@ -623,9 +592,9 @@ For the "initial height" variable, we interpret that the more negative the z-sco
 
 The "age" variable works similarly to initial height, but it always "worsens" the difference since age is always positive and the coefficient is negative. We conclude that the younger the child, the better the final difference, as the difference will be greater.
 
-Regarding sex, we find that boys respond better to the treatment. Being male increases the difference by 0.2422, while for girls, this difference decreases by 0.2422.
+Regarding sex, boys respond better to the treatment: with the same number of treatments, initial height, age and diagnosis, the expected difference for a boy is 0.2422 z-score **higher than for a girl**. Girls are the reference category, so there is no separate coefficient for them; the 0.2422 is the gap between the two groups.
 
-Finally, children diagnosed as SGA (Small for Gestational Age) show a slight worsening in the difference, while those diagnosed as ISS (Idiopathic Short Stature) show an improvement.
+Finally, children diagnosed as SGA (Small for Gestational Age, PIG) have an expected difference 0.1499 z-score **lower than** children diagnosed as ISS (Idiopathic Short Stature, BEI), all else being equal. This does not mean that SGA children get worse with treatment, only that they gain less than comparable ISS children.
 
 We conclude that the ideal scenario for a child to achieve the best results is to complete the 4 years of treatment, have the lowest possible initial height z-score, start treatment at the youngest age, be male, and be diagnosed as ISS.
 
