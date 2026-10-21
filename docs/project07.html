@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>S&amp;OP demand forecasting: hierarchical ARIMA/ETS pipeline, from the Total to the SKU – MyDataPortfolio</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-32643bc00688b413a4b4dac13675c875.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">MyDataPortfolio</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Profile</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project01.html"> 
+<span class="menu-text">Project 01</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project02.html"> 
+<span class="menu-text">Project 02</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project03.html"> 
+<span class="menu-text">Project 03</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project04.html"> 
+<span class="menu-text">Project 04</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project05.html"> 
+<span class="menu-text">Project 05</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project06_1.html"> 
+<span class="menu-text">Project 6.1</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project06_2.html"> 
+<span class="menu-text">Project 6.2</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./project07.html" aria-current="page"> 
+<span class="menu-text">Project 07</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://batistugo.github.io/MyDataPortfolio/pt/"> 
+<span class="menu-text">Versão em PT</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#about-the-project" id="toc-about-the-project" class="nav-link active" data-scroll-target="#about-the-project">About the project</a></li>
+  <li><a href="#scale-and-granularities" id="toc-scale-and-granularities" class="nav-link" data-scroll-target="#scale-and-granularities">Scale and granularities</a></li>
+  <li><a href="#interactive-dashboard" id="toc-interactive-dashboard" class="nav-link" data-scroll-target="#interactive-dashboard">Interactive dashboard</a></li>
+  <li><a href="#how-the-pipeline-works" id="toc-how-the-pipeline-works" class="nav-link" data-scroll-target="#how-the-pipeline-works">How the pipeline works</a></li>
+  <li><a href="#the-most-interesting-functions" id="toc-the-most-interesting-functions" class="nav-link" data-scroll-target="#the-most-interesting-functions">The most interesting functions</a>
+  <ul class="collapse">
+  <li><a href="#automatic-choice-between-arima-ets-and-intermittent-models" id="toc-automatic-choice-between-arima-ets-and-intermittent-models" class="nav-link" data-scroll-target="#automatic-choice-between-arima-ets-and-intermittent-models">Automatic choice between ARIMA, ETS and intermittent models</a></li>
+  <li><a href="#tail-cleaning" id="toc-tail-cleaning" class="nav-link" data-scroll-target="#tail-cleaning">Tail cleaning</a></li>
+  <li><a href="#top-down-weights" id="toc-top-down-weights" class="nav-link" data-scroll-target="#top-down-weights">Top-down weights</a></li>
+  <li><a href="#shape-for-straight-line-forecasts" id="toc-shape-for-straight-line-forecasts" class="nav-link" data-scroll-target="#shape-for-straight-line-forecasts">Shape for straight-line forecasts</a></li>
+  <li><a href="#choosing-the-production-method-of-each-series" id="toc-choosing-the-production-method-of-each-series" class="nav-link" data-scroll-target="#choosing-the-production-method-of-each-series">Choosing the production method of each series</a></li>
+  <li><a href="#a-pipeline-that-adjusts-itself" id="toc-a-pipeline-that-adjusts-itself" class="nav-link" data-scroll-target="#a-pipeline-that-adjusts-itself">A pipeline that adjusts itself</a></li>
+  </ul></li>
+  <li><a href="#results-on-the-synthetic-data" id="toc-results-on-the-synthetic-data" class="nav-link" data-scroll-target="#results-on-the-synthetic-data">Results on the synthetic data</a></li>
+  <li><a href="#in-production" id="toc-in-production" class="nav-link" data-scroll-target="#in-production">In production</a></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<div class="h1 page-title">
+<p>S&amp;OP demand forecasting: a hierarchical ARIMA/ETS pipeline, from the Total to the SKU</p>
+</div>
+<p><em>Hugo Batista da Silva</em></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Language:</strong> Python (statsforecast, pandas, joblib) and Plotly · <strong>Type:</strong> work project, rebuilt with synthetic data · <strong>Code:</strong> <a href="https://github.com/batistugo/sop-demand-forecasting">github.com/batistugo/sop-demand-forecasting</a></p>
+</div>
+</div>
+<section id="about-the-project" class="level2">
+<h2 class="anchored" data-anchor-id="about-the-project">About the project</h2>
+<p>In S&amp;OP (Sales and Operations Planning), the company agrees every month on how much it expects to sell, so that purchasing, production and stock follow the same number. At a textile company, I built and run the <strong>statistical pipeline</strong> that produces the starting point of this process: every month it forecasts the next <strong>28 months</strong> of every item of the catalog, with 80% and 95% prediction intervals. The business areas (sales, purchasing, production…) then adjust this baseline, item by item, in an S&amp;OP web app.</p>
+<p>The company data cannot be published, so for this portfolio the whole pipeline was rebuilt with <strong>synthetic data</strong> that keeps the structure of the original (columns, hierarchy and business rules), with <strong>fictitious names</strong> and stronger seasonality than the real series, to make the behaviour of each method easy to see.</p>
+</section>
+<section id="scale-and-granularities" class="level2">
+<h2 class="anchored" data-anchor-id="scale-and-granularities">Scale and granularities</h2>
+<p>The same engine forecasts the four levels of the product hierarchy. A SKU is a fabric in one colour, so the lowest level has thousands of small, noisy and sometimes intermittent series.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 28%">
+<col style="width: 38%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Level</th>
+<th style="text-align: right;">Series in production</th>
+<th style="text-align: right;">Series in the synthetic data</th>
+<th>What is forecast</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Total</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td>all sales</td>
+</tr>
+<tr class="even">
+<td>Segment</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">6</td>
+<td>fabric family (linen, viscose, knit…)</td>
+</tr>
+<tr class="odd">
+<td>Product (“parent”)</td>
+<td style="text-align: right;">about 490</td>
+<td style="text-align: right;">48</td>
+<td>one fabric</td>
+</tr>
+<tr class="even">
+<td>SKU (“child”)</td>
+<td style="text-align: right;">about 3,600</td>
+<td style="text-align: right;">300</td>
+<td>fabric × colour</td>
+</tr>
+</tbody>
+</table>
+<p>The synthetic data covers January 2022 to September 2026 (57 months and 70,219 order lines), and the forecast starts in October 2026.</p>
+</section>
+<section id="interactive-dashboard" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="interactive-dashboard">Interactive dashboard</h2>
+<p>The dashboard below replicates the forecast screens of the S&amp;OP front end (in production, a React + Plotly app fed by an API), now fed by the outputs of the pipeline on the synthetic data. It opens on the most accurate SKU of the backtest. You can:</p>
+<ul>
+<li>choose the <strong>level</strong> and filter <strong>segment → product → SKU</strong>;</li>
+<li>compare the <strong>⭐ production curve</strong> (with 80% and 95% intervals) with the raw <strong>Combined</strong>, <strong>ARIMA/ETS</strong> and <strong>Top-Down</strong> curves;</li>
+<li>read the actual sales of the last 6/12/18 months against the forecast of the next 6/12/18;</li>
+<li>see the <strong>backtest accuracy of each method</strong>, and in the <em>Accuracy</em> tab, the ranking of all series of a level.</li>
+</ul>
+<div class="column-page-left">
+<iframe class="sop-dash" src="dashboards/sop/index.html?lang=en&amp;aba=proj&amp;nivel=filho&amp;item=VISCOSE FALESIA - 03" title="S&amp;OP forecast dashboard" loading="lazy">
+</iframe>
+</div>
+<style>
+iframe.sop-dash { width: 100%; height: 1650px; border: 1px solid #e2e3ea; border-radius: 10px; margin: 0.5rem 0 1.5rem; }
+</style>
+<script>
+// o dashboard informa a própria altura; o quadro se ajusta para não ter barra de rolagem interna
+window.addEventListener("message", function (e) {
+  if (!e.data || !e.data.sopAltura) return;
+  document.querySelectorAll("iframe.sop-dash").forEach(function (f) {
+    var alvo = e.data.sopAltura + 8;
+    if (f.contentWindow === e.source && Math.abs(f.offsetHeight - alvo) > 4) f.style.height = alvo + "px";
+  });
+});
+</script>
+</section>
+<section id="how-the-pipeline-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-the-pipeline-works">How the pipeline works</h2>
+<p>Each stage is a standalone script that reads the parquet files of the previous one. The backtest and the model tuning run <strong>before</strong> the forecasts, because they decide the models from the sales data; this way, a single monthly run already delivers the best forecast.</p>
+<div class="cell" data-fig-width="6" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+  A[Sales data] --&gt; B[06 Backtest&lt;br/&gt;5 methods per series]
+  B --&gt; C[06b Circuit breaker&lt;br/&gt;07 Champion-challenger&lt;br/&gt;07b Bias factors]
+  C --&gt; D[01 Total]
+  D --&gt; E[02 Product]
+  D --&gt; F[03 Segment]
+  E --&gt; G[04 SKU]
+  E &amp; F &amp; G --&gt; H[07c Finalize&lt;br/&gt;route + shape + bias&lt;br/&gt;+ reconciliation]
+  H --&gt; I[Production curve&lt;br/&gt;and dashboard]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>The Total is fitted once; the products and segments use its forecast for the top-down, and the SKUs use the forecast of their product. At the end, <code>07c</code> builds the <strong>production curve</strong> of each series: the method recommended by the backtest, with a seasonal shape when needed, the bias factor and the hierarchical reconciliation.</p>
+</section>
+<section id="the-most-interesting-functions" class="level2">
+<h2 class="anchored" data-anchor-id="the-most-interesting-functions">The most interesting functions</h2>
+<section id="automatic-choice-between-arima-ets-and-intermittent-models" class="level3">
+<h3 class="anchored" data-anchor-id="automatic-choice-between-arima-ets-and-intermittent-models">Automatic choice between ARIMA, ETS and intermittent models</h3>
+<p><code>fit_best_model</code> decides the model family of each series by its share of months without sales. <strong>Dense</strong> series go to <strong>AutoARIMA</strong>, the Hyndman–Khandakar stepwise search (the same algorithm as <code>forecast::auto.arima</code> in R, here from <code>statsforecast</code>), with <strong>AutoETS</strong> as fallback. <strong>Sparse</strong> series are kept away from ARIMA, which explodes on series that are almost all zeros: in the aggregate levels they go to AutoETS and, at SKU level, to the best intermittent-demand model (Croston, SBA or TSB) by in-sample error. Seasonal terms are only allowed with at least 24 months of history.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fit_best_model(y, h<span class="op">=</span>H_DEFAULT, allow_seasonal<span class="op">=</span><span class="va">True</span>, prop_zero<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                   manual_model<span class="op">=</span><span class="va">None</span>, intermittent_threshold<span class="op">=</span>INTERMITTENT_PROP_ZERO):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    season_length <span class="op">=</span> <span class="dv">12</span> <span class="cf">if</span> allow_seasonal <span class="cf">else</span> <span class="dv">1</span>          <span class="co"># sazonal só com &gt;= 24 meses</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> manual_model <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:                          <span class="co"># override do tuning (07)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        m, name <span class="op">=</span> _fit_manual_model(y, manual_model, season_length)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> m <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> m, name</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> prop_zero <span class="op">&gt;=</span> PROP_ZERO_THRESHOLD:                  <span class="co"># série ESPARSA (&gt;= 30% de zeros)</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> INTERMITTENT_ENABLE <span class="kw">and</span> prop_zero <span class="op">&gt;=</span> intermittent_threshold:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            m, name <span class="op">=</span> _fit_best_intermittent(y)           <span class="co"># Croston / SBA / TSB (só no SKU)</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> m <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> m, name</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        m, name <span class="op">=</span> _fit_auto_ets(y, season_length)         <span class="co"># agregados: ETS</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> m <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            m, name <span class="op">=</span> _fit_auto_arima(y, season_length)   <span class="co"># ARIMA só se o ETS falhar</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> m, name</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    m, name <span class="op">=</span> _fit_auto_arima(y, season_length)           <span class="co"># série DENSA: AutoARIMA...</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> m <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        m, name <span class="op">=</span> _fit_auto_ets(y, season_length)         <span class="co"># ...com fallback AutoETS</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> m, name</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _fit_auto_arima(y, season_length):</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    approx <span class="op">=</span> <span class="bu">len</span>(y) <span class="op">&gt;</span> ARIMA_APPROX_MIN_OBS                <span class="co"># aproximação de AIC só em série longa</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> AutoARIMA(season_length<span class="op">=</span>season_length, approximation<span class="op">=</span>approx,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>                  stepwise<span class="op">=</span><span class="va">True</span>, allowdrift<span class="op">=</span><span class="va">True</span>, allowmean<span class="op">=</span><span class="va">True</span>).fit(y<span class="op">=</span>y)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> m, _arima_name(m)                              <span class="co"># ex.: "ARIMA(0,1,1)(0,1,1)[12]"</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _fit_auto_ets(y, season_length):</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> AutoETS(season_length<span class="op">=</span>season_length, model<span class="op">=</span><span class="st">"ZZZ"</span>).fit(y<span class="op">=</span>y)   <span class="co"># erro, tendência e</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> m, _ets_name(m)                                <span class="co"># sazonalidade escolhidos por AIC</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Around this choice, <code>forecast_series</code> prepares the series: it aligns it to the global monthly grid (a month without sales becomes 0), <strong>keeps the recent zeros</strong> so the model <em>sees</em> that an item stopped selling, anchors the forecast at the last closed month + 1 (an item whose last sale was a year ago is not forecast “from the past”) and caps prediction intervals that explode.</p>
+</section>
+<section id="tail-cleaning" class="level3">
+<h3 class="anchored" data-anchor-id="tail-cleaning">Tail cleaning</h3>
+<p>An ARIMA fitted on a short and noisy series can produce a good first few months and a useless tail: it goes negative, explodes, or becomes a flat line. Three functions deal with this:</p>
+<ul>
+<li><code>flag_bad_tail</code> marks a forecast whose tail (from month 5 on) is mostly negative or grows/falls explosively (last value more than 5 to 8 times the first, with large month-to-month jumps);</li>
+<li><code>flat_tail_start</code> finds where a flat tail starts (at least 6 final months within 1% of the last value);</li>
+<li><code>combine_one</code> builds the <strong>Combined</strong> curve: it keeps the head of the ARIMA/ETS forecast and <strong>replaces a bad tail by the top-down forecast</strong>, or <strong>rescales a flat tail by the top-down shape</strong>, keeping the ARIMA level.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> flag_bad_tail(fc_df, start_bad<span class="op">=</span><span class="dv">5</span>, neg_share_thr<span class="op">=</span><span class="fl">0.5</span>, explode_factor<span class="op">=</span><span class="fl">8.0</span>, high_jump_factor<span class="op">=</span><span class="fl">5.0</span>):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> fc_df[<span class="st">"mean"</span>].to_numpy(dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    tail <span class="op">=</span> m[start_bad <span class="op">-</span> <span class="dv">1</span>:]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    neg_share <span class="op">=</span> <span class="bu">float</span>(np.mean(tail <span class="op">&lt;=</span> <span class="dv">0</span>))                         <span class="co"># cauda negativa</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    slope <span class="op">=</span> <span class="bu">float</span>(np.polyfit(np.arange(<span class="bu">len</span>(tail)), tail, <span class="dv">1</span>)[<span class="dv">0</span>])   <span class="co"># tendência da cauda</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    ratio_last_first <span class="op">=</span> <span class="bu">abs</span>(tail[<span class="op">-</span><span class="dv">1</span>] <span class="op">/</span> m[<span class="dv">0</span>])</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    mean_local_ratio <span class="op">=</span> np.mean(np.<span class="bu">abs</span>(np.diff(tail) <span class="op">/</span> np.maximum(tail[:<span class="op">-</span><span class="dv">1</span>], <span class="fl">1e-6</span>)))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> neg_share <span class="op">&gt;=</span> neg_share_thr:</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> slope <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> ratio_last_first <span class="op">&gt;</span> high_jump_factor <span class="kw">and</span> mean_local_ratio <span class="op">&gt;</span> <span class="fl">1.5</span>:</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span>                                               <span class="co"># explode para cima</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> slope <span class="op">&lt;</span> <span class="dv">0</span> <span class="kw">and</span> ratio_last_first <span class="op">&gt;</span> explode_factor <span class="kw">and</span> mean_local_ratio <span class="op">&gt;</span> <span class="fl">1.5</span>:</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span>                                               <span class="co"># explode para baixo</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> combine_one(a, p_prop, id_value, w_fut, tot_fc_dt, id_col, swap_bad<span class="op">=</span><span class="st">"tail"</span>, ...):</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1) cauda ruim → troca a partir do 5º mês pelo Top-Down (pesos × projeção do nível de cima)</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> flag_bad_tail(ap, start_bad<span class="op">=</span>bad_start):</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        td <span class="op">=</span> build_td_fc(id_value, ap[<span class="st">"data"</span>], ap, w_fut, tot_fc_dt, id_col<span class="op">=</span>id_col)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        ap.loc[idx_cauda, IC] <span class="op">=</span> td.loc[idx_cauda, IC]</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ap</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2) sem cauda plana → mantém o ARIMA/ETS como está</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    tail_start <span class="op">=</span> flat_tail_start(ap[<span class="st">"mean"</span>], min_run<span class="op">=</span><span class="dv">6</span>, rel_tol<span class="op">=</span><span class="fl">0.01</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> is_const_all(ap[<span class="st">"mean"</span>]) <span class="kw">and</span> tail_start <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ap</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3) projeção constante ou cauda plana → mantém o NÍVEL do ARIMA e usa a FORMA do Top-Down</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    k <span class="op">=</span> media_arima_cauda <span class="op">/</span> media_topdown_cauda</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    ap.loc[idx_cauda, <span class="st">"mean"</span>] <span class="op">=</span> k <span class="op">*</span> ap.loc[idx_cauda, <span class="st">"fc_vendas"</span>]</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="top-down-weights" class="level3">
+<h3 class="anchored" data-anchor-id="top-down-weights">Top-down weights</h3>
+<p>The top-down curve of an item is its share of the forecast of the level above. <code>build_topdown_weights</code> blends the item’s share <strong>in each month of the year</strong> (local seasonality, weight 0.6) with its <strong>global</strong> share (weight 0.4) and multiplies by a <strong>momentum</strong> (last 3 months over the 3 before, clipped to [0.8, 1.2]), then normalizes the weights to add up to 1 in each future month. At SKU level the level above is the product, so the colours divide the product forecast.</p>
+</section>
+<section id="shape-for-straight-line-forecasts" class="level3">
+<h3 class="anchored" data-anchor-id="shape-for-straight-line-forecasts">Shape for straight-line forecasts</h3>
+<p>Sometimes the plain ARIMA wins the backtest but forecasts a straight line: the level is reliable, but the curve says nothing about the seasonal peaks that purchasing and production need. <code>cv_detrend</code> measures the lack of shape (the coefficient of variation of the residual after removing a linear trend, so a constant and a diagonal line both score about 0), <code>perfil_sazonal</code> estimates the monthly index of the item and <code>aplicar_perfil</code> imposes this shape while <strong>keeping the ARIMA mean</strong> over the horizon. The profile comes from the item itself or, if its history is short or not seasonal, from its product or its segment. These “seasonalized” curves enter the backtest as two extra methods.</p>
+</section>
+<section id="choosing-the-production-method-of-each-series" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-the-production-method-of-each-series">Choosing the production method of each series</h3>
+<p>The backtest refits every method at 6 rolling origins and compares 1 to 6 months ahead with the real sales. The recommended method is the one with the lowest <strong>WMAPE per horizon</strong> (the mean of the WMAPE of each step ahead, so that h = 1, present in all origins, does not dominate). Two extra rules: a method <strong>with shape</strong> within 3 points of the best is preferred to a flat line, and close cases (within 3 points) are decided by the smallest <strong>bias</strong>.</p>
+</section>
+<section id="a-pipeline-that-adjusts-itself" class="level3">
+<h3 class="anchored" data-anchor-id="a-pipeline-that-adjusts-itself">A pipeline that adjusts itself</h3>
+<ul>
+<li><strong>Champion–challenger</strong> (<code>07_tuning.py</code>): on the high-volume series with the worst error, a fixed set of ARIMA/SARIMA orders challenges AutoARIMA in the same backtest; a challenger that wins by at least 3 points (in the pooled WMAPE and in the WMAPE per horizon) is applied automatically, without manual approval.</li>
+<li><strong>Circuit breaker</strong> (<code>06b_circuit_breaker.py</code>): each cycle saves the applied forecast and a “shadow” AutoARIMA forecast; when the months are realized, an override that performed worse than the shadow is reverted and put on cooldown.</li>
+<li><strong>Bias correction</strong> (<code>07b_bias.py</code>): where the recommended method has a relevant bias (≥ 15%) on a relevant volume, the forecast is multiplied by 1 / (1 + bias), clipped to [0.5, 1.5].</li>
+<li><strong>Reconciliation</strong> (<code>07c_finalizar.py</code>): the levels are made coherent (products and segments add up to the Total, SKUs add up to their product) with one multiplier per month, which keeps the shape of each series.</li>
+</ul>
+</section>
+</section>
+<section id="results-on-the-synthetic-data" class="level2">
+<h2 class="anchored" data-anchor-id="results-on-the-synthetic-data">Results on the synthetic data</h2>
+<p>Backtest with 6 rolling origins (April to September 2026), 1 to 6 months ahead. Accuracy is 1 − WMAPE of the method chosen for production:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 24%">
+<col style="width: 22%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Level</th>
+<th style="text-align: right;">Series evaluated</th>
+<th style="text-align: right;">Median accuracy</th>
+<th style="text-align: right;">Accuracy ≥ 90%</th>
+<th style="text-align: right;">Accuracy ≥ 80%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Total</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">87.8%</td>
+<td style="text-align: right;">–</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td>Segment</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">88.4%</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="odd">
+<td>Product</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">85.3%</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="even">
+<td>SKU</td>
+<td style="text-align: right;">272</td>
+<td style="text-align: right;">80.9%</td>
+<td style="text-align: right;"><strong>20</strong></td>
+<td style="text-align: right;">146</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/project07/acuracia_por_nivel.png" class="img-fluid figure-img"></p>
+<figcaption>Accuracy of the recommended method in each level. Each point is a series; green points are above 90%.</figcaption>
+</figure>
+</div>
+<p><strong>20 of the 272 SKUs evaluated are forecast with more than 90% accuracy</strong>, even though each SKU is a small slice of the total: these are the main colours of products with a stable seasonal pattern, where the seasonal ARIMA of the product and the colour shares of the top-down capture almost all the signal. At the other end are the small colours, where the monthly quantity depends on a few orders. The absolute values depend on how much noise the synthetic generator puts in each series (the real series are noisier); what the project shows is the machinery that chooses, for each series, the method that works best for it.</p>
+<p><strong>Models chosen automatically.</strong> In this run, AutoARIMA picked a seasonal ARIMA for the Total (ARIMA(0,1,0)(1,1,0)[12]), for all 6 segments and for 44 of the 48 products. At SKU level, 241 series got a seasonal ARIMA, 53 a non-seasonal ARIMA (colours with a short history or with the seasonality drowned by noise) and 6 an intermittent-demand model (colours with many months without sales). No series went to ETS, because none of the aggregate synthetic series is sparse; in the real data, where many products have long gaps, about half of the products end up on ETS and most SKUs on intermittent-demand models. The plain ARIMA is also rarely the method that goes to production: at SKU level, the backtest picked the Top-Down for 126 SKUs, the Combined curve for 102 and a seasonalized curve for 41.</p>
+</section>
+<section id="in-production" class="level2">
+<h2 class="anchored" data-anchor-id="in-production">In production</h2>
+<p>In the company, the pipeline reads the sales model from the data warehouse and runs as an <strong>Azure Container Apps Job</strong>: monthly by cron and on demand, when someone clicks “Forecast” in the S&amp;OP app. The state that must survive between runs (model overrides, cooldown, bias factors and snapshots for the circuit breaker) lives on a persistent file share; a file lock prevents two runs at the same time, secrets are masked before any line reaches the log, and the parquet files and the logs go to a Blob Storage read by the API that feeds the front end.</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<p>The full pipeline, the synthetic data generator, the dashboard and the unit tests are in the <a href="https://github.com/batistugo/sop-demand-forecasting">repository</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<style>
+
+/* language switch: a highlighted button on the right side of the navbar */
+
+a.nav-link.lang-switch {
+
+  background-color: #2780e3;
+
+  color: #fff !important;
+
+  border-radius: 999px;
+
+  padding: 0.3rem 1rem !important;
+
+  margin: 0.25rem 0;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+}
+
+a.nav-link.lang-switch:hover,
+
+a.nav-link.lang-switch:focus {
+
+  background-color: #1a68c2;
+
+  color: #fff !important;
+
+}
+
+/* on small screens the menu collapses: a copy of the button is shown at the top of the page */
+
+.lang-switch-bar { display: none; }
+
+@media (max-width: 991.98px) {
+
+  .lang-switch-bar { display: block; text-align: right; margin: 0 0 0.75rem 0; }
+
+  .lang-switch-bar a.nav-link.lang-switch { display: inline-block; font-size: 0.9rem; margin: 0; }
+
+  li.lang-switch-item { display: none; }
+
+}
+
+</style>
+
+
+
+<script>
+
+// 1) the browser tab shows the title of the page in its own language
+
+// 2) the language button of the navbar opens the same page in the other language
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  var titulo = document.querySelector("main .page-title");
+
+  if (titulo) document.title = titulo.textContent.trim().replace(/\s+/g, " ") + " – MyDataPortfolio";
+
+
+
+  var isPt = (document.documentElement.lang || "").indexOf("pt") === 0;
+
+  var page = location.pathname.split("/").pop() || "index.html";
+
+  document.querySelectorAll("a.nav-link").forEach(function (a) {
+
+    var text = a.textContent.trim();
+
+    if ((isPt && text === "EN Version") || (!isPt && text === "Versão em PT")) {
+
+      a.classList.add("lang-switch");
+
+      a.setAttribute("href", (isPt ? "../" : "pt/") + page);
+
+      a.setAttribute("title", isPt ? "Read this page in English" : "Ler esta página em português");
+
+      a.setAttribute("lang", isPt ? "en" : "pt-BR");
+
+      a.parentElement.classList.add("lang-switch-item");
+
+
+
+      var main = document.querySelector("main");
+
+      if (main) {
+
+        var barra = document.createElement("div");
+
+        barra.className = "lang-switch-bar";
+
+        barra.appendChild(a.cloneNode(true));
+
+        main.insertBefore(barra, main.firstChild);
+
+      }
+
+    }
+
+  });
+
+});
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

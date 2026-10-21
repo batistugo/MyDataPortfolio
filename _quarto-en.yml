@@ -2,6 +2,7 @@ project:
   output-dir: docs
   resources:
     - .nojekyll
+    - "/dashboards/**"
 
 lang: en
 
@@ -25,6 +26,8 @@ website:
         href: project06_1.Rmd
       - text: "Project 6.2"
         href: project06_2.Rmd
+      - text: "Project 07"
+        href: project07.qmd
     right:
       - text: "Versão em PT"
         href: https://batistugo.github.io/MyDataPortfolio/pt/

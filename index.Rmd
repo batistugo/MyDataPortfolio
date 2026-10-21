@@ -118,6 +118,7 @@ Fique à vontade para entrar em contato por qualquer um desses canais.
     <tr><td><a href="project05.html">Project 05</a></td><td>Survival analysis and adjusted Cox model</td><td>Contract (synthetic data)</td></tr>
     <tr><td><a href="project06_1.html">Project 6.1</a></td><td>Psychometrics (CFA), regression and mediation</td><td>Contract (real, de-identified data)</td></tr>
     <tr><td><a href="project06_2.html">Project 6.2</a></td><td>Longitudinal data linkage and quantile regression</td><td>Contract (real, de-identified data)</td></tr>
+    <tr><td><a href="project07.html">Project 07</a></td><td>Hierarchical demand forecasting with ARIMA/ETS (Python)</td><td>Work (synthetic data)</td></tr>
   </tbody>
 </table>
 </div>
@@ -141,6 +142,7 @@ Fique à vontade para entrar em contato por qualquer um desses canais.
     <tr><td><a href="project05.html">Projeto 05</a></td><td>Análise de sobrevivência e modelo de Cox ajustado</td><td>Contratado (dados sintéticos)</td></tr>
     <tr><td><a href="project06_1.html">Projeto 6.1</a></td><td>Psicometria (AFC), regressão e mediação</td><td>Contratado (dados reais, sem identificação)</td></tr>
     <tr><td><a href="project06_2.html">Projeto 6.2</a></td><td>Cruzamento de bases longitudinais e regressão quantílica</td><td>Contratado (dados reais, sem identificação)</td></tr>
+    <tr><td><a href="project07.html">Projeto 07</a></td><td>Projeção de demanda hierárquica com ARIMA/ETS (Python)</td><td>Trabalho (dados sintéticos)</td></tr>
   </tbody>
 </table>
 </div>

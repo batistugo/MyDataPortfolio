@@ -1,5 +1,7 @@
 project:
   output-dir: docs/pt
+  resources:
+    - "/dashboards/**"
 
 lang: pt-BR
 
@@ -23,6 +25,8 @@ website:
         href: project06_1.Rmd
       - text: "Projeto 6.2"
         href: project06_2.Rmd
+      - text: "Projeto 07"
+        href: project07.qmd
     right:
       - text: "EN Version"
         href: https://batistugo.github.io/MyDataPortfolio/

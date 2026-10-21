@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S&amp;OP Forecast Viewer</title>
+<style>
+  :root {
+    --bg: #F7F7FA; --surface: #FFFFFF; --border: #E2E3EA; --text: #1F2330; --muted: #6B7080;
+    --accent: #1E2A78; --accent-soft: #E9EBF7; --good: #0B8A5C; --bad: #DC2626;
+    --hist: #343A40; --prod: #1E2A78; --comb: #7C3AED; --arima: #0B8A5C; --td: #D97706;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: 14px; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 16px; }
+  header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  h1 { font-size: 20px; margin: 0; letter-spacing: -0.2px; }
+  .sub { color: var(--muted); margin-top: 3px; font-size: 13px; }
+  .lang button { border: 1px solid var(--border); background: var(--surface); color: var(--muted);
+                 padding: 5px 10px; cursor: pointer; font-size: 13px; }
+  .lang button:first-child { border-radius: 7px 0 0 7px; }
+  .lang button:last-child { border-radius: 0 7px 7px 0; border-left: none; }
+  .lang button.ativo { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  nav.abas { display: flex; gap: 4px; margin: 16px 0 14px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  nav.abas button { border: none; background: none; padding: 9px 14px; font-size: 14px; color: var(--muted);
+                    cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -1px; }
+  nav.abas button.ativo { color: var(--text); font-weight: 600; border-bottom-color: var(--accent); }
+  .linha { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .rotulo { color: var(--muted); font-size: 13px; }
+  .pilula { padding: 7px 14px; border: 1px solid var(--border); background: var(--surface); color: var(--muted);
+            border-radius: 8px; cursor: pointer; font-size: 14px; }
+  .pilula:hover { color: var(--text); }
+  .pilula.ativo { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  .pilula:disabled { opacity: .45; cursor: default; }
+  .toggle.ativo { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+  select { padding: 7px 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface);
+           font-size: 14px; color: var(--text); max-width: 100%; }
+  .metodo { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+            padding: 8px 12px; border-radius: 6px; margin-bottom: 12px; }
+  .metodo .mod { color: var(--muted); margin-left: 6px; font-size: 13px; }
+  h3 { font-size: 15px; margin: 18px 0 8px; }
+  .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+  .card-valor { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .card-titulo { color: var(--muted); font-size: 13px; margin-top: 2px; }
+  .card-delta { font-weight: 600; margin-top: 4px; }
+  .grafico { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin-top: 14px;
+             height: 470px; }
+  .grafico.baixo { height: 340px; }
+  .tabela-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  th, td { padding: 7px 10px; border-bottom: 1px solid var(--border); text-align: left; white-space: nowrap; }
+  th { color: var(--muted); font-weight: 600; background: #FAFAFC; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.rec td { background: var(--accent-soft); font-weight: 600; }
+  tr.clicavel { cursor: pointer; }
+  tr.clicavel:hover td { background: #F1F2F8; }
+  .nota { color: var(--muted); font-size: 12.5px; margin-top: 6px; }
+  .info { color: var(--muted); padding: 14px; background: var(--surface); border: 1px dashed var(--border); border-radius: 8px; }
+  .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  .dois { display: grid; grid-template-columns: 3fr 2fr; gap: 14px; }
+  pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px; overflow-x: auto; font-size: 12.5px; }
+  footer { color: var(--muted); font-size: 12px; margin-top: 22px; }
+  @media (max-width: 720px) {
+    .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .dois { grid-template-columns: 1fr; }
+    .grafico { height: 380px; }
+    .card-valor { font-size: 18px; }
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
+<script src="data.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1 id="titulo"></h1>
+      <div class="sub" id="subtitulo"></div>
+    </div>
+    <div class="lang"><button data-lang="en">EN</button><button data-lang="pt">PT</button></div>
+  </header>
+  <nav class="abas" id="abas"></nav>
+  <main id="conteudo"></main>
+  <footer id="rodape"></footer>
+</div>
+
+<script>
+"use strict";
+const D = window.SOP_DATA;
+const NIVEIS = ["total", "segmento", "pai", "filho"];
+
+// ---------------------------------------------------------------- textos
+const T = {
+  en: {
+    titulo: "S&OP · Demand forecasting",
+    sub: (m) => `Synthetic data · history ${m.ini}–${m.fim} · ${m.h}-month horizon`,
+    abas: { proj: "Forecasts", acur: "Accuracy", metr: "Metrics" },
+    niveis: { total: "Total", segmento: "Segment", pai: "Product (parent)", filho: "SKU (child)" },
+    campo: { segmento: "Segment", pai: "Product", filho: "SKU" },
+    todos: "All",
+    projecao: "Forecast:", comparar: "Compare:",
+    producao: "⭐ Production", combinado: "Combined", arima: "ARIMA/ETS", topdown: "Top-Down",
+    historico: "History", ic95: "95% PI", ic80: "80% PI",
+    metodoProd: "Production method:", modelo: "Model:",
+    realizado: (m) => `Actual (last months, up to ${m})`,
+    projetado: "Forecast (next months, production curve)",
+    ultimos: (n) => `Last ${n} months`, proximos: (n) => `Next ${n} months`,
+    somaUlt: (n) => `sum of the last ${n} months`, somaProx: (n) => `sum of the next ${n} months`,
+    novo: "▲ new",
+    graf: (id) => `${id} — History × Forecast`,
+    eixoY: "Quantity (meters)",
+    acurTit: "Backtest accuracy of each method (6 rolling origins, 1–6 months ahead)",
+    acurNA: "Accuracy is not available for this item: it is computed for the aggregate levels and for the SKUs with at least 12 months of history that sold in at least 10 of the last 12 months.",
+    janela: "Evaluated window:",
+    cols: ["Method", "Accuracy", "WMAPE", "WMAPE/h", "MASE", "Hit ±20%", "Bias"],
+    recomendado: "⭐ = method chosen for production (lowest WMAPE/h, tie-break by bias and shape).",
+    mesTit: "Month by month (next 12 months)",
+    curva: "Curve",
+    acurNivel: "Level:",
+    kAval: "Series evaluated", kMed: "Median accuracy", k90: "Accuracy ≥ 90%", k80: "Accuracy ≥ 80%",
+    histTit: "Accuracy of the recommended method (number of series per range)",
+    histX: "Accuracy (1 − WMAPE)", histY: "Series",
+    metTit: "Method chosen for production",
+    rankTit: "Most accurate series (click to open the forecast)",
+    rankCols: ["#", "Series", "Method", "Accuracy", "Hit ±20%", "Bias"],
+    semAcur: "No backtest at this level.",
+    metrTit: "How to read the accuracy metrics",
+    metrIntro: "All metrics come from a rolling-origin backtest: the history is cut at an earlier month, the next months are forecast and compared with what was actually sold, and this is repeated for several origins to estimate the out-of-sample error.",
+    metrCols: ["Metric", "What it measures", "Better when", "Example"],
+    metr: [
+      ["Accuracy", "How close the forecast was to the actual sales, in % (business reading). It is 1 − WMAPE.", "HIGHER (100% = perfect)", "WMAPE of 20% → accuracy 80%."],
+      ["WMAPE", "Mean absolute percentage error weighted by volume (items that sell more weigh more).", "LOWER. Reference: <20% good · 20–50% fair · >50% weak", "Sold 100 and 200; forecast 90 and 260 → errors 10 and 60 → 70/300 = 23%."],
+      ["WMAPE/h", "Average of the WMAPE of each step ahead (h = 1, 2, …), so the short term does not dominate. It is the criterion that picks the ⭐ method.", "LOWER", "WMAPE of month 1 = 10% and of month 2 = 30% → WMAPE/h = 20%."],
+      ["MASE", "Error of the model divided by the error of a naive forecast (same month last year, or last month). Scale-free and robust to zeros.", "<1 (better than naive)", "MASE 0.45 → the model makes ~45% of the naive error."],
+      ["Hit ±20%", "Share of months (with sales) whose error stayed within ±20%.", "HIGHER", "6 months evaluated, 4 within ±20% → 67%."],
+      ["Bias", "Systematic tendency: positive over-forecasts, negative under-forecasts.", "Close to 0", "Bias +15% → on average 15% above the actual."],
+    ],
+    formulas: "With yᵢ = actual sales of month i and ŷᵢ = forecast:",
+    formulasPre: `WMAPE      = Σ |yᵢ − ŷᵢ|  /  Σ |yᵢ|
+Accuracy   = max(0, 1 − WMAPE)
+Bias       = Σ (ŷᵢ − yᵢ)  /  Σ |yᵢ|
+MASE       = MAE(model) / MAE(naive)      naive: ŷᵢ = yᵢ₋₁₂ (≥ 24 months) or yᵢ₋₁
+Hit ±20%   = #(months with |yᵢ − ŷᵢ| / yᵢ ≤ 0.20) / #(months with sales)
+WMAPE/h    = mean over h of the WMAPE computed only for the step h months ahead`,
+    rodape: "Replica of the S&OP front end, built from the pipeline outputs on synthetic data. Code: github.com/batistugo/sop-demand-forecasting",
+    metodos: {
+      "Combinado": "Combined", "Top-Down": "Top-Down", "ARIMA/ETS": "ARIMA/ETS",
+      "ARIMA Sazonalizado": "Seasonalized ARIMA", "Combinado Sazonalizado": "Seasonalized Combined",
+    },
+  },
+  pt: {
+    titulo: "S&OP · Projeção de demanda",
+    sub: (m) => `Dados sintéticos · histórico ${m.ini}–${m.fim} · horizonte de ${m.h} meses`,
+    abas: { proj: "Projeções", acur: "Acurácia", metr: "Métricas" },
+    niveis: { total: "Total", segmento: "Segmento", pai: "Pai (produto)", filho: "Filho (SKU)" },
+    campo: { segmento: "Segmento", pai: "Produto", filho: "SKU" },
+    todos: "Todos",
+    projecao: "Projeção:", comparar: "Comparar:",
+    producao: "⭐ Produção", combinado: "Combinado", arima: "ARIMA/ETS", topdown: "Top-Down",
+    historico: "Histórico", ic95: "IC 95%", ic80: "IC 80%",
+    metodoProd: "Método de produção:", modelo: "Modelo:",
+    realizado: (m) => `Realizado (últimos meses, até ${m})`,
+    projetado: "Projetado (próximos meses, curva de produção)",
+    ultimos: (n) => `Últimos ${n} meses`, proximos: (n) => `Próximos ${n} meses`,
+    somaUlt: (n) => `soma dos últimos ${n} meses`, somaProx: (n) => `soma dos próximos ${n} meses`,
+    novo: "▲ novo",
+    graf: (id) => `${id} — Histórico × Projeção`,
+    eixoY: "Quantidade (metros)",
+    acurTit: "Acurácia de cada método no backteste (6 origens móveis, 1 a 6 meses à frente)",
+    acurNA: "Acurácia não disponível para este item: ela é calculada para os níveis agregados e para os SKUs com pelo menos 12 meses de histórico que venderam em pelo menos 10 dos últimos 12 meses.",
+    janela: "Janela avaliada:",
+    cols: ["Método", "Acurácia", "WMAPE", "WMAPE/h", "MASE", "Acerto ±20%", "Viés"],
+    recomendado: "⭐ = método escolhido para produção (menor WMAPE/h, com desempate por viés e por forma).",
+    mesTit: "Mês a mês (próximos 12 meses)",
+    curva: "Curva",
+    acurNivel: "Nível:",
+    kAval: "Séries avaliadas", kMed: "Acurácia mediana", k90: "Acurácia ≥ 90%", k80: "Acurácia ≥ 80%",
+    histTit: "Acurácia do método recomendado (número de séries por faixa)",
+    histX: "Acurácia (1 − WMAPE)", histY: "Séries",
+    metTit: "Método escolhido para produção",
+    rankTit: "Séries com maior acurácia (clique para abrir a projeção)",
+    rankCols: ["#", "Série", "Método", "Acurácia", "Acerto ±20%", "Viés"],
+    semAcur: "Sem backteste neste nível.",
+    metrTit: "Como ler as métricas de acurácia",
+    metrIntro: "Todas as métricas vêm de um backteste de origem móvel: o histórico é cortado num mês anterior, os meses seguintes são projetados e comparados com o que de fato foi vendido, e isso se repete em várias origens para estimar o erro fora da amostra.",
+    metrCols: ["Métrica", "O que mede", "Melhor quando", "Exemplo"],
+    metr: [
+      ["Acurácia", "Quão perto a projeção ficou da venda real, em % (leitura de negócio). É 1 − WMAPE.", "MAIOR (100% = perfeito)", "WMAPE de 20% → acurácia de 80%."],
+      ["WMAPE", "Erro percentual médio ponderado pelo volume (itens que vendem mais pesam mais).", "MENOR. Referência: <20% bom · 20–50% razoável · >50% fraco", "Vendeu 100 e 200; previu 90 e 260 → erros 10 e 60 → 70/300 = 23%."],
+      ["WMAPE/h", "Média do WMAPE de cada mês à frente (h = 1, 2, …), para o curto prazo não dominar. É o critério que escolhe o método ⭐.", "MENOR", "WMAPE do 1º mês = 10% e do 2º = 30% → WMAPE/h = 20%."],
+      ["MASE", "Erro do modelo dividido pelo erro de uma previsão ingênua (mesmo mês do ano anterior, ou mês anterior). Livre de escala e robusto a zeros.", "<1 (melhor que o ingênuo)", "MASE 0,45 → o modelo erra ~45% do que o ingênuo erraria."],
+      ["Acerto ±20%", "Fração dos meses (com venda) em que o erro ficou dentro de ±20%.", "MAIOR", "6 meses avaliados, 4 dentro de ±20% → 67%."],
+      ["Viés", "Tendência sistemática: positivo projeta a mais, negativo projeta a menos.", "Perto de 0", "Viés +15% → na média, 15% acima do real."],
+    ],
+    formulas: "Sendo yᵢ = venda real do mês i e ŷᵢ = valor previsto:",
+    formulasPre: `WMAPE        = Σ |yᵢ − ŷᵢ|  /  Σ |yᵢ|
+Acurácia     = máx(0, 1 − WMAPE)
+Viés         = Σ (ŷᵢ − yᵢ)  /  Σ |yᵢ|
+MASE         = MAE(modelo) / MAE(ingênuo)   ingênuo: ŷᵢ = yᵢ₋₁₂ (≥ 24 meses) ou yᵢ₋₁
+Acerto ±20%  = nº de meses com |yᵢ − ŷᵢ| / yᵢ ≤ 0,20  /  nº de meses com venda
+WMAPE/h      = média, entre os passos h, do WMAPE calculado só para h meses à frente`,
+    rodape: "Réplica do front do S&OP, montada a partir das saídas do pipeline sobre dados sintéticos. Código: github.com/batistugo/sop-demand-forecasting",
+    metodos: {
+      "Combinado": "Combinado", "Top-Down": "Top-Down", "ARIMA/ETS": "ARIMA/ETS",
+      "ARIMA Sazonalizado": "ARIMA Sazonalizado", "Combinado Sazonalizado": "Combinado Sazonalizado",
+    },
+  },
+};
+
+// Rótulo do método de produção vindo do pipeline (em português) → idioma da tela
+function rotuloMetodo(s, lang) {
+  if (!s || lang === "pt") return s || "—";
+  return s
+    .replace("Combinado Sazonalizado", "Seasonalized Combined")
+    .replace("ARIMA Sazonalizado", "Seasonalized ARIMA")
+    .replace("Combinado", "Combined")
+    .replace("(sem sazonalidade)", "(no seasonality)")
+    .replace("(plano — sem padrão)", "(flat — no pattern)")
+    .replace("(própria)", "(own profile)")
+    .replace("(material)", "(product profile)")
+    .replace("(segmento)", "(segment profile)");
+}
+
+// ---------------------------------------------------------------- estado
+const params = new URLSearchParams(location.search);
+const S = {
+  lang: params.get("lang") === "pt" ? "pt" : "en",
+  aba: params.get("aba") || "proj",
+  nivel: NIVEIS.includes(params.get("nivel")) ? params.get("nivel") : "total",
+  item: params.get("item") || "",
+  fSeg: "", fPai: "",
+  ver: { producao: true, combinado: false, arima: false, topdown: false },
+  nivelAcur: "filho",
+};
+const t = () => T[S.lang];
+const fmt = (x) => x == null ? "—" : Math.round(x).toLocaleString(S.lang === "pt" ? "pt-BR" : "en-US");
+const pct = (x, d = 0) => x == null ? "—" : `${(x * 100).toFixed(d)}%`.replace(".", S.lang === "pt" ? "," : ".");
+const pctS = (x) => x == null ? "—" : Math.round(x * 100) === 0 ? pct(0) : `${x > 0 ? "+" : "−"}${pct(Math.abs(x))}`;
+const acurOf = (w) => w == null ? null : Math.max(0, 1 - w);
+const mesCurto = (iso) => { const [a, m] = iso.split("-"); return `${m}/${a.slice(2)}`; };
+const el = (html) => { const d = document.createElement("div"); d.innerHTML = html.trim(); return d.firstChild; };
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+// ---------------------------------------------------------------- hierarquia
+const CAT = D.catalogo;
+function itensDoNivel(nivel) {
+  if (nivel === "total") return ["Total"];
+  let ids = Object.keys(D.niveis[nivel]).sort();
+  if (nivel === "pai" && S.fSeg) ids = ids.filter((p) => CAT.pai_seg[p] === S.fSeg);
+  if (nivel === "filho") {
+    if (S.fPai) ids = ids.filter((s) => CAT.filho_pai[s] === S.fPai);
+    else if (S.fSeg) ids = ids.filter((s) => CAT.pai_seg[CAT.filho_pai[s]] === S.fSeg);
+  }
+  return ids;
+}
+function paisDoFiltro() {
+  return Object.keys(CAT.pai_seg).filter((p) => !S.fSeg || CAT.pai_seg[p] === S.fSeg).sort();
+}
+function ajustarItem() {
+  const lista = itensDoNivel(S.nivel);
+  if (!lista.includes(S.item)) S.item = lista[0] || "";
+}
+function abrirItem(nivel, id) {
+  S.aba = "proj"; S.nivel = nivel; S.item = id;
+  S.fSeg = nivel === "pai" ? CAT.pai_seg[id] : nivel === "filho" ? CAT.pai_seg[CAT.filho_pai[id]] : "";
+  S.fPai = nivel === "filho" ? CAT.filho_pai[id] : "";
+  render();
+  window.scrollTo(0, 0);
+}
+
+// ---------------------------------------------------------------- aba Projeções
+function somaUltimos(h, n) { return h.slice(-n).reduce((s, v) => s + (v || 0), 0); }
+function somaPrimeiros(p, n) { return p.slice(0, n).reduce((s, v) => s + (v || 0), 0); }
+
+function tracos(e) {
+  const L = t();
+  const mh = D.meses_hist, mf = D.meses_fc;
+  const ultimo = e.h.length ? e.h[e.h.length - 1] : null;
+  const ponte = (vals) => ({ x: [mh[mh.length - 1], ...mf], y: [ultimo, ...vals] });
+  const tr = [];
+  if (S.ver.producao) {
+    tr.push(
+      { x: mf, y: e.p95[1], mode: "lines", line: { width: 0 }, hoverinfo: "skip", showlegend: false },
+      { x: mf, y: e.p95[0], mode: "lines", name: L.ic95, line: { width: 0 }, fill: "tonexty", fillcolor: "rgba(30,42,120,0.10)", hoverinfo: "skip" },
+      { x: mf, y: e.p80[1], mode: "lines", line: { width: 0 }, hoverinfo: "skip", showlegend: false },
+      { x: mf, y: e.p80[0], mode: "lines", name: L.ic80, line: { width: 0 }, fill: "tonexty", fillcolor: "rgba(30,42,120,0.22)", hoverinfo: "skip" },
+      { ...ponte(e.p), mode: "lines", name: L.producao, line: { color: getCss("--prod"), width: 3, dash: "dot" } },
+    );
+  }
+  if (S.ver.combinado && e.c) tr.push({ ...ponte(e.c), mode: "lines", name: L.combinado, line: { color: getCss("--comb"), width: 2, dash: "dot" } });
+  if (S.ver.arima && e.a) tr.push({ ...ponte(e.a), mode: "lines", name: L.arima, line: { color: getCss("--arima"), width: 2, dash: "dot" } });
+  if (S.ver.topdown && e.t) tr.push({ ...ponte(e.t), mode: "lines", name: L.topdown, line: { color: getCss("--td"), width: 2, dash: "dot" } });
+  tr.push({ x: mh, y: e.h, mode: "lines", name: L.historico, line: { color: getCss("--hist"), width: 2 }, connectgaps: false });
+  return tr;
+}
+function getCss(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+
+function layoutBase(extra) {
+  return Object.assign({
+    margin: { l: 60, r: 16, t: 46, b: 40 },
+    separators: S.lang === "pt" ? ",." : ".,",
+    xaxis: { type: "date", tickformat: "%m/%Y", hoverformat: "%m/%Y" },
+    yaxis: { rangemode: "tozero", separatethousands: true },
+    legend: { orientation: "h", y: -0.16 },
+    hovermode: "x unified",
+    paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)",
+    font: { family: "-apple-system, Segoe UI, Roboto, Arial, sans-serif", size: 12 },
+  }, extra || {});
+}
+
+function selectHtml(id, rotulo, opcoes, valor, comTodos) {
+  const L = t();
+  const ops = (comTodos ? [`<option value="">${L.todos}</option>`] : [])
+    .concat(opcoes.map((o) => `<option value="${esc(o)}"${o === valor ? " selected" : ""}>${esc(o)}</option>`));
+  return `<label class="rotulo" for="${id}">${rotulo}</label><select id="${id}">${ops.join("")}</select>`;
+}
+
+function renderProjecoes(root) {
+  const L = t();
+  ajustarItem();
+  const e = D.niveis[S.nivel][S.item];
+
+  const pil = NIVEIS.map((n) => `<button class="pilula${n === S.nivel ? " ativo" : ""}" data-nivel="${n}">${L.niveis[n]}</button>`).join("");
+  root.appendChild(el(`<div class="linha">${pil}</div>`));
+
+  if (S.nivel !== "total") {
+    let filtros = "";
+    if (S.nivel === "segmento") filtros += selectHtml("selItem", L.campo.segmento, itensDoNivel("segmento"), S.item);
+    if (S.nivel === "pai" || S.nivel === "filho") filtros += selectHtml("selSeg", L.campo.segmento, CAT.segmentos, S.fSeg, true);
+    if (S.nivel === "filho") filtros += selectHtml("selPai", L.campo.pai, paisDoFiltro(), S.fPai, true);
+    if (S.nivel === "pai") filtros += selectHtml("selItem", L.campo.pai, itensDoNivel("pai"), S.item);
+    if (S.nivel === "filho") filtros += selectHtml("selItem", L.campo.filho, itensDoNivel("filho"), S.item);
+    root.appendChild(el(`<div class="linha">${filtros}</div>`));
+  }
+  if (!e) { root.appendChild(el(`<div class="info">—</div>`)); return; }
+
+  const tg = (k, rot, ok) => `<button class="pilula toggle${S.ver[k] && ok ? " ativo" : ""}" data-ver="${k}"${ok ? "" : " disabled"}>${rot}</button>`;
+  const isTot = S.nivel === "total";
+  root.appendChild(el(`<div class="linha"><span class="rotulo">${L.projecao}</span>${tg("producao", L.producao, true)}
+    <span class="rotulo" style="margin-left:10px">${L.comparar}</span>
+    ${isTot ? "" : tg("combinado", L.combinado, !!e.c)}${tg("arima", L.arima, !!e.a)}${isTot ? "" : tg("topdown", L.topdown, !!e.t)}</div>`));
+
+  root.appendChild(el(`<div class="metodo"><b>${L.metodoProd}</b> ${esc(rotuloMetodo(e.mp, S.lang))}
+    ${e.mod ? `<span class="mod">· ${L.modelo} ${esc(e.mod)}</span>` : ""}</div>`));
+
+  // cards 6/12/18: realizado × projetado
+  const fimH = mesCurto(D.meta.hist_fim);
+  const cardsR = [6, 12, 18].map((n) => `<div class="card"><div class="card-valor">${fmt(somaUltimos(e.h, n))}</div>
+    <div class="card-titulo">${L.ultimos(n)}</div><div class="nota">${L.somaUlt(n)}</div></div>`).join("");
+  const cardsP = [6, 12, 18].map((n) => {
+    const p = somaPrimeiros(e.p, n), r = somaUltimos(e.h, n);
+    let delta = "";
+    if (r > 0) {
+      const d = (p - r) / r;
+      delta = `<div class="card-delta" style="color:${d >= 0 ? "var(--good)" : "var(--bad)"}">${d >= 0 ? "▲" : "▼"} ${pct(Math.abs(d), 1)}</div>`;
+    } else if (p > 0) delta = `<div class="card-delta" style="color:var(--good)">${L.novo}</div>`;
+    return `<div class="card"><div class="card-valor">${fmt(p)}</div><div class="card-titulo">${L.proximos(n)}</div>${delta}
+      <div class="nota">${L.somaProx(n)}</div></div>`;
+  }).join("");
+  root.appendChild(el(`<div><h3>${L.realizado(fimH)}</h3><div class="cards">${cardsR}</div>
+    <h3>${L.projetado}</h3><div class="cards">${cardsP}</div></div>`));
+
+  const g = el(`<div class="grafico" id="graf"></div>`);
+  root.appendChild(g);
+  Plotly.newPlot(g, tracos(e), layoutBase({
+    title: { text: L.graf(S.item), font: { size: 15 } },
+    yaxis: { title: { text: L.eixoY }, rangemode: "tozero", separatethousands: true },
+  }), { displaylogo: false, responsive: true });
+
+  // acurácia do item
+  root.appendChild(el(`<h3>${L.acurTit}</h3>`));
+  if (e.acc && e.acc.length) {
+    // métodos com o mesmo resultado (WMAPE e viés idênticos) viram uma linha só, como no front
+    const grupos = [];
+    e.acc.forEach((r) => {
+      const g = grupos.find((x) => x[1] === r[1] && x[3] === r[3]);
+      if (g) { g[0] += ` / ${L.metodos[r[0]] || r[0]}`; g[6] = g[6] || r[6]; }
+      else grupos.push([L.metodos[r[0]] || r[0], ...r.slice(1)]);
+    });
+    const linhas = grupos.map(([m, w, wh, v, mase, hit, rec]) => `<tr class="${rec ? "rec" : ""}">
+      <td>${rec ? "⭐ " : ""}${esc(m)}</td><td class="num">${pct(acurOf(w))}</td><td class="num">${pct(w)}</td>
+      <td class="num">${pct(wh)}</td><td class="num">${mase == null ? "—" : mase.toFixed(2).replace(".", S.lang === "pt" ? "," : ".")}</td>
+      <td class="num">${pct(hit)}</td><td class="num">${pctS(v)}</td></tr>`).join("");
+    const cab = L.cols.map((c, i) => `<th${i ? ' class="num"' : ""}>${c}</th>`).join("");
+    const jan = D.resumo.niveis[S.nivel].janela;
+    root.appendChild(el(`<div><div class="tabela-wrap"><table><thead><tr>${cab}</tr></thead><tbody>${linhas}</tbody></table></div>
+      <div class="nota">${L.recomendado} ${jan ? `${L.janela} ${jan.replace("..", " – ")}.` : ""}</div></div>`));
+  } else {
+    root.appendChild(el(`<div class="info">${L.acurNA}</div>`));
+  }
+
+  // mês a mês
+  const mf = D.meses_fc.slice(0, 12);
+  const linha = (rot, arr) => arr ? `<tr><td>${rot}</td>${mf.map((_, i) => `<td class="num">${fmt(arr[i])}</td>`).join("")}</tr>` : "";
+  root.appendChild(el(`<div><h3>${L.mesTit}</h3><div class="tabela-wrap"><table>
+    <thead><tr><th>${L.curva}</th>${mf.map((m) => `<th class="num">${mesCurto(m)}</th>`).join("")}</tr></thead>
+    <tbody>${linha(L.producao, e.p)}${isTot ? "" : linha(L.combinado, e.c)}${linha(L.arima, e.a)}${isTot ? "" : linha(L.topdown, e.t)}</tbody>
+    </table></div></div>`));
+
+  // eventos
+  root.querySelectorAll("[data-nivel]").forEach((b) => b.onclick = () => {
+    S.nivel = b.dataset.nivel; S.item = ""; render();
+  });
+  root.querySelectorAll("[data-ver]").forEach((b) => b.onclick = () => { S.ver[b.dataset.ver] = !S.ver[b.dataset.ver]; render(); });
+  const on = (id, fn) => { const x = root.querySelector("#" + id); if (x) x.onchange = () => { fn(x.value); render(); }; };
+  on("selSeg", (v) => { S.fSeg = v; S.fPai = ""; S.item = ""; });
+  on("selPai", (v) => { S.fPai = v; S.item = ""; });
+  on("selItem", (v) => { S.item = v; });
+}
+
+// ---------------------------------------------------------------- aba Acurácia
+function renderAcuracia(root) {
+  const L = t();
+  const niveisAcur = ["segmento", "pai", "filho", "total"];
+  root.appendChild(el(`<div class="linha"><span class="rotulo">${L.acurNivel}</span>${niveisAcur.map((n) =>
+    `<button class="pilula${n === S.nivelAcur ? " ativo" : ""}" data-nacur="${n}">${L.niveis[n]}</button>`).join("")}</div>`));
+  root.querySelectorAll("[data-nacur]").forEach((b) => b.onclick = () => { S.nivelAcur = b.dataset.nacur; render(); });
+
+  const ents = Object.entries(D.niveis[S.nivelAcur])
+    .map(([id, e]) => {
+      const r = (e.acc || []).find((x) => x[6] === 1);
+      return r ? { id, metodo: r[0], acc: acurOf(r[1]), hit: r[5], vies: r[3] } : null;
+    })
+    .filter(Boolean);
+  if (!ents.length) { root.appendChild(el(`<div class="info">${L.semAcur}</div>`)); return; }
+
+  const accs = ents.map((x) => x.acc).sort((a, b) => a - b);
+  const med = accs.length % 2 ? accs[(accs.length - 1) / 2] : (accs[accs.length / 2 - 1] + accs[accs.length / 2]) / 2;
+  const n90 = accs.filter((a) => a >= 0.9).length, n80 = accs.filter((a) => a >= 0.8).length;
+  const k = (v, r) => `<div class="card"><div class="card-valor">${v}</div><div class="card-titulo">${r}</div></div>`;
+  root.appendChild(el(`<div class="kpis">${k(ents.length, L.kAval)}${k(pct(med), L.kMed)}${k(n90, L.k90)}${k(n80, L.k80)}</div>`));
+  const jan = D.resumo.niveis[S.nivelAcur].janela;
+  if (jan) root.appendChild(el(`<div class="nota">${L.janela} ${jan.replace("..", " – ")}</div>`));
+
+  const dois = el(`<div class="dois"><div class="grafico baixo" id="gHist"></div><div class="grafico baixo" id="gMet"></div></div>`);
+  root.appendChild(dois);
+  const faixas = Array.from({ length: 10 }, (_, i) => i / 10);
+  const cont = faixas.map((f) => accs.filter((a) => a >= f && (f === 0.9 ? a <= 1 : a < f + 0.1)).length);
+  Plotly.newPlot(dois.querySelector("#gHist"), [{
+    type: "bar", x: faixas.map((f) => `${Math.round(f * 100)}–${Math.round(f * 100 + 10)}%`), y: cont,
+    marker: { color: faixas.map((f) => f >= 0.9 ? getCss("--good") : f >= 0.8 ? "#5BAF8F" : "#9AA0B4") },
+    hovertemplate: "%{x}: %{y}<extra></extra>",
+  }], layoutBase({ title: { text: L.histTit, font: { size: 13 } }, hovermode: "closest",
+    xaxis: { title: { text: L.histX } }, yaxis: { title: { text: L.histY } }, margin: { l: 50, r: 10, t: 40, b: 60 } }),
+    { displaylogo: false, responsive: true });
+
+  const porMetodo = {};
+  ents.forEach((x) => { const m = L.metodos[x.metodo] || x.metodo; porMetodo[m] = (porMetodo[m] || 0) + 1; });
+  const ms = Object.entries(porMetodo).sort((a, b) => a[1] - b[1]);
+  Plotly.newPlot(dois.querySelector("#gMet"), [{
+    type: "bar", orientation: "h", y: ms.map((m) => m[0]), x: ms.map((m) => m[1]),
+    marker: { color: getCss("--accent") }, hovertemplate: "%{y}: %{x}<extra></extra>",
+  }], layoutBase({ title: { text: L.metTit, font: { size: 13 } }, hovermode: "closest",
+    margin: { l: 160, r: 10, t: 40, b: 40 }, xaxis: { type: "linear", title: { text: L.histY } },
+    yaxis: { automargin: true } }), { displaylogo: false, responsive: true });
+
+  const top = ents.slice().sort((a, b) => b.acc - a.acc).slice(0, 20);
+  const cab = L.rankCols.map((c, i) => `<th${i > 2 ? ' class="num"' : ""}>${c}</th>`).join("");
+  const linhas = top.map((x, i) => `<tr class="clicavel" data-abrir="${esc(x.id)}"><td>${i + 1}</td><td>${esc(x.id)}</td>
+    <td>${esc(L.metodos[x.metodo] || x.metodo)}</td><td class="num">${pct(x.acc, 1)}</td><td class="num">${pct(x.hit)}</td>
+    <td class="num">${pctS(x.vies)}</td></tr>`).join("");
+  root.appendChild(el(`<div><h3>${L.rankTit}</h3><div class="tabela-wrap"><table><thead><tr>${cab}</tr></thead>
+    <tbody>${linhas}</tbody></table></div></div>`));
+  root.querySelectorAll("[data-abrir]").forEach((r) => r.onclick = () => abrirItem(S.nivelAcur, r.dataset.abrir));
+}
+
+// ---------------------------------------------------------------- aba Métricas
+function renderMetricas(root) {
+  const L = t();
+  const cab = L.metrCols.map((c) => `<th>${c}</th>`).join("");
+  const linhas = L.metr.map((m) => `<tr><td><b>${m[0]}</b></td>${m.slice(1).map((c) => `<td style="white-space:normal">${c}</td>`).join("")}</tr>`).join("");
+  root.appendChild(el(`<div><h3>${L.metrTit}</h3><p>${L.metrIntro}</p>
+    <div class="tabela-wrap"><table><thead><tr>${cab}</tr></thead><tbody>${linhas}</tbody></table></div>
+    <p>${L.formulas}</p><pre>${L.formulasPre}</pre></div>`));
+}
+
+// ---------------------------------------------------------------- shell
+function render() {
+  const L = t();
+  document.documentElement.lang = S.lang === "pt" ? "pt-BR" : "en";
+  document.getElementById("titulo").textContent = L.titulo;
+  document.getElementById("subtitulo").textContent = L.sub({ ini: mesCurto(D.meta.hist_ini), fim: mesCurto(D.meta.hist_fim), h: D.meta.h });
+  document.querySelectorAll(".lang button").forEach((b) => b.classList.toggle("ativo", b.dataset.lang === S.lang));
+  const abas = document.getElementById("abas");
+  abas.innerHTML = Object.entries(L.abas).map(([k, v]) => `<button data-aba="${k}" class="${k === S.aba ? "ativo" : ""}">${v}</button>`).join("");
+  abas.querySelectorAll("button").forEach((b) => b.onclick = () => { S.aba = b.dataset.aba; render(); });
+  const root = document.getElementById("conteudo");
+  root.querySelectorAll(".js-plotly-plot").forEach((p) => Plotly.purge(p));
+  root.innerHTML = "";
+  if (S.aba === "acur") renderAcuracia(root);
+  else if (S.aba === "metr") renderMetricas(root);
+  else renderProjecoes(root);
+  document.getElementById("rodape").textContent = L.rodape;
+  avisarAltura();
+}
+
+// dentro de um iframe (página do portfólio), informa a altura do CONTEÚDO para a página ajustar
+// o quadro. Usa o body, não o documentElement: a altura deste acompanha a do próprio quadro, e
+// cada ajuste dispararia um novo resize (o quadro cresceria sem parar).
+function avisarAltura() {
+  if (window.parent === window) return;
+  requestAnimationFrame(() => window.parent.postMessage(
+    { sopAltura: Math.ceil(document.body.getBoundingClientRect().height) }, "*"));
+}
+window.addEventListener("resize", avisarAltura);
+document.querySelectorAll(".lang button").forEach((b) => b.onclick = () => { S.lang = b.dataset.lang; render(); });
+
+if (S.nivel !== "total" && S.item) {
+  S.fSeg = S.nivel === "pai" ? CAT.pai_seg[S.item] || "" : S.nivel === "filho" ? CAT.pai_seg[CAT.filho_pai[S.item]] || "" : "";
+  S.fPai = S.nivel === "filho" ? CAT.filho_pai[S.item] || "" : "";
+}
+render();
+</script>
+</body>
+</html>
