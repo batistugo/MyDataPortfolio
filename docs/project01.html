@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Hugo Batista da Silva">
 
 <title>Evaluation of the Efficacy of Using Growth Hormone Therapy in the Treatment of Children with Idiopathic Short Stature and Small for Gestational Age – MyDataPortfolio</title>
 <style>
@@ -81,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-32643bc00688b413a4b4dac13675c875.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -184,6 +183,12 @@ window.Quarto = {
 <span class="menu-text">Project 05</span></a>
   </li>  
 </ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://batistugo.github.io/MyDataPortfolio/pt/"> 
+<span class="menu-text">PT</span></a>
+  </li>  
+</ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
@@ -214,33 +219,15 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Evaluation of the Efficacy of Using Growth Hormone Therapy in the Treatment of Children with Idiopathic Short Stature and Small for Gestational Age</h1>
+
+
+
+<div class="h1 page-title">
+<p>Evaluation of the Efficacy of Using Growth Hormone Therapy in the Treatment of Children with Idiopathic Short Stature and Small for Gestational Age</p>
 </div>
-
-
-
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Hugo Batista da Silva </p>
-          </div>
-  </div>
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
+<p><em>Hugo Batista da Silva</em></p>
 <section id="about-the-project" class="level2">
 <h2 class="anchored" data-anchor-id="about-the-project">About the project</h2>
 <p>The client for this project approached me with a request to analyze data from the SUS (Unified Health System) to support her master’s thesis in pharmacy. Due to the pandemic and personal challenges, this project had been put on hold for two years, necessitating the hiring of a data scientist.</p>
@@ -255,10 +242,13 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>(<span class="fu">read_excel</span>(<span class="st">"PLANILHA.xlsx"</span>))</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> dataset[, <span class="fu">c</span>(<span class="st">"SEXO"</span>, <span class="st">"ID_DIAG"</span>, <span class="st">"IDADE_INÍCIO"</span>, <span class="st">"HAZ_INÍCIO"</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"HAZ_1ANOS"</span>, <span class="st">"HAZ_2ANOS"</span>, <span class="st">"HAZ_3ANOS"</span>, <span class="st">"HAZ_4ANOS"</span>)]</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(dataset)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># returns the text in the language of the page being rendered</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>tr <span class="ot">&lt;-</span> <span class="cf">function</span>(en, pt) <span class="cf">if</span> (<span class="fu">identical</span>(<span class="fu">Sys.getenv</span>(<span class="st">"QUARTO_PROFILE"</span>), <span class="st">"pt"</span>)) pt <span class="cf">else</span> en</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>(<span class="fu">read_excel</span>(<span class="st">"PLANILHA.xlsx"</span>))</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> dataset[, <span class="fu">c</span>(<span class="st">"SEXO"</span>, <span class="st">"ID_DIAG"</span>, <span class="st">"IDADE_INÍCIO"</span>, <span class="st">"HAZ_INÍCIO"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"HAZ_1ANOS"</span>, <span class="st">"HAZ_2ANOS"</span>, <span class="st">"HAZ_3ANOS"</span>, <span class="st">"HAZ_4ANOS"</span>)]</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(dataset)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    SEXO ID_DIAG IDADE_INÍCIO HAZ_INÍCIO HAZ_1ANOS HAZ_2ANOS HAZ_3ANOS
    &lt;num&gt;  &lt;char&gt;        &lt;num&gt;      &lt;num&gt;     &lt;num&gt;     &lt;num&gt;     &lt;num&gt;
@@ -298,7 +288,7 @@ window.Quarto = {
 </tr>
 <tr class="odd">
 <td>IDADE_INÍCIO</td>
-<td>Age in mounths at start of treatment</td>
+<td>Age in months at start of treatment</td>
 </tr>
 <tr class="even">
 <td>HAZ_INÍCIO</td>
@@ -331,7 +321,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dataset[</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  , <span class="st">`</span><span class="at">:=</span><span class="st">`</span>(</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">sexo_cat =</span> <span class="fu">ifelse</span>(SEXO <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Male"</span>, <span class="st">"Female"</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">sexo_cat =</span> <span class="fu">ifelse</span>(SEXO <span class="sc">==</span> <span class="dv">1</span>, <span class="fu">tr</span>(<span class="st">"Male"</span>, <span class="st">"Masculino"</span>), <span class="fu">tr</span>(<span class="st">"Female"</span>, <span class="st">"Feminino"</span>)),</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">grupo_idade_t0 =</span> <span class="fu">fcase</span>(</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      IDADE_INÍCIO <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> IDADE_INÍCIO <span class="sc">&lt;</span> <span class="dv">72</span>, <span class="st">"0-71"</span>,</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      IDADE_INÍCIO <span class="sc">&gt;=</span> <span class="dv">72</span> <span class="sc">&amp;</span> IDADE_INÍCIO <span class="sc">&lt;</span> <span class="dv">120</span>, <span class="st">"72-119"</span>,</span>
@@ -343,7 +333,7 @@ window.Quarto = {
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>      <span class="sc">!</span><span class="fu">is.na</span>(HAZ_2ANOS) <span class="sc">&amp;</span> <span class="fu">is.na</span>(HAZ_3ANOS) <span class="sc">&amp;</span> <span class="fu">is.na</span>(HAZ_4ANOS), <span class="dv">2</span>,</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(HAZ_2ANOS) <span class="sc">&amp;</span> <span class="fu">is.na</span>(HAZ_3ANOS) <span class="sc">&amp;</span> <span class="fu">is.na</span>(HAZ_4ANOS),  <span class="dv">1</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  )][,     </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  )][,</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>     diferenca <span class="sc">:</span><span class="er">=</span> <span class="fu">fcase</span>(</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>       tratamento <span class="sc">==</span> <span class="dv">1</span>, HAZ_1ANOS <span class="sc">-</span> <span class="st">`</span><span class="at">HAZ_INÍCIO</span><span class="st">`</span>,</span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>       tratamento <span class="sc">==</span> <span class="dv">2</span>, HAZ_2ANOS <span class="sc">-</span> <span class="st">`</span><span class="at">HAZ_INÍCIO</span><span class="st">`</span>,</span>
@@ -401,12 +391,12 @@ window.Quarto = {
 <pre><code>Warning: pacote 'ggplot2' foi compilado no R versão 4.5.2</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dataset_aux, <span class="fu">aes</span>(<span class="at">x =</span> aux, <span class="at">y =</span> media, <span class="at">colour =</span> grupo_idade_t0)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average height in each year of treatment"</span>,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Height Z-score"</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year of treatment"</span>) <span class="sc">+</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"Age t(0)"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Average height in each year of treatment"</span>, <span class="st">"Altura média em cada ano de tratamento"</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">tr</span>(<span class="st">"Height Z-score"</span>, <span class="st">"Escore-z da altura"</span>),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="fu">tr</span>(<span class="st">"Year of treatment"</span>, <span class="st">"Ano de tratamento"</span>)) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Age t(0)"</span>, <span class="st">"Idade t(0)"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -440,12 +430,13 @@ window.Quarto = {
 <span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dataset_aux, <span class="fu">aes</span>(<span class="at">x =</span> aux, <span class="at">y =</span> media, <span class="at">colour =</span> grupo_idade_t0)) <span class="sc">+</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average height difference with initial height in each year of treatment"</span>,</span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Height Z-score"</span>,</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year of treatment"</span>) <span class="sc">+</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"Age t(0)"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Average height difference with initial height in each year of treatment"</span>,</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Diferença média em relação à altura inicial em cada ano de tratamento"</span>),</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">tr</span>(<span class="st">"Height Z-score"</span>, <span class="st">"Escore-z da altura"</span>),</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="fu">tr</span>(<span class="st">"Year of treatment"</span>, <span class="st">"Ano de tratamento"</span>)) <span class="sc">+</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Age t(0)"</span>, <span class="st">"Idade t(0)"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -482,12 +473,12 @@ window.Quarto = {
 <span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dataset_aux, <span class="fu">aes</span>(<span class="at">x =</span> aux, <span class="at">y =</span> media, <span class="at">colour =</span> sexo_cat)) <span class="sc">+</span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average height in each year of treatment"</span>,</span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Height Z-score"</span>,</span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year of treatment"</span>) <span class="sc">+</span></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"Sex"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Average height in each year of treatment"</span>, <span class="st">"Altura média em cada ano de tratamento"</span>),</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">tr</span>(<span class="st">"Height Z-score"</span>, <span class="st">"Escore-z da altura"</span>),</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="fu">tr</span>(<span class="st">"Year of treatment"</span>, <span class="st">"Ano de tratamento"</span>)) <span class="sc">+</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Sex"</span>, <span class="st">"Sexo"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -524,12 +515,12 @@ window.Quarto = {
 <span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dataset_aux, <span class="fu">aes</span>(<span class="at">x =</span> aux, <span class="at">y =</span> media, <span class="at">colour =</span> ID_DIAG)) <span class="sc">+</span></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average height in each year of treatment"</span>,</span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Height Z-score"</span>,</span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year of treatment"</span>) <span class="sc">+</span></span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"Diagnosis"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Average height in each year of treatment"</span>, <span class="st">"Altura média em cada ano de tratamento"</span>),</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">tr</span>(<span class="st">"Height Z-score"</span>, <span class="st">"Escore-z da altura"</span>),</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="fu">tr</span>(<span class="st">"Year of treatment"</span>, <span class="st">"Ano de tratamento"</span>)) <span class="sc">+</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Diagnosis"</span>, <span class="st">"Diagnóstico"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -554,11 +545,11 @@ window.Quarto = {
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>]</span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dataset_aux, <span class="fu">aes</span>(<span class="at">x =</span> tratamento, <span class="at">y =</span> media)) <span class="sc">+</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average initial height per number of treatments"</span>,</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Initial height Z-score"</span>,</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Number of treatments"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Average initial height per number of treatments"</span>, <span class="st">"Altura inicial média por número de tratamentos"</span>),</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">tr</span>(<span class="st">"Initial height Z-score"</span>, <span class="st">"Escore-z da altura inicial"</span>),</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="fu">tr</span>(<span class="st">"Number of treatments"</span>, <span class="st">"Número de tratamentos"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -586,39 +577,39 @@ window.Quarto = {
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dataset_aux2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"variavel"</span>, <span class="st">"grupo_idade_t0"</span>, <span class="st">"cor"</span>)</span>
 <span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>dataset_aux3 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(dataset_aux1, dataset_aux2)</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>dataset_aux3[, grupo_idade_t0 <span class="sc">:</span><span class="er">=</span> </span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>dataset_aux3[, grupo_idade_t0 <span class="sc">:</span><span class="er">=</span></span>
 <span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>               <span class="fu">factor</span>(grupo_idade_t0,</span>
 <span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>                      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0-71"</span>, <span class="st">"0-71 "</span>, <span class="st">"72-119"</span>, <span class="st">"72-119 "</span>, <span class="st">"120+"</span>, <span class="st">"120+ "</span>))]</span>
 <span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> dataset_aux3, <span class="fu">aes</span>(<span class="at">x =</span> grupo_idade_t0, <span class="at">y =</span> variavel, <span class="at">color =</span> cor)) <span class="sc">+</span></span>
 <span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_identity</span>() <span class="sc">+</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">'Height Z-score'</span>, </span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Age"</span>,</span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Initial height (blue) X height after one year of treatment (red)"</span>) <span class="sc">+</span></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>()</span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="co">#SEX</span></span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>dataset_aux1 <span class="ot">&lt;-</span> dataset_aux[, <span class="fu">c</span>(<span class="st">"HAZ_INÍCIO"</span>, <span class="st">"sexo_cat"</span>)][, cor <span class="sc">:</span><span class="er">=</span> <span class="st">"blue"</span>]</span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>dataset_aux2 <span class="ot">&lt;-</span> dataset_aux[, <span class="fu">c</span>(<span class="st">"HAZ_1ANOS"</span>, <span class="st">"sexo_cat"</span>)][, cor <span class="sc">:</span><span class="er">=</span> <span class="st">"red"</span>]</span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>dataset_aux2[, sexo_cat <span class="sc">:</span><span class="er">=</span> <span class="fu">fcase</span>(</span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  sexo_cat <span class="sc">==</span> <span class="st">"Male"</span>, <span class="st">"Male "</span>,</span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>  sexo_cat <span class="sc">==</span> <span class="st">"Female"</span>, <span class="st">"Female "</span></span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>)]</span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dataset_aux1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"variavel"</span>, <span class="st">"sexo_cat"</span>, <span class="st">"cor"</span>)</span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dataset_aux2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"variavel"</span>, <span class="st">"sexo_cat"</span>, <span class="st">"cor"</span>)</span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>dataset_aux3 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(dataset_aux1, dataset_aux2)</span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>dataset_aux3[, sexo_cat <span class="sc">:</span><span class="er">=</span> </span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>               <span class="fu">factor</span>(sexo_cat,</span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>                      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Male "</span>, <span class="st">"Female"</span>, <span class="st">"Female "</span>))]</span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> dataset_aux3, <span class="fu">aes</span>(<span class="at">x =</span> sexo_cat, <span class="at">y =</span> variavel, <span class="at">color =</span> cor)) <span class="sc">+</span></span>
-<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_identity</span>() <span class="sc">+</span></span>
-<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">'Height Z-score'</span>, </span>
-<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Sex"</span>,</span>
-<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Initial height (blue) X height after one year of treatment (red)"</span>) <span class="sc">+</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="fu">tr</span>(<span class="st">'Height Z-score'</span>, <span class="st">'Escore-z da altura'</span>),</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="fu">tr</span>(<span class="st">"Age"</span>, <span class="st">"Idade"</span>),</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Initial height (blue) X height after one year of treatment (red)"</span>,</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Altura inicial (azul) X altura após um ano de tratamento (vermelho)"</span>)) <span class="sc">+</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>()</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co">#SEX</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>dataset_aux1 <span class="ot">&lt;-</span> dataset_aux[, <span class="fu">c</span>(<span class="st">"HAZ_INÍCIO"</span>, <span class="st">"sexo_cat"</span>)][, cor <span class="sc">:</span><span class="er">=</span> <span class="st">"blue"</span>]</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>dataset_aux2 <span class="ot">&lt;-</span> dataset_aux[, <span class="fu">c</span>(<span class="st">"HAZ_1ANOS"</span>, <span class="st">"sexo_cat"</span>)][, cor <span class="sc">:</span><span class="er">=</span> <span class="st">"red"</span>]</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>dataset_aux2[, sexo_cat <span class="sc">:</span><span class="er">=</span> <span class="fu">paste0</span>(sexo_cat, <span class="st">" "</span>)]</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dataset_aux1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"variavel"</span>, <span class="st">"sexo_cat"</span>, <span class="st">"cor"</span>)</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dataset_aux2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"variavel"</span>, <span class="st">"sexo_cat"</span>, <span class="st">"cor"</span>)</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>dataset_aux3 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(dataset_aux1, dataset_aux2)</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>dataset_aux3[, sexo_cat <span class="sc">:</span><span class="er">=</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>               <span class="fu">factor</span>(sexo_cat,</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>                      <span class="at">levels =</span> <span class="fu">c</span>(<span class="fu">tr</span>(<span class="st">"Male"</span>, <span class="st">"Masculino"</span>), <span class="fu">tr</span>(<span class="st">"Male "</span>, <span class="st">"Masculino "</span>),</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">tr</span>(<span class="st">"Female"</span>, <span class="st">"Feminino"</span>), <span class="fu">tr</span>(<span class="st">"Female "</span>, <span class="st">"Feminino "</span>)))]</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> dataset_aux3, <span class="fu">aes</span>(<span class="at">x =</span> sexo_cat, <span class="at">y =</span> variavel, <span class="at">color =</span> cor)) <span class="sc">+</span></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_identity</span>() <span class="sc">+</span></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="fu">tr</span>(<span class="st">'Height Z-score'</span>, <span class="st">'Escore-z da altura'</span>),</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="fu">tr</span>(<span class="st">"Sex"</span>, <span class="st">"Sexo"</span>),</span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Initial height (blue) X height after one year of treatment (red)"</span>,</span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Altura inicial (azul) X altura após um ano de tratamento (vermelho)"</span>)) <span class="sc">+</span></span>
 <span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>()</span>
 <span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a><span class="co">#TREATMENT</span></span>
@@ -636,43 +627,45 @@ window.Quarto = {
 <span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dataset_aux2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"variavel"</span>, <span class="st">"tratamento"</span>, <span class="st">"cor"</span>)</span>
 <span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>dataset_aux3 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(dataset_aux1, dataset_aux2)</span>
-<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>dataset_aux3[, tratamento <span class="sc">:</span><span class="er">=</span> </span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>dataset_aux3[, tratamento <span class="sc">:</span><span class="er">=</span></span>
 <span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>               <span class="fu">factor</span>(tratamento,</span>
 <span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>                      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"T1"</span>, <span class="st">"T1 "</span>, <span class="st">"T2"</span>, <span class="st">"T2 "</span>,<span class="st">"T3"</span>, <span class="st">"T3 "</span>,<span class="st">"T4"</span>, <span class="st">"T4 "</span>))]</span>
 <span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a>b3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> dataset_aux3, <span class="fu">aes</span>(<span class="at">x =</span> tratamento, <span class="at">y =</span> variavel, <span class="at">color =</span> cor)) <span class="sc">+</span></span>
 <span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_identity</span>() <span class="sc">+</span></span>
-<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">'Height Z-score'</span>, </span>
-<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Years of Treatment"</span>,</span>
-<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Initial height (blue) X height after one year of treatment (red)"</span>) <span class="sc">+</span></span>
-<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>()</span>
-<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a><span class="co">#DIAGNOSIS</span></span>
-<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a>dataset_aux1 <span class="ot">&lt;-</span> dataset_aux[, <span class="fu">c</span>(<span class="st">"HAZ_INÍCIO"</span>, <span class="st">"ID_DIAG"</span>)][, cor <span class="sc">:</span><span class="er">=</span> <span class="st">"blue"</span>]</span>
-<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a>dataset_aux2 <span class="ot">&lt;-</span> dataset_aux[, <span class="fu">c</span>(<span class="st">"HAZ_1ANOS"</span>, <span class="st">"ID_DIAG"</span>)][, cor <span class="sc">:</span><span class="er">=</span> <span class="st">"red"</span>]</span>
-<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a>dataset_aux2[, ID_DIAG <span class="sc">:</span><span class="er">=</span> <span class="fu">fcase</span>(</span>
-<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a>  ID_DIAG <span class="sc">==</span> <span class="st">"BEI"</span>, <span class="st">"BEI "</span>,</span>
-<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>  ID_DIAG <span class="sc">==</span> <span class="st">"PIG"</span>, <span class="st">"PIG "</span></span>
-<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a>)]</span>
-<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dataset_aux1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"variavel"</span>, <span class="st">"ID_DIAG"</span>, <span class="st">"cor"</span>)</span>
-<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dataset_aux2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"variavel"</span>, <span class="st">"ID_DIAG"</span>, <span class="st">"cor"</span>)</span>
-<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a>dataset_aux3 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(dataset_aux1, dataset_aux2)</span>
-<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a>dataset_aux3[, ID_DIAG <span class="sc">:</span><span class="er">=</span> </span>
-<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>               <span class="fu">factor</span>(ID_DIAG,</span>
-<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a>                      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"BEI"</span>, <span class="st">"BEI "</span>,<span class="st">"PIG"</span>, <span class="st">"PIG "</span>))]</span>
-<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a>b4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> dataset_aux3, <span class="fu">aes</span>(<span class="at">x =</span> ID_DIAG, <span class="at">y =</span> variavel, <span class="at">color =</span> cor)) <span class="sc">+</span></span>
-<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_identity</span>() <span class="sc">+</span></span>
-<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">'Height Z-score'</span>, </span>
-<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Diagnosis"</span>,</span>
-<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Initial height (blue) X height after one year of treatment (red)"</span>) <span class="sc">+</span></span>
-<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>()</span>
-<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
-<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(b1, b2, b3, b4, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="fu">tr</span>(<span class="st">'Height Z-score'</span>, <span class="st">'Escore-z da altura'</span>),</span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="fu">tr</span>(<span class="st">"Years of Treatment"</span>, <span class="st">"Anos de tratamento"</span>),</span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Initial height (blue) X height after one year of treatment (red)"</span>,</span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Altura inicial (azul) X altura após um ano de tratamento (vermelho)"</span>)) <span class="sc">+</span></span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>()</span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a><span class="co">#DIAGNOSIS</span></span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a>dataset_aux1 <span class="ot">&lt;-</span> dataset_aux[, <span class="fu">c</span>(<span class="st">"HAZ_INÍCIO"</span>, <span class="st">"ID_DIAG"</span>)][, cor <span class="sc">:</span><span class="er">=</span> <span class="st">"blue"</span>]</span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a>dataset_aux2 <span class="ot">&lt;-</span> dataset_aux[, <span class="fu">c</span>(<span class="st">"HAZ_1ANOS"</span>, <span class="st">"ID_DIAG"</span>)][, cor <span class="sc">:</span><span class="er">=</span> <span class="st">"red"</span>]</span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a>dataset_aux2[, ID_DIAG <span class="sc">:</span><span class="er">=</span> <span class="fu">fcase</span>(</span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>  ID_DIAG <span class="sc">==</span> <span class="st">"BEI"</span>, <span class="st">"BEI "</span>,</span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a>  ID_DIAG <span class="sc">==</span> <span class="st">"PIG"</span>, <span class="st">"PIG "</span></span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a>)]</span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dataset_aux1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"variavel"</span>, <span class="st">"ID_DIAG"</span>, <span class="st">"cor"</span>)</span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dataset_aux2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"variavel"</span>, <span class="st">"ID_DIAG"</span>, <span class="st">"cor"</span>)</span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a>dataset_aux3 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(dataset_aux1, dataset_aux2)</span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>dataset_aux3[, ID_DIAG <span class="sc">:</span><span class="er">=</span></span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a>               <span class="fu">factor</span>(ID_DIAG,</span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a>                      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"BEI"</span>, <span class="st">"BEI "</span>,<span class="st">"PIG"</span>, <span class="st">"PIG "</span>))]</span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a>b4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> dataset_aux3, <span class="fu">aes</span>(<span class="at">x =</span> ID_DIAG, <span class="at">y =</span> variavel, <span class="at">color =</span> cor)) <span class="sc">+</span></span>
+<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_identity</span>() <span class="sc">+</span></span>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="fu">tr</span>(<span class="st">'Height Z-score'</span>, <span class="st">'Escore-z da altura'</span>),</span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="fu">tr</span>(<span class="st">"Diagnosis"</span>, <span class="st">"Diagnóstico"</span>),</span>
+<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Initial height (blue) X height after one year of treatment (red)"</span>,</span>
+<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Altura inicial (azul) X altura após um ano de tratamento (vermelho)"</span>)) <span class="sc">+</span></span>
+<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>()</span>
+<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(b1, b2, b3, b4, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -714,7 +707,7 @@ window.Quarto = {
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>pvalue <span class="ot">&lt;-</span> <span class="fu">c</span>(t1<span class="sc">$</span>p.value, t2<span class="sc">$</span>p.value, t3<span class="sc">$</span>p.value, t4<span class="sc">$</span>p.value)</span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">cbind</span>(estt, pvalue)</span>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(results) <span class="ot">&lt;-</span> testes</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(results) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Statistics"</span>, <span class="st">"p-value"</span>)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(results) <span class="ot">&lt;-</span> <span class="fu">tr</span>(<span class="fu">c</span>(<span class="st">"Statistics"</span>, <span class="st">"p-value"</span>), <span class="fu">c</span>(<span class="st">"Estatística"</span>, <span class="st">"p-valor"</span>))</span>
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(results, <span class="at">digits =</span> <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                               Statistics   p-value
@@ -880,17 +873,17 @@ ID_DIAGPIG   -0.27705743 -0.02269063</code></pre>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(dataset)</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Number of coeficients</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">length</span>(fit<span class="sc">$</span>coef)   </span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">length</span>(fit<span class="sc">$</span>coef)</span>
 <span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Leverage cut</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>corte.hii<span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>k<span class="sc">/</span>n   </span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>corte.hii<span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>k<span class="sc">/</span>n</span>
 <span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Cookis distance cut</span></span>
 <span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>corte.cook<span class="ot">&lt;-</span> <span class="dv">4</span><span class="sc">/</span>n</span>
 <span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
 <span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">hatvalues</span>(fit), <span class="at">type =</span> <span class="st">"h"</span>, <span class="at">cex.lab =</span> <span class="fl">1.5</span>, <span class="at">cex.axis =</span> <span class="fl">1.5</span>,</span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Observation"</span>, <span class="at">ylab =</span> <span class="st">"Leverage"</span>,</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">tr</span>(<span class="st">"Observation"</span>, <span class="st">"Observação"</span>), <span class="at">ylab =</span> <span class="fu">tr</span>(<span class="st">"Leverage"</span>, <span class="st">"Alavancagem"</span>),</span>
 <span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(<span class="fu">max</span>(<span class="fu">hatvalues</span>(fit)), corte.hii)))</span>
 <span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">c</span>(<span class="dv">0</span>, n <span class="sc">+</span> <span class="dv">1</span>), <span class="fu">c</span>(corte.hii, corte.hii), <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
 <span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a></span>
@@ -910,7 +903,7 @@ ID_DIAGPIG   -0.27705743 -0.02269063</code></pre>
 <pre><code> [1] 225  80  10  66   1  45  94  44 219  84</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Higher Cooks Distance</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>cooks <span class="ot">&lt;-</span> <span class="fu">order</span>(<span class="fu">cooks.distance</span>(fit),<span class="at">decreasing=</span><span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]   </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>cooks <span class="ot">&lt;-</span> <span class="fu">order</span>(<span class="fu">cooks.distance</span>(fit),<span class="at">decreasing=</span><span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>cooks</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 225  10 166  54 130  34 193  93 203  83</code></pre>
@@ -932,8 +925,8 @@ ID_DIAGPIG   -0.27705743 -0.02269063</code></pre>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>sr<span class="ot">&lt;-</span> <span class="fu">rstandard</span>(fit)</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
 <span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sr, <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">cex.lab =</span> <span class="fl">1.5</span>, <span class="at">cex.axis =</span> <span class="fl">1.5</span>, </span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Observation"</span>, <span class="at">ylab =</span> <span class="st">"Standardized Residuals"</span>,</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sr, <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">cex.lab =</span> <span class="fl">1.5</span>, <span class="at">cex.axis =</span> <span class="fl">1.5</span>,</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">tr</span>(<span class="st">"Observation"</span>, <span class="st">"Observação"</span>), <span class="at">ylab =</span> <span class="fu">tr</span>(<span class="st">"Standardized Residuals"</span>, <span class="st">"Resíduos padronizados"</span>),</span>
 <span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fu">min</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="fu">min</span>(sr)), <span class="fu">max</span>(<span class="dv">2</span>, <span class="fu">max</span>(sr))))</span>
 <span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">c</span>(<span class="dv">0</span>, n <span class="sc">+</span> <span class="dv">1</span>), <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
 <span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">c</span>(<span class="dv">0</span>, n <span class="sc">+</span> <span class="dv">1</span>), <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">2</span>), <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
@@ -942,7 +935,7 @@ ID_DIAGPIG   -0.27705743 -0.02269063</code></pre>
 <span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(high_residuals, sr[high_residuals], <span class="at">labels =</span> <span class="fu">round</span>(sr[high_residuals], <span class="dv">2</span>),</span>
 <span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">cex =</span> <span class="fl">0.7</span>)</span>
 <span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(sr, <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">cex.lab =</span> <span class="fl">1.5</span>, <span class="at">cex.axis =</span> <span class="fl">1.5</span>, <span class="at">xlab =</span> <span class="st">"Standardized Residuals"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(sr, <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">cex.lab =</span> <span class="fl">1.5</span>, <span class="at">cex.axis =</span> <span class="fl">1.5</span>, <span class="at">xlab =</span> <span class="fu">tr</span>(<span class="st">"Standardized Residuals"</span>, <span class="st">"Resíduos padronizados"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -966,7 +959,7 @@ ID_DIAGPIG   -0.27705743 -0.02269063</code></pre>
 <span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>valorp <span class="ot">&lt;-</span> <span class="fu">c</span>(t1<span class="sc">$</span>p.value, t2<span class="sc">$</span>p.value, t3<span class="sc">$</span>p.value, t4<span class="sc">$</span>p.value, t5<span class="sc">$</span>p.value, t6<span class="sc">$</span>p.value)</span>
 <span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>resultados <span class="ot">&lt;-</span> <span class="fu">cbind</span>(estt, valorp)</span>
 <span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(resultados) <span class="ot">&lt;-</span> testes</span>
-<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(resultados) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Statistic"</span>, <span class="st">"p-value"</span>)</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(resultados) <span class="ot">&lt;-</span> <span class="fu">tr</span>(<span class="fu">c</span>(<span class="st">"Statistic"</span>, <span class="st">"p-value"</span>), <span class="fu">c</span>(<span class="st">"Estatística"</span>, <span class="st">"p-valor"</span>))</span>
 <span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(resultados, <span class="at">digits =</span> <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                               Statistic p-value
@@ -984,7 +977,7 @@ Anderson-Darling normality test                  0.16817  0.9355</code></pre>
 <h4 class="anchored" data-anchor-id="homoscedasticity">Homoscedasticity</h4>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Breusch-Pagan Test</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">bptest</span>(fit) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">bptest</span>(fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     studentized Breusch-Pagan test
@@ -1052,6 +1045,42 @@ BP = 4.4489, df = 5, p-value = 0.4868</code></pre>
 </section>
 
 </main> <!-- /main -->
+<script>
+
+// 1) the browser tab shows the title of the page in its own language
+
+// 2) the EN / PT link of the navbar opens the same page in the other language
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  var titulo = document.querySelector("main .page-title");
+
+  if (titulo) document.title = titulo.textContent.trim().replace(/\s+/g, " ") + " – MyDataPortfolio";
+
+
+
+  var isPt = (document.documentElement.lang || "").indexOf("pt") === 0;
+
+  var page = location.pathname.split("/").pop() || "index.html";
+
+  document.querySelectorAll("a.nav-link").forEach(function (a) {
+
+    var text = a.textContent.trim();
+
+    if ((isPt && text === "EN") || (!isPt && text === "PT")) {
+
+      a.setAttribute("href", (isPt ? "../" : "pt/") + page);
+
+      a.setAttribute("title", isPt ? "Read in English" : "Ler em português");
+
+    }
+
+  });
+
+});
+
+</script>
+
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

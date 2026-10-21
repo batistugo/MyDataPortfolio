@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Hugo Batista da Silva">
 
 <title>Sales Loss Prediction: ranking open orders with XGBoost, without leakage – MyDataPortfolio</title>
 <style>
@@ -46,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-32643bc00688b413a4b4dac13675c875.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -120,6 +119,12 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Project 05</span></a>
   </li>  
 </ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://batistugo.github.io/MyDataPortfolio/pt/"> 
+<span class="menu-text">PT</span></a>
+  </li>  
+</ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
@@ -145,33 +150,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Sales Loss Prediction: ranking open orders with XGBoost, without leakage</h1>
+
+
+
+<div class="h1 page-title">
+<p>Sales Loss Prediction: ranking open orders with XGBoost, without leakage</p>
 </div>
-
-
-
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Hugo Batista da Silva </p>
-          </div>
-  </div>
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
+<p><em>Hugo Batista da Silva</em></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -278,6 +265,42 @@ Note
 </section>
 
 </main> <!-- /main -->
+<script>
+
+// 1) the browser tab shows the title of the page in its own language
+
+// 2) the EN / PT link of the navbar opens the same page in the other language
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  var titulo = document.querySelector("main .page-title");
+
+  if (titulo) document.title = titulo.textContent.trim().replace(/\s+/g, " ") + " – MyDataPortfolio";
+
+
+
+  var isPt = (document.documentElement.lang || "").indexOf("pt") === 0;
+
+  var page = location.pathname.split("/").pop() || "index.html";
+
+  document.querySelectorAll("a.nav-link").forEach(function (a) {
+
+    var text = a.textContent.trim();
+
+    if ((isPt && text === "EN") || (!isPt && text === "PT")) {
+
+      a.setAttribute("href", (isPt ? "../" : "pt/") + page);
+
+      a.setAttribute("title", isPt ? "Read in English" : "Ler em português");
+
+    }
+
+  });
+
+});
+
+</script>
+
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

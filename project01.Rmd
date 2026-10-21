@@ -1,8 +1,7 @@
 ---
-title: "Evaluation of the Efficacy of Using Growth Hormone Therapy in the Treatment of Children with Idiopathic Short Stature and Small for Gestational Age"
-author: "Hugo Batista da Silva"
+pagetitle: "Evaluation of the Efficacy of Using Growth Hormone Therapy in the Treatment of Children with Idiopathic Short Stature and Small for Gestational Age"
 output:
-  html_document: 
+  html_document:
     toc: true
     toc_float: true
     collapsed: false
@@ -11,6 +10,20 @@ output:
     theme: cosmo
 ---
 
+::: {.content-visible when-profile="en"}
+::: {.h1 .page-title}
+Evaluation of the Efficacy of Using Growth Hormone Therapy in the Treatment of Children with Idiopathic Short Stature and Small for Gestational Age
+:::
+:::
+::: {.content-visible when-profile="pt"}
+::: {.h1 .page-title}
+Avaliação da Eficácia da Terapia com Hormônio do Crescimento no Tratamento de Crianças com Baixa Estatura Idiopática e Pequenas para a Idade Gestacional
+:::
+:::
+
+*Hugo Batista da Silva*
+
+::: {.content-visible when-profile="en"}
 ## About the project
 The client for this project approached me with a request to analyze data from the SUS (Unified Health System) to support her master's thesis in pharmacy. Due to the pandemic and personal challenges, this project had been put on hold for two years, necessitating the hiring of a data scientist.
 
@@ -22,10 +35,27 @@ The final conclusions were not included in this document, as this study also ser
 
 ## The dataset
 The raw database contains 22 variables; however, after analysis, 8 of these will be used. The variables included in the analysis are sex, diagnosis (ISS or SGA), age at the beginning of treatment, height at the beginning of treatment, height after 1 year of treatment, height after 2 years of treatment, height after 3 years of treatment, and height after 4 years of treatment. The height data is represented as a Z-score, indicating the deviation from each child's ideal height (with 0 being the ideal Z-score). This calculation was performed using WHO software.
+:::
+::: {.content-visible when-profile="pt"}
+## Sobre o projeto
+A cliente deste projeto me procurou para analisar dados do SUS (Sistema Único de Saúde) que dariam suporte à sua dissertação de mestrado em farmácia. Por causa da pandemia e de dificuldades pessoais, o projeto ficou parado por dois anos, o que tornou necessária a contratação de um cientista de dados.
+
+Os dados se referem a um tratamento com injeções de hormônio do crescimento oferecido pelo governo a crianças com baixa estatura idiopática (BEI) e a crianças pequenas para a idade gestacional (PIG). O tratamento consiste na aplicação de quatro injeções ao longo de quatro anos (uma por ano), e a altura da criança é medida e comparada com a altura média esperada para a sua idade, conforme definido pela Organização Mundial da Saúde (OMS).
+
+O objetivo inicial era reproduzir os dados de evolução da altura ao longo das aplicações com base nos dados oficiais da OMS. No entanto, apesar de se tratar de um estudo censitário, a coorte era pequena. Por isso, depois das análises descritivas e dos estudos iniciais, foi ajustado um modelo de regressão linear utilizando dois indicadores construídos para o estudo.
+
+As conclusões finais não foram incluídas neste documento, pois o estudo também serviu de base para possíveis mudanças na política de tratamento hormonal. O objetivo deste documento é apresentar a análise exploratória e mostrar como os estudos foram definidos.
+
+## A base de dados
+A base bruta contém 22 variáveis, mas, após a análise, apenas 8 delas serão utilizadas. As variáveis incluídas na análise são sexo, diagnóstico (BEI ou PIG), idade no início do tratamento, altura no início do tratamento e altura após 1, 2, 3 e 4 anos de tratamento. A altura está expressa em escore-z, que indica o desvio em relação à altura ideal de cada criança (sendo 0 o escore-z ideal). Esse cálculo foi feito com o software da OMS.
+:::
 
 ```{r, warning=FALSE}
 library(data.table)
 library(readxl)
+
+# returns the text in the language of the page being rendered
+tr <- function(en, pt) if (identical(Sys.getenv("QUARTO_PROFILE"), "pt")) pt else en
 
 dataset <- as.data.table(read_excel("PLANILHA.xlsx"))
 dataset <- dataset[, c("SEXO", "ID_DIAG", "IDADE_INÍCIO", "HAZ_INÍCIO",
@@ -33,6 +63,8 @@ dataset <- dataset[, c("SEXO", "ID_DIAG", "IDADE_INÍCIO", "HAZ_INÍCIO",
 tail(dataset)
 
 ```
+
+::: {.content-visible when-profile="en"}
 We have 237 children in the dataset, but as we can see, some of the children did not complete the entire treatment, but all of them at least received the first dose of the hormone.
 
 Table of variables:
@@ -41,7 +73,7 @@ Table of variables:
 |--------------|---------------------------------------------|
 | SEXO         | Sex; (1) male, (0) female                   |
 | ID_DIAG      | Diagnosis; BEI, PIG (ISS and SGA)           |
-| IDADE_INÍCIO | Age in mounths at start of treatment        |
+| IDADE_INÍCIO | Age in months at start of treatment         |
 | HAZ_INÍCIO   | Height in zscore at the start of treatment  |
 | HAZ_1ANOS    | Height in zscore after 1 year of treatment  |
 | HAZ_2ANOS    | Height in zscore after 2 years of treatment |
@@ -54,12 +86,36 @@ Before starting the descriptive analysis, it was necessary to create categorical
 The "difference" variable was created to serve as the response variable in the regression model. This variable represents the difference between the child's initial height, recorded before the start of treatment, and the most recent height available after the start of treatment.
 
 The "treatment" variable was assigned discrete values of 1, 2, 3, and 4, where "1" represents the completion of a single treatment cycle, "2" denotes the completion of two cycles, and so on up to "4". Including the "treatment" variable as a covariate in the final model allowed us to investigate the relationship between the patients' height evolution and their adherence to the treatment regimen.
+:::
+::: {.content-visible when-profile="pt"}
+Temos 237 crianças na base e, como podemos ver, algumas delas não concluíram o tratamento completo, mas todas receberam pelo menos a primeira dose do hormônio.
+
+Tabela de variáveis:
+
+| Variável     | Descrição                                        |
+|--------------|--------------------------------------------------|
+| SEXO         | Sexo; (1) masculino, (0) feminino                |
+| ID_DIAG      | Diagnóstico; BEI, PIG                            |
+| IDADE_INÍCIO | Idade em meses no início do tratamento           |
+| HAZ_INÍCIO   | Altura em escore-z no início do tratamento       |
+| HAZ_1ANOS    | Altura em escore-z após 1 ano de tratamento      |
+| HAZ_2ANOS    | Altura em escore-z após 2 anos de tratamento     |
+| HAZ_3ANOS    | Altura em escore-z após 3 anos de tratamento     |
+| HAZ_4ANOS    | Altura em escore-z após 4 anos de tratamento     |
+
+## Descrição dos dados, gráficos e testes
+Antes de iniciar a análise descritiva, foi necessário criar variáveis categóricas para sexo e idade. Como não havia uma variável adequada para ser a resposta do modelo de regressão, foram criadas duas variáveis indicadoras adicionais: "tratamento" e "diferenca".
+
+A variável "diferenca" foi criada para ser a variável resposta do modelo de regressão. Ela representa a diferença entre a altura inicial da criança, registrada antes do início do tratamento, e a altura mais recente disponível após o início do tratamento.
+
+A variável "tratamento" assume os valores discretos 1, 2, 3 e 4, em que "1" representa a conclusão de um único ciclo de tratamento, "2" a conclusão de dois ciclos, e assim por diante até "4". A inclusão de "tratamento" como covariável no modelo final permitiu investigar a relação entre a evolução da altura dos pacientes e a sua adesão ao tratamento.
+:::
 
 ```{r}
 
 dataset[
   , `:=`(
-    sexo_cat = ifelse(SEXO == 1, "Male", "Female"),
+    sexo_cat = ifelse(SEXO == 1, tr("Male", "Masculino"), tr("Female", "Feminino")),
     grupo_idade_t0 = fcase(
       IDADE_INÍCIO >= 0 & IDADE_INÍCIO < 72, "0-71",
       IDADE_INÍCIO >= 72 & IDADE_INÍCIO < 120, "72-119",
@@ -71,7 +127,7 @@ dataset[
       !is.na(HAZ_2ANOS) & is.na(HAZ_3ANOS) & is.na(HAZ_4ANOS), 2,
       is.na(HAZ_2ANOS) & is.na(HAZ_3ANOS) & is.na(HAZ_4ANOS),  1
     )
-  )][,     
+  )][,
      diferenca := fcase(
        tratamento == 1, HAZ_1ANOS - `HAZ_INÍCIO`,
        tratamento == 2, HAZ_2ANOS - `HAZ_INÍCIO`,
@@ -86,6 +142,7 @@ summary(dataset$diferenca)
 boxplot(dataset$diferenca)
 ```
 
+::: {.content-visible when-profile="en"}
 We observe that the "difference" variable includes negative values, indicating that some children experienced a decrease in height during treatment. However, most of the data points are above 0, and both the median and mean are positive, suggesting that the majority of children achieved a height greater than expected after treatment.
 
 To make this document more dynamic and concise, we will focus on analyzing the average evolution of children's height over the years of treatment using categorical variables and relevant graphs, leaving out tabular frequency analyses. Each graph will be followed by a brief analysis.
@@ -94,6 +151,17 @@ To make this document more dynamic and concise, we will focus on analyzing the a
 For the age variable, we will conduct two analyses: one measuring the average height and the other measuring the average difference from the initial height. This approach will allow us to observe the real evolution in each age group.
 
 #### Age (average height)
+:::
+::: {.content-visible when-profile="pt"}
+Observamos que a variável "diferenca" apresenta valores negativos, o que indica que algumas crianças tiveram redução no escore-z de altura durante o tratamento. Ainda assim, a maior parte das observações está acima de 0, e tanto a mediana quanto a média são positivas, o que sugere que a maioria das crianças alcançou uma altura maior que a esperada após o tratamento.
+
+Para deixar este documento mais dinâmico e conciso, vamos nos concentrar na evolução média da altura das crianças ao longo dos anos de tratamento, usando as variáveis categóricas e gráficos pertinentes, e deixando de fora as tabelas de frequência. Cada gráfico vem acompanhado de uma breve análise.
+
+### Gráficos de evolução
+Para a variável idade, faremos duas análises: uma com a altura média e outra com a diferença média em relação à altura inicial. Assim, conseguimos observar a evolução real em cada faixa etária.
+
+#### Idade (altura média)
+:::
 ```{r, fig.width = 14, fig.height = 8}
 dataset_aux <- copy(dataset)
 dataset_aux <- dataset_aux[
@@ -118,15 +186,20 @@ dataset_aux[, aux := fcase(
 
 library(ggplot2)
 ggplot(dataset_aux, aes(x = aux, y = media, colour = grupo_idade_t0)) +
-  geom_line(linewidth = 1) + 
+  geom_line(linewidth = 1) +
   theme(legend.text = element_text(size = 15), legend.title = element_text(size = 20), text = element_text(size = 20)) +
-  labs(title = "Average height in each year of treatment",
-       y = "Height Z-score",
-       x = "Year of treatment") +
-  guides(color = guide_legend(title = "Age t(0)"))
+  labs(title = tr("Average height in each year of treatment", "Altura média em cada ano de tratamento"),
+       y = tr("Height Z-score", "Escore-z da altura"),
+       x = tr("Year of treatment", "Ano de tratamento")) +
+  guides(color = guide_legend(title = tr("Age t(0)", "Idade t(0)")))
 ```
 
+::: {.content-visible when-profile="en"}
 #### Age (average difference height)
+:::
+::: {.content-visible when-profile="pt"}
+#### Idade (diferença média de altura)
+:::
 ```{r, fig.width = 14, fig.height = 8}
 dataset_aux <- copy(dataset)
 dataset_aux <- dataset_aux[
@@ -149,16 +222,25 @@ dataset_aux[, aux := fcase(
 
 library(ggplot2)
 ggplot(dataset_aux, aes(x = aux, y = media, colour = grupo_idade_t0)) +
-  geom_line(linewidth = 1) + 
+  geom_line(linewidth = 1) +
   theme(legend.text = element_text(size = 15), legend.title = element_text(size = 20), text = element_text(size = 20)) +
-  labs(title = "Average height difference with initial height in each year of treatment",
-       y = "Height Z-score",
-       x = "Year of treatment") +
-  guides(color = guide_legend(title = "Age t(0)"))
+  labs(title = tr("Average height difference with initial height in each year of treatment",
+                  "Diferença média em relação à altura inicial em cada ano de tratamento"),
+       y = tr("Height Z-score", "Escore-z da altura"),
+       x = tr("Year of treatment", "Ano de tratamento")) +
+  guides(color = guide_legend(title = tr("Age t(0)", "Idade t(0)")))
 ```
+
+::: {.content-visible when-profile="en"}
 Simply using the height graph does not reveal which age group had the greatest adherence to the treatment. By analyzing the "difference" variable, we observe that the group aged 0 to 71 months shows a better difference and evolution compared to the initial stage of treatment.
 
 #### Sex (average height)
+:::
+::: {.content-visible when-profile="pt"}
+Apenas com o gráfico de altura não é possível identificar qual faixa etária respondeu melhor ao tratamento. Ao analisar a variável "diferenca", observamos que o grupo de 0 a 71 meses apresenta a maior diferença e a melhor evolução em relação ao início do tratamento.
+
+#### Sexo (altura média)
+:::
 ```{r, fig.width = 14, fig.height = 8}
 dataset_aux <- copy(dataset)
 dataset_aux <- dataset_aux[
@@ -183,16 +265,24 @@ dataset_aux[, aux := fcase(
 
 library(ggplot2)
 ggplot(dataset_aux, aes(x = aux, y = media, colour = sexo_cat)) +
-  geom_line(linewidth = 1) + 
+  geom_line(linewidth = 1) +
   theme(legend.text = element_text(size = 15), legend.title = element_text(size = 20), text = element_text(size = 20)) +
-  labs(title = "Average height in each year of treatment",
-       y = "Height Z-score",
-       x = "Year of treatment") +
-  guides(color = guide_legend(title = "Sex"))
+  labs(title = tr("Average height in each year of treatment", "Altura média em cada ano de tratamento"),
+       y = tr("Height Z-score", "Escore-z da altura"),
+       x = tr("Year of treatment", "Ano de tratamento")) +
+  guides(color = guide_legend(title = tr("Sex", "Sexo")))
 ```
+
+::: {.content-visible when-profile="en"}
 We observed that both sexes had similar average initial heights, but males showed a better response after 1 year of treatment.
 
 #### Diagnosis (average height)
+:::
+::: {.content-visible when-profile="pt"}
+Observamos que os dois sexos tinham alturas iniciais médias semelhantes, mas os meninos apresentaram uma resposta melhor após 1 ano de tratamento.
+
+#### Diagnóstico (altura média)
+:::
 ```{r, fig.width = 14, fig.height = 8}
 dataset_aux <- copy(dataset)
 dataset_aux <- dataset_aux[
@@ -217,18 +307,28 @@ dataset_aux[, aux := fcase(
 
 library(ggplot2)
 ggplot(dataset_aux, aes(x = aux, y = media, colour = ID_DIAG)) +
-  geom_line(linewidth = 1) + 
+  geom_line(linewidth = 1) +
   theme(legend.text = element_text(size = 15), legend.title = element_text(size = 20), text = element_text(size = 20)) +
-  labs(title = "Average height in each year of treatment",
-       y = "Height Z-score",
-       x = "Year of treatment") +
-  guides(color = guide_legend(title = "Diagnosis"))
+  labs(title = tr("Average height in each year of treatment", "Altura média em cada ano de tratamento"),
+       y = tr("Height Z-score", "Escore-z da altura"),
+       x = tr("Year of treatment", "Ano de tratamento")) +
+  guides(color = guide_legend(title = tr("Diagnosis", "Diagnóstico")))
 ```
+
+::: {.content-visible when-profile="en"}
 We observed that children diagnosed with BEI initially had better values, but both BEI and PIG groups showed similar evolution patterns.
 
 A separate analysis was conducted for the treatment variable, where we examined its relationship with the average initial height at the beginning of treatment.
 
 #### Treatments (average initial height)
+:::
+::: {.content-visible when-profile="pt"}
+Observamos que as crianças com diagnóstico de BEI partiram de valores melhores, mas os grupos BEI e PIG apresentaram padrões de evolução semelhantes.
+
+Para a variável tratamento, foi feita uma análise à parte, na qual examinamos a sua relação com a altura inicial média no começo do tratamento.
+
+#### Tratamentos (altura inicial média)
+:::
 ```{r, fig.width = 10, fig.height = 6}
 dataset_aux <- copy(dataset)
 dataset_aux <- dataset_aux[
@@ -240,17 +340,27 @@ dataset_aux <- dataset_aux[
 ]
 
 ggplot(dataset_aux, aes(x = tratamento, y = media)) +
-  geom_line(linewidth = 1) + 
+  geom_line(linewidth = 1) +
   theme(legend.text = element_text(size = 15), legend.title = element_text(size = 20), text = element_text(size = 20)) +
-  labs(title = "Average initial height per number of treatments",
-       y = "Initial height Z-score",
-       x = "Number of treatments")
+  labs(title = tr("Average initial height per number of treatments", "Altura inicial média por número de tratamentos"),
+       y = tr("Initial height Z-score", "Escore-z da altura inicial"),
+       x = tr("Number of treatments", "Número de tratamentos"))
 ```
+
+::: {.content-visible when-profile="en"}
 The analysis of this graph reveals that, interestingly, children with better initial height values tended to continue the treatment for a longer duration.
 
 We observed that across all evolution graphs, the difference in height during the first year is the most significant. Consequently, the next graph will present a boxplot comparing initial height with height after 1 year of treatment.
 
 #### Boxplot
+:::
+::: {.content-visible when-profile="pt"}
+Curiosamente, este gráfico mostra que as crianças com melhores valores de altura inicial tenderam a permanecer mais tempo em tratamento.
+
+Em todos os gráficos de evolução, a diferença de altura no primeiro ano é a mais expressiva. Por isso, o próximo gráfico apresenta boxplots comparando a altura inicial com a altura após 1 ano de tratamento.
+
+#### Boxplot
+:::
 ```{r, fig.width = 14, fig.height = 8}
 #Age group
 dataset_aux <- copy(dataset)
@@ -265,39 +375,39 @@ names(dataset_aux1) <- c("variavel", "grupo_idade_t0", "cor")
 names(dataset_aux2) <- c("variavel", "grupo_idade_t0", "cor")
 
 dataset_aux3 <- rbind(dataset_aux1, dataset_aux2)
-dataset_aux3[, grupo_idade_t0 := 
+dataset_aux3[, grupo_idade_t0 :=
                factor(grupo_idade_t0,
                       levels = c("0-71", "0-71 ", "72-119", "72-119 ", "120+", "120+ "))]
 
 b1 <- ggplot(data = dataset_aux3, aes(x = grupo_idade_t0, y = variavel, color = cor)) +
   geom_boxplot() +
   scale_color_identity() +
-  labs(y = 'Height Z-score', 
-       x = "Age",
-       title = "Initial height (blue) X height after one year of treatment (red)") +
+  labs(y = tr('Height Z-score', 'Escore-z da altura'),
+       x = tr("Age", "Idade"),
+       title = tr("Initial height (blue) X height after one year of treatment (red)",
+                  "Altura inicial (azul) X altura após um ano de tratamento (vermelho)")) +
   scale_y_reverse()
 
 #SEX
 dataset_aux1 <- dataset_aux[, c("HAZ_INÍCIO", "sexo_cat")][, cor := "blue"]
 dataset_aux2 <- dataset_aux[, c("HAZ_1ANOS", "sexo_cat")][, cor := "red"]
-dataset_aux2[, sexo_cat := fcase(
-  sexo_cat == "Male", "Male ",
-  sexo_cat == "Female", "Female "
-)]
+dataset_aux2[, sexo_cat := paste0(sexo_cat, " ")]
 names(dataset_aux1) <- c("variavel", "sexo_cat", "cor")
 names(dataset_aux2) <- c("variavel", "sexo_cat", "cor")
 
 dataset_aux3 <- rbind(dataset_aux1, dataset_aux2)
-dataset_aux3[, sexo_cat := 
+dataset_aux3[, sexo_cat :=
                factor(sexo_cat,
-                      levels = c("Male", "Male ", "Female", "Female "))]
+                      levels = c(tr("Male", "Masculino"), tr("Male ", "Masculino "),
+                                 tr("Female", "Feminino"), tr("Female ", "Feminino ")))]
 
 b2 <- ggplot(data = dataset_aux3, aes(x = sexo_cat, y = variavel, color = cor)) +
   geom_boxplot() +
   scale_color_identity() +
-  labs(y = 'Height Z-score', 
-       x = "Sex",
-       title = "Initial height (blue) X height after one year of treatment (red)") +
+  labs(y = tr('Height Z-score', 'Escore-z da altura'),
+       x = tr("Sex", "Sexo"),
+       title = tr("Initial height (blue) X height after one year of treatment (red)",
+                  "Altura inicial (azul) X altura após um ano de tratamento (vermelho)")) +
   scale_y_reverse()
 
 #TREATMENT
@@ -315,16 +425,17 @@ names(dataset_aux1) <- c("variavel", "tratamento", "cor")
 names(dataset_aux2) <- c("variavel", "tratamento", "cor")
 
 dataset_aux3 <- rbind(dataset_aux1, dataset_aux2)
-dataset_aux3[, tratamento := 
+dataset_aux3[, tratamento :=
                factor(tratamento,
                       levels = c("T1", "T1 ", "T2", "T2 ","T3", "T3 ","T4", "T4 "))]
 
 b3 <- ggplot(data = dataset_aux3, aes(x = tratamento, y = variavel, color = cor)) +
   geom_boxplot() +
   scale_color_identity() +
-  labs(y = 'Height Z-score', 
-       x = "Years of Treatment",
-       title = "Initial height (blue) X height after one year of treatment (red)") +
+  labs(y = tr('Height Z-score', 'Escore-z da altura'),
+       x = tr("Years of Treatment", "Anos de tratamento"),
+       title = tr("Initial height (blue) X height after one year of treatment (red)",
+                  "Altura inicial (azul) X altura após um ano de tratamento (vermelho)")) +
   scale_y_reverse()
 
 #DIAGNOSIS
@@ -338,16 +449,17 @@ names(dataset_aux1) <- c("variavel", "ID_DIAG", "cor")
 names(dataset_aux2) <- c("variavel", "ID_DIAG", "cor")
 
 dataset_aux3 <- rbind(dataset_aux1, dataset_aux2)
-dataset_aux3[, ID_DIAG := 
+dataset_aux3[, ID_DIAG :=
                factor(ID_DIAG,
                       levels = c("BEI", "BEI ","PIG", "PIG "))]
 
 b4 <- ggplot(data = dataset_aux3, aes(x = ID_DIAG, y = variavel, color = cor)) +
   geom_boxplot() +
   scale_color_identity() +
-  labs(y = 'Height Z-score', 
-       x = "Diagnosis",
-       title = "Initial height (blue) X height after one year of treatment (red)") +
+  labs(y = tr('Height Z-score', 'Escore-z da altura'),
+       x = tr("Diagnosis", "Diagnóstico"),
+       title = tr("Initial height (blue) X height after one year of treatment (red)",
+                  "Altura inicial (azul) X altura após um ano de tratamento (vermelho)")) +
   scale_y_reverse()
 
 library(gridExtra)
@@ -358,6 +470,8 @@ rm(dataset_aux, dataset_aux1, dataset_aux2, dataset_aux3, b1, b2, b3, b4)
 invisible(gc())
 
 ```
+
+::: {.content-visible when-profile="en"}
 We observed that the age group 0 to 71 months showed the most significant improvement. Regarding sex, differences were not evident in the boxplots. In terms of treatment duration, children who underwent 4 years of treatment exhibited the greatest initial difference in the first year. For diagnosis differences were not evident.
 
 ### Tests
@@ -378,6 +492,29 @@ $H_0 =$ The differences follow a normal distribution.
 $H_1 =$ The differences do not follow a normal distribution.
 
 #### Normality Test
+:::
+::: {.content-visible when-profile="pt"}
+Observamos que a faixa etária de 0 a 71 meses apresentou a melhora mais expressiva. Em relação ao sexo, os boxplots não mostram diferenças evidentes. Quanto à duração do tratamento, as crianças que fizeram os 4 anos de tratamento tiveram a maior diferença já no primeiro ano. Para o diagnóstico, também não há diferenças evidentes.
+
+### Testes
+Para avaliar se a altura mudou de forma significativa após um ano de tratamento, comparamos a altura inicial de cada criança com a altura da **mesma criança** após um ano. Como as duas medidas vêm dos mesmos indivíduos, as amostras não são independentes e o teste adequado é o **teste t pareado**, que trabalha com a diferença dentro de cada criança:
+
+$$D_i = \text{HAZ}_{1,i} - \text{HAZ}_{0,i}$$
+
+As hipóteses do teste t pareado são:
+
+$H_0: \mu_D = 0$ (não há mudança média na altura após um ano).
+
+$H_1: \mu_D \neq 0$ (há mudança média na altura após um ano).
+
+O pressuposto de normalidade do teste t pareado se refere às **diferenças** $D_i$, e não às colunas originais de altura; por isso, é essa a variável que testamos. Para os testes de normalidade a seguir, as hipóteses são:
+
+$H_0 =$ As diferenças seguem uma distribuição normal.
+
+$H_1 =$ As diferenças não seguem uma distribuição normal.
+
+#### Teste de normalidade
+:::
 ```{r, warning=FALSE}
 library(nortest)
 dif_1 <- dataset$HAZ_1ANOS - dataset$HAZ_INÍCIO
@@ -393,15 +530,26 @@ estt <- as.numeric(c(t1$statistic, t2$statistic, t3$statistic, t4$statistic))
 pvalue <- c(t1$p.value, t2$p.value, t3$p.value, t4$p.value)
 results <- cbind(estt, pvalue)
 rownames(results) <- testes
-colnames(results) <- c("Statistics", "p-value")
+colnames(results) <- tr(c("Statistics", "p-value"), c("Estatística", "p-valor"))
 print(results, digits = 4)
 ```
+
+::: {.content-visible when-profile="en"}
 All tests reject the null hypothesis at the 5% level, so the differences are not exactly normally distributed. (The plain Kolmogorov-Smirnov test was not used because it is invalid when the mean and standard deviation are estimated from the same data; Lilliefors is the corrected version.)
 
 This does not invalidate the paired t-test here: with at least 54 children in every group, the Central Limit Theorem guarantees that the **sample mean** of the differences is approximately normal, which is what the test actually relies on. Even so, as a robustness check we also report the **Wilcoxon signed-rank test**, the non-parametric alternative for paired data, which does not assume normality.
 
 #### Paired tests by group
 To avoid repeating the same code for every variable, a helper function runs both tests for each level of a grouping variable:
+:::
+::: {.content-visible when-profile="pt"}
+Todos os testes rejeitam a hipótese nula ao nível de 5%, ou seja, as diferenças não seguem exatamente uma distribuição normal. (O teste de Kolmogorov-Smirnov tradicional não foi usado porque ele não é válido quando a média e o desvio padrão são estimados a partir dos próprios dados; o teste de Lilliefors é a versão corrigida.)
+
+Isso não invalida o teste t pareado neste caso: com pelo menos 54 crianças em cada grupo, o Teorema Central do Limite garante que a **média amostral** das diferenças tem distribuição aproximadamente normal, e é nisso que o teste de fato se apoia. Mesmo assim, como verificação de robustez, apresentamos também o **teste de Wilcoxon (postos sinalizados)**, a alternativa não paramétrica para dados pareados, que não pressupõe normalidade.
+
+#### Testes pareados por grupo
+Para não repetir o mesmo código para cada variável, uma função auxiliar aplica os dois testes em cada nível de uma variável de agrupamento:
+:::
 ```{r}
 paired_tests <- function(data, group_var) {
   results <- data[, {
@@ -419,28 +567,56 @@ paired_tests <- function(data, group_var) {
 }
 ```
 
+::: {.content-visible when-profile="en"}
 #### Age
+:::
+::: {.content-visible when-profile="pt"}
+#### Idade
+:::
 ```{r}
 paired_tests(dataset, "grupo_idade_t0")
 ```
 
+::: {.content-visible when-profile="en"}
 #### Sex
+:::
+::: {.content-visible when-profile="pt"}
+#### Sexo
+:::
 ```{r}
 paired_tests(dataset, "sexo_cat")
 ```
 
+::: {.content-visible when-profile="en"}
 #### Diagnosis
+:::
+::: {.content-visible when-profile="pt"}
+#### Diagnóstico
+:::
 ```{r}
 paired_tests(dataset, "ID_DIAG")
 ```
 
+::: {.content-visible when-profile="en"}
 #### Years of Treatment
+:::
+::: {.content-visible when-profile="pt"}
+#### Anos de tratamento
+:::
 ```{r}
 paired_tests(dataset, "tratamento")
 ```
+
+::: {.content-visible when-profile="en"}
 In every group the confidence interval of the mean difference lies entirely above zero and both the paired t-test and the Wilcoxon test give extremely small p-values. This means there is a significant **increase** in height z-score after one year of treatment in all groups, and the conclusion does not depend on the normality assumption.
 
 Since every p-value is practically zero, comparing p-values between groups is not informative. The **size of the effect** (`mean_diff`) is what matters. The 0 to 71 months age group shows the largest mean gain (about 1.03 z-score, against 0.63 for 120+ months), and boys gain more than girls (0.85 against 0.68). The two diagnoses have very similar gains (0.79 for BEI and 0.76 for PIG). Children who completed 4 years of treatment had the largest first-year gain (0.95).
+:::
+::: {.content-visible when-profile="pt"}
+Em todos os grupos, o intervalo de confiança da diferença média fica inteiramente acima de zero, e tanto o teste t pareado quanto o teste de Wilcoxon resultam em p-valores extremamente pequenos. Isso significa que há um **aumento** significativo no escore-z da altura após um ano de tratamento em todos os grupos, e essa conclusão não depende do pressuposto de normalidade.
+
+Como todos os p-valores são praticamente zero, compará-los entre os grupos não traz informação. O que importa é o **tamanho do efeito** (`mean_diff`). A faixa etária de 0 a 71 meses apresenta o maior ganho médio (cerca de 1,03 no escore-z, contra 0,63 no grupo de 120+ meses), e os meninos ganham mais que as meninas (0,85 contra 0,68). Os dois diagnósticos têm ganhos muito parecidos (0,79 para BEI e 0,76 para PIG). As crianças que completaram os 4 anos de tratamento tiveram o maior ganho no primeiro ano (0,95).
+:::
 
 ```{r}
 #Cleaning the environment
@@ -448,56 +624,94 @@ rm(results, pvalue, estt, testes, t4, t3, t2, t1, dif_1)
 invisible(gc())
 ```
 
+::: {.content-visible when-profile="en"}
 ## Modeling
 After the descriptive analyses, graphs and tests, we will move on to the second part of this project, which is modeling. I'll be brief so this page doesn't get too big (it's already huge).
 
 After carrying out tests with all variables and interactions between them, the final model was defined as:
 
 ### Regression Model
+:::
+::: {.content-visible when-profile="pt"}
+## Modelagem
+Depois das análises descritivas, dos gráficos e dos testes, passamos à segunda parte do projeto: a modelagem. Vou ser breve para que esta página não fique grande demais (ela já está enorme).
+
+Após testar todas as variáveis e as interações entre elas, o modelo final ficou definido assim:
+
+### Modelo de regressão
+:::
 ```{r}
 #To help interpret the model, the variable age in months was transformed into age in years.
 dataset[, `IDADE_INÍCIO` := `IDADE_INÍCIO`/12]
 fit <- lm(diferenca ~ tratamento + HAZ_INÍCIO + `IDADE_INÍCIO` + SEXO + ID_DIAG, data = dataset)
 summary(fit)
 ```
+
+::: {.content-visible when-profile="en"}
 In the model above, all coefficients are significant at the 95% confidence level. The coefficient of determination, R², is a crucial measure of model quality, indicating the proportion of variability in the response variable explained by the independent variables. Here, R² is 0.4261, suggesting that approximately 42.61% of the variability in the 'difference' variable is explained by the included independent variables.
 
 While 42.61% may seem relatively low, it's important to note that the data are in z-scores, which inherently limit variability. When the model was tested using height variables in centimeters, an R² greater than 0.8 was achieved. However, z-scores were chosen to standardize the evolution of child height and avoid large differences between groups.
 
 Additionally, the residual standard error is low at 0.4455, and the F-statistic has an extremely low p-value, indicating that the model significantly outperforms a model without predictors.
+:::
+::: {.content-visible when-profile="pt"}
+No modelo acima, todos os coeficientes são significativos ao nível de confiança de 95%. O coeficiente de determinação (R²) é uma medida importante da qualidade do ajuste, pois indica a proporção da variabilidade da variável resposta explicada pelas variáveis independentes. Aqui, o R² é 0,4261, ou seja, aproximadamente 42,61% da variabilidade da variável "diferenca" é explicada pelas variáveis independentes incluídas.
+
+Embora 42,61% possa parecer relativamente baixo, vale lembrar que os dados estão em escore-z, o que por natureza limita a variabilidade. Quando o modelo foi testado com as alturas em centímetros, obteve-se um R² maior que 0,8. Ainda assim, optou-se pelo escore-z para padronizar a evolução da altura das crianças e evitar grandes diferenças entre os grupos.
+
+Além disso, o erro padrão residual é baixo (0,4455) e a estatística F tem p-valor extremamente baixo, o que indica que o modelo é significativamente melhor que um modelo sem preditores.
+:::
 
 ```{r}
 # The confidence interval of the coefficients
 confint(fit)
 ```
+
+::: {.content-visible when-profile="en"}
 The 95% confidence intervals for the coefficient estimates are reliable, as none of them include the number 0. This indicates that these predictors robustly explain the variation in the dependent variable.
 
 Now, to confirm the veracity of the chosen model, we will study the assumptions necessary for its validation.
 
 #### Multicollinearity
+:::
+::: {.content-visible when-profile="pt"}
+Os intervalos de confiança de 95% das estimativas dos coeficientes são consistentes, pois nenhum deles contém o 0. Isso indica que esses preditores explicam de forma robusta a variação da variável dependente.
+
+Agora, para confirmar a validade do modelo escolhido, vamos verificar os pressupostos necessários.
+
+#### Multicolinearidade
+:::
 ```{r, warning=FALSE}
 car::vif(fit)
 ```
+
+::: {.content-visible when-profile="en"}
 The VIF (Variance Inflation Factor) results indicate the extent to which the variance of a regression coefficient is inflated due to collinearity with other independent variables in the model. For a model to be acceptable, the VIF should be less than 5. As observed, all variables have a VIF below 2, confirming that there is no significant multicollinearity among the predictor variables in this model.
 
 #### Points of influence/leverage/outliers
+:::
+::: {.content-visible when-profile="pt"}
+O VIF (Fator de Inflação da Variância) indica o quanto a variância de um coeficiente de regressão é inflada pela colinearidade com as demais variáveis independentes do modelo. Para que o modelo seja aceitável, o VIF deve ser menor que 5. Como podemos ver, todas as variáveis têm VIF abaixo de 2, o que confirma que não há multicolinearidade relevante entre os preditores deste modelo.
+
+#### Pontos influentes, pontos de alavanca e outliers
+:::
 
 ```{r, fig.width = 14, fig.height = 10}
 # Number of observations
 n <- nrow(dataset)
 
 #Number of coeficients
-k <- length(fit$coef) 	
+k <- length(fit$coef)
 
 #Leverage cut
-corte.hii<- 2*k/n	
+corte.hii<- 2*k/n
 #Cookis distance cut
 corte.cook<- 4/n
 
 par(mfrow = c(2, 1))
 
 plot(hatvalues(fit), type = "h", cex.lab = 1.5, cex.axis = 1.5,
-     xlab = "Observation", ylab = "Leverage",
+     xlab = tr("Observation", "Observação"), ylab = tr("Leverage", "Alavancagem"),
      ylim = c(0, max(max(hatvalues(fit)), corte.hii)))
 lines(c(0, n + 1), c(corte.hii, corte.hii), col = 'red', lty = 2)
 
@@ -508,7 +722,7 @@ lines(c(0, n + 1), c(corte.cook, corte.cook), col = 'red', lty = 2)
 hatv <- order(hatvalues(fit),decreasing=TRUE)[1:10]
 hatv
 # Higher Cooks Distance
-cooks <- order(cooks.distance(fit),decreasing=TRUE)[1:10]	
+cooks <- order(cooks.distance(fit),decreasing=TRUE)[1:10]
 cooks
 
 #Higher leveragens and cook distance at the same time
@@ -516,18 +730,28 @@ critic_points <- Reduce(intersect, list(hatv, cooks))
 critic_points
 
 ```
+
+::: {.content-visible when-profile="en"}
 We can see that among the 10 largest leverage and cook distance points, only 2 coexist in both groups. The recommended option is to remove these points, but after running the model without these two points, the best difference between them was the increase in R² to 0.4313. Therefore, it was decided to keep the 2 points in the model, considering that the data is reliable and they are probably legitimate outliers.
 
 Now continuing the verification of the model assumptions we have.
 
 #### Residual Analysis
+:::
+::: {.content-visible when-profile="pt"}
+Vemos que, entre os 10 pontos com maior alavancagem e os 10 com maior distância de Cook, apenas 2 aparecem nos dois grupos. A recomendação seria removê-los, mas, ao reajustar o modelo sem esses dois pontos, a principal diferença foi o aumento do R² para 0,4313. Por isso, decidimos manter os 2 pontos no modelo, considerando que os dados são confiáveis e que provavelmente se trata de outliers legítimos.
+
+Seguimos agora com a verificação dos pressupostos do modelo.
+
+#### Análise de resíduos
+:::
 ```{r, fig.width = 14, fig.height = 10}
 #Standardized Residuals
 sr<- rstandard(fit)
 par(mfrow = c(1, 2))
 
-plot(sr, pch = 20, cex.lab = 1.5, cex.axis = 1.5, 
-     xlab = "Observation", ylab = "Standardized Residuals",
+plot(sr, pch = 20, cex.lab = 1.5, cex.axis = 1.5,
+     xlab = tr("Observation", "Observação"), ylab = tr("Standardized Residuals", "Resíduos padronizados"),
      ylim = c(min(-2, min(sr)), max(2, max(sr))))
 lines(c(0, n + 1), c(2, 2), col = 'red', lty = 2)
 lines(c(0, n + 1), c(-2, -2), col = 'red', lty = 2)
@@ -536,12 +760,20 @@ points(high_residuals, sr[high_residuals], col = "red", pch = 20)
 text(high_residuals, sr[high_residuals], labels = round(sr[high_residuals], 2),
      pos = 3, col = "red", cex = 0.7)
 
-boxplot(sr, pch = 20, cex.lab = 1.5, cex.axis = 1.5, xlab = "Standardized Residuals")
+boxplot(sr, pch = 20, cex.lab = 1.5, cex.axis = 1.5, xlab = tr("Standardized Residuals", "Resíduos padronizados"))
 
 ```
+
+::: {.content-visible when-profile="en"}
 The residuals are evenly distributed around 0, as observed in the boxplot where the median is very close to 0, and the distribution is well-balanced. There are only 10 points outside the range of -2 to 2, indicating very good residual values.
 
 Next, we will perform a normality test to finalize the residual analysis.
+:::
+::: {.content-visible when-profile="pt"}
+Os resíduos estão distribuídos de forma equilibrada em torno de 0, como se vê no boxplot, em que a mediana está muito próxima de 0 e a distribuição é bem simétrica. Há apenas 10 pontos fora do intervalo de -2 a 2, o que indica resíduos muito bem comportados.
+
+Em seguida, aplicamos testes de normalidade para concluir a análise de resíduos.
+:::
 ```{r}
 t1 <- ks.test(sr,"pnorm") # KS
 t2 <- lillie.test(sr) # Lilliefors
@@ -555,17 +787,27 @@ estt <- as.numeric(c(t1$statistic, t2$statistic, t3$statistic, t4$statistic, t5$
 valorp <- c(t1$p.value, t2$p.value, t3$p.value, t4$p.value, t5$p.value, t6$p.value)
 resultados <- cbind(estt, valorp)
 rownames(resultados) <- testes
-colnames(resultados) <- c("Statistic", "p-value")
+colnames(resultados) <- tr(c("Statistic", "p-value"), c("Estatística", "p-valor"))
 print(resultados, digits = 4)
 ```
+
+::: {.content-visible when-profile="en"}
 All six tests indicate that there is insufficient evidence to reject the null hypothesis that the residuals follow a normal distribution. Therefore, we conclude that the residuals meet the assumption of normality.
 
 #### Homoscedasticity
+:::
+::: {.content-visible when-profile="pt"}
+Os seis testes indicam que não há evidência suficiente para rejeitar a hipótese nula de que os resíduos seguem uma distribuição normal. Portanto, concluímos que os resíduos atendem ao pressuposto de normalidade.
+
+#### Homocedasticidade
+:::
 ```{r, warning=FALSE}
 # Breusch-Pagan Test
-lmtest::bptest(fit) 
+lmtest::bptest(fit)
 
 ```
+
+::: {.content-visible when-profile="en"}
 The absence of heteroscedasticity in the residuals is crucial as it ensures that confidence intervals and significance tests of the regression model coefficients are correctly interpreted. With a p-value of 0.4868, there is no statistically significant evidence to reject the null hypothesis of the test indicating no heteroscedasticity in the model residuals. Therefore, we conclude that the residuals exhibit homoscedasticity.
 
 #### Conclusion
@@ -597,4 +839,38 @@ Regarding sex, boys respond better to the treatment: with the same number of tre
 Finally, children diagnosed as SGA (Small for Gestational Age, PIG) have an expected difference 0.1499 z-score **lower than** children diagnosed as ISS (Idiopathic Short Stature, BEI), all else being equal. This does not mean that SGA children get worse with treatment, only that they gain less than comparable ISS children.
 
 We conclude that the ideal scenario for a child to achieve the best results is to complete the 4 years of treatment, have the lowest possible initial height z-score, start treatment at the youngest age, be male, and be diagnosed as ISS.
+:::
+::: {.content-visible when-profile="pt"}
+A ausência de heterocedasticidade nos resíduos é fundamental, pois garante que os intervalos de confiança e os testes de significância dos coeficientes do modelo sejam interpretados corretamente. Com p-valor de 0,4868, não há evidência estatisticamente significativa para rejeitar a hipótese nula do teste, de ausência de heterocedasticidade nos resíduos. Portanto, concluímos que os resíduos são homocedásticos.
+
+#### Conclusão
+Com todos os pressupostos verificados e o modelo validado, podemos interpretar os coeficientes e fazer inferências a partir do modelo. O modelo final é:
+
+$$Y = 0.4777 + 0.2547X_1 - 0.198X_2 - 0.0422X_3 + 0.2422X_4 - 0.1499X_5$$
+
+| Variável | Descrição                                                                                                          |
+|----------|--------------------------------------------------------------------------------------------------------------------|
+|     Y    | Diferença entre a altura inicial da criança e a altura mais recente disponível após o início do tratamento.        |
+|    X1    | Número de tratamentos                                                                                              |
+|    X2    | Altura em escore-z no início do tratamento                                                                         |
+|    X3    | Idade em anos no início do tratamento                                                                              |
+|    X4    | Sexo; 1 = masculino, 0 = feminino (referência)                                                                     |
+|    X5    | Diagnóstico; 1 = PIG, 0 = BEI (referência)                                                                         |
+
+Cada coeficiente é interpretado **mantendo as demais variáveis constantes**. Sexo e diagnóstico são variáveis dummy, portanto seus coeficientes são medidos em relação a uma **categoria de referência**: meninas (X4 = 0) e BEI (X5 = 0).
+
+O intercepto (0,4777) é a diferença esperada para uma menina com diagnóstico de BEI quando todas as variáveis numéricas valem zero (nenhum tratamento, escore-z inicial 0 e idade 0). Essa combinação não existe nos dados (todas as crianças receberam pelo menos um tratamento), então o intercepto funciona como ponto de ancoragem do modelo e não tem, isoladamente, interpretação prática direta.
+
+A variável "número de tratamentos" é a que tem maior impacto sobre a diferença. Cada ano de tratamento hormonal aumenta a diferença em 0,2547, podendo chegar a 1,0188.
+
+Para a variável "altura inicial", quanto mais negativo o escore-z, maior a diferença ao final do tratamento. Ou seja, quanto menor a altura inicial da criança, maior a diferença final, com coeficiente de -0,198.
+
+A variável "idade" funciona de forma parecida com a altura inicial, mas sempre "piora" a diferença, já que a idade é sempre positiva e o coeficiente é negativo. Concluímos que, quanto mais nova a criança, melhor o resultado, pois maior será a diferença.
+
+Quanto ao sexo, os meninos respondem melhor ao tratamento: com o mesmo número de tratamentos, a mesma altura inicial, a mesma idade e o mesmo diagnóstico, a diferença esperada para um menino é 0,2422 de escore-z **maior que a de uma menina**. As meninas são a categoria de referência, por isso não há um coeficiente próprio para elas; o 0,2422 é a distância entre os dois grupos.
+
+Por fim, as crianças com diagnóstico de PIG (Pequeno para a Idade Gestacional) têm diferença esperada 0,1499 de escore-z **menor que** as crianças com diagnóstico de BEI (Baixa Estatura Idiopática), mantidas as demais condições. Isso não significa que as crianças PIG pioram com o tratamento, apenas que ganham menos que crianças BEI comparáveis.
+
+Concluímos que o cenário ideal para uma criança obter os melhores resultados é completar os 4 anos de tratamento, ter o menor escore-z de altura inicial possível, começar o tratamento o mais cedo possível, ser do sexo masculino e ter diagnóstico de BEI.
+:::
 

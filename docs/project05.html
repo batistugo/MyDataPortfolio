@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Hugo Batista da Silva">
 
 <title>Survival Analysis of Patients with Esophageal Cancer Before and After an Institutional Care Protocol – MyDataPortfolio</title>
 <style>
@@ -81,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-32643bc00688b413a4b4dac13675c875.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -184,6 +183,12 @@ window.Quarto = {
 <span class="menu-text">Project 05</span></a>
   </li>  
 </ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://batistugo.github.io/MyDataPortfolio/pt/"> 
+<span class="menu-text">PT</span></a>
+  </li>  
+</ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
@@ -223,33 +228,15 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Survival Analysis of Patients with Esophageal Cancer Before and After an Institutional Care Protocol</h1>
+
+
+
+<div class="h1 page-title">
+<p>Survival Analysis of Patients with Esophageal Cancer Before and After an Institutional Care Protocol</p>
 </div>
-
-
-
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Hugo Batista da Silva </p>
-          </div>
-  </div>
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
+<p><em>Hugo Batista da Silva</em></p>
 <section id="about-the-project" class="level2">
 <h2 class="anchored" data-anchor-id="about-the-project">About the project</h2>
 <p>This project was the statistical analysis of a final paper of a medical residency in Clinical Oncology, carried out at a cancer hospital in Vitória, Espírito Santo. In August 2018 the hospital introduced an institutional <strong>care protocol for esophageal cancer</strong>, whose main goal was to reduce the time between the patient’s first consultation and the start of treatment.</p>
@@ -370,41 +357,46 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> dataset[tratamento <span class="sc">%chin%</span> <span class="fu">c</span>(<span class="st">"3"</span>, <span class="st">"4"</span>) <span class="sc">&amp;</span> obito <span class="sc">!=</span> <span class="st">"9"</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>dataset[, <span class="st">`</span><span class="at">:=</span><span class="st">`</span>(</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">obito_geral =</span> <span class="fu">fcase</span>(</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    obito <span class="sc">==</span> <span class="st">"1"</span> <span class="sc">&amp;</span> causa_obito <span class="sc">%chin%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>), <span class="dv">1</span>L,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    obito <span class="sc">==</span> <span class="st">"2"</span> <span class="sc">&amp;</span> causa_obito <span class="sc">==</span> <span class="st">"0"</span>, <span class="dv">0</span>L,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">default =</span> <span class="cn">NA_integer_</span>),</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">faixa_etaria =</span> <span class="fu">ifelse</span>(<span class="fu">as.numeric</span>(idade) <span class="sc">&lt;</span> <span class="dv">60</span>, <span class="st">"Under 60"</span>, <span class="st">"60 or more"</span>),</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">etilismo =</span> <span class="fu">fcase</span>(etilismo <span class="sc">%chin%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"3"</span>), <span class="st">"Yes"</span>, etilismo <span class="sc">==</span> <span class="st">"2"</span>, <span class="st">"No"</span>),</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">fumante =</span> <span class="fu">fcase</span>(fumante <span class="sc">%chin%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"3"</span>), <span class="st">"Yes"</span>, fumante <span class="sc">==</span> <span class="st">"2"</span>, <span class="st">"No"</span>),</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">via_alimentar =</span> <span class="fu">fcase</span>(via_alimentar <span class="sc">==</span> <span class="st">"1"</span>, <span class="st">"Yes"</span>, via_alimentar <span class="sc">==</span> <span class="st">"2"</span>, <span class="st">"No"</span>),</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">sexo =</span> <span class="fu">fcase</span>(sexo <span class="sc">==</span> <span class="st">"1"</span>, <span class="st">"Male"</span>, sexo <span class="sc">==</span> <span class="st">"2"</span>, <span class="st">"Female"</span>),</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">tratamento =</span> <span class="fu">fcase</span>(tratamento <span class="sc">==</span> <span class="st">"3"</span>, <span class="st">"Bimodal"</span>, tratamento <span class="sc">==</span> <span class="st">"4"</span>, <span class="st">"Trimodal"</span>),</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">estadiamento =</span> <span class="fu">fcase</span>(estadiamento <span class="sc">==</span> <span class="st">"2"</span>, <span class="st">"Stage II"</span>, estadiamento <span class="sc">==</span> <span class="st">"3"</span>, <span class="st">"Stage III"</span>, estadiamento <span class="sc">==</span> <span class="st">"4"</span>, <span class="st">"Stage IV"</span>),</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">ecog =</span> <span class="fu">fcase</span>(ecog <span class="sc">==</span> <span class="st">"0"</span>, <span class="st">"ECOG 0"</span>, ecog <span class="sc">==</span> <span class="st">"1"</span>, <span class="st">"ECOG 1"</span>, ecog <span class="sc">==</span> <span class="st">"2"</span>, <span class="st">"ECOG 2"</span>, <span class="at">default =</span> <span class="st">"Not recorded"</span>),</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">tempo_consulta_1_trat =</span> <span class="fu">fcase</span>(</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    tempo_consulta_1_trat <span class="sc">==</span> <span class="st">"1"</span>, <span class="st">"Less than 1 month"</span>,</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    tempo_consulta_1_trat <span class="sc">==</span> <span class="st">"2"</span>, <span class="st">"1 to 2 months"</span>,</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    tempo_consulta_1_trat <span class="sc">==</span> <span class="st">"3"</span>, <span class="st">"More than 2 months"</span>)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>)]</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> dataset[<span class="sc">!</span><span class="fu">is.na</span>(obito_geral)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">tr</span>(<span class="st">"Yes"</span>, <span class="st">"Sim"</span>); nao <span class="ot">&lt;-</span> <span class="fu">tr</span>(<span class="st">"No"</span>, <span class="st">"Não"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>dataset[, <span class="st">`</span><span class="at">:=</span><span class="st">`</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">obito_geral =</span> <span class="fu">fcase</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    obito <span class="sc">==</span> <span class="st">"1"</span> <span class="sc">&amp;</span> causa_obito <span class="sc">%chin%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>), <span class="dv">1</span>L,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    obito <span class="sc">==</span> <span class="st">"2"</span> <span class="sc">&amp;</span> causa_obito <span class="sc">==</span> <span class="st">"0"</span>, <span class="dv">0</span>L,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">default =</span> <span class="cn">NA_integer_</span>),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">faixa_etaria =</span> <span class="fu">ifelse</span>(<span class="fu">as.numeric</span>(idade) <span class="sc">&lt;</span> <span class="dv">60</span>, <span class="fu">tr</span>(<span class="st">"Under 60"</span>, <span class="st">"Menos de 60 anos"</span>), <span class="fu">tr</span>(<span class="st">"60 or more"</span>, <span class="st">"60 anos ou mais"</span>)),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">etilismo =</span> <span class="fu">fcase</span>(etilismo <span class="sc">%chin%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"3"</span>), sim, etilismo <span class="sc">==</span> <span class="st">"2"</span>, nao),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">fumante =</span> <span class="fu">fcase</span>(fumante <span class="sc">%chin%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"3"</span>), sim, fumante <span class="sc">==</span> <span class="st">"2"</span>, nao),</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">via_alimentar =</span> <span class="fu">fcase</span>(via_alimentar <span class="sc">==</span> <span class="st">"1"</span>, sim, via_alimentar <span class="sc">==</span> <span class="st">"2"</span>, nao),</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">sexo =</span> <span class="fu">fcase</span>(sexo <span class="sc">==</span> <span class="st">"1"</span>, <span class="fu">tr</span>(<span class="st">"Male"</span>, <span class="st">"Masculino"</span>), sexo <span class="sc">==</span> <span class="st">"2"</span>, <span class="fu">tr</span>(<span class="st">"Female"</span>, <span class="st">"Feminino"</span>)),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">tratamento =</span> <span class="fu">fcase</span>(tratamento <span class="sc">==</span> <span class="st">"3"</span>, <span class="st">"Bimodal"</span>, tratamento <span class="sc">==</span> <span class="st">"4"</span>, <span class="st">"Trimodal"</span>),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">estadiamento =</span> <span class="fu">fcase</span>(estadiamento <span class="sc">==</span> <span class="st">"2"</span>, <span class="fu">tr</span>(<span class="st">"Stage II"</span>, <span class="st">"Estádio II"</span>), estadiamento <span class="sc">==</span> <span class="st">"3"</span>, <span class="fu">tr</span>(<span class="st">"Stage III"</span>, <span class="st">"Estádio III"</span>),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                       estadiamento <span class="sc">==</span> <span class="st">"4"</span>, <span class="fu">tr</span>(<span class="st">"Stage IV"</span>, <span class="st">"Estádio IV"</span>)),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">ecog =</span> <span class="fu">fcase</span>(ecog <span class="sc">==</span> <span class="st">"0"</span>, <span class="st">"ECOG 0"</span>, ecog <span class="sc">==</span> <span class="st">"1"</span>, <span class="st">"ECOG 1"</span>, ecog <span class="sc">==</span> <span class="st">"2"</span>, <span class="st">"ECOG 2"</span>, <span class="at">default =</span> <span class="fu">tr</span>(<span class="st">"Not recorded"</span>, <span class="st">"Não registrado"</span>)),</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">tempo_consulta_1_trat =</span> <span class="fu">fcase</span>(</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    tempo_consulta_1_trat <span class="sc">==</span> <span class="st">"1"</span>, <span class="fu">tr</span>(<span class="st">"Less than 1 month"</span>, <span class="st">"Menos de 1 mês"</span>),</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    tempo_consulta_1_trat <span class="sc">==</span> <span class="st">"2"</span>, <span class="fu">tr</span>(<span class="st">"1 to 2 months"</span>, <span class="st">"Entre 1 e 2 meses"</span>),</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    tempo_consulta_1_trat <span class="sc">==</span> <span class="st">"3"</span>, <span class="fu">tr</span>(<span class="st">"More than 2 months"</span>, <span class="st">"Mais de 2 meses"</span>))</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>)]</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> dataset[<span class="sc">!</span><span class="fu">is.na</span>(obito_geral)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The protocol started on <strong>July 31, 2018</strong>: patients with the first consultation up to this date are “pre protocol”, the others are “post protocol”. The survival time is counted in months from the first consultation until death. For the patients still alive the time is counted until the <strong>end of the data collection</strong>: these are censored observations, we know they survived at least that long.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dataset[, <span class="st">`</span><span class="at">:=</span><span class="st">`</span>(<span class="at">consulta_1 =</span> <span class="fu">dmy</span>(consulta_1), <span class="at">data_obito =</span> <span class="fu">dmy</span>(data_obito), <span class="at">data_trat_1 =</span> <span class="fu">dmy</span>(data_trat_1))]</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>fim_coleta <span class="ot">&lt;-</span> <span class="fu">max</span>(dataset<span class="sc">$</span>data_obito, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>dataset[, protocolo <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(consulta_1 <span class="sc">&lt;=</span> <span class="fu">dmy</span>(<span class="st">"31/07/2018"</span>), <span class="st">"Pre protocol"</span>, <span class="st">"Post protocol"</span>),</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Pre protocol"</span>, <span class="st">"Post protocol"</span>))]</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>dataset[, tempo <span class="sc">:</span><span class="er">=</span> <span class="fu">fifelse</span>(obito_geral <span class="sc">==</span> <span class="dv">1</span>L,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">as.numeric</span>(data_obito <span class="sc">-</span> consulta_1),</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">as.numeric</span>(fim_coleta <span class="sc">-</span> consulta_1)) <span class="sc">/</span> <span class="dv">30</span>]</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>dataset[, tempo_consulta_1_trat <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(tempo_consulta_1_trat, <span class="fu">c</span>(<span class="st">"Less than 1 month"</span>, <span class="st">"1 to 2 months"</span>, <span class="st">"More than 2 months"</span>))]</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>dataset[, ecog <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(ecog, <span class="fu">c</span>(<span class="st">"ECOG 0"</span>, <span class="st">"ECOG 1"</span>, <span class="st">"ECOG 2"</span>, <span class="st">"Not recorded"</span>))]</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>dataset[, .N, by <span class="ot">=</span> .(protocolo, <span class="at">obito =</span> <span class="fu">fifelse</span>(obito_geral <span class="sc">==</span> <span class="dv">1</span>L, <span class="st">"Dead"</span>, <span class="st">"Alive (censored)"</span>))]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>niveis_protocolo <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">tr</span>(<span class="st">"Pre protocol"</span>, <span class="st">"Pré-protocolo"</span>), <span class="fu">tr</span>(<span class="st">"Post protocol"</span>, <span class="st">"Pós-protocolo"</span>))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>dataset[, protocolo <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(consulta_1 <span class="sc">&lt;=</span> <span class="fu">dmy</span>(<span class="st">"31/07/2018"</span>), niveis_protocolo[<span class="dv">1</span>], niveis_protocolo[<span class="dv">2</span>]),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">levels =</span> niveis_protocolo)]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>dataset[, tempo <span class="sc">:</span><span class="er">=</span> <span class="fu">fifelse</span>(obito_geral <span class="sc">==</span> <span class="dv">1</span>L,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">as.numeric</span>(data_obito <span class="sc">-</span> consulta_1),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">as.numeric</span>(fim_coleta <span class="sc">-</span> consulta_1)) <span class="sc">/</span> <span class="dv">30</span>]</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>dataset[, tempo_consulta_1_trat <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(tempo_consulta_1_trat, <span class="fu">c</span>(<span class="fu">tr</span>(<span class="st">"Less than 1 month"</span>, <span class="st">"Menos de 1 mês"</span>),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                                                                   <span class="fu">tr</span>(<span class="st">"1 to 2 months"</span>, <span class="st">"Entre 1 e 2 meses"</span>),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                                                                   <span class="fu">tr</span>(<span class="st">"More than 2 months"</span>, <span class="st">"Mais de 2 meses"</span>)))]</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>dataset[, ecog <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(ecog, <span class="fu">c</span>(<span class="st">"ECOG 0"</span>, <span class="st">"ECOG 1"</span>, <span class="st">"ECOG 2"</span>, <span class="fu">tr</span>(<span class="st">"Not recorded"</span>, <span class="st">"Não registrado"</span>)))]</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>dataset[, .N, by <span class="ot">=</span> .(protocolo, <span class="at">obito =</span> <span class="fu">fifelse</span>(obito_geral <span class="sc">==</span> <span class="dv">1</span>L, <span class="fu">tr</span>(<span class="st">"Dead"</span>, <span class="st">"Óbito"</span>), <span class="fu">tr</span>(<span class="st">"Alive (censored)"</span>, <span class="st">"Vivo (censurado)"</span>)))]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       protocolo            obito     N
           &lt;fctr&gt;           &lt;char&gt; &lt;int&gt;
@@ -424,7 +416,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">dcast</span>(dataset[<span class="sc">!</span><span class="fu">is.na</span>(tempo_consulta_1_trat), .N, <span class="at">by =</span> .(tempo_consulta_1_trat, protocolo)],</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>            tempo_consulta_1_trat <span class="sc">~</span> protocolo, <span class="at">value.var =</span> <span class="st">"N"</span>),</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Time to treatment"</span>, <span class="st">"Pre protocol"</span>, <span class="st">"Post protocol"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="fu">tr</span>(<span class="st">"Time to treatment"</span>, <span class="st">"Tempo até o tratamento"</span>), niveis_protocolo))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <thead>
@@ -479,7 +471,8 @@ X-squared = 47.196, df = 2, p-value = 5.644e-11</code></pre>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">setcolorder</span>(perfil, <span class="fu">c</span>(<span class="st">"variable"</span>, <span class="st">"category"</span>))</span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(perfil, <span class="at">digits =</span> <span class="dv">2</span>,</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Variable"</span>, <span class="st">"Category"</span>, <span class="st">"N pre"</span>, <span class="st">"N post"</span>, <span class="st">"% pre"</span>, <span class="st">"% post"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="fu">tr</span>(<span class="st">"Variable"</span>, <span class="st">"Variável"</span>), <span class="fu">tr</span>(<span class="st">"Category"</span>, <span class="st">"Categoria"</span>),</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">tr</span>(<span class="fu">c</span>(<span class="st">"N pre"</span>, <span class="st">"N post"</span>, <span class="st">"% pre"</span>, <span class="st">"% post"</span>), <span class="fu">c</span>(<span class="st">"N pré"</span>, <span class="st">"N pós"</span>, <span class="st">"% pré"</span>, <span class="st">"% pós"</span>))))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <thead>
@@ -664,7 +657,7 @@ X-squared = 47.196, df = 2, p-value = 5.644e-11</code></pre>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> variable, <span class="at">scales =</span> <span class="st">"free_x"</span>, <span class="at">ncol =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">1.15</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>)) <span class="sc">+</span></span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">20</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Proportion of deaths by category"</span>, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Deaths"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Proportion of deaths by category"</span>, <span class="st">"Proporção de óbitos por categoria"</span>), <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="fu">tr</span>(<span class="st">"Deaths"</span>, <span class="st">"Óbitos"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -701,8 +694,9 @@ X-squared = 47.196, df = 2, p-value = 5.644e-11</code></pre>
 [1,] 184    127   16.6    14.3    20.4</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(fit_geral, <span class="at">data =</span> dataset, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">surv.median.line =</span> <span class="st">"hv"</span>, <span class="at">legend =</span> <span class="st">"none"</span>,</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="st">"Time (months)"</span>, <span class="at">ylab =</span> <span class="st">"Estimated S(t)"</span>, <span class="at">title =</span> <span class="st">"Kaplan-Meier, all patients"</span>,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">break.time.by =</span> <span class="dv">12</span>, <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="fu">tr</span>(<span class="st">"Time (months)"</span>, <span class="st">"Tempo (meses)"</span>), <span class="at">ylab =</span> <span class="fu">tr</span>(<span class="st">"Estimated S(t)"</span>, <span class="st">"S(t) estimada"</span>),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Kaplan-Meier, all patients"</span>, <span class="st">"Kaplan-Meier, todos os pacientes"</span>),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">break.time.by =</span> <span class="dv">12</span>, <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -737,9 +731,11 @@ protocolo=Post protocol 85       57     53.2     0.279     0.499
  Chisq= 0.5  on 1 degrees of freedom, p= 0.5 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(fit_protocolo, <span class="at">data =</span> dataset, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">pval =</span> <span class="cn">TRUE</span>, <span class="at">risk.table =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">legend.labs =</span> <span class="fu">c</span>(<span class="st">"Pre protocol"</span>, <span class="st">"Post protocol"</span>), <span class="at">legend.title =</span> <span class="st">""</span>,</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="st">"Time (months)"</span>, <span class="at">ylab =</span> <span class="st">"Estimated S(t)"</span>, <span class="at">title =</span> <span class="st">"Kaplan-Meier by protocol"</span>,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">break.time.by =</span> <span class="dv">12</span>, <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">legend.labs =</span> niveis_protocolo, <span class="at">legend.title =</span> <span class="st">""</span>,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="fu">tr</span>(<span class="st">"Time (months)"</span>, <span class="st">"Tempo (meses)"</span>), <span class="at">ylab =</span> <span class="fu">tr</span>(<span class="st">"Estimated S(t)"</span>, <span class="st">"S(t) estimada"</span>),</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Kaplan-Meier by protocol"</span>, <span class="st">"Kaplan-Meier por protocolo"</span>),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">risk.table.title =</span> <span class="fu">tr</span>(<span class="st">"Number at risk"</span>, <span class="st">"Pacientes em risco"</span>),</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">break.time.by =</span> <span class="dv">12</span>, <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -761,7 +757,7 @@ protocolo=Post protocol 85       57     53.2     0.279     0.499
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  dados <span class="ot">&lt;-</span> dataset[<span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">get</span>(v))]</span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">surv_fit</span>(<span class="fu">as.formula</span>(<span class="fu">paste</span>(<span class="st">"Surv(tempo, obito_geral) ~"</span>, v)), <span class="at">data =</span> dados)</span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsurvplot</span>(fit, <span class="at">data =</span> dados, <span class="at">pval =</span> <span class="cn">TRUE</span>, <span class="at">legend.title =</span> <span class="st">""</span>, <span class="at">legend.labs =</span> <span class="fu">levels</span>(<span class="fu">factor</span>(dados[[v]])),</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">xlab =</span> <span class="st">"Time (months)"</span>, <span class="at">ylab =</span> <span class="st">"S(t)"</span>, <span class="at">title =</span> v, <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>))</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">xlab =</span> <span class="fu">tr</span>(<span class="st">"Time (months)"</span>, <span class="st">"Tempo (meses)"</span>), <span class="at">ylab =</span> <span class="st">"S(t)"</span>, <span class="at">title =</span> v, <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>))</span>
 <span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange_ggsurvplots</span>(graficos, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">print =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -777,9 +773,11 @@ protocolo=Post protocol 85       57     53.2     0.279     0.499
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>tabela_lr <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">variable =</span> variaveis_km,</span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">all =</span> <span class="fu">sapply</span>(variaveis_km, log_rank, <span class="at">dados =</span> dataset),</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">pre_protocol =</span> <span class="fu">sapply</span>(variaveis_km, log_rank, <span class="at">dados =</span> dataset[protocolo <span class="sc">==</span> <span class="st">"Pre protocol"</span>]),</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">post_protocol =</span> <span class="fu">sapply</span>(variaveis_km, log_rank, <span class="at">dados =</span> dataset[protocolo <span class="sc">==</span> <span class="st">"Post protocol"</span>]))</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tabela_lr, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Variable"</span>, <span class="st">"p-value (all)"</span>, <span class="st">"p-value (pre protocol)"</span>, <span class="st">"p-value (post protocol)"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">pre_protocol =</span> <span class="fu">sapply</span>(variaveis_km, log_rank, <span class="at">dados =</span> dataset[protocolo <span class="sc">==</span> niveis_protocolo[<span class="dv">1</span>]]),</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">post_protocol =</span> <span class="fu">sapply</span>(variaveis_km, log_rank, <span class="at">dados =</span> dataset[protocolo <span class="sc">==</span> niveis_protocolo[<span class="dv">2</span>]]))</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tabela_lr, <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">tr</span>(<span class="fu">c</span>(<span class="st">"Variable"</span>, <span class="st">"p-value (all)"</span>, <span class="st">"p-value (pre protocol)"</span>, <span class="st">"p-value (post protocol)"</span>),</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">c</span>(<span class="st">"Variável"</span>, <span class="st">"Valor-p (todos)"</span>, <span class="st">"Valor-p (pré-protocolo)"</span>, <span class="st">"Valor-p (pós-protocolo)"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
@@ -910,15 +908,19 @@ Score (logrank) test = 56.3  on 10 df,   p=2e-08</code></pre>
 </div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dataset_aux <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>(hr, <span class="at">keep.rownames =</span> <span class="st">"variavel"</span>)[, .(variavel, <span class="at">HR =</span> <span class="st">`</span><span class="at">exp(coef)</span><span class="st">`</span>, <span class="at">lower =</span> <span class="st">`</span><span class="at">lower .95</span><span class="st">`</span>, <span class="at">upper =</span> <span class="st">`</span><span class="at">upper .95</span><span class="st">`</span>)]</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>dataset_aux[, variavel <span class="sc">:</span><span class="er">=</span> <span class="fu">gsub</span>(<span class="st">"protocolo|estadiamento|ecog|faixa_etaria|sexo|fumante|etilismo"</span>, <span class="st">""</span>, variavel)]</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>dataset_aux[variavel <span class="sc">==</span> <span class="st">"Yes"</span>, variavel <span class="sc">:</span><span class="er">=</span> <span class="fu">c</span>(<span class="st">"Smoker"</span>, <span class="st">"Alcohol use"</span>)]</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dataset_aux, <span class="fu">aes</span>(<span class="at">x =</span> HR, <span class="at">y =</span> <span class="fu">reorder</span>(variavel, HR))) <span class="sc">+</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">colour =</span> <span class="st">"grey50"</span>) <span class="sc">+</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> lower, <span class="at">xmax =</span> upper), <span class="at">colour =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>)) <span class="sc">+</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Hazard ratios of the Cox model (95% confidence intervals)"</span>, <span class="at">x =</span> <span class="st">"Hazard ratio (log scale)"</span>, <span class="at">y =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>dataset_aux[, variavel <span class="sc">:</span><span class="er">=</span> <span class="fu">fcase</span>(<span class="fu">grepl</span>(<span class="st">"^protocolo"</span>, variavel), niveis_protocolo[<span class="dv">2</span>],</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">grepl</span>(<span class="st">"^ecog.*(recorded|registrado)$"</span>, variavel), <span class="fu">tr</span>(<span class="st">"ECOG not recorded"</span>, <span class="st">"ECOG não registrado"</span>),</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">grepl</span>(<span class="st">"^fumante"</span>, variavel), <span class="fu">tr</span>(<span class="st">"Smoker"</span>, <span class="st">"Tabagista"</span>),</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">grepl</span>(<span class="st">"^etilismo"</span>, variavel), <span class="fu">tr</span>(<span class="st">"Alcohol use"</span>, <span class="st">"Etilista"</span>),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                                <span class="at">default =</span> <span class="fu">gsub</span>(<span class="st">"protocolo|estadiamento|ecog|faixa_etaria|sexo"</span>, <span class="st">""</span>, variavel))]</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dataset_aux, <span class="fu">aes</span>(<span class="at">x =</span> HR, <span class="at">y =</span> <span class="fu">reorder</span>(variavel, HR))) <span class="sc">+</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">colour =</span> <span class="st">"grey50"</span>) <span class="sc">+</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> lower, <span class="at">xmax =</span> upper), <span class="at">colour =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Hazard ratios of the Cox model (95% confidence intervals)"</span>, <span class="st">"Razões de risco do modelo de Cox (intervalos de confiança de 95%)"</span>),</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="fu">tr</span>(<span class="st">"Hazard ratio (log scale)"</span>, <span class="st">"Razão de riscos (escala log)"</span>), <span class="at">y =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -963,6 +965,42 @@ GLOBAL       14.315 10 0.159</code></pre>
 </section>
 
 </main> <!-- /main -->
+<script>
+
+// 1) the browser tab shows the title of the page in its own language
+
+// 2) the EN / PT link of the navbar opens the same page in the other language
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  var titulo = document.querySelector("main .page-title");
+
+  if (titulo) document.title = titulo.textContent.trim().replace(/\s+/g, " ") + " – MyDataPortfolio";
+
+
+
+  var isPt = (document.documentElement.lang || "").indexOf("pt") === 0;
+
+  var page = location.pathname.split("/").pop() || "index.html";
+
+  document.querySelectorAll("a.nav-link").forEach(function (a) {
+
+    var text = a.textContent.trim();
+
+    if ((isPt && text === "EN") || (!isPt && text === "PT")) {
+
+      a.setAttribute("href", (isPt ? "../" : "pt/") + page);
+
+      a.setAttribute("title", isPt ? "Read in English" : "Ler em português");
+
+    }
+
+  });
+
+});
+
+</script>
+
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

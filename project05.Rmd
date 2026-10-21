@@ -1,6 +1,5 @@
 ---
-title: "Survival Analysis of Patients with Esophageal Cancer Before and After an Institutional Care Protocol"
-author: "Hugo Batista da Silva"
+pagetitle: "Survival Analysis of Patients with Esophageal Cancer Before and After an Institutional Care Protocol"
 output:
   html_document:
     toc: true
@@ -13,8 +12,32 @@ output:
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+
+# returns the text in the language of the page being rendered
+tr <- function(en, pt) if (identical(Sys.getenv("QUARTO_PROFILE"), "pt")) pt else en
+
+# numbers written inside the text follow the language (0.48 in English, 0,48 in Portuguese)
+knitr::knit_hooks$set(inline = function(x) {
+  if (is.numeric(x)) x <- format(x, decimal.mark = tr(".", ","), scientific = FALSE)
+  x
+})
 ```
 
+::: {.content-visible when-profile="en"}
+::: {.h1 .page-title}
+Survival Analysis of Patients with Esophageal Cancer Before and After an Institutional Care Protocol
+:::
+:::
+
+::: {.content-visible when-profile="pt"}
+::: {.h1 .page-title}
+Análise de Sobrevivência de Pacientes com Câncer de Esôfago Antes e Depois de um Protocolo Institucional
+:::
+:::
+
+*Hugo Batista da Silva*
+
+::: {.content-visible when-profile="en"}
 ## About the project
 This project was the statistical analysis of a final paper of a medical residency in Clinical Oncology, carried out at a cancer hospital in Vitória, Espírito Santo. In August 2018 the hospital introduced an institutional **care protocol for esophageal cancer**, whose main goal was to reduce the time between the patient's first consultation and the start of treatment.
 
@@ -24,6 +47,19 @@ The analysis has two parts. The first one is descriptive: the profile of the pat
 
 ## The dataset
 The data come from medical records, and since they are sensitive health data protected by the Brazilian data protection law (LGPD), the original database cannot be published. The database used on this page is **synthetic**: it has exactly the same structure as the original spreadsheet (same variables, same codes, same proportion of excluded records), and it was generated from the distributions and the models fitted on the real data. No real patient is in it, but the results are very close to the real ones.
+:::
+
+::: {.content-visible when-profile="pt"}
+## Sobre o projeto
+Este projeto foi a análise estatística do trabalho de conclusão de uma residência médica em Oncologia Clínica, realizado em um hospital oncológico de Vitória, no Espírito Santo. Em agosto de 2018 o hospital implantou um **protocolo institucional para o câncer de esôfago**, cujo principal objetivo era reduzir o tempo entre a primeira consulta do paciente e o início do tratamento.
+
+A pergunta do estudo era: **a sobrevida mudou depois do protocolo?** Para respondê-la, os pacientes diagnosticados com câncer de esôfago que iniciaram o tratamento no hospital foram acompanhados desde a primeira consulta até o óbito ou até o fim da coleta de dados, e os pacientes tratados antes e depois do protocolo foram comparados.
+
+A análise tem duas partes. A primeira é descritiva: o perfil dos pacientes e como ele mudou com o protocolo. A segunda é a análise de sobrevivência, com curvas de Kaplan-Meier, testes log-rank e, por fim, um modelo de regressão de Cox ajustado pelas características dos pacientes.
+
+## A base de dados
+Os dados vêm de prontuários e, por serem dados sensíveis de saúde protegidos pela LGPD, a base original não pode ser publicada. A base usada nesta página é **sintética**: tem exatamente a mesma estrutura da planilha original (mesmas variáveis, mesmos códigos, mesma proporção de registros excluídos) e foi gerada a partir das distribuições e dos modelos ajustados nos dados reais. Nenhum paciente real está nela, mas os resultados são muito próximos dos reais.
+:::
 
 ```{r}
 library(data.table)
@@ -37,6 +73,7 @@ dataset <- fread("data/esofago_sintetico.csv", colClasses = "character")
 tail(dataset)
 ```
 
+::: {.content-visible when-profile="en"}
 The database has `r nrow(dataset)` patients. The variables are coded as in the data collection form:
 
 | Variable | Description |
@@ -57,68 +94,123 @@ The database has `r nrow(dataset)` patients. The variables are coded as in the d
 
 ## Data treatment
 The study includes only the patients who received **bimodal or trimodal treatment** and whose vital status is known. The outcome is the **death caused by the disease or by the treatment**; patients who died from other causes or from an unknown cause are excluded, because their death says nothing about the effect of the treatment.
+:::
+
+::: {.content-visible when-profile="pt"}
+A base tem `r nrow(dataset)` pacientes. As variáveis estão codificadas como na ficha de coleta:
+
+| Variável | Descrição |
+|-----------------------|---------------------------------------------------------------|
+| sexo | Sexo; (1) masculino, (2) feminino |
+| idade | Idade na primeira consulta |
+| consulta_1 | Data da primeira consulta |
+| estadiamento | Estadiamento clínico; (2) II, (3) III, (4) IV |
+| data_trat_1 | Data de início do tratamento |
+| tratamento | Tipo de tratamento; (3) bimodal, (4) trimodal, outros |
+| obito | Situação vital; (1) óbito, (2) vivo, (9) ignorado |
+| data_obito | Data do óbito |
+| causa_obito | Causa do óbito; (0) vivo, (1) doença, (2) tratamento, (3) outra, (9) ignorada |
+| etilismo, fumante | Etilismo e tabagismo; (1) sim, (2) não, (3) ex |
+| ecog | Escala de desempenho ECOG; 0, 1, 2 (demais códigos = não registrado) |
+| tempo_consulta_1_trat | Tempo entre a primeira consulta e o tratamento; (1) menos de 1 mês, (2) entre 1 e 2 meses, (3) mais de 2 meses |
+| via_alimentar | Uso de via alimentar alternativa (sonda); (1) sim, (2) não |
+
+## Tratamento dos dados
+O estudo inclui apenas os pacientes que fizeram **tratamento bimodal ou trimodal** e cuja situação vital é conhecida. O desfecho é o **óbito causado pela doença ou pelo tratamento**; os pacientes que morreram por outras causas ou por causa ignorada são excluídos, porque o óbito deles não diz nada sobre o efeito do tratamento.
+:::
 
 ```{r}
 dataset <- dataset[tratamento %chin% c("3", "4") & obito != "9"]
 
+sim <- tr("Yes", "Sim"); nao <- tr("No", "Não")
 dataset[, `:=`(
   obito_geral = fcase(
     obito == "1" & causa_obito %chin% c("1", "2"), 1L,
     obito == "2" & causa_obito == "0", 0L,
     default = NA_integer_),
-  faixa_etaria = ifelse(as.numeric(idade) < 60, "Under 60", "60 or more"),
-  etilismo = fcase(etilismo %chin% c("1", "3"), "Yes", etilismo == "2", "No"),
-  fumante = fcase(fumante %chin% c("1", "3"), "Yes", fumante == "2", "No"),
-  via_alimentar = fcase(via_alimentar == "1", "Yes", via_alimentar == "2", "No"),
-  sexo = fcase(sexo == "1", "Male", sexo == "2", "Female"),
+  faixa_etaria = ifelse(as.numeric(idade) < 60, tr("Under 60", "Menos de 60 anos"), tr("60 or more", "60 anos ou mais")),
+  etilismo = fcase(etilismo %chin% c("1", "3"), sim, etilismo == "2", nao),
+  fumante = fcase(fumante %chin% c("1", "3"), sim, fumante == "2", nao),
+  via_alimentar = fcase(via_alimentar == "1", sim, via_alimentar == "2", nao),
+  sexo = fcase(sexo == "1", tr("Male", "Masculino"), sexo == "2", tr("Female", "Feminino")),
   tratamento = fcase(tratamento == "3", "Bimodal", tratamento == "4", "Trimodal"),
-  estadiamento = fcase(estadiamento == "2", "Stage II", estadiamento == "3", "Stage III", estadiamento == "4", "Stage IV"),
-  ecog = fcase(ecog == "0", "ECOG 0", ecog == "1", "ECOG 1", ecog == "2", "ECOG 2", default = "Not recorded"),
+  estadiamento = fcase(estadiamento == "2", tr("Stage II", "Estádio II"), estadiamento == "3", tr("Stage III", "Estádio III"),
+                       estadiamento == "4", tr("Stage IV", "Estádio IV")),
+  ecog = fcase(ecog == "0", "ECOG 0", ecog == "1", "ECOG 1", ecog == "2", "ECOG 2", default = tr("Not recorded", "Não registrado")),
   tempo_consulta_1_trat = fcase(
-    tempo_consulta_1_trat == "1", "Less than 1 month",
-    tempo_consulta_1_trat == "2", "1 to 2 months",
-    tempo_consulta_1_trat == "3", "More than 2 months")
+    tempo_consulta_1_trat == "1", tr("Less than 1 month", "Menos de 1 mês"),
+    tempo_consulta_1_trat == "2", tr("1 to 2 months", "Entre 1 e 2 meses"),
+    tempo_consulta_1_trat == "3", tr("More than 2 months", "Mais de 2 meses"))
 )]
 dataset <- dataset[!is.na(obito_geral)]
 ```
 
+::: {.content-visible when-profile="en"}
 The protocol started on **July 31, 2018**: patients with the first consultation up to this date are "pre protocol", the others are "post protocol". The survival time is counted in months from the first consultation until death. For the patients still alive the time is counted until the **end of the data collection**: these are censored observations, we know they survived at least that long.
+:::
+
+::: {.content-visible when-profile="pt"}
+O protocolo começou em **31 de julho de 2018**: os pacientes com primeira consulta até essa data são "pré-protocolo" e os demais, "pós-protocolo". O tempo de sobrevida é contado em meses, da primeira consulta até o óbito. Para os pacientes ainda vivos, o tempo é contado até o **fim da coleta de dados**: são observações censuradas, sabemos que sobreviveram pelo menos até ali.
+:::
 
 ```{r}
 dataset[, `:=`(consulta_1 = dmy(consulta_1), data_obito = dmy(data_obito), data_trat_1 = dmy(data_trat_1))]
 
 fim_coleta <- max(dataset$data_obito, na.rm = TRUE)
-dataset[, protocolo := factor(ifelse(consulta_1 <= dmy("31/07/2018"), "Pre protocol", "Post protocol"),
-                              levels = c("Pre protocol", "Post protocol"))]
+niveis_protocolo <- c(tr("Pre protocol", "Pré-protocolo"), tr("Post protocol", "Pós-protocolo"))
+dataset[, protocolo := factor(ifelse(consulta_1 <= dmy("31/07/2018"), niveis_protocolo[1], niveis_protocolo[2]),
+                              levels = niveis_protocolo)]
 dataset[, tempo := fifelse(obito_geral == 1L,
                            as.numeric(data_obito - consulta_1),
                            as.numeric(fim_coleta - consulta_1)) / 30]
 
-dataset[, tempo_consulta_1_trat := factor(tempo_consulta_1_trat, c("Less than 1 month", "1 to 2 months", "More than 2 months"))]
-dataset[, ecog := factor(ecog, c("ECOG 0", "ECOG 1", "ECOG 2", "Not recorded"))]
+dataset[, tempo_consulta_1_trat := factor(tempo_consulta_1_trat, c(tr("Less than 1 month", "Menos de 1 mês"),
+                                                                   tr("1 to 2 months", "Entre 1 e 2 meses"),
+                                                                   tr("More than 2 months", "Mais de 2 meses")))]
+dataset[, ecog := factor(ecog, c("ECOG 0", "ECOG 1", "ECOG 2", tr("Not recorded", "Não registrado")))]
 
-dataset[, .N, by = .(protocolo, obito = fifelse(obito_geral == 1L, "Dead", "Alive (censored)"))]
+dataset[, .N, by = .(protocolo, obito = fifelse(obito_geral == 1L, tr("Dead", "Óbito"), tr("Alive (censored)", "Vivo (censurado)")))]
 ```
 
+::: {.content-visible when-profile="en"}
 After the treatment, `r nrow(dataset)` patients remain in the study, `r sum(dataset$obito_geral)` of them dead and `r sum(dataset$obito_geral == 0)` alive at the end of the data collection.
 
 ## Descriptive analysis
 
 ### Time between the first consultation and the treatment
 The main goal of the protocol was to start the treatment earlier, so this is the first thing to verify:
+:::
+
+::: {.content-visible when-profile="pt"}
+Após o tratamento dos dados, restam `r nrow(dataset)` pacientes no estudo, `r sum(dataset$obito_geral)` deles com óbito e `r sum(dataset$obito_geral == 0)` vivos ao fim da coleta.
+
+## Análise descritiva
+
+### Tempo entre a primeira consulta e o tratamento
+O principal objetivo do protocolo era antecipar o início do tratamento, então essa é a primeira coisa a verificar:
+:::
 
 ```{r}
 kable(dcast(dataset[!is.na(tempo_consulta_1_trat), .N, by = .(tempo_consulta_1_trat, protocolo)],
             tempo_consulta_1_trat ~ protocolo, value.var = "N"),
-      col.names = c("Time to treatment", "Pre protocol", "Post protocol"))
+      col.names = c(tr("Time to treatment", "Tempo até o tratamento"), niveis_protocolo))
 
 chisq.test(table(dataset$tempo_consulta_1_trat, dataset$protocolo))
 ```
 
+::: {.content-visible when-profile="en"}
 The difference is large and significant: after the protocol, most patients started the treatment in **less than one month**, while before it the most common situation was a wait of more than two months. The protocol reached its main goal.
 
 ### Profile of the patients by protocol
 The table below shows the distribution of each variable in the two periods. If the groups are different, any difference in survival can be caused by the profile of the patients and not by the protocol.
+:::
+
+::: {.content-visible when-profile="pt"}
+A diferença é grande e significativa: depois do protocolo, a maioria dos pacientes começou o tratamento em **menos de um mês**, enquanto antes a situação mais comum era uma espera de mais de dois meses. O protocolo atingiu o seu principal objetivo.
+
+### Perfil dos pacientes por protocolo
+A tabela abaixo mostra a distribuição de cada variável nos dois períodos. Se os grupos forem diferentes, qualquer diferença na sobrevida pode ser causada pelo perfil dos pacientes, e não pelo protocolo.
+:::
 
 ```{r}
 variaveis <- c("sexo", "faixa_etaria", "fumante", "etilismo", "estadiamento", "via_alimentar", "ecog", "tratamento")
@@ -132,13 +224,23 @@ perfil <- rbindlist(lapply(variaveis, function(v) {
 setcolorder(perfil, c("variable", "category"))
 
 kable(perfil, digits = 2,
-      col.names = c("Variable", "Category", "N pre", "N post", "% pre", "% post"))
+      col.names = c(tr("Variable", "Variável"), tr("Category", "Categoria"),
+                    tr(c("N pre", "N post", "% pre", "% post"), c("N pré", "N pós", "% pré", "% pós"))))
 ```
 
+::: {.content-visible when-profile="en"}
 The two groups are not equal. After the protocol there are **more patients in stage IV**, the most advanced one, and the ECOG performance status was recorded for almost every patient, while before it was missing in about a third of the records. These differences will be taken into account in the Cox model.
 
 ### Deaths by variable
 To have a first idea of which variables are related to death, the graph shows the proportion of deaths in each category:
+:::
+
+::: {.content-visible when-profile="pt"}
+Os dois grupos não são iguais. Depois do protocolo há **mais pacientes no estádio IV**, o mais avançado, e o ECOG passou a ser registrado para quase todos os pacientes, enquanto antes faltava em cerca de um terço dos prontuários. Essas diferenças serão levadas em conta no modelo de Cox.
+
+### Óbitos por variável
+Para ter uma primeira ideia de quais variáveis estão relacionadas ao óbito, o gráfico mostra a proporção de óbitos em cada categoria:
+:::
 
 ```{r, fig.width = 14, fig.height = 9}
 dataset_aux <- rbindlist(lapply(c("protocolo", variaveis, "tempo_consulta_1_trat"), function(v)
@@ -150,10 +252,16 @@ ggplot(dataset_aux, aes(x = category, y = prop_obito)) +
   facet_wrap(~ variable, scales = "free_x", ncol = 4) +
   scale_y_continuous(labels = scales::percent, limits = c(0, 1.15), breaks = seq(0, 1, 0.25)) +
   theme(text = element_text(size = 15), axis.text.x = element_text(angle = 20, hjust = 1)) +
-  labs(title = "Proportion of deaths by category", x = NULL, y = "Deaths")
+  labs(title = tr("Proportion of deaths by category", "Proporção de óbitos por categoria"), x = NULL, y = tr("Deaths", "Óbitos"))
 ```
 
+::: {.content-visible when-profile="en"}
 Most variables have similar proportions of deaths between their categories. The clearest differences appear in **stage** and **ECOG**: the more advanced the disease and the worse the performance status, the higher the proportion of deaths. Alcohol use also shows a moderate difference. However, the proportion of deaths ignores time and the different follow-up of each patient, so the survival analysis is the right tool to compare the groups.
+:::
+
+::: {.content-visible when-profile="pt"}
+A maioria das variáveis tem proporções de óbito parecidas entre as suas categorias. As diferenças mais claras aparecem no **estadiamento** e no **ECOG**: quanto mais avançada a doença e pior o desempenho, maior a proporção de óbitos. O etilismo também mostra uma diferença moderada. No entanto, a proporção de óbitos ignora o tempo e o acompanhamento diferente de cada paciente, por isso a análise de sobrevivência é a ferramenta adequada para comparar os grupos.
+:::
 
 ```{r}
 #Cleaning the environment
@@ -161,6 +269,7 @@ rm(perfil, dataset_aux)
 invisible(gc())
 ```
 
+::: {.content-visible when-profile="en"}
 ## Survival analysis
 In survival analysis the variable of interest is the **time until an event**, here the death. Its main feature is that it incorporates incomplete times (censored observations): the patients who were alive at the end of the study did not have the event, but their follow-up time is still information.
 
@@ -175,26 +284,57 @@ $H_0 =$ There is no difference between the survival curves.
 $H_1 =$ There is a difference between the survival curves.
 
 ### Overall survival
+:::
+
+::: {.content-visible when-profile="pt"}
+## Análise de sobrevivência
+Na análise de sobrevivência a variável de interesse é o **tempo até um evento**, aqui o óbito. Sua principal característica é incorporar tempos incompletos (observações censuradas): os pacientes que estavam vivos ao fim do estudo não tiveram o evento, mas o tempo de acompanhamento deles continua sendo informação.
+
+A função de sobrevivência $S(t) = P(T \geq t)$ é a probabilidade de um paciente sobreviver além do tempo $t$. Ela é estimada pelo **estimador de Kaplan-Meier**:
+
+$$\hat{S}(t) = \prod_{j: t_j < t} \left(1 - \frac{d_j}{n_j}\right)$$
+
+em que $d_j$ é o número de óbitos no tempo $t_j$ e $n_j$ o número de pacientes ainda em risco. Para comparar as curvas de dois ou mais grupos é usado o **teste log-rank**, com as hipóteses:
+
+$H_0 =$ Não existe diferença entre as curvas de sobrevivência.
+
+$H_1 =$ Existe diferença entre as curvas de sobrevivência.
+
+### Sobrevida geral
+:::
+
 ```{r, fig.width = 12, fig.height = 6}
 fit_geral <- survfit(Surv(tempo, obito_geral) ~ 1, data = dataset)
 fit_geral
 
 ggsurvplot(fit_geral, data = dataset, conf.int = TRUE, surv.median.line = "hv", legend = "none",
-           xlab = "Time (months)", ylab = "Estimated S(t)", title = "Kaplan-Meier, all patients",
+           xlab = tr("Time (months)", "Tempo (meses)"), ylab = tr("Estimated S(t)", "S(t) estimada"),
+           title = tr("Kaplan-Meier, all patients", "Kaplan-Meier, todos os pacientes"),
            break.time.by = 12, ggtheme = theme_minimal(base_size = 15))
 ```
 
+::: {.content-visible when-profile="en"}
 The median survival of the patients is `r round(summary(fit_geral)$table["median"], 1)` months: half of the patients died before this time. The curve falls quickly in the first two years, which is expected for a disease usually diagnosed in advanced stages.
 
 ### Survival by protocol
+:::
+
+::: {.content-visible when-profile="pt"}
+A sobrevida mediana dos pacientes é de `r round(summary(fit_geral)$table["median"], 1)` meses: metade dos pacientes morreu antes desse tempo. A curva cai rapidamente nos dois primeiros anos, o que é esperado para uma doença geralmente diagnosticada em estádios avançados.
+
+### Sobrevida por protocolo
+:::
+
 ```{r, fig.width = 12, fig.height = 8}
 fit_protocolo <- survfit(Surv(tempo, obito_geral) ~ protocolo, data = dataset)
 fit_protocolo
 survdiff(Surv(tempo, obito_geral) ~ protocolo, data = dataset)
 
 ggsurvplot(fit_protocolo, data = dataset, conf.int = TRUE, pval = TRUE, risk.table = TRUE,
-           legend.labs = c("Pre protocol", "Post protocol"), legend.title = "",
-           xlab = "Time (months)", ylab = "Estimated S(t)", title = "Kaplan-Meier by protocol",
+           legend.labs = niveis_protocolo, legend.title = "",
+           xlab = tr("Time (months)", "Tempo (meses)"), ylab = tr("Estimated S(t)", "S(t) estimada"),
+           title = tr("Kaplan-Meier by protocol", "Kaplan-Meier por protocolo"),
+           risk.table.title = tr("Number at risk", "Pacientes em risco"),
            break.time.by = 12, ggtheme = theme_minimal(base_size = 15))
 ```
 
@@ -203,10 +343,19 @@ lr_protocolo <- survdiff(Surv(tempo, obito_geral) ~ protocolo, data = dataset)
 p_protocolo <- pchisq(lr_protocolo$chisq, 1, lower.tail = FALSE)
 ```
 
+::: {.content-visible when-profile="en"}
 The two curves are very close for the whole follow-up, and the log-rank test does not reject the null hypothesis (p = `r round(p_protocolo, 2)`). There is no evidence that survival changed after the protocol. Note in the risk table that the post protocol patients have a much shorter follow-up, since they entered the study later; this is exactly why the censored observations must be kept.
 
 ### Survival by the other variables
 The same analysis was made for each variable of the study. To keep the page readable, the curves are shown together and the log-rank tests are summarised in a table:
+:::
+
+::: {.content-visible when-profile="pt"}
+As duas curvas ficam muito próximas durante todo o acompanhamento, e o teste log-rank não rejeita a hipótese nula (p = `r round(p_protocolo, 2)`). Não há evidência de que a sobrevida tenha mudado depois do protocolo. Note na tabela de pacientes em risco que os pacientes do pós-protocolo têm um acompanhamento bem mais curto, pois entraram no estudo depois; é justamente por isso que as observações censuradas precisam ser mantidas.
+
+### Sobrevida pelas demais variáveis
+A mesma análise foi feita para cada variável do estudo. Para deixar a página legível, as curvas são mostradas juntas e os testes log-rank estão resumidos em uma tabela:
+:::
 
 ```{r, fig.width = 16, fig.height = 16}
 variaveis_km <- c("faixa_etaria", "fumante", "etilismo", "via_alimentar", "tempo_consulta_1_trat",
@@ -216,7 +365,7 @@ graficos <- lapply(variaveis_km, function(v) {
   dados <- dataset[!is.na(get(v))]
   fit <- surv_fit(as.formula(paste("Surv(tempo, obito_geral) ~", v)), data = dados)
   ggsurvplot(fit, data = dados, pval = TRUE, legend.title = "", legend.labs = levels(factor(dados[[v]])),
-             xlab = "Time (months)", ylab = "S(t)", title = v, ggtheme = theme_minimal(base_size = 13))
+             xlab = tr("Time (months)", "Tempo (meses)"), ylab = "S(t)", title = v, ggtheme = theme_minimal(base_size = 13))
 })
 arrange_ggsurvplots(graficos, ncol = 2, nrow = 4, print = TRUE)
 
@@ -226,14 +375,24 @@ log_rank <- function(v, dados) {
 }
 tabela_lr <- data.table(variable = variaveis_km,
                         all = sapply(variaveis_km, log_rank, dados = dataset),
-                        pre_protocol = sapply(variaveis_km, log_rank, dados = dataset[protocolo == "Pre protocol"]),
-                        post_protocol = sapply(variaveis_km, log_rank, dados = dataset[protocolo == "Post protocol"]))
-kable(tabela_lr, digits = 3, col.names = c("Variable", "p-value (all)", "p-value (pre protocol)", "p-value (post protocol)"))
+                        pre_protocol = sapply(variaveis_km, log_rank, dados = dataset[protocolo == niveis_protocolo[1]]),
+                        post_protocol = sapply(variaveis_km, log_rank, dados = dataset[protocolo == niveis_protocolo[2]]))
+kable(tabela_lr, digits = 3,
+      col.names = tr(c("Variable", "p-value (all)", "p-value (pre protocol)", "p-value (post protocol)"),
+                     c("Variável", "Valor-p (todos)", "Valor-p (pré-protocolo)", "Valor-p (pós-protocolo)")))
 ```
 
+::: {.content-visible when-profile="en"}
 Using a significance level of 10%, as in the original study, **stage**, **ECOG** and **alcohol use** are the variables with significant differences in survival: the higher the stage and the worse the ECOG, the lower the probability of survival, and patients with a history of alcohol use survive less. The other variables, including the time between the first consultation and the treatment, show curves close to each other.
 
 In the analysis filtered by protocol, ECOG remains significant in both periods. Stage loses significance after the protocol, and alcohol use is borderline in both periods: each group has about half of the patients, so the tests have less power.
+:::
+
+::: {.content-visible when-profile="pt"}
+Com nível de significância de 10%, como no estudo original, **estadiamento**, **ECOG** e **etilismo** são as variáveis com diferenças significativas na sobrevida: quanto maior o estadiamento e pior o ECOG, menor a probabilidade de sobreviver, e os pacientes com histórico de etilismo sobrevivem menos. As demais variáveis, incluindo o tempo entre a primeira consulta e o tratamento, têm curvas próximas entre si.
+
+Na análise filtrada por protocolo, o ECOG continua significativo nos dois períodos. O estadiamento perde significância depois do protocolo, e o etilismo fica no limite nos dois períodos: cada grupo tem cerca de metade dos pacientes, então os testes têm menos poder.
+:::
 
 ```{r}
 #Cleaning the environment
@@ -241,6 +400,7 @@ rm(graficos, variaveis_km)
 invisible(gc())
 ```
 
+::: {.content-visible when-profile="en"}
 ## Cox regression model
 The Kaplan-Meier curves compare one variable at a time. But we saw in the descriptive analysis that the post protocol patients had more advanced disease, so the comparison by protocol may be mixing the effect of the protocol with the effect of the profile of the patients. To separate them, a **Cox proportional hazards model** was fitted:
 
@@ -249,6 +409,18 @@ $$h(t \mid x) = h_0(t) \exp(\beta_1 x_1 + \dots + \beta_p x_p)$$
 where $h_0(t)$ is the baseline hazard and $\exp(\beta)$ is the **hazard ratio (HR)**: values above 1 mean a higher risk of death, values below 1 a lower risk.
 
 The choice of the variables follows the question of the study. The model includes the characteristics of the patient at diagnosis that can affect survival and that changed between the periods (stage, ECOG, age, sex, smoking and alcohol). The time to treatment and the type of treatment are **not** included, because they are the way the protocol acts: adjusting for them would remove precisely the effect we want to measure.
+:::
+
+::: {.content-visible when-profile="pt"}
+## Modelo de regressão de Cox
+As curvas de Kaplan-Meier comparam uma variável de cada vez. Mas vimos na análise descritiva que os pacientes do pós-protocolo tinham doença mais avançada, então a comparação por protocolo pode estar misturando o efeito do protocolo com o efeito do perfil dos pacientes. Para separá-los, foi ajustado um **modelo de riscos proporcionais de Cox**:
+
+$$h(t \mid x) = h_0(t) \exp(\beta_1 x_1 + \dots + \beta_p x_p)$$
+
+em que $h_0(t)$ é o risco basal e $\exp(\beta)$ é a **razão de riscos (hazard ratio, HR)**: valores acima de 1 indicam maior risco de óbito, e valores abaixo de 1, menor risco.
+
+A escolha das variáveis segue a pergunta do estudo. O modelo inclui as características do paciente no diagnóstico que podem afetar a sobrevida e que mudaram entre os períodos (estadiamento, ECOG, idade, sexo, tabagismo e etilismo). O tempo até o tratamento e o tipo de tratamento **não** entram, porque são o caminho pelo qual o protocolo age: ajustar por eles removeria justamente o efeito que queremos medir.
+:::
 
 ```{r}
 fit_cox <- coxph(Surv(tempo, obito_geral) ~ protocolo + estadiamento + ecog + faixa_etaria + sexo + fumante + etilismo,
@@ -258,31 +430,55 @@ summary(fit_cox)
 
 ```{r, include = FALSE}
 hr <- summary(fit_cox)$conf.int
+linha <- function(padrao) grep(padrao, rownames(hr))[1]
+hr_protocolo <- hr[linha("^protocolo"), ]
+hr_estadio4 <- hr[linha("^estadiamento.*IV$"), ]
+hr_ecog2 <- hr[linha("^ecogECOG 2$"), ]
+hr_etilismo <- hr[linha("^etilismo"), ]
 ```
 
 ```{r, fig.width = 12, fig.height = 6}
 dataset_aux <- as.data.table(hr, keep.rownames = "variavel")[, .(variavel, HR = `exp(coef)`, lower = `lower .95`, upper = `upper .95`)]
-dataset_aux[, variavel := gsub("protocolo|estadiamento|ecog|faixa_etaria|sexo|fumante|etilismo", "", variavel)]
-dataset_aux[variavel == "Yes", variavel := c("Smoker", "Alcohol use")]
+dataset_aux[, variavel := fcase(grepl("^protocolo", variavel), niveis_protocolo[2],
+                                grepl("^ecog.*(recorded|registrado)$", variavel), tr("ECOG not recorded", "ECOG não registrado"),
+                                grepl("^fumante", variavel), tr("Smoker", "Tabagista"),
+                                grepl("^etilismo", variavel), tr("Alcohol use", "Etilista"),
+                                default = gsub("protocolo|estadiamento|ecog|faixa_etaria|sexo", "", variavel))]
 
 ggplot(dataset_aux, aes(x = HR, y = reorder(variavel, HR))) +
   geom_vline(xintercept = 1, linetype = "dashed", colour = "grey50") +
   geom_pointrange(aes(xmin = lower, xmax = upper), colour = "steelblue", size = 0.8) +
   scale_x_log10() +
   theme(text = element_text(size = 15)) +
-  labs(title = "Hazard ratios of the Cox model (95% confidence intervals)", x = "Hazard ratio (log scale)", y = NULL)
+  labs(title = tr("Hazard ratios of the Cox model (95% confidence intervals)", "Razões de risco do modelo de Cox (intervalos de confiança de 95%)"),
+       x = tr("Hazard ratio (log scale)", "Razão de riscos (escala log)"), y = NULL)
 ```
 
-The hazard ratio of the protocol is `r round(hr["protocoloPost protocol", "exp(coef)"], 2)`, with a 95% confidence interval from `r round(hr["protocoloPost protocol", "lower .95"], 2)` to `r round(hr["protocoloPost protocol", "upper .95"], 2)`, which contains 1: after adjusting for the profile of the patients, there is **no evidence of a difference in survival** between the periods. The variables with the largest effects are the ones related to the condition of the patient: **stage IV** (HR = `r round(hr["estadiamentoStage IV", "exp(coef)"], 2)`) and **ECOG 2** (HR = `r round(hr["ecogECOG 2", "exp(coef)"], 2)`), compared with stage II and ECOG 0. **Alcohol use** also increases the risk of death (HR = `r round(hr["etilismoYes", "exp(coef)"], 2)`), while age, sex and smoking do not show significant effects once the other variables are considered.
+::: {.content-visible when-profile="en"}
+The hazard ratio of the protocol is `r round(hr_protocolo["exp(coef)"], 2)`, with a 95% confidence interval from `r round(hr_protocolo["lower .95"], 2)` to `r round(hr_protocolo["upper .95"], 2)`, which contains 1: after adjusting for the profile of the patients, there is **no evidence of a difference in survival** between the periods. The variables with the largest effects are the ones related to the condition of the patient: **stage IV** (HR = `r round(hr_estadio4["exp(coef)"], 2)`) and **ECOG 2** (HR = `r round(hr_ecog2["exp(coef)"], 2)`), compared with stage II and ECOG 0. **Alcohol use** also increases the risk of death (HR = `r round(hr_etilismo["exp(coef)"], 2)`), while age, sex and smoking do not show significant effects once the other variables are considered.
 
 ### Proportional hazards assumption
 The Cox model assumes that the hazard ratio between two patients is constant over time. This is verified with the test based on the **Schoenfeld residuals**, where $H_0$ is that the hazards are proportional:
+:::
+
+::: {.content-visible when-profile="pt"}
+A razão de riscos do protocolo é `r round(hr_protocolo["exp(coef)"], 2)`, com intervalo de confiança de 95% de `r round(hr_protocolo["lower .95"], 2)` a `r round(hr_protocolo["upper .95"], 2)`, que contém o 1: depois de ajustar pelo perfil dos pacientes, **não há evidência de diferença na sobrevida** entre os períodos. As variáveis com os maiores efeitos são as ligadas à condição do paciente: **estádio IV** (HR = `r round(hr_estadio4["exp(coef)"], 2)`) e **ECOG 2** (HR = `r round(hr_ecog2["exp(coef)"], 2)`), em comparação com o estádio II e o ECOG 0. O **etilismo** também aumenta o risco de óbito (HR = `r round(hr_etilismo["exp(coef)"], 2)`), enquanto idade, sexo e tabagismo não mostram efeitos significativos quando as demais variáveis são consideradas.
+
+### Pressuposto de riscos proporcionais
+O modelo de Cox supõe que a razão de riscos entre dois pacientes é constante ao longo do tempo. Isso é verificado com o teste baseado nos **resíduos de Schoenfeld**, em que $H_0$ é a de que os riscos são proporcionais:
+:::
 
 ```{r}
 cox.zph(fit_cox)
 ```
 
+::: {.content-visible when-profile="en"}
 No variable rejects the null hypothesis at the 5% level, so the assumption of proportional hazards is acceptable and the model can be interpreted.
+:::
+
+::: {.content-visible when-profile="pt"}
+Nenhuma variável rejeita a hipótese nula ao nível de 5%, então o pressuposto de riscos proporcionais é aceitável e o modelo pode ser interpretado.
+:::
 
 ```{r}
 #Cleaning the environment
@@ -290,9 +486,20 @@ rm(dataset_aux, hr)
 invisible(gc())
 ```
 
+::: {.content-visible when-profile="en"}
 ## Conclusion
 The protocol reached its main goal: after it, most patients started the treatment in less than one month after the first consultation, against a wait usually longer than two months before.
 
 In terms of survival, the Kaplan-Meier curves of the two periods are very close and the log-rank test shows no significant difference. The Cox model, adjusted for the characteristics of the patients, confirms this result: the hazard ratio of the protocol is close to 1. The factors that really determine the survival of these patients are the **stage of the disease** and the **performance status (ECOG)** at diagnosis, followed by the history of **alcohol use**.
 
 With 184 patients from a single hospital, small effects of the protocol could not be detected. A study with a larger sample and a longer follow-up of the post protocol patients would be the natural next step to evaluate whether the shorter time to treatment translates into a gain in survival.
+:::
+
+::: {.content-visible when-profile="pt"}
+## Conclusão
+O protocolo atingiu o seu principal objetivo: depois dele, a maioria dos pacientes começou o tratamento em menos de um mês após a primeira consulta, contra uma espera geralmente superior a dois meses antes.
+
+Em relação à sobrevida, as curvas de Kaplan-Meier dos dois períodos são muito próximas e o teste log-rank não mostra diferença significativa. O modelo de Cox, ajustado pelas características dos pacientes, confirma esse resultado: a razão de riscos do protocolo é próxima de 1. Os fatores que realmente determinam a sobrevida desses pacientes são o **estadiamento da doença** e o **desempenho (ECOG)** no diagnóstico, seguidos pelo histórico de **etilismo**.
+
+Com 184 pacientes de um único hospital, efeitos pequenos do protocolo não poderiam ser detectados. Um estudo com amostra maior e acompanhamento mais longo dos pacientes do pós-protocolo seria o passo natural para avaliar se o menor tempo até o tratamento se traduz em ganho de sobrevida.
+:::

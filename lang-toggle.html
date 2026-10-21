@@ -1,0 +1,18 @@
+<script>
+// 1) the browser tab shows the title of the page in its own language
+// 2) the EN / PT link of the navbar opens the same page in the other language
+document.addEventListener("DOMContentLoaded", function () {
+  var titulo = document.querySelector("main .page-title");
+  if (titulo) document.title = titulo.textContent.trim().replace(/\s+/g, " ") + " – MyDataPortfolio";
+
+  var isPt = (document.documentElement.lang || "").indexOf("pt") === 0;
+  var page = location.pathname.split("/").pop() || "index.html";
+  document.querySelectorAll("a.nav-link").forEach(function (a) {
+    var text = a.textContent.trim();
+    if ((isPt && text === "EN") || (!isPt && text === "PT")) {
+      a.setAttribute("href", (isPt ? "../" : "pt/") + page);
+      a.setAttribute("title", isPt ? "Read in English" : "Ler em português");
+    }
+  });
+});
+</script>

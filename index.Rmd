@@ -1,19 +1,10 @@
 ---
-title: "My Data Science Projects Portfolio"
-output:
-  html_document:
-    theme: cosmo
-    md_extensions: +markdown_in_html_blocks
+pagetitle: "My Data Science Projects Portfolio"
+toc: false
 ---
 
 <style>
-
-/* Esconde o título gerado automaticamente pelo YAML (caso apareça) */
-h1.title, .title { 
-  display: none !important;
-}
-
-.table thead th, td { 
+.table thead th, td {
   text-align: center !important;
 }
 
@@ -21,12 +12,6 @@ h1.title, .title {
   border-bottom: 3px double #000 !important;
 }
 
-/* Exemplo de estilo usado no seu snippet */
-#getting-started img {
-  margin-right: 10px;
-}
-
-/* Opcional: separador bonito e não clicável */
 hr.sep {
   margin: 24px 0;
   border: 0;
@@ -36,95 +21,123 @@ hr.sep {
 }
 
 .thead-dark {
-background-color: #222222;
-color: #fff;
+  background-color: #222222;
+  color: #fff;
 }
 
 .description {
-font-size: 20px;
+  font-size: 20px;
 }
 
 .contacts, .projects {
-font-size: 18px;
+  font-size: 18px;
 }
-
 </style>
 
-<div class="row" style="padding-top: 30px;">
-  <div class="col-sm-12">
-
-# **My Data Science Portfolio**
+::: {.content-visible when-profile="en"}
+::: {.h1 .page-title}
+**My Data Science Portfolio**
+:::
 
 <div class="description">
+
 Welcome to my portfolio, showcasing my freelance data science projects as well as my personal projects. My name is Hugo Batista da Silva, and I hail from Espírito Santo, Brazil. I hold a Bachelor's degree in [Statistics](https://estatistica.ufes.br/matriz-curricular-ppc-2019) from the Federal University of Espírito Santo.
 
-In this portfolio, you will find a selection of projects that I found particularly interesting and diverse in terms of subject matter. I have carefully curated this collection to avoid repetitive themes and to present a broad spectrum of my work. 
+In this portfolio, you will find a selection of projects that I found particularly interesting and diverse in terms of subject matter. I have carefully curated this collection to avoid repetitive themes and to present a broad spectrum of my work.
 
 Please note that the content provided on each project's page, accessible via the links in the projects table, does not represent the final product of those projects (especially for contractual work). The detailed written sections and references have been omitted to enhance readability and dynamism.
+
 </div>
+:::
+
+::: {.content-visible when-profile="pt"}
+::: {.h1 .page-title}
+**Meu Portfólio de Ciência de Dados**
+:::
+
+<div class="description">
+
+Bem-vindo ao meu portfólio, com projetos de ciência de dados que desenvolvi como freelancer e também projetos pessoais. Meu nome é Hugo Batista da Silva, sou do Espírito Santo e bacharel em [Estatística](https://estatistica.ufes.br/matriz-curricular-ppc-2019) pela Universidade Federal do Espírito Santo (UFES).
+
+Aqui você encontra uma seleção de projetos que considero especialmente interessantes e variados em relação aos temas. A coleção foi escolhida com cuidado para evitar assuntos repetidos e mostrar um panorama amplo do meu trabalho.
+
+O conteúdo de cada página, acessível pelos links da tabela de projetos, não representa o produto final de cada projeto (especialmente nos trabalhos contratados). As seções escritas mais detalhadas e as referências foram omitidas para deixar a leitura mais dinâmica.
+
+</div>
+:::
 
 <hr class="sep">
 
-### **Contact Info**
+::: {.content-visible when-profile="en"}
+### **Contact Info** {.unnumbered .unlisted}
 
 <div class="contacts">
-- LinkedIn: [Hugo Batista da Silva](https://www.linkedin.com/in/hugo-batista-da-silva-064715257/)  
-- GitHub: [Batistugo](https://github.com/batistugo/)  
-- Email: batistashugo@gmail.com  
-- Phone: +55 (27) 99749-2646  
+
+- LinkedIn: [Hugo Batista da Silva](https://www.linkedin.com/in/hugo-batista-da-silva-064715257/)
+- GitHub: [Batistugo](https://github.com/batistugo/)
+- Email: batistashugo@gmail.com
+- Phone: +55 (27) 99749-2646
+
 </div>
 
-Feel free to reach out to me through any of the following channels.
+Feel free to reach out to me through any of these channels.
+:::
+
+::: {.content-visible when-profile="pt"}
+### **Contato** {.unnumbered .unlisted}
+
+<div class="contacts">
+
+- LinkedIn: [Hugo Batista da Silva](https://www.linkedin.com/in/hugo-batista-da-silva-064715257/)
+- GitHub: [Batistugo](https://github.com/batistugo/)
+- E-mail: batistashugo@gmail.com
+- Telefone: +55 (27) 99749-2646
+
+</div>
+
+Fique à vontade para entrar em contato por qualquer um desses canais.
+:::
 
 <hr class="sep">
 
-  </div>
+::: {.content-visible when-profile="en"}
+### **Projects** {.unnumbered .unlisted}
 
-  <div class="col-sm-5">
-
-### **Projects**
-<div class="projects">
-Aqui estão alguns dos meus projetos:
-</div>
+<div class="projects">Here are some of my projects:</div>
 
 <div class="table-responsive">
 <table class="table table-hover custom-table">
   <thead class="thead-dark">
-    <tr>
-      <th>Name</th>
-      <th>Subject</th>
-      <th>Project Type</th>
-    </tr>
+    <tr><th>Name</th><th>Subject</th><th>Project Type</th></tr>
   </thead>
   <tbody>
-    <tr>
-      <td><a href="project01.html">Project 01</a></td>
-      <td>Linear model</td>
-      <td>Contract</td>
-    </tr>
-    <tr>
-      <td><a href="project02.html">Project 02</a></td>
-      <td>Theory Test</td>
-      <td>Personal</td>
-    </tr>
-    <tr>
-      <td><a href="project03.html">Project 03</a></td>
-      <td>Classification with XGBoost (Python)</td>
-      <td>Work (synthetic data)</td>
-    </tr>
-    <tr>
-      <td><a href="project04.html">Project 04</a></td>
-      <td>Sampling plan and regression (PhD methodology)</td>
-      <td>Contract (3 articles)</td>
-    </tr>
-    <tr>
-      <td><a href="project05.html">Project 05</a></td>
-      <td>Survival analysis and adjusted Cox model</td>
-      <td>Contract (synthetic data)</td>
-    </tr>
+    <tr><td><a href="project01.html">Project 01</a></td><td>Linear model</td><td>Contract</td></tr>
+    <tr><td><a href="project02.html">Project 02</a></td><td>Theory Test</td><td>Personal</td></tr>
+    <tr><td><a href="project03.html">Project 03</a></td><td>Classification with XGBoost (Python)</td><td>Work (synthetic data)</td></tr>
+    <tr><td><a href="project04.html">Project 04</a></td><td>Sampling plan and regression (PhD methodology)</td><td>Contract (3 articles)</td></tr>
+    <tr><td><a href="project05.html">Project 05</a></td><td>Survival analysis and adjusted Cox model</td><td>Contract (synthetic data)</td></tr>
   </tbody>
 </table>
 </div>
+:::
 
-  </div>
+::: {.content-visible when-profile="pt"}
+### **Projetos** {.unnumbered .unlisted}
+
+<div class="projects">Estes são alguns dos meus projetos:</div>
+
+<div class="table-responsive">
+<table class="table table-hover custom-table">
+  <thead class="thead-dark">
+    <tr><th>Nome</th><th>Tema</th><th>Tipo de projeto</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><a href="project01.html">Projeto 01</a></td><td>Modelo linear</td><td>Contratado</td></tr>
+    <tr><td><a href="project02.html">Projeto 02</a></td><td>Teste teórico</td><td>Pessoal</td></tr>
+    <tr><td><a href="project03.html">Projeto 03</a></td><td>Classificação com XGBoost (Python)</td><td>Trabalho (dados sintéticos)</td></tr>
+    <tr><td><a href="project04.html">Projeto 04</a></td><td>Plano amostral e regressão (metodologia de doutorado)</td><td>Contratado (3 artigos)</td></tr>
+    <tr><td><a href="project05.html">Projeto 05</a></td><td>Análise de sobrevivência e modelo de Cox ajustado</td><td>Contratado (dados sintéticos)</td></tr>
+  </tbody>
+</table>
 </div>
+:::

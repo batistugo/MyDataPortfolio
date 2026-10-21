@@ -1,0 +1,24 @@
+project:
+  output-dir: docs/pt
+
+lang: pt-BR
+
+website:
+  title: "MyDataPortfolio"
+  navbar:
+    left:
+      - text: "Perfil"
+        href: index.Rmd
+      - text: "Projeto 01"
+        href: project01.Rmd
+      - text: "Projeto 02"
+        href: project02.Rmd
+      - text: "Projeto 03"
+        href: project03.qmd
+      - text: "Projeto 04"
+        href: project04.qmd
+      - text: "Projeto 05"
+        href: project05.Rmd
+    right:
+      - text: "EN"
+        href: https://batistugo.github.io/MyDataPortfolio/

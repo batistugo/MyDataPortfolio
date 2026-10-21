@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Survival Analysis of Patients with Esophageal Cancer Before and After an Institutional Care Protocol – MyDataPortfolio</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-32643bc00688b413a4b4dac13675c875.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">MyDataPortfolio</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Perfil</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project01.html"> 
+<span class="menu-text">Projeto 01</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project02.html"> 
+<span class="menu-text">Projeto 02</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project03.html"> 
+<span class="menu-text">Projeto 03</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project04.html"> 
+<span class="menu-text">Projeto 04</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./project05.html" aria-current="page"> 
+<span class="menu-text">Projeto 05</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://batistugo.github.io/MyDataPortfolio/"> 
+<span class="menu-text">EN</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Nesta página</h2>
+   
+  <ul>
+  <li><a href="#sobre-o-projeto" id="toc-sobre-o-projeto" class="nav-link active" data-scroll-target="#sobre-o-projeto">Sobre o projeto</a></li>
+  <li><a href="#a-base-de-dados" id="toc-a-base-de-dados" class="nav-link" data-scroll-target="#a-base-de-dados">A base de dados</a></li>
+  <li><a href="#tratamento-dos-dados" id="toc-tratamento-dos-dados" class="nav-link" data-scroll-target="#tratamento-dos-dados">Tratamento dos dados</a></li>
+  <li><a href="#análise-descritiva" id="toc-análise-descritiva" class="nav-link" data-scroll-target="#análise-descritiva">Análise descritiva</a>
+  <ul class="collapse">
+  <li><a href="#tempo-entre-a-primeira-consulta-e-o-tratamento" id="toc-tempo-entre-a-primeira-consulta-e-o-tratamento" class="nav-link" data-scroll-target="#tempo-entre-a-primeira-consulta-e-o-tratamento">Tempo entre a primeira consulta e o tratamento</a></li>
+  <li><a href="#perfil-dos-pacientes-por-protocolo" id="toc-perfil-dos-pacientes-por-protocolo" class="nav-link" data-scroll-target="#perfil-dos-pacientes-por-protocolo">Perfil dos pacientes por protocolo</a></li>
+  <li><a href="#óbitos-por-variável" id="toc-óbitos-por-variável" class="nav-link" data-scroll-target="#óbitos-por-variável">Óbitos por variável</a></li>
+  </ul></li>
+  <li><a href="#análise-de-sobrevivência" id="toc-análise-de-sobrevivência" class="nav-link" data-scroll-target="#análise-de-sobrevivência">Análise de sobrevivência</a>
+  <ul class="collapse">
+  <li><a href="#sobrevida-geral" id="toc-sobrevida-geral" class="nav-link" data-scroll-target="#sobrevida-geral">Sobrevida geral</a></li>
+  <li><a href="#sobrevida-por-protocolo" id="toc-sobrevida-por-protocolo" class="nav-link" data-scroll-target="#sobrevida-por-protocolo">Sobrevida por protocolo</a></li>
+  <li><a href="#sobrevida-pelas-demais-variáveis" id="toc-sobrevida-pelas-demais-variáveis" class="nav-link" data-scroll-target="#sobrevida-pelas-demais-variáveis">Sobrevida pelas demais variáveis</a></li>
+  </ul></li>
+  <li><a href="#modelo-de-regressão-de-cox" id="toc-modelo-de-regressão-de-cox" class="nav-link" data-scroll-target="#modelo-de-regressão-de-cox">Modelo de regressão de Cox</a>
+  <ul class="collapse">
+  <li><a href="#pressuposto-de-riscos-proporcionais" id="toc-pressuposto-de-riscos-proporcionais" class="nav-link" data-scroll-target="#pressuposto-de-riscos-proporcionais">Pressuposto de riscos proporcionais</a></li>
+  </ul></li>
+  <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão">Conclusão</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<div class="h1 page-title">
+<p>Análise de Sobrevivência de Pacientes com Câncer de Esôfago Antes e Depois de um Protocolo Institucional</p>
+</div>
+<p><em>Hugo Batista da Silva</em></p>
+<section id="sobre-o-projeto" class="level2">
+<h2 class="anchored" data-anchor-id="sobre-o-projeto">Sobre o projeto</h2>
+<p>Este projeto foi a análise estatística do trabalho de conclusão de uma residência médica em Oncologia Clínica, realizado em um hospital oncológico de Vitória, no Espírito Santo. Em agosto de 2018 o hospital implantou um <strong>protocolo institucional para o câncer de esôfago</strong>, cujo principal objetivo era reduzir o tempo entre a primeira consulta do paciente e o início do tratamento.</p>
+<p>A pergunta do estudo era: <strong>a sobrevida mudou depois do protocolo?</strong> Para respondê-la, os pacientes diagnosticados com câncer de esôfago que iniciaram o tratamento no hospital foram acompanhados desde a primeira consulta até o óbito ou até o fim da coleta de dados, e os pacientes tratados antes e depois do protocolo foram comparados.</p>
+<p>A análise tem duas partes. A primeira é descritiva: o perfil dos pacientes e como ele mudou com o protocolo. A segunda é a análise de sobrevivência, com curvas de Kaplan-Meier, testes log-rank e, por fim, um modelo de regressão de Cox ajustado pelas características dos pacientes.</p>
+</section>
+<section id="a-base-de-dados" class="level2">
+<h2 class="anchored" data-anchor-id="a-base-de-dados">A base de dados</h2>
+<p>Os dados vêm de prontuários e, por serem dados sensíveis de saúde protegidos pela LGPD, a base original não pode ser publicada. A base usada nesta página é <strong>sintética</strong>: tem exatamente a mesma estrutura da planilha original (mesmas variáveis, mesmos códigos, mesma proporção de registros excluídos) e foi gerada a partir das distribuições e dos modelos ajustados nos dados reais. Nenhum paciente real está nela, mas os resultados são muito próximos dos reais.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">"data/esofago_sintetico.csv"</span>, <span class="at">colClasses =</span> <span class="st">"character"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(dataset)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   paciente   sexo  idade consulta_1 estadiamento data_trat_1 tratamento  obito
+     &lt;char&gt; &lt;char&gt; &lt;char&gt;     &lt;char&gt;       &lt;char&gt;      &lt;char&gt;     &lt;char&gt; &lt;char&gt;
+1:     P219      1     63 25/02/2018            3  04/04/2018          3      1
+2:     P220      2     56 25/04/2019            3  12/08/2019          3      1
+3:     P221      1     56 02/10/2019            3  10/10/2019          4      1
+4:     P222      1     72 14/01/2016            3  09/05/2016          3      9
+5:     P223      1     83 01/07/2018            3  29/08/2018          4      1
+6:     P224      1     82 21/03/2020            3  13/04/2020          3      1
+   data_obito causa_obito etilismo fumante   ecog tempo_consulta_1_trat
+       &lt;char&gt;      &lt;char&gt;   &lt;char&gt;  &lt;char&gt; &lt;char&gt;                &lt;char&gt;
+1: 12/06/2019           1        3       3      9                     2
+2: 03/07/2020           1        3       2      1                     3
+3: 02/02/2020           1        2       2      1                     1
+4:                      9        3       3      1                     3
+5: 17/11/2018           1        2       2      1                     2
+6: 02/07/2021           3        2       3      9                     4
+   via_alimentar
+          &lt;char&gt;
+1:             2
+2:             2
+3:             1
+4:             1
+5:             1
+6:             2</code></pre>
+</div>
+</div>
+<p>A base tem 224 pacientes. As variáveis estão codificadas como na ficha de coleta:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 73%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variável</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>sexo</td>
+<td>Sexo; (1) masculino, (2) feminino</td>
+</tr>
+<tr class="even">
+<td>idade</td>
+<td>Idade na primeira consulta</td>
+</tr>
+<tr class="odd">
+<td>consulta_1</td>
+<td>Data da primeira consulta</td>
+</tr>
+<tr class="even">
+<td>estadiamento</td>
+<td>Estadiamento clínico; (2) II, (3) III, (4) IV</td>
+</tr>
+<tr class="odd">
+<td>data_trat_1</td>
+<td>Data de início do tratamento</td>
+</tr>
+<tr class="even">
+<td>tratamento</td>
+<td>Tipo de tratamento; (3) bimodal, (4) trimodal, outros</td>
+</tr>
+<tr class="odd">
+<td>obito</td>
+<td>Situação vital; (1) óbito, (2) vivo, (9) ignorado</td>
+</tr>
+<tr class="even">
+<td>data_obito</td>
+<td>Data do óbito</td>
+</tr>
+<tr class="odd">
+<td>causa_obito</td>
+<td>Causa do óbito; (0) vivo, (1) doença, (2) tratamento, (3) outra, (9) ignorada</td>
+</tr>
+<tr class="even">
+<td>etilismo, fumante</td>
+<td>Etilismo e tabagismo; (1) sim, (2) não, (3) ex</td>
+</tr>
+<tr class="odd">
+<td>ecog</td>
+<td>Escala de desempenho ECOG; 0, 1, 2 (demais códigos = não registrado)</td>
+</tr>
+<tr class="even">
+<td>tempo_consulta_1_trat</td>
+<td>Tempo entre a primeira consulta e o tratamento; (1) menos de 1 mês, (2) entre 1 e 2 meses, (3) mais de 2 meses</td>
+</tr>
+<tr class="odd">
+<td>via_alimentar</td>
+<td>Uso de via alimentar alternativa (sonda); (1) sim, (2) não</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tratamento-dos-dados" class="level2">
+<h2 class="anchored" data-anchor-id="tratamento-dos-dados">Tratamento dos dados</h2>
+<p>O estudo inclui apenas os pacientes que fizeram <strong>tratamento bimodal ou trimodal</strong> e cuja situação vital é conhecida. O desfecho é o <strong>óbito causado pela doença ou pelo tratamento</strong>; os pacientes que morreram por outras causas ou por causa ignorada são excluídos, porque o óbito deles não diz nada sobre o efeito do tratamento.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> dataset[tratamento <span class="sc">%chin%</span> <span class="fu">c</span>(<span class="st">"3"</span>, <span class="st">"4"</span>) <span class="sc">&amp;</span> obito <span class="sc">!=</span> <span class="st">"9"</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">tr</span>(<span class="st">"Yes"</span>, <span class="st">"Sim"</span>); nao <span class="ot">&lt;-</span> <span class="fu">tr</span>(<span class="st">"No"</span>, <span class="st">"Não"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>dataset[, <span class="st">`</span><span class="at">:=</span><span class="st">`</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">obito_geral =</span> <span class="fu">fcase</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    obito <span class="sc">==</span> <span class="st">"1"</span> <span class="sc">&amp;</span> causa_obito <span class="sc">%chin%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>), <span class="dv">1</span>L,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    obito <span class="sc">==</span> <span class="st">"2"</span> <span class="sc">&amp;</span> causa_obito <span class="sc">==</span> <span class="st">"0"</span>, <span class="dv">0</span>L,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">default =</span> <span class="cn">NA_integer_</span>),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">faixa_etaria =</span> <span class="fu">ifelse</span>(<span class="fu">as.numeric</span>(idade) <span class="sc">&lt;</span> <span class="dv">60</span>, <span class="fu">tr</span>(<span class="st">"Under 60"</span>, <span class="st">"Menos de 60 anos"</span>), <span class="fu">tr</span>(<span class="st">"60 or more"</span>, <span class="st">"60 anos ou mais"</span>)),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">etilismo =</span> <span class="fu">fcase</span>(etilismo <span class="sc">%chin%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"3"</span>), sim, etilismo <span class="sc">==</span> <span class="st">"2"</span>, nao),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">fumante =</span> <span class="fu">fcase</span>(fumante <span class="sc">%chin%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"3"</span>), sim, fumante <span class="sc">==</span> <span class="st">"2"</span>, nao),</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">via_alimentar =</span> <span class="fu">fcase</span>(via_alimentar <span class="sc">==</span> <span class="st">"1"</span>, sim, via_alimentar <span class="sc">==</span> <span class="st">"2"</span>, nao),</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">sexo =</span> <span class="fu">fcase</span>(sexo <span class="sc">==</span> <span class="st">"1"</span>, <span class="fu">tr</span>(<span class="st">"Male"</span>, <span class="st">"Masculino"</span>), sexo <span class="sc">==</span> <span class="st">"2"</span>, <span class="fu">tr</span>(<span class="st">"Female"</span>, <span class="st">"Feminino"</span>)),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">tratamento =</span> <span class="fu">fcase</span>(tratamento <span class="sc">==</span> <span class="st">"3"</span>, <span class="st">"Bimodal"</span>, tratamento <span class="sc">==</span> <span class="st">"4"</span>, <span class="st">"Trimodal"</span>),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">estadiamento =</span> <span class="fu">fcase</span>(estadiamento <span class="sc">==</span> <span class="st">"2"</span>, <span class="fu">tr</span>(<span class="st">"Stage II"</span>, <span class="st">"Estádio II"</span>), estadiamento <span class="sc">==</span> <span class="st">"3"</span>, <span class="fu">tr</span>(<span class="st">"Stage III"</span>, <span class="st">"Estádio III"</span>),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                       estadiamento <span class="sc">==</span> <span class="st">"4"</span>, <span class="fu">tr</span>(<span class="st">"Stage IV"</span>, <span class="st">"Estádio IV"</span>)),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">ecog =</span> <span class="fu">fcase</span>(ecog <span class="sc">==</span> <span class="st">"0"</span>, <span class="st">"ECOG 0"</span>, ecog <span class="sc">==</span> <span class="st">"1"</span>, <span class="st">"ECOG 1"</span>, ecog <span class="sc">==</span> <span class="st">"2"</span>, <span class="st">"ECOG 2"</span>, <span class="at">default =</span> <span class="fu">tr</span>(<span class="st">"Not recorded"</span>, <span class="st">"Não registrado"</span>)),</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">tempo_consulta_1_trat =</span> <span class="fu">fcase</span>(</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    tempo_consulta_1_trat <span class="sc">==</span> <span class="st">"1"</span>, <span class="fu">tr</span>(<span class="st">"Less than 1 month"</span>, <span class="st">"Menos de 1 mês"</span>),</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    tempo_consulta_1_trat <span class="sc">==</span> <span class="st">"2"</span>, <span class="fu">tr</span>(<span class="st">"1 to 2 months"</span>, <span class="st">"Entre 1 e 2 meses"</span>),</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    tempo_consulta_1_trat <span class="sc">==</span> <span class="st">"3"</span>, <span class="fu">tr</span>(<span class="st">"More than 2 months"</span>, <span class="st">"Mais de 2 meses"</span>))</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>)]</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> dataset[<span class="sc">!</span><span class="fu">is.na</span>(obito_geral)]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>O protocolo começou em <strong>31 de julho de 2018</strong>: os pacientes com primeira consulta até essa data são “pré-protocolo” e os demais, “pós-protocolo”. O tempo de sobrevida é contado em meses, da primeira consulta até o óbito. Para os pacientes ainda vivos, o tempo é contado até o <strong>fim da coleta de dados</strong>: são observações censuradas, sabemos que sobreviveram pelo menos até ali.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dataset[, <span class="st">`</span><span class="at">:=</span><span class="st">`</span>(<span class="at">consulta_1 =</span> <span class="fu">dmy</span>(consulta_1), <span class="at">data_obito =</span> <span class="fu">dmy</span>(data_obito), <span class="at">data_trat_1 =</span> <span class="fu">dmy</span>(data_trat_1))]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>fim_coleta <span class="ot">&lt;-</span> <span class="fu">max</span>(dataset<span class="sc">$</span>data_obito, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>niveis_protocolo <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">tr</span>(<span class="st">"Pre protocol"</span>, <span class="st">"Pré-protocolo"</span>), <span class="fu">tr</span>(<span class="st">"Post protocol"</span>, <span class="st">"Pós-protocolo"</span>))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>dataset[, protocolo <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(consulta_1 <span class="sc">&lt;=</span> <span class="fu">dmy</span>(<span class="st">"31/07/2018"</span>), niveis_protocolo[<span class="dv">1</span>], niveis_protocolo[<span class="dv">2</span>]),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">levels =</span> niveis_protocolo)]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>dataset[, tempo <span class="sc">:</span><span class="er">=</span> <span class="fu">fifelse</span>(obito_geral <span class="sc">==</span> <span class="dv">1</span>L,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">as.numeric</span>(data_obito <span class="sc">-</span> consulta_1),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">as.numeric</span>(fim_coleta <span class="sc">-</span> consulta_1)) <span class="sc">/</span> <span class="dv">30</span>]</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>dataset[, tempo_consulta_1_trat <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(tempo_consulta_1_trat, <span class="fu">c</span>(<span class="fu">tr</span>(<span class="st">"Less than 1 month"</span>, <span class="st">"Menos de 1 mês"</span>),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                                                                   <span class="fu">tr</span>(<span class="st">"1 to 2 months"</span>, <span class="st">"Entre 1 e 2 meses"</span>),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                                                                   <span class="fu">tr</span>(<span class="st">"More than 2 months"</span>, <span class="st">"Mais de 2 meses"</span>)))]</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>dataset[, ecog <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(ecog, <span class="fu">c</span>(<span class="st">"ECOG 0"</span>, <span class="st">"ECOG 1"</span>, <span class="st">"ECOG 2"</span>, <span class="fu">tr</span>(<span class="st">"Not recorded"</span>, <span class="st">"Não registrado"</span>)))]</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>dataset[, .N, by <span class="ot">=</span> .(protocolo, <span class="at">obito =</span> <span class="fu">fifelse</span>(obito_geral <span class="sc">==</span> <span class="dv">1</span>L, <span class="fu">tr</span>(<span class="st">"Dead"</span>, <span class="st">"Óbito"</span>), <span class="fu">tr</span>(<span class="st">"Alive (censored)"</span>, <span class="st">"Vivo (censurado)"</span>)))]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       protocolo            obito     N
+          &lt;fctr&gt;           &lt;char&gt; &lt;int&gt;
+1: Pré-protocolo            Óbito    70
+2: Pós-protocolo            Óbito    57
+3: Pré-protocolo Vivo (censurado)    29
+4: Pós-protocolo Vivo (censurado)    28</code></pre>
+</div>
+</div>
+<p>Após o tratamento dos dados, restam 184 pacientes no estudo, 127 deles com óbito e 57 vivos ao fim da coleta.</p>
+</section>
+<section id="análise-descritiva" class="level2">
+<h2 class="anchored" data-anchor-id="análise-descritiva">Análise descritiva</h2>
+<section id="tempo-entre-a-primeira-consulta-e-o-tratamento" class="level3">
+<h3 class="anchored" data-anchor-id="tempo-entre-a-primeira-consulta-e-o-tratamento">Tempo entre a primeira consulta e o tratamento</h3>
+<p>O principal objetivo do protocolo era antecipar o início do tratamento, então essa é a primeira coisa a verificar:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">dcast</span>(dataset[<span class="sc">!</span><span class="fu">is.na</span>(tempo_consulta_1_trat), .N, <span class="at">by =</span> .(tempo_consulta_1_trat, protocolo)],</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>            tempo_consulta_1_trat <span class="sc">~</span> protocolo, <span class="at">value.var =</span> <span class="st">"N"</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="fu">tr</span>(<span class="st">"Time to treatment"</span>, <span class="st">"Tempo até o tratamento"</span>), niveis_protocolo))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tempo até o tratamento</th>
+<th style="text-align: right;">Pré-protocolo</th>
+<th style="text-align: right;">Pós-protocolo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Menos de 1 mês</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">53</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Entre 1 e 2 meses</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">22</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mais de 2 meses</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">8</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="fu">table</span>(dataset<span class="sc">$</span>tempo_consulta_1_trat, dataset<span class="sc">$</span>protocolo))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  table(dataset$tempo_consulta_1_trat, dataset$protocolo)
+X-squared = 47.196, df = 2, p-value = 5.644e-11</code></pre>
+</div>
+</div>
+<p>A diferença é grande e significativa: depois do protocolo, a maioria dos pacientes começou o tratamento em <strong>menos de um mês</strong>, enquanto antes a situação mais comum era uma espera de mais de dois meses. O protocolo atingiu o seu principal objetivo.</p>
+</section>
+<section id="perfil-dos-pacientes-por-protocolo" class="level3">
+<h3 class="anchored" data-anchor-id="perfil-dos-pacientes-por-protocolo">Perfil dos pacientes por protocolo</h3>
+<p>A tabela abaixo mostra a distribuição de cada variável nos dois períodos. Se os grupos forem diferentes, qualquer diferença na sobrevida pode ser causada pelo perfil dos pacientes, e não pelo protocolo.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>variaveis <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"sexo"</span>, <span class="st">"faixa_etaria"</span>, <span class="st">"fumante"</span>, <span class="st">"etilismo"</span>, <span class="st">"estadiamento"</span>, <span class="st">"via_alimentar"</span>, <span class="st">"ecog"</span>, <span class="st">"tratamento"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>perfil <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(<span class="fu">lapply</span>(variaveis, <span class="cf">function</span>(v) {</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  dataset_aux <span class="ot">&lt;-</span> dataset[<span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">get</span>(v)), .N, by <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"protocolo"</span>, v)][, pct <span class="sc">:</span><span class="er">=</span> N <span class="sc">/</span> <span class="fu">sum</span>(N), by <span class="ot">=</span> protocolo]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  dataset_aux <span class="ot">&lt;-</span> <span class="fu">dcast</span>(dataset_aux, <span class="fu">as.formula</span>(<span class="fu">paste</span>(v, <span class="st">"~ protocolo"</span>)), <span class="at">value.var =</span> <span class="fu">c</span>(<span class="st">"N"</span>, <span class="st">"pct"</span>))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setnames</span>(dataset_aux, v, <span class="st">"category"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  dataset_aux[, variable <span class="sc">:</span><span class="er">=</span> v]</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">setcolorder</span>(perfil, <span class="fu">c</span>(<span class="st">"variable"</span>, <span class="st">"category"</span>))</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(perfil, <span class="at">digits =</span> <span class="dv">2</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="fu">tr</span>(<span class="st">"Variable"</span>, <span class="st">"Variável"</span>), <span class="fu">tr</span>(<span class="st">"Category"</span>, <span class="st">"Categoria"</span>),</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">tr</span>(<span class="fu">c</span>(<span class="st">"N pre"</span>, <span class="st">"N post"</span>, <span class="st">"% pre"</span>, <span class="st">"% post"</span>), <span class="fu">c</span>(<span class="st">"N pré"</span>, <span class="st">"N pós"</span>, <span class="st">"% pré"</span>, <span class="st">"% pós"</span>))))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variável</th>
+<th style="text-align: left;">Categoria</th>
+<th style="text-align: right;">N pré</th>
+<th style="text-align: right;">N pós</th>
+<th style="text-align: right;">% pré</th>
+<th style="text-align: right;">% pós</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">sexo</td>
+<td style="text-align: left;">Feminino</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">0.27</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sexo</td>
+<td style="text-align: left;">Masculino</td>
+<td style="text-align: right;">88</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">0.89</td>
+<td style="text-align: right;">0.73</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">faixa_etaria</td>
+<td style="text-align: left;">60 anos ou mais</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">0.53</td>
+<td style="text-align: right;">0.41</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">faixa_etaria</td>
+<td style="text-align: left;">Menos de 60 anos</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">0.59</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fumante</td>
+<td style="text-align: left;">Não</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">0.36</td>
+<td style="text-align: right;">0.35</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fumante</td>
+<td style="text-align: left;">Sim</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">0.64</td>
+<td style="text-align: right;">0.65</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">etilismo</td>
+<td style="text-align: left;">Não</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">0.43</td>
+<td style="text-align: right;">0.51</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">etilismo</td>
+<td style="text-align: left;">Sim</td>
+<td style="text-align: right;">54</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">0.57</td>
+<td style="text-align: right;">0.49</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">estadiamento</td>
+<td style="text-align: left;">Estádio II</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">0.14</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">estadiamento</td>
+<td style="text-align: left;">Estádio III</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">0.82</td>
+<td style="text-align: right;">0.71</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">estadiamento</td>
+<td style="text-align: left;">Estádio IV</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">0.15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">via_alimentar</td>
+<td style="text-align: left;">Não</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">0.62</td>
+<td style="text-align: right;">0.28</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">via_alimentar</td>
+<td style="text-align: left;">Sim</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">0.38</td>
+<td style="text-align: right;">0.72</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ecog</td>
+<td style="text-align: left;">ECOG 0</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: right;">0.13</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ecog</td>
+<td style="text-align: left;">ECOG 1</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">0.37</td>
+<td style="text-align: right;">0.65</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ecog</td>
+<td style="text-align: left;">ECOG 2</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">0.13</td>
+<td style="text-align: right;">0.18</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ecog</td>
+<td style="text-align: left;">Não registrado</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">0.05</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tratamento</td>
+<td style="text-align: left;">Bimodal</td>
+<td style="text-align: right;">83</td>
+<td style="text-align: right;">66</td>
+<td style="text-align: right;">0.84</td>
+<td style="text-align: right;">0.78</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tratamento</td>
+<td style="text-align: left;">Trimodal</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">0.22</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Os dois grupos não são iguais. Depois do protocolo há <strong>mais pacientes no estádio IV</strong>, o mais avançado, e o ECOG passou a ser registrado para quase todos os pacientes, enquanto antes faltava em cerca de um terço dos prontuários. Essas diferenças serão levadas em conta no modelo de Cox.</p>
+</section>
+<section id="óbitos-por-variável" class="level3">
+<h3 class="anchored" data-anchor-id="óbitos-por-variável">Óbitos por variável</h3>
+<p>Para ter uma primeira ideia de quais variáveis estão relacionadas ao óbito, o gráfico mostra a proporção de óbitos em cada categoria:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dataset_aux <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(<span class="fu">lapply</span>(<span class="fu">c</span>(<span class="st">"protocolo"</span>, variaveis, <span class="st">"tempo_consulta_1_trat"</span>), <span class="cf">function</span>(v)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  dataset[<span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">get</span>(v)), .(<span class="at">prop_obito =</span> <span class="fu">mean</span>(obito_geral), <span class="at">n =</span> .N), <span class="at">by =</span> .(<span class="at">category =</span> <span class="fu">as.character</span>(<span class="fu">get</span>(v)))][, <span class="at">variable :=</span> v]))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dataset_aux, <span class="fu">aes</span>(<span class="at">x =</span> category, <span class="at">y =</span> prop_obito)) <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> prop_obito), <span class="st">"%</span><span class="sc">\n</span><span class="st">(n="</span>, n, <span class="st">")"</span>)), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.2</span>, <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> variable, <span class="at">scales =</span> <span class="st">"free_x"</span>, <span class="at">ncol =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">1.15</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>)) <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">20</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Proportion of deaths by category"</span>, <span class="st">"Proporção de óbitos por categoria"</span>), <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="fu">tr</span>(<span class="st">"Deaths"</span>, <span class="st">"Óbitos"</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project05_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="1344"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A maioria das variáveis tem proporções de óbito parecidas entre as suas categorias. As diferenças mais claras aparecem no <strong>estadiamento</strong> e no <strong>ECOG</strong>: quanto mais avançada a doença e pior o desempenho, maior a proporção de óbitos. O etilismo também mostra uma diferença moderada. No entanto, a proporção de óbitos ignora o tempo e o acompanhamento diferente de cada paciente, por isso a análise de sobrevivência é a ferramenta adequada para comparar os grupos.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Cleaning the environment</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(perfil, dataset_aux)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">gc</span>())</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="análise-de-sobrevivência" class="level2">
+<h2 class="anchored" data-anchor-id="análise-de-sobrevivência">Análise de sobrevivência</h2>
+<p>Na análise de sobrevivência a variável de interesse é o <strong>tempo até um evento</strong>, aqui o óbito. Sua principal característica é incorporar tempos incompletos (observações censuradas): os pacientes que estavam vivos ao fim do estudo não tiveram o evento, mas o tempo de acompanhamento deles continua sendo informação.</p>
+<p>A função de sobrevivência <span class="math inline">\(S(t) = P(T \geq t)\)</span> é a probabilidade de um paciente sobreviver além do tempo <span class="math inline">\(t\)</span>. Ela é estimada pelo <strong>estimador de Kaplan-Meier</strong>:</p>
+<p><span class="math display">\[\hat{S}(t) = \prod_{j: t_j &lt; t} \left(1 - \frac{d_j}{n_j}\right)\]</span></p>
+<p>em que <span class="math inline">\(d_j\)</span> é o número de óbitos no tempo <span class="math inline">\(t_j\)</span> e <span class="math inline">\(n_j\)</span> o número de pacientes ainda em risco. Para comparar as curvas de dois ou mais grupos é usado o <strong>teste log-rank</strong>, com as hipóteses:</p>
+<p><span class="math inline">\(H_0 =\)</span> Não existe diferença entre as curvas de sobrevivência.</p>
+<p><span class="math inline">\(H_1 =\)</span> Existe diferença entre as curvas de sobrevivência.</p>
+<section id="sobrevida-geral" class="level3">
+<h3 class="anchored" data-anchor-id="sobrevida-geral">Sobrevida geral</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fit_geral <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(tempo, obito_geral) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> dataset)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>fit_geral</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: survfit(formula = Surv(tempo, obito_geral) ~ 1, data = dataset)
+
+       n events median 0.95LCL 0.95UCL
+[1,] 184    127   16.6    14.3    20.4</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(fit_geral, <span class="at">data =</span> dataset, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">surv.median.line =</span> <span class="st">"hv"</span>, <span class="at">legend =</span> <span class="st">"none"</span>,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="fu">tr</span>(<span class="st">"Time (months)"</span>, <span class="st">"Tempo (meses)"</span>), <span class="at">ylab =</span> <span class="fu">tr</span>(<span class="st">"Estimated S(t)"</span>, <span class="st">"S(t) estimada"</span>),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Kaplan-Meier, all patients"</span>, <span class="st">"Kaplan-Meier, todos os pacientes"</span>),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">break.time.by =</span> <span class="dv">12</span>, <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project05_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A sobrevida mediana dos pacientes é de 16,6 meses: metade dos pacientes morreu antes desse tempo. A curva cai rapidamente nos dois primeiros anos, o que é esperado para uma doença geralmente diagnosticada em estádios avançados.</p>
+</section>
+<section id="sobrevida-por-protocolo" class="level3">
+<h3 class="anchored" data-anchor-id="sobrevida-por-protocolo">Sobrevida por protocolo</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fit_protocolo <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(tempo, obito_geral) <span class="sc">~</span> protocolo, <span class="at">data =</span> dataset)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>fit_protocolo</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: survfit(formula = Surv(tempo, obito_geral) ~ protocolo, data = dataset)
+
+                         n events median 0.95LCL 0.95UCL
+protocolo=Pré-protocolo 99     70   17.9    13.5    31.4
+protocolo=Pós-protocolo 85     57   14.9    13.5    21.3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(tempo, obito_geral) <span class="sc">~</span> protocolo, <span class="at">data =</span> dataset)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+survdiff(formula = Surv(tempo, obito_geral) ~ protocolo, data = dataset)
+
+                         N Observed Expected (O-E)^2/E (O-E)^2/V
+protocolo=Pré-protocolo 99       70     73.8     0.201     0.499
+protocolo=Pós-protocolo 85       57     53.2     0.279     0.499
+
+ Chisq= 0.5  on 1 degrees of freedom, p= 0.5 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(fit_protocolo, <span class="at">data =</span> dataset, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">pval =</span> <span class="cn">TRUE</span>, <span class="at">risk.table =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">legend.labs =</span> niveis_protocolo, <span class="at">legend.title =</span> <span class="st">""</span>,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="fu">tr</span>(<span class="st">"Time (months)"</span>, <span class="st">"Tempo (meses)"</span>), <span class="at">ylab =</span> <span class="fu">tr</span>(<span class="st">"Estimated S(t)"</span>, <span class="st">"S(t) estimada"</span>),</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Kaplan-Meier by protocol"</span>, <span class="st">"Kaplan-Meier por protocolo"</span>),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">risk.table.title =</span> <span class="fu">tr</span>(<span class="st">"Number at risk"</span>, <span class="st">"Pacientes em risco"</span>),</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">break.time.by =</span> <span class="dv">12</span>, <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project05_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As duas curvas ficam muito próximas durante todo o acompanhamento, e o teste log-rank não rejeita a hipótese nula (p = 0,48). Não há evidência de que a sobrevida tenha mudado depois do protocolo. Note na tabela de pacientes em risco que os pacientes do pós-protocolo têm um acompanhamento bem mais curto, pois entraram no estudo depois; é justamente por isso que as observações censuradas precisam ser mantidas.</p>
+</section>
+<section id="sobrevida-pelas-demais-variáveis" class="level3">
+<h3 class="anchored" data-anchor-id="sobrevida-pelas-demais-variáveis">Sobrevida pelas demais variáveis</h3>
+<p>A mesma análise foi feita para cada variável do estudo. Para deixar a página legível, as curvas são mostradas juntas e os testes log-rank estão resumidos em uma tabela:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>variaveis_km <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"faixa_etaria"</span>, <span class="st">"fumante"</span>, <span class="st">"etilismo"</span>, <span class="st">"via_alimentar"</span>, <span class="st">"tempo_consulta_1_trat"</span>,</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"tratamento"</span>, <span class="st">"estadiamento"</span>, <span class="st">"ecog"</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>graficos <span class="ot">&lt;-</span> <span class="fu">lapply</span>(variaveis_km, <span class="cf">function</span>(v) {</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  dados <span class="ot">&lt;-</span> dataset[<span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">get</span>(v))]</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">surv_fit</span>(<span class="fu">as.formula</span>(<span class="fu">paste</span>(<span class="st">"Surv(tempo, obito_geral) ~"</span>, v)), <span class="at">data =</span> dados)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsurvplot</span>(fit, <span class="at">data =</span> dados, <span class="at">pval =</span> <span class="cn">TRUE</span>, <span class="at">legend.title =</span> <span class="st">""</span>, <span class="at">legend.labs =</span> <span class="fu">levels</span>(<span class="fu">factor</span>(dados[[v]])),</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">xlab =</span> <span class="fu">tr</span>(<span class="st">"Time (months)"</span>, <span class="st">"Tempo (meses)"</span>), <span class="at">ylab =</span> <span class="st">"S(t)"</span>, <span class="at">title =</span> v, <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>))</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange_ggsurvplots</span>(graficos, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">print =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project05_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="1536"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>log_rank <span class="ot">&lt;-</span> <span class="cf">function</span>(v, dados) {</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  teste <span class="ot">&lt;-</span> <span class="fu">survdiff</span>(<span class="fu">as.formula</span>(<span class="fu">paste</span>(<span class="st">"Surv(tempo, obito_geral) ~"</span>, v)), <span class="at">data =</span> dados[<span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">get</span>(v))])</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pchisq</span>(teste<span class="sc">$</span>chisq, <span class="fu">length</span>(teste<span class="sc">$</span>n) <span class="sc">-</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>tabela_lr <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">variable =</span> variaveis_km,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">all =</span> <span class="fu">sapply</span>(variaveis_km, log_rank, <span class="at">dados =</span> dataset),</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">pre_protocol =</span> <span class="fu">sapply</span>(variaveis_km, log_rank, <span class="at">dados =</span> dataset[protocolo <span class="sc">==</span> niveis_protocolo[<span class="dv">1</span>]]),</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">post_protocol =</span> <span class="fu">sapply</span>(variaveis_km, log_rank, <span class="at">dados =</span> dataset[protocolo <span class="sc">==</span> niveis_protocolo[<span class="dv">2</span>]]))</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tabela_lr, <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">tr</span>(<span class="fu">c</span>(<span class="st">"Variable"</span>, <span class="st">"p-value (all)"</span>, <span class="st">"p-value (pre protocol)"</span>, <span class="st">"p-value (post protocol)"</span>),</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">c</span>(<span class="st">"Variável"</span>, <span class="st">"Valor-p (todos)"</span>, <span class="st">"Valor-p (pré-protocolo)"</span>, <span class="st">"Valor-p (pós-protocolo)"</span>)))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 18%">
+<col style="width: 27%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variável</th>
+<th style="text-align: right;">Valor-p (todos)</th>
+<th style="text-align: right;">Valor-p (pré-protocolo)</th>
+<th style="text-align: right;">Valor-p (pós-protocolo)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">faixa_etaria</td>
+<td style="text-align: right;">0.254</td>
+<td style="text-align: right;">0.408</td>
+<td style="text-align: right;">0.505</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fumante</td>
+<td style="text-align: right;">0.634</td>
+<td style="text-align: right;">0.676</td>
+<td style="text-align: right;">0.791</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">etilismo</td>
+<td style="text-align: right;">0.016</td>
+<td style="text-align: right;">0.104</td>
+<td style="text-align: right;">0.056</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">via_alimentar</td>
+<td style="text-align: right;">0.232</td>
+<td style="text-align: right;">0.508</td>
+<td style="text-align: right;">0.413</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tempo_consulta_1_trat</td>
+<td style="text-align: right;">0.870</td>
+<td style="text-align: right;">0.787</td>
+<td style="text-align: right;">0.135</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tratamento</td>
+<td style="text-align: right;">0.512</td>
+<td style="text-align: right;">0.231</td>
+<td style="text-align: right;">0.752</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">estadiamento</td>
+<td style="text-align: right;">0.003</td>
+<td style="text-align: right;">0.004</td>
+<td style="text-align: right;">0.270</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ecog</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.011</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Com nível de significância de 10%, como no estudo original, <strong>estadiamento</strong>, <strong>ECOG</strong> e <strong>etilismo</strong> são as variáveis com diferenças significativas na sobrevida: quanto maior o estadiamento e pior o ECOG, menor a probabilidade de sobreviver, e os pacientes com histórico de etilismo sobrevivem menos. As demais variáveis, incluindo o tempo entre a primeira consulta e o tratamento, têm curvas próximas entre si.</p>
+<p>Na análise filtrada por protocolo, o ECOG continua significativo nos dois períodos. O estadiamento perde significância depois do protocolo, e o etilismo fica no limite nos dois períodos: cada grupo tem cerca de metade dos pacientes, então os testes têm menos poder.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Cleaning the environment</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(graficos, variaveis_km)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">gc</span>())</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="modelo-de-regressão-de-cox" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-de-regressão-de-cox">Modelo de regressão de Cox</h2>
+<p>As curvas de Kaplan-Meier comparam uma variável de cada vez. Mas vimos na análise descritiva que os pacientes do pós-protocolo tinham doença mais avançada, então a comparação por protocolo pode estar misturando o efeito do protocolo com o efeito do perfil dos pacientes. Para separá-los, foi ajustado um <strong>modelo de riscos proporcionais de Cox</strong>:</p>
+<p><span class="math display">\[h(t \mid x) = h_0(t) \exp(\beta_1 x_1 + \dots + \beta_p x_p)\]</span></p>
+<p>em que <span class="math inline">\(h_0(t)\)</span> é o risco basal e <span class="math inline">\(\exp(\beta)\)</span> é a <strong>razão de riscos (hazard ratio, HR)</strong>: valores acima de 1 indicam maior risco de óbito, e valores abaixo de 1, menor risco.</p>
+<p>A escolha das variáveis segue a pergunta do estudo. O modelo inclui as características do paciente no diagnóstico que podem afetar a sobrevida e que mudaram entre os períodos (estadiamento, ECOG, idade, sexo, tabagismo e etilismo). O tempo até o tratamento e o tipo de tratamento <strong>não</strong> entram, porque são o caminho pelo qual o protocolo age: ajustar por eles removeria justamente o efeito que queremos medir.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>fit_cox <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(tempo, obito_geral) <span class="sc">~</span> protocolo <span class="sc">+</span> estadiamento <span class="sc">+</span> ecog <span class="sc">+</span> faixa_etaria <span class="sc">+</span> sexo <span class="sc">+</span> fumante <span class="sc">+</span> etilismo,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> dataset)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_cox)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(tempo, obito_geral) ~ protocolo + estadiamento + 
+    ecog + faixa_etaria + sexo + fumante + etilismo, data = dataset)
+
+  n= 178, number of events= 123 
+   (6 observations deleted due to missingness)
+
+                                coef exp(coef) se(coef)      z Pr(&gt;|z|)    
+protocoloPós-protocolo        0.1110    1.1174   0.2182  0.509 0.610943    
+estadiamentoEstádio III       0.9856    2.6795   0.3219  3.062 0.002202 ** 
+estadiamentoEstádio IV        1.6322    5.1153   0.4527  3.605 0.000312 ***
+ecogECOG 1                    1.2129    3.3633   0.3737  3.246 0.001171 ** 
+ecogECOG 2                    2.3184   10.1589   0.4238  5.470 4.50e-08 ***
+ecogNão registrado            1.7126    5.5435   0.4155  4.122 3.75e-05 ***
+faixa_etariaMenos de 60 anos  0.3305    1.3916   0.1910  1.730 0.083584 .  
+sexoMasculino                -0.2640    0.7680   0.2458 -1.074 0.282727    
+fumanteSim                    0.1429    1.1536   0.1937  0.738 0.460684    
+etilismoSim                   0.6887    1.9911   0.1909  3.609 0.000308 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+                             exp(coef) exp(-coef) lower .95 upper .95
+protocoloPós-protocolo           1.117    0.89495    0.7286     1.714
+estadiamentoEstádio III          2.679    0.37321    1.4257     5.036
+estadiamentoEstádio IV           5.115    0.19549    2.1062    12.423
+ecogECOG 1                       3.363    0.29733    1.6169     6.996
+ecogECOG 2                      10.159    0.09844    4.4268    23.314
+ecogNão registrado               5.544    0.18039    2.4555    12.515
+faixa_etariaMenos de 60 anos     1.392    0.71859    0.9571     2.023
+sexoMasculino                    0.768    1.30211    0.4744     1.243
+fumanteSim                       1.154    0.86683    0.7892     1.686
+etilismoSim                      1.991    0.50222    1.3698     2.894
+
+Concordance= 0.696  (se = 0.025 )
+Likelihood ratio test= 60.93  on 10 df,   p=2e-09
+Wald test            = 53.17  on 10 df,   p=7e-08
+Score (logrank) test = 56.3  on 10 df,   p=2e-08</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dataset_aux <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>(hr, <span class="at">keep.rownames =</span> <span class="st">"variavel"</span>)[, .(variavel, <span class="at">HR =</span> <span class="st">`</span><span class="at">exp(coef)</span><span class="st">`</span>, <span class="at">lower =</span> <span class="st">`</span><span class="at">lower .95</span><span class="st">`</span>, <span class="at">upper =</span> <span class="st">`</span><span class="at">upper .95</span><span class="st">`</span>)]</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>dataset_aux[, variavel <span class="sc">:</span><span class="er">=</span> <span class="fu">fcase</span>(<span class="fu">grepl</span>(<span class="st">"^protocolo"</span>, variavel), niveis_protocolo[<span class="dv">2</span>],</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">grepl</span>(<span class="st">"^ecog.*(recorded|registrado)$"</span>, variavel), <span class="fu">tr</span>(<span class="st">"ECOG not recorded"</span>, <span class="st">"ECOG não registrado"</span>),</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">grepl</span>(<span class="st">"^fumante"</span>, variavel), <span class="fu">tr</span>(<span class="st">"Smoker"</span>, <span class="st">"Tabagista"</span>),</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">grepl</span>(<span class="st">"^etilismo"</span>, variavel), <span class="fu">tr</span>(<span class="st">"Alcohol use"</span>, <span class="st">"Etilista"</span>),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                                <span class="at">default =</span> <span class="fu">gsub</span>(<span class="st">"protocolo|estadiamento|ecog|faixa_etaria|sexo"</span>, <span class="st">""</span>, variavel))]</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dataset_aux, <span class="fu">aes</span>(<span class="at">x =</span> HR, <span class="at">y =</span> <span class="fu">reorder</span>(variavel, HR))) <span class="sc">+</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">colour =</span> <span class="st">"grey50"</span>) <span class="sc">+</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> lower, <span class="at">xmax =</span> upper), <span class="at">colour =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Hazard ratios of the Cox model (95% confidence intervals)"</span>, <span class="st">"Razões de risco do modelo de Cox (intervalos de confiança de 95%)"</span>),</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="fu">tr</span>(<span class="st">"Hazard ratio (log scale)"</span>, <span class="st">"Razão de riscos (escala log)"</span>), <span class="at">y =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project05_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A razão de riscos do protocolo é 1,12, com intervalo de confiança de 95% de 0,73 a 1,71, que contém o 1: depois de ajustar pelo perfil dos pacientes, <strong>não há evidência de diferença na sobrevida</strong> entre os períodos. As variáveis com os maiores efeitos são as ligadas à condição do paciente: <strong>estádio IV</strong> (HR = 5,12) e <strong>ECOG 2</strong> (HR = 10,16), em comparação com o estádio II e o ECOG 0. O <strong>etilismo</strong> também aumenta o risco de óbito (HR = 1,99), enquanto idade, sexo e tabagismo não mostram efeitos significativos quando as demais variáveis são consideradas.</p>
+<section id="pressuposto-de-riscos-proporcionais" class="level3">
+<h3 class="anchored" data-anchor-id="pressuposto-de-riscos-proporcionais">Pressuposto de riscos proporcionais</h3>
+<p>O modelo de Cox supõe que a razão de riscos entre dois pacientes é constante ao longo do tempo. Isso é verificado com o teste baseado nos <strong>resíduos de Schoenfeld</strong>, em que <span class="math inline">\(H_0\)</span> é a de que os riscos são proporcionais:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(fit_cox)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              chisq df     p
+protocolo     0.116  1 0.733
+estadiamento  0.918  2 0.632
+ecog          3.484  3 0.323
+faixa_etaria  7.550  1 0.006
+sexo          0.578  1 0.447
+fumante       0.778  1 0.378
+etilismo      0.337  1 0.562
+GLOBAL       14.315 10 0.159</code></pre>
+</div>
+</div>
+<p>Nenhuma variável rejeita a hipótese nula ao nível de 5%, então o pressuposto de riscos proporcionais é aceitável e o modelo pode ser interpretado.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Cleaning the environment</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(dataset_aux, hr)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">gc</span>())</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="conclusão" class="level2">
+<h2 class="anchored" data-anchor-id="conclusão">Conclusão</h2>
+<p>O protocolo atingiu o seu principal objetivo: depois dele, a maioria dos pacientes começou o tratamento em menos de um mês após a primeira consulta, contra uma espera geralmente superior a dois meses antes.</p>
+<p>Em relação à sobrevida, as curvas de Kaplan-Meier dos dois períodos são muito próximas e o teste log-rank não mostra diferença significativa. O modelo de Cox, ajustado pelas características dos pacientes, confirma esse resultado: a razão de riscos do protocolo é próxima de 1. Os fatores que realmente determinam a sobrevida desses pacientes são o <strong>estadiamento da doença</strong> e o <strong>desempenho (ECOG)</strong> no diagnóstico, seguidos pelo histórico de <strong>etilismo</strong>.</p>
+<p>Com 184 pacientes de um único hospital, efeitos pequenos do protocolo não poderiam ser detectados. Um estudo com amostra maior e acompanhamento mais longo dos pacientes do pós-protocolo seria o passo natural para avaliar se o menor tempo até o tratamento se traduz em ganho de sobrevida.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+
+// 1) the browser tab shows the title of the page in its own language
+
+// 2) the EN / PT link of the navbar opens the same page in the other language
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  var titulo = document.querySelector("main .page-title");
+
+  if (titulo) document.title = titulo.textContent.trim().replace(/\s+/g, " ") + " – MyDataPortfolio";
+
+
+
+  var isPt = (document.documentElement.lang || "").indexOf("pt") === 0;
+
+  var page = location.pathname.split("/").pop() || "index.html";
+
+  document.querySelectorAll("a.nav-link").forEach(function (a) {
+
+    var text = a.textContent.trim();
+
+    if ((isPt && text === "EN") || (!isPt && text === "PT")) {
+
+      a.setAttribute("href", (isPt ? "../" : "pt/") + page);
+
+      a.setAttribute("title", isPt ? "Read in English" : "Ler em português");
+
+    }
+
+  });
+
+});
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,26 @@
+project:
+  output-dir: docs
+  resources:
+    - .nojekyll
+
+lang: en
+
+website:
+  title: "MyDataPortfolio"
+  navbar:
+    left:
+      - text: "Profile"
+        href: index.Rmd
+      - text: "Project 01"
+        href: project01.Rmd
+      - text: "Project 02"
+        href: project02.Rmd
+      - text: "Project 03"
+        href: project03.qmd
+      - text: "Project 04"
+        href: project04.qmd
+      - text: "Project 05"
+        href: project05.Rmd
+    right:
+      - text: "PT"
+        href: https://batistugo.github.io/MyDataPortfolio/pt/

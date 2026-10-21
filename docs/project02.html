@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Hugo Batista da Silva">
 
 <title>Comparison between the non-parametric Wilcoxon test and Binomial Sign test – MyDataPortfolio</title>
 <style>
@@ -81,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-32643bc00688b413a4b4dac13675c875.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -184,6 +183,12 @@ window.Quarto = {
 <span class="menu-text">Project 05</span></a>
   </li>  
 </ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://batistugo.github.io/MyDataPortfolio/pt/"> 
+<span class="menu-text">PT</span></a>
+  </li>  
+</ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
@@ -198,36 +203,18 @@ window.Quarto = {
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Comparison between the non-parametric Wilcoxon test and Binomial Sign test</h1>
+
+
+
+<div class="h1 page-title">
+<p>Comparison between the non-parametric Wilcoxon test and Binomial Sign test</p>
 </div>
-
-
-
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Hugo Batista da Silva </p>
-          </div>
-  </div>
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
+<p><em>Hugo Batista da Silva</em></p>
 <p>Before starting the simulation, we will generate two paired samples that follow the normal distribution, x and y, where the mean <span class="math inline">\(\mu\)</span> of y is algebraically related to the value of x. <span class="math display">\[ X \sim N(0, 1)\  \\ \  Y \sim N(x + d, 1),\ d = 0.1,\ 0.2,\ ...,\ 1 \]</span> In this simulation we will test the power of the tests to detect whether samples have a relationship, and to do this we will simulate values where detection is more difficult and easier by varying the <span class="math inline">\(d\)</span> of <span class="math inline">\(Y\)</span> and the <span class="math inline">\(n\)</span> for the <span class="math inline">\(rnorm\)</span> function. The larger <span class="math inline">\(d\)</span> and <span class="math inline">\(n\)</span>, the easier to detect. <span class="math inline">\(1000\)</span> repetitions were performed for each combination of <span class="math inline">\(d\)</span> and <span class="math inline">\(n\)</span>.</p>
 <p>For the sign test, a difference was designated between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, and through this it was dichotomized between negative and positive to adjust the numerical values of the test support. For the Wilcoxon, it was enough to apply the test with <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
-<p>reinforcing that the following code is not focused on performance. This file also serves to show how it is possible to create data.frame objects with different names according to the for loop.</p>
+<p>Reinforcing that the following code is not focused on performance. This file also serves to show how it is possible to create data.frame objects with different names according to the for loop.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -242,81 +229,92 @@ Anexando pacote: 'reshape2'</code></pre>
 
     dcast, melt</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(n <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">10</span>L, <span class="dv">100</span>L, <span class="dv">10</span>L)){</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(d <span class="cf">in</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="fl">0.1</span>)){</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    soma_rej_bin <span class="ot">&lt;-</span> <span class="dv">0</span>L</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    soma_rej_wc <span class="ot">&lt;-</span> <span class="dv">0</span>L</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(num <span class="cf">in</span> <span class="dv">1</span>L<span class="sc">:</span><span class="dv">1000</span>L){</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>      x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, x <span class="sc">+</span> d, <span class="dv">1</span>)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>      dif <span class="ot">&lt;-</span> <span class="fu">ifelse</span>((x <span class="sc">-</span> y) <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="dv">1</span>L, <span class="dv">0</span>L)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>      neg <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">fcase</span>(dif <span class="sc">==</span> <span class="dv">1</span>L, <span class="dv">1</span>L), <span class="at">na.rm =</span> T)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>      pos <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">fcase</span>(dif <span class="sc">==</span> <span class="dv">0</span>L, <span class="dv">1</span>L), <span class="at">na.rm =</span> T)</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>      teste_bin <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="at">x =</span> <span class="fu">c</span>(neg, pos), <span class="at">p =</span> <span class="fl">0.5</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>      soma_rej_bin <span class="ot">&lt;-</span> soma_rej_bin <span class="sc">+</span> <span class="fu">ifelse</span>(teste_bin<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.1</span>, <span class="dv">1</span>L, <span class="dv">0</span>L)</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>      teste_wc <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(x, y, <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">exact =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>      soma_rej_wc <span class="ot">&lt;-</span> soma_rej_wc <span class="sc">+</span> <span class="fu">ifelse</span>(teste_wc<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.1</span>, <span class="dv">1</span>L, <span class="dv">0</span>L)</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text =</span> <span class="fu">paste0</span>(</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>      <span class="st">"bin_valores_n"</span>, n, <span class="st">"_d"</span>, d, <span class="st">" &lt;- c()"</span>, <span class="st">" ; "</span>, <span class="st">"wc_valores_n"</span>, n, <span class="st">"_d"</span>, d, <span class="st">" &lt;- c()"</span>, <span class="st">" ; "</span>,</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>      <span class="st">"bin_valores_n"</span>, n, <span class="st">"_d"</span>, d, <span class="st">" &lt;- c(bin_valores_n"</span>, n, <span class="st">"_d"</span>, d, <span class="st">", soma_rej_bin/1000)"</span>, <span class="st">" ; "</span>,</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>      <span class="st">"wc_valores_n"</span>, n, <span class="st">"_d"</span>, d, <span class="st">" &lt;- c(wc_valores_n"</span>, n, <span class="st">"_d"</span>, d, <span class="st">", soma_rej_wc/1000)"</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    )))</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(n <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">10</span>L, <span class="dv">100</span>L, <span class="dv">10</span>L)){</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text =</span> <span class="fu">paste0</span>(</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"wc_valores_n"</span>, n, <span class="st">" &lt;- c() ; "</span>, <span class="st">"bin_valores_n"</span>, n, <span class="st">" &lt;- c() ; "</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  )))</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(d <span class="cf">in</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="fl">0.1</span>)){</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text =</span> <span class="fu">paste0</span>(</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>      <span class="st">"wc_valores_n"</span>, n, <span class="st">" &lt;- c(wc_valores_n"</span>, n, <span class="st">", wc_valores_n"</span>, n, <span class="st">"_d"</span>, d, <span class="st">") ; "</span>,</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>      <span class="st">"bin_valores_n"</span>, n, <span class="st">" &lt;- c(bin_valores_n"</span>, n, <span class="st">", bin_valores_n"</span>, n, <span class="st">"_d"</span>, d, <span class="st">")"</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    )))</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>dados_bin <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  bin_valores_n10, bin_valores_n20, bin_valores_n30, bin_valores_n40, bin_valores_n50,</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>  bin_valores_n60, bin_valores_n70, bin_valores_n80, bin_valores_n90, bin_valores_n100)</span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dados_bin) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>  <span class="st">"10 observations"</span>, <span class="st">"20 observations"</span>, <span class="st">"30 observations"</span>, <span class="st">"40 observations"</span>, <span class="st">"50 observations"</span>,</span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>  <span class="st">"60 observations"</span>, <span class="st">"70 observations"</span>, <span class="st">"80 observations"</span>, <span class="st">"90 observations"</span>, <span class="st">"100 observations"</span>)</span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>dados_bin[, d <span class="sc">:</span><span class="er">=</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="fl">0.1</span>)]</span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>dados_wc <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>  wc_valores_n10, wc_valores_n20, wc_valores_n30, wc_valores_n40, wc_valores_n50,</span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>  wc_valores_n60, wc_valores_n70, wc_valores_n80, wc_valores_n90, wc_valores_n100)</span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dados_wc) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>  <span class="st">"10 observations"</span>, <span class="st">"20 observations"</span>, <span class="st">"30 observations"</span>, <span class="st">"40 observations"</span>, <span class="st">"50 observations"</span>,</span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>  <span class="st">"60 observations"</span>, <span class="st">"70 observations"</span>, <span class="st">"80 observations"</span>, <span class="st">"90 observations"</span>, <span class="st">"100 observations"</span>)</span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>dados_wc[, d <span class="sc">:</span><span class="er">=</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="fl">0.1</span>)]</span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="co">#Generating the graphs</span></span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>grafico_bin <span class="ot">&lt;-</span> <span class="fu">melt</span>(dados_bin ,  <span class="at">id.vars =</span> <span class="st">'d'</span>, <span class="at">variable.name =</span> <span class="st">'sample'</span>)</span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>grafico_wc <span class="ot">&lt;-</span> <span class="fu">melt</span>(dados_wc ,  <span class="at">id.vars =</span> <span class="st">'d'</span>, <span class="at">variable.name =</span> <span class="st">'sample'</span>)</span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>plot_bin <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(grafico_bin, <span class="fu">aes</span>(d, value)) <span class="sc">+</span></span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">colour =</span> sample), <span class="at">size =</span> .<span class="dv">8</span>) <span class="sc">+</span></span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Signal Test with 1000 repetitions"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Distance from the mean"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Test Power"</span>) <span class="sc">+</span></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="fl">0.1</span>), </span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"0.1"</span>, <span class="st">"0.2"</span>, <span class="st">"0.3"</span>, <span class="st">"0.4"</span>, <span class="st">"0.5"</span>, <span class="st">"0.6"</span>, <span class="st">"0.7"</span>, <span class="st">"0.8"</span>, <span class="st">"0.9"</span>, <span class="st">"1"</span>))</span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>plot_wc <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(grafico_wc, <span class="fu">aes</span>(d, value)) <span class="sc">+</span></span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">colour =</span> sample), <span class="at">size =</span> .<span class="dv">8</span>) <span class="sc">+</span></span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Wilcoxon test with 1000 repetitions"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Distance from the mean"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Test Power"</span>) <span class="sc">+</span></span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="fl">0.1</span>), </span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"0.1"</span>, <span class="st">"0.2"</span>, <span class="st">"0.3"</span>, <span class="st">"0.4"</span>, <span class="st">"0.5"</span>, <span class="st">"0.6"</span>, <span class="st">"0.7"</span>, <span class="st">"0.8"</span>, <span class="st">"0.9"</span>, <span class="st">"1"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># returns the text in the language of the page being rendered</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>tr <span class="ot">&lt;-</span> <span class="cf">function</span>(en, pt) <span class="cf">if</span> (<span class="fu">identical</span>(<span class="fu">Sys.getenv</span>(<span class="st">"QUARTO_PROFILE"</span>), <span class="st">"pt"</span>)) pt <span class="cf">else</span> en</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(n <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">10</span>L, <span class="dv">100</span>L, <span class="dv">10</span>L)){</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(d <span class="cf">in</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="fl">0.1</span>)){</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    soma_rej_bin <span class="ot">&lt;-</span> <span class="dv">0</span>L</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    soma_rej_wc <span class="ot">&lt;-</span> <span class="dv">0</span>L</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(num <span class="cf">in</span> <span class="dv">1</span>L<span class="sc">:</span><span class="dv">1000</span>L){</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>      x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, x <span class="sc">+</span> d, <span class="dv">1</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>      dif <span class="ot">&lt;-</span> <span class="fu">ifelse</span>((x <span class="sc">-</span> y) <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="dv">1</span>L, <span class="dv">0</span>L)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>      neg <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">fcase</span>(dif <span class="sc">==</span> <span class="dv">1</span>L, <span class="dv">1</span>L), <span class="at">na.rm =</span> T)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>      pos <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">fcase</span>(dif <span class="sc">==</span> <span class="dv">0</span>L, <span class="dv">1</span>L), <span class="at">na.rm =</span> T)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>      teste_bin <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="at">x =</span> <span class="fu">c</span>(neg, pos), <span class="at">p =</span> <span class="fl">0.5</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>      soma_rej_bin <span class="ot">&lt;-</span> soma_rej_bin <span class="sc">+</span> <span class="fu">ifelse</span>(teste_bin<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.1</span>, <span class="dv">1</span>L, <span class="dv">0</span>L)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>      teste_wc <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(x, y, <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">exact =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>      soma_rej_wc <span class="ot">&lt;-</span> soma_rej_wc <span class="sc">+</span> <span class="fu">ifelse</span>(teste_wc<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.1</span>, <span class="dv">1</span>L, <span class="dv">0</span>L)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text =</span> <span class="fu">paste0</span>(</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>      <span class="st">"bin_valores_n"</span>, n, <span class="st">"_d"</span>, d, <span class="st">" &lt;- c()"</span>, <span class="st">" ; "</span>, <span class="st">"wc_valores_n"</span>, n, <span class="st">"_d"</span>, d, <span class="st">" &lt;- c()"</span>, <span class="st">" ; "</span>,</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>      <span class="st">"bin_valores_n"</span>, n, <span class="st">"_d"</span>, d, <span class="st">" &lt;- c(bin_valores_n"</span>, n, <span class="st">"_d"</span>, d, <span class="st">", soma_rej_bin/1000)"</span>, <span class="st">" ; "</span>,</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>      <span class="st">"wc_valores_n"</span>, n, <span class="st">"_d"</span>, d, <span class="st">" &lt;- c(wc_valores_n"</span>, n, <span class="st">"_d"</span>, d, <span class="st">", soma_rej_wc/1000)"</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    )))</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(n <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">10</span>L, <span class="dv">100</span>L, <span class="dv">10</span>L)){</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text =</span> <span class="fu">paste0</span>(</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"wc_valores_n"</span>, n, <span class="st">" &lt;- c() ; "</span>, <span class="st">"bin_valores_n"</span>, n, <span class="st">" &lt;- c() ; "</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  )))</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(d <span class="cf">in</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="fl">0.1</span>)){</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text =</span> <span class="fu">paste0</span>(</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>      <span class="st">"wc_valores_n"</span>, n, <span class="st">" &lt;- c(wc_valores_n"</span>, n, <span class="st">", wc_valores_n"</span>, n, <span class="st">"_d"</span>, d, <span class="st">") ; "</span>,</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>      <span class="st">"bin_valores_n"</span>, n, <span class="st">" &lt;- c(bin_valores_n"</span>, n, <span class="st">", bin_valores_n"</span>, n, <span class="st">"_d"</span>, d, <span class="st">")"</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    )))</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>dados_bin <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>  bin_valores_n10, bin_valores_n20, bin_valores_n30, bin_valores_n40, bin_valores_n50,</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>  bin_valores_n60, bin_valores_n70, bin_valores_n80, bin_valores_n90, bin_valores_n100)</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dados_bin) <span class="ot">&lt;-</span> <span class="fu">tr</span>(</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"10 observations"</span>, <span class="st">"20 observations"</span>, <span class="st">"30 observations"</span>, <span class="st">"40 observations"</span>, <span class="st">"50 observations"</span>,</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">"60 observations"</span>, <span class="st">"70 observations"</span>, <span class="st">"80 observations"</span>, <span class="st">"90 observations"</span>, <span class="st">"100 observations"</span>),</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"10 observações"</span>, <span class="st">"20 observações"</span>, <span class="st">"30 observações"</span>, <span class="st">"40 observações"</span>, <span class="st">"50 observações"</span>,</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    <span class="st">"60 observações"</span>, <span class="st">"70 observações"</span>, <span class="st">"80 observações"</span>, <span class="st">"90 observações"</span>, <span class="st">"100 observações"</span>))</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>dados_bin[, d <span class="sc">:</span><span class="er">=</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="fl">0.1</span>)]</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>dados_wc <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>  wc_valores_n10, wc_valores_n20, wc_valores_n30, wc_valores_n40, wc_valores_n50,</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>  wc_valores_n60, wc_valores_n70, wc_valores_n80, wc_valores_n90, wc_valores_n100)</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dados_wc) <span class="ot">&lt;-</span> <span class="fu">tr</span>(</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"10 observations"</span>, <span class="st">"20 observations"</span>, <span class="st">"30 observations"</span>, <span class="st">"40 observations"</span>, <span class="st">"50 observations"</span>,</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>    <span class="st">"60 observations"</span>, <span class="st">"70 observations"</span>, <span class="st">"80 observations"</span>, <span class="st">"90 observations"</span>, <span class="st">"100 observations"</span>),</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"10 observações"</span>, <span class="st">"20 observações"</span>, <span class="st">"30 observações"</span>, <span class="st">"40 observações"</span>, <span class="st">"50 observações"</span>,</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">"60 observações"</span>, <span class="st">"70 observações"</span>, <span class="st">"80 observações"</span>, <span class="st">"90 observações"</span>, <span class="st">"100 observações"</span>))</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>dados_wc[, d <span class="sc">:</span><span class="er">=</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="fl">0.1</span>)]</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="co">#Generating the graphs</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>grafico_bin <span class="ot">&lt;-</span> <span class="fu">melt</span>(dados_bin ,  <span class="at">id.vars =</span> <span class="st">'d'</span>, <span class="at">variable.name =</span> <span class="st">'sample'</span>)</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>grafico_wc <span class="ot">&lt;-</span> <span class="fu">melt</span>(dados_wc ,  <span class="at">id.vars =</span> <span class="st">'d'</span>, <span class="at">variable.name =</span> <span class="st">'sample'</span>)</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>plot_bin <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(grafico_bin, <span class="fu">aes</span>(d, value)) <span class="sc">+</span></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">colour =</span> sample), <span class="at">size =</span> .<span class="dv">8</span>) <span class="sc">+</span></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">colour =</span> <span class="fu">tr</span>(<span class="st">"Sample size"</span>, <span class="st">"Tamanho da amostra"</span>)) <span class="sc">+</span></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">tr</span>(<span class="st">"Sign Test with 1000 repetitions"</span>, <span class="st">"Teste do sinal com 1000 repetições"</span>)) <span class="sc">+</span></span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">tr</span>(<span class="st">"Distance from the mean"</span>, <span class="st">"Distância da média"</span>)) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="fu">tr</span>(<span class="st">"Test Power"</span>, <span class="st">"Poder do teste"</span>)) <span class="sc">+</span></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="fl">0.1</span>),</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"0.1"</span>, <span class="st">"0.2"</span>, <span class="st">"0.3"</span>, <span class="st">"0.4"</span>, <span class="st">"0.5"</span>, <span class="st">"0.6"</span>, <span class="st">"0.7"</span>, <span class="st">"0.8"</span>, <span class="st">"0.9"</span>, <span class="st">"1"</span>))</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>plot_wc <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(grafico_wc, <span class="fu">aes</span>(d, value)) <span class="sc">+</span></span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">colour =</span> sample), <span class="at">size =</span> .<span class="dv">8</span>) <span class="sc">+</span></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">colour =</span> <span class="fu">tr</span>(<span class="st">"Sample size"</span>, <span class="st">"Tamanho da amostra"</span>)) <span class="sc">+</span></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">tr</span>(<span class="st">"Wilcoxon test with 1000 repetitions"</span>, <span class="st">"Teste de Wilcoxon com 1000 repetições"</span>)) <span class="sc">+</span></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">tr</span>(<span class="st">"Distance from the mean"</span>, <span class="st">"Distância da média"</span>)) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="fu">tr</span>(<span class="st">"Test Power"</span>, <span class="st">"Poder do teste"</span>)) <span class="sc">+</span></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="fl">0.1</span>),</span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"0.1"</span>, <span class="st">"0.2"</span>, <span class="st">"0.3"</span>, <span class="st">"0.4"</span>, <span class="st">"0.5"</span>, <span class="st">"0.6"</span>, <span class="st">"0.7"</span>, <span class="st">"0.8"</span>, <span class="st">"0.9"</span>, <span class="st">"1"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(plot_bin, plot_wc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -328,11 +326,47 @@ Anexando pacote: 'reshape2'</code></pre>
 </div>
 </div>
 </div>
-<p>Observing the graphs we notice that the convergence curve of the test power for the value <span class="math inline">\(1\)</span> for the Wilcoxon happens earlier than that of the Sign test, in both tests we see a weak power of the test for samples with <span class="math inline">\(n = 10\)</span> and <span class="math inline">\(n = 20\)</span>, however for the Wilcoxon the sample of <span class="math inline">\(n = 20\)</span> follows values very close to the sample of <span class="math inline">\(n = 30\)</span> of the sign test. It is also noted that for the Sign test, from the distance <span class="math inline">\(0.8\)</span> the power of the test for <span class="math inline">\(n \geq 40\)</span> has already converged to <span class="math inline">\(1\)</span> almost completely, whereas in the Wilcoxon test this convergence already happens with the distance <span class="math inline">\(0.6\)</span>, showing that he is superior in every way.</p>
+<p>Observing the graphs we notice that the convergence curve of the test power for the value <span class="math inline">\(1\)</span> for the Wilcoxon happens earlier than that of the Sign test, in both tests we see a weak power of the test for samples with <span class="math inline">\(n = 10\)</span> and <span class="math inline">\(n = 20\)</span>, however for the Wilcoxon the sample of <span class="math inline">\(n = 20\)</span> follows values very close to the sample of <span class="math inline">\(n = 30\)</span> of the sign test. It is also noted that for the Sign test, from the distance <span class="math inline">\(0.8\)</span> the power of the test for <span class="math inline">\(n \geq 40\)</span> has already converged to <span class="math inline">\(1\)</span> almost completely, whereas in the Wilcoxon test this convergence already happens with the distance <span class="math inline">\(0.6\)</span>, showing that it is superior in every way.</p>
 
 
 
 </main> <!-- /main -->
+<script>
+
+// 1) the browser tab shows the title of the page in its own language
+
+// 2) the EN / PT link of the navbar opens the same page in the other language
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  var titulo = document.querySelector("main .page-title");
+
+  if (titulo) document.title = titulo.textContent.trim().replace(/\s+/g, " ") + " – MyDataPortfolio";
+
+
+
+  var isPt = (document.documentElement.lang || "").indexOf("pt") === 0;
+
+  var page = location.pathname.split("/").pop() || "index.html";
+
+  document.querySelectorAll("a.nav-link").forEach(function (a) {
+
+    var text = a.textContent.trim();
+
+    if ((isPt && text === "EN") || (!isPt && text === "PT")) {
+
+      a.setAttribute("href", (isPt ? "../" : "pt/") + page);
+
+      a.setAttribute("title", isPt ? "Read in English" : "Ler em português");
+
+    }
+
+  });
+
+});
+
+</script>
+
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

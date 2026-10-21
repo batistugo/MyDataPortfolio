@@ -1,8 +1,5 @@
 project:
   type: website
-  output-dir: docs
-  resources:
-    - .nojekyll
   render:
     - index.Rmd
     - project01.Rmd
@@ -11,28 +8,20 @@ project:
     - project04.qmd
     - project05.Rmd
 
-execute:
-  freeze: auto
+# two languages, rendered by render.ps1 / render.sh (English first, then Portuguese):
+#   quarto render --profile en   ->  docs/      (English, current URLs)
+#   quarto render --profile pt   ->  docs/pt/   (Portuguese)
+profile:
+  default: en
 
-website:
-  title: "MyDataPortfolio"
-  navbar:
-    left:
-      - text: "Profile"
-        href: index.Rmd
-      - text: "Project 01"
-        href: project01.Rmd
-      - text: "Project 02"
-        href: project02.Rmd
-      - text: "Project 03"
-        href: project03.qmd
-      - text: "Project 04"
-        href: project04.qmd
-      - text: "Project 05"
-        href: project05.Rmd
+# no freeze: each language executes its own code, so plot labels follow the language
+execute:
+  freeze: false
 
 format:
   html:
     theme: cosmo
     toc: true
     code-fold: false
+    title-block-style: none
+    include-after-body: lang-toggle.html
