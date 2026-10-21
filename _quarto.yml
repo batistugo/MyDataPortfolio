@@ -9,7 +9,7 @@ project:
     - project02.Rmd
     - project03.qmd
     - project04.qmd
-    - project05.qmd
+    - project05.Rmd
 
 execute:
   freeze: auto
@@ -29,7 +29,7 @@ website:
       - text: "Project 04"
         href: project04.qmd
       - text: "Project 05"
-        href: project05.qmd
+        href: project05.Rmd
 
 format:
   html:
