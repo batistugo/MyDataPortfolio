@@ -186,7 +186,7 @@ window.Quarto = {
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="https://batistugo.github.io/MyDataPortfolio/pt/"> 
-<span class="menu-text">PT</span></a>
+<span class="menu-text">Versão em PT</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -1045,11 +1045,61 @@ BP = 4.4489, df = 5, p-value = 0.4868</code></pre>
 </section>
 
 </main> <!-- /main -->
+<style>
+
+/* language switch: a highlighted button on the right side of the navbar */
+
+a.nav-link.lang-switch {
+
+  background-color: #2780e3;
+
+  color: #fff !important;
+
+  border-radius: 999px;
+
+  padding: 0.3rem 1rem !important;
+
+  margin: 0.25rem 0;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+}
+
+a.nav-link.lang-switch:hover,
+
+a.nav-link.lang-switch:focus {
+
+  background-color: #1a68c2;
+
+  color: #fff !important;
+
+}
+
+/* on small screens the menu collapses: a copy of the button is shown at the top of the page */
+
+.lang-switch-bar { display: none; }
+
+@media (max-width: 991.98px) {
+
+  .lang-switch-bar { display: block; text-align: right; margin: 0 0 0.75rem 0; }
+
+  .lang-switch-bar a.nav-link.lang-switch { display: inline-block; font-size: 0.9rem; margin: 0; }
+
+  li.lang-switch-item { display: none; }
+
+}
+
+</style>
+
+
+
 <script>
 
 // 1) the browser tab shows the title of the page in its own language
 
-// 2) the EN / PT link of the navbar opens the same page in the other language
+// 2) the language button of the navbar opens the same page in the other language
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -1067,11 +1117,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var text = a.textContent.trim();
 
-    if ((isPt && text === "EN") || (!isPt && text === "PT")) {
+    if ((isPt && text === "EN Version") || (!isPt && text === "Versão em PT")) {
+
+      a.classList.add("lang-switch");
 
       a.setAttribute("href", (isPt ? "../" : "pt/") + page);
 
-      a.setAttribute("title", isPt ? "Read in English" : "Ler em português");
+      a.setAttribute("title", isPt ? "Read this page in English" : "Ler esta página em português");
+
+      a.setAttribute("lang", isPt ? "en" : "pt-BR");
+
+      a.parentElement.classList.add("lang-switch-item");
+
+
+
+      var main = document.querySelector("main");
+
+      if (main) {
+
+        var barra = document.createElement("div");
+
+        barra.className = "lang-switch-bar";
+
+        barra.appendChild(a.cloneNode(true));
+
+        main.insertBefore(barra, main.firstChild);
+
+      }
 
     }
 

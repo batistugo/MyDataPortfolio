@@ -22,5 +22,5 @@ website:
       - text: "Project 05"
         href: project05.Rmd
     right:
-      - text: "PT"
+      - text: "Versão em PT"
         href: https://batistugo.github.io/MyDataPortfolio/pt/
