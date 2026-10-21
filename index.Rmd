@@ -112,6 +112,11 @@ Aqui estão alguns dos meus projetos:
       <td>Classification with XGBoost (Python)</td>
       <td>Work (synthetic data)</td>
     </tr>
+    <tr>
+      <td><a href="project04.html">Project 04</a></td>
+      <td>Sampling plan and regression (PhD methodology)</td>
+      <td>Contract (3 articles)</td>
+    </tr>
   </tbody>
 </table>
 </div>
