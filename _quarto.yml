@@ -9,6 +9,7 @@ project:
     - project02.Rmd
     - project03.qmd
     - project04.qmd
+    - project05.qmd
 
 execute:
   freeze: auto
@@ -27,6 +28,8 @@ website:
         href: project03.qmd
       - text: "Project 04"
         href: project04.qmd
+      - text: "Project 05"
+        href: project05.qmd
 
 format:
   html:

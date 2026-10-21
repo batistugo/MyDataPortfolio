@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Hugo Batista da Silva">
+
+<title>Esophageal Cancer Survival: did the new care protocol change anything? – MyDataPortfolio</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">MyDataPortfolio</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Profile</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project01.html"> 
+<span class="menu-text">Project 01</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project02.html"> 
+<span class="menu-text">Project 02</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project03.html"> 
+<span class="menu-text">Project 03</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project04.html"> 
+<span class="menu-text">Project 04</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./project05.html" aria-current="page"> 
+<span class="menu-text">Project 05</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#about-the-project" id="toc-about-the-project" class="nav-link active" data-scroll-target="#about-the-project">About the project</a></li>
+  <li><a href="#the-dataset" id="toc-the-dataset" class="nav-link" data-scroll-target="#the-dataset">The dataset</a></li>
+  <li><a href="#profile-of-the-two-groups" id="toc-profile-of-the-two-groups" class="nav-link" data-scroll-target="#profile-of-the-two-groups">Profile of the two groups</a></li>
+  <li><a href="#survival-curves" id="toc-survival-curves" class="nav-link" data-scroll-target="#survival-curves">Survival curves</a></li>
+  <li><a href="#adjusting-for-the-differences-between-the-groups" id="toc-adjusting-for-the-differences-between-the-groups" class="nav-link" data-scroll-target="#adjusting-for-the-differences-between-the-groups">Adjusting for the differences between the groups</a>
+  <ul class="collapse">
+  <li><a href="#checking-the-assumption-of-proportional-hazards" id="toc-checking-the-assumption-of-proportional-hazards" class="nav-link" data-scroll-target="#checking-the-assumption-of-proportional-hazards">Checking the assumption of proportional hazards</a></li>
+  <li><a href="#parametric-models" id="toc-parametric-models" class="nav-link" data-scroll-target="#parametric-models">Parametric models</a></li>
+  </ul></li>
+  <li><a href="#how-much-can-one-cohort-of-184-patients-vary" id="toc-how-much-can-one-cohort-of-184-patients-vary" class="nav-link" data-scroll-target="#how-much-can-one-cohort-of-184-patients-vary">How much can one cohort of 184 patients vary?</a></li>
+  <li><a href="#and-in-the-real-data" id="toc-and-in-the-real-data" class="nav-link" data-scroll-target="#and-in-the-real-data">And in the real data?</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Esophageal Cancer Survival: did the new care protocol change anything?</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Hugo Batista da Silva </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Language:</strong> R (survival, survminer, flexsurv, data.table) · <strong>Type:</strong> statistical consulting for a medical residency final paper (Clinical Oncology) · <strong>Data:</strong> synthetic cohort generated from models fitted on the real data, see <a href="#the-dataset">below</a></p>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flexsurv)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>coorte <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">"data/coorte_esofago_sintetica.csv"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>coorte[, protocolo <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(protocolo, <span class="fu">c</span>(<span class="st">"Pré Protocolo"</span>, <span class="st">"Pós Protocolo"</span>))]</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>coorte[, estadiamento <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(estadiamento, <span class="fu">c</span>(<span class="st">"Nível II"</span>, <span class="st">"Nível III"</span>, <span class="st">"Nível IV"</span>))]</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>coorte[, ecog_c <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(ecog_c, <span class="fu">c</span>(<span class="st">"Nível 0"</span>, <span class="st">"Nível 1"</span>, <span class="st">"Nível 2"</span>, <span class="st">"Not recorded"</span>))]</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>coorte[, sexo <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(sexo, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>))]</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>reais <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"analysis/esofago_resultados_reais.rds"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>simulacoes <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"analysis/esofago_simulacoes.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="about-the-project" class="level2">
+<h2 class="anchored" data-anchor-id="about-the-project">About the project</h2>
+<p>In August 2018 a cancer hospital in Vitória (ES, Brazil) introduced a new <strong>care protocol for esophageal cancer</strong>, designed mainly to shorten the time between the first consultation and the start of treatment. A Clinical Oncology resident wanted to evaluate it in her residency final paper, and I was hired for the statistical analysis.</p>
+<p>The design is a <strong>retrospective cohort</strong>: patients with a first consultation before the protocol (2016 to July 2018) are compared with patients after it (August 2018 to 2020), and the outcome is the time from the first consultation until death by the disease or by the treatment.</p>
+<p>The analysis follows three steps: compare the profile of the two groups, estimate the survival curves taking the censored patients into account, and estimate the effect of the protocol with a Cox model adjusted for the differences between the groups.</p>
+</section>
+<section id="the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="the-dataset">The dataset</h2>
+<p>The real data come from medical records and cannot be published, not even anonymised: with 184 patients from a single hospital, a combination of dates, age and stage could identify someone. So this page runs on a <strong>synthetic cohort</strong> with the same structure:</p>
+<ul>
+<li>the covariates of each fictitious patient are drawn with the <strong>real proportions of their protocol group</strong> (this keeps the differences between the groups, which are the heart of the problem);</li>
+<li>the survival times come from the <strong>adjusted Cox model fitted on the real data</strong>, using the baseline hazard of that same model (Breslow estimator), so the shape of the risk over time is also preserved; the follow-up is cut at the real end of data collection.</li>
+</ul>
+<p>The generator script is <a href="https://github.com/batistugo/MyDataPortfolio/blob/main/analysis/esofago_sintetico.R">available here</a>. It runs on my machine, where the real data are, and exports only the fictitious cohort and aggregated results. At the end of the page, the synthetic results are compared with the real ones.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>protocolo</td>
+<td>Pré Protocolo (before Aug 2018) or Pós Protocolo</td>
+</tr>
+<tr class="even">
+<td>consulta_1, data_obito</td>
+<td>Date of the first consultation and of death (empty if alive)</td>
+</tr>
+<tr class="odd">
+<td>obito, tempo_meses</td>
+<td>Death indicator and follow-up time in months</td>
+</tr>
+<tr class="even">
+<td>estadiamento</td>
+<td>Clinical stage II, III or IV</td>
+</tr>
+<tr class="odd">
+<td>ecog_c</td>
+<td>ECOG performance status 0, 1, 2 or not recorded</td>
+</tr>
+<tr class="even">
+<td>faixa_etaria, sexo</td>
+<td>Age group (under / over 60) and sex</td>
+</tr>
+<tr class="odd">
+<td>fumante, etilismo</td>
+<td>Smoking and alcohol use</td>
+</tr>
+<tr class="even">
+<td>tempo_consulta_1_trat</td>
+<td>Time between the first consultation and the treatment</td>
+</tr>
+<tr class="odd">
+<td>tratamento</td>
+<td>Bimodal or trimodal treatment</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="profile-of-the-two-groups" class="level2">
+<h2 class="anchored" data-anchor-id="profile-of-the-two-groups">Profile of the two groups</h2>
+<p>Before comparing survival, it is necessary to know if the two groups are comparable.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>perfil <span class="ot">&lt;-</span> <span class="cf">function</span>(v) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  dataset_aux <span class="ot">&lt;-</span> coorte[, .N, by <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"protocolo"</span>, v)][, pct <span class="sc">:</span><span class="er">=</span> N <span class="sc">/</span> <span class="fu">sum</span>(N), by <span class="ot">=</span> protocolo]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  dataset_aux <span class="ot">&lt;-</span> <span class="fu">dcast</span>(dataset_aux, <span class="fu">as.formula</span>(<span class="fu">paste</span>(v, <span class="st">"~ protocolo"</span>)), <span class="at">value.var =</span> <span class="st">"pct"</span>, <span class="at">fill =</span> <span class="dv">0</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setnames</span>(dataset_aux, v, <span class="st">"Level"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  dataset_aux[, Variable <span class="sc">:</span><span class="er">=</span> v]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>tabela_1 <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(<span class="fu">lapply</span>(<span class="fu">c</span>(<span class="st">"estadiamento"</span>, <span class="st">"ecog_c"</span>, <span class="st">"tempo_consulta_1_trat"</span>, <span class="st">"tratamento"</span>, <span class="st">"faixa_etaria"</span>, <span class="st">"sexo"</span>), perfil))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">setcolorder</span>(tabela_1, <span class="st">"Variable"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tabela_1, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Variable"</span>, <span class="st">"Level"</span>, <span class="st">"Before protocol"</span>, <span class="st">"After protocol"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 25%">
+<col style="width: 22%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Level</th>
+<th style="text-align: right;">Before protocol</th>
+<th style="text-align: right;">After protocol</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">estadiamento</td>
+<td style="text-align: left;">Nível II</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">0.20</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">estadiamento</td>
+<td style="text-align: left;">Nível III</td>
+<td style="text-align: right;">0.82</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">estadiamento</td>
+<td style="text-align: left;">Nível IV</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">0.25</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ecog_c</td>
+<td style="text-align: left;">Nível 0</td>
+<td style="text-align: right;">0.14</td>
+<td style="text-align: right;">0.07</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ecog_c</td>
+<td style="text-align: left;">Nível 1</td>
+<td style="text-align: right;">0.41</td>
+<td style="text-align: right;">0.75</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ecog_c</td>
+<td style="text-align: left;">Nível 2</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">0.14</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ecog_c</td>
+<td style="text-align: left;">Not recorded</td>
+<td style="text-align: right;">0.33</td>
+<td style="text-align: right;">0.04</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tempo_consulta_1_trat</td>
+<td style="text-align: left;">Entre 1 e 2 meses</td>
+<td style="text-align: right;">0.38</td>
+<td style="text-align: right;">0.29</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tempo_consulta_1_trat</td>
+<td style="text-align: left;">Mais de 2 meses</td>
+<td style="text-align: right;">0.52</td>
+<td style="text-align: right;">0.07</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tempo_consulta_1_trat</td>
+<td style="text-align: left;">Menos de 1 mês</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.64</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tratamento</td>
+<td style="text-align: left;">Bimodal</td>
+<td style="text-align: right;">0.80</td>
+<td style="text-align: right;">0.71</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tratamento</td>
+<td style="text-align: left;">Trimodal</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">0.29</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">faixa_etaria</td>
+<td style="text-align: left;">mais de 60 anos</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">0.48</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">faixa_etaria</td>
+<td style="text-align: left;">menos de 60 anos</td>
+<td style="text-align: right;">0.51</td>
+<td style="text-align: right;">0.52</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sexo</td>
+<td style="text-align: left;">Male</td>
+<td style="text-align: right;">0.88</td>
+<td style="text-align: right;">0.68</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sexo</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">0.32</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The protocol achieved its main goal: the share of patients treated in <strong>less than one month</strong> is much higher after it. But the groups are <strong>not comparable</strong>: after the protocol there are many more patients in <strong>stage IV</strong>, the most advanced one, and fewer patients without a recorded ECOG. Any comparison of survival that ignores this mixes the effect of the protocol with the effect of a sicker population.</p>
+</section>
+<section id="survival-curves" class="level2">
+<h2 class="anchored" data-anchor-id="survival-curves">Survival curves</h2>
+<p>Not every patient had died when the data were collected. These patients are <strong>censored</strong>: we know they survived at least until the end of the follow-up, and this information must enter the analysis. Ignoring them, for example by calculating the time only from the date of death, would answer a different question (“among those who died, how long did it take?”) and would bias the comparison.</p>
+<p>The censoring is especially important here because the two groups were <strong>followed for different lengths of time</strong>: patients after the protocol arrived later, so on the date the data were collected they had been followed for much less time. The reverse Kaplan-Meier (where the “event” is being censored) measures this:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">survfit</span>(<span class="fu">Surv</span>(tempo_meses, <span class="dv">1</span> <span class="sc">-</span> obito) <span class="sc">~</span> protocolo, <span class="at">data =</span> coorte)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: survfit(formula = Surv(tempo_meses, 1 - obito) ~ protocolo, data = coorte)
+
+                         n events median 0.95LCL 0.95UCL
+protocolo=Pré Protocolo 99     26   65.4    58.9    70.6
+protocolo=Pós Protocolo 85     27   32.4    30.4    38.0</code></pre>
+</div>
+</div>
+<p>The Kaplan-Meier curves, with the patients still alive as censored observations at the end of the data collection:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit_correto <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(tempo_meses, obito) <span class="sc">~</span> protocolo, <span class="at">data =</span> coorte)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>lr_correto <span class="ot">&lt;-</span> <span class="fu">survdiff</span>(<span class="fu">Surv</span>(tempo_meses, obito) <span class="sc">~</span> protocolo, <span class="at">data =</span> coorte)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(fit_correto, <span class="at">data =</span> coorte, <span class="at">risk.table =</span> <span class="cn">TRUE</span>, <span class="at">pval =</span> <span class="cn">TRUE</span>, <span class="at">conf.int =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">surv.median.line =</span> <span class="st">"hv"</span>, <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#1d4ed8"</span>, <span class="st">"#db2777"</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">legend.labs =</span> <span class="fu">c</span>(<span class="st">"Before protocol"</span>, <span class="st">"After protocol"</span>), <span class="at">legend.title =</span> <span class="st">""</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="st">"Months since the first consultation"</span>, <span class="at">ylab =</span> <span class="st">"Survival probability"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">break.time.by =</span> <span class="dv">12</span>, <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project05_files/figure-html/km_correto-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The curves of the two periods are very close, and the log-rank test finds no difference (p = 0.53).</p>
+</section>
+<section id="adjusting-for-the-differences-between-the-groups" class="level2">
+<h2 class="anchored" data-anchor-id="adjusting-for-the-differences-between-the-groups">Adjusting for the differences between the groups</h2>
+<p>Comparing “before” and “after” with a log-rank test assumes that the groups differ only in the protocol, and we saw that this is false. The right tool is a <strong>Cox model adjusted for confounders</strong>. Choosing the adjustment variables is a decision about causality, not a statistical one:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  C["Confounders&lt;br/&gt;&lt;small&gt;stage, ECOG, age, sex,&lt;br/&gt;smoking, alcohol&lt;/small&gt;"] --&gt; P["Protocol"]
+  C --&gt; D["Death"]
+  P --&gt; M["Mediators&lt;br/&gt;&lt;small&gt;time to treatment,&lt;br/&gt;treatment type&lt;/small&gt;"] --&gt; D
+  P --&gt; D
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>Confounders</strong> are characteristics of the patient at diagnosis that differ between the periods and also affect survival. They <strong>must</strong> enter the model.</li>
+<li><strong>Mediators</strong> are the way the protocol acts: it exists to shorten the time to treatment. Adjusting for them would remove exactly the effect we want to measure, so they stay out of the main model and are used only as a sensitivity analysis.</li>
+</ul>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cox_bruto <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(tempo_meses, obito) <span class="sc">~</span> protocolo, <span class="at">data =</span> coorte)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>cox_ajust <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(tempo_meses, obito) <span class="sc">~</span> protocolo <span class="sc">+</span> estadiamento <span class="sc">+</span> ecog_c <span class="sc">+</span> faixa_etaria <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                     sexo <span class="sc">+</span> fumante <span class="sc">+</span> etilismo, <span class="at">data =</span> coorte)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>cox_mediadores <span class="ot">&lt;-</span> <span class="fu">update</span>(cox_ajust, . <span class="sc">~</span> . <span class="sc">+</span> tempo_consulta_1_trat <span class="sc">+</span> tratamento)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>resumo <span class="ot">&lt;-</span> <span class="cf">function</span>(m, nome) {</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="fu">summary</span>(m)<span class="sc">$</span>conf.int</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.table</span>(<span class="at">Model =</span> nome, <span class="at">HR =</span> s[<span class="dv">1</span>, <span class="dv">1</span>], <span class="st">`</span><span class="at">CI 95% lower</span><span class="st">`</span> <span class="ot">=</span> s[<span class="dv">1</span>, <span class="dv">3</span>], <span class="st">`</span><span class="at">CI 95% upper</span><span class="st">`</span> <span class="ot">=</span> s[<span class="dv">1</span>, <span class="dv">4</span>],</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">p =</span> <span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">1</span>, <span class="dv">5</span>])</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">rbind</span>(<span class="fu">resumo</span>(cox_bruto, <span class="st">"Unadjusted"</span>),</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>            <span class="fu">resumo</span>(cox_ajust, <span class="st">"Adjusted for confounders (main model)"</span>),</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>            <span class="fu">resumo</span>(cox_mediadores, <span class="st">"Adjusted + mediators (sensitivity)"</span>)),</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">caption =</span> <span class="st">"Hazard ratio of death, after vs before the protocol"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Hazard ratio of death, after vs before the protocol</caption>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 7%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Model</th>
+<th style="text-align: right;">HR</th>
+<th style="text-align: right;">CI 95% lower</th>
+<th style="text-align: right;">CI 95% upper</th>
+<th style="text-align: right;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Unadjusted</td>
+<td style="text-align: right;">1.119</td>
+<td style="text-align: right;">0.786</td>
+<td style="text-align: right;">1.594</td>
+<td style="text-align: right;">0.532</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Adjusted for confounders (main model)</td>
+<td style="text-align: right;">1.115</td>
+<td style="text-align: right;">0.712</td>
+<td style="text-align: right;">1.745</td>
+<td style="text-align: right;">0.635</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Adjusted + mediators (sensitivity)</td>
+<td style="text-align: right;">1.206</td>
+<td style="text-align: right;">0.683</td>
+<td style="text-align: right;">2.131</td>
+<td style="text-align: right;">0.519</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>coefs <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>(<span class="fu">summary</span>(cox_ajust)<span class="sc">$</span>conf.int, <span class="at">keep.rownames =</span> <span class="st">"termo"</span>)[, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>)]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setnames</span>(coefs, <span class="fu">c</span>(<span class="st">"termo"</span>, <span class="st">"HR"</span>, <span class="st">"inf"</span>, <span class="st">"sup"</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>coefs[, termo <span class="sc">:</span><span class="er">=</span> <span class="fu">gsub</span>(<span class="st">"protocolo|estadiamento|ecog_c|faixa_etaria|sexo"</span>, <span class="st">""</span>, termo)]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>coefs[, termo <span class="sc">:</span><span class="er">=</span> <span class="fu">fcase</span>(termo <span class="sc">==</span> <span class="st">"Pós Protocolo"</span>, <span class="st">"After protocol"</span>, termo <span class="sc">==</span> <span class="st">"Nível III"</span>, <span class="st">"Stage III"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                       termo <span class="sc">==</span> <span class="st">"Nível IV"</span>, <span class="st">"Stage IV"</span>, termo <span class="sc">==</span> <span class="st">"Nível 1"</span>, <span class="st">"ECOG 1"</span>, termo <span class="sc">==</span> <span class="st">"Nível 2"</span>, <span class="st">"ECOG 2"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                       termo <span class="sc">==</span> <span class="st">"Not recorded"</span>, <span class="st">"ECOG not recorded"</span>, termo <span class="sc">==</span> <span class="st">"menos de 60 anos"</span>, <span class="st">"Under 60"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                       termo <span class="sc">==</span> <span class="st">"Female"</span>, <span class="st">"Female"</span>, termo <span class="sc">==</span> <span class="st">"fumante"</span>, <span class="st">"Smoker"</span>, termo <span class="sc">==</span> <span class="st">"etilismo"</span>, <span class="st">"Alcohol use"</span>)]</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(coefs, <span class="fu">aes</span>(HR, <span class="fu">reorder</span>(termo, HR), <span class="at">colour =</span> termo <span class="sc">==</span> <span class="st">"After protocol"</span>)) <span class="sc">+</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">colour =</span> <span class="st">"grey50"</span>) <span class="sc">+</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> inf, <span class="at">xmax =</span> sup), <span class="at">size =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span> <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"grey30"</span>, <span class="st">"#db2777"</span>), <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Adjusted Cox model"</span>, <span class="at">subtitle =</span> <span class="st">"Hazard ratios with 95% confidence intervals (log scale)"</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Hazard ratio"</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project05_files/figure-html/forest-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>After adjustment, the hazard ratio of the protocol is close to 1, with a confidence interval that includes both a benefit and a harm. What really drives survival is the <strong>condition of the patient</strong>: advanced stage and worse ECOG.</p>
+<section id="checking-the-assumption-of-proportional-hazards" class="level3">
+<h3 class="anchored" data-anchor-id="checking-the-assumption-of-proportional-hazards">Checking the assumption of proportional hazards</h3>
+<p>The Cox model assumes that the ratio between the hazards of two groups is constant over time. The Schoenfeld residuals test this for each variable:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>zph <span class="ot">&lt;-</span> <span class="fu">cox.zph</span>(cox_ajust)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>zph</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>               chisq df     p
+protocolo     0.9163  1 0.338
+estadiamento  4.7790  2 0.092
+ecog_c        7.7820  3 0.051
+faixa_etaria  0.3714  1 0.542
+sexo          1.3836  1 0.239
+fumante       0.4202  1 0.517
+etilismo      0.0694  1 0.792
+GLOBAL       17.5788 10 0.062</code></pre>
+</div>
+</div>
+<p>No variable rejects the hypothesis of proportional hazards at 5%, but in this synthetic cohort ECOG (p = 0.051) and the global test (p = 0.062) are close to the limit, so the plot of the residuals over time would deserve a look before trusting the model. In the real data the assumption holds comfortably (global p = 0.9).</p>
+</section>
+<section id="parametric-models" class="level3">
+<h3 class="anchored" data-anchor-id="parametric-models">Parametric models</h3>
+<p>The original work also compared parametric distributions for the survival time, which are useful to describe the hazard over time and to extrapolate. The AIC shows which one fits these data best:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>distribuicoes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"exp"</span>, <span class="st">"weibull"</span>, <span class="st">"lnorm"</span>, <span class="st">"llogis"</span>, <span class="st">"gengamma"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ajustes <span class="ot">&lt;-</span> <span class="fu">lapply</span>(distribuicoes, <span class="cf">function</span>(d) <span class="fu">flexsurvreg</span>(<span class="fu">Surv</span>(tempo_meses, obito) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> coorte, <span class="at">dist =</span> d))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">data.table</span>(<span class="at">Distribution =</span> <span class="fu">c</span>(<span class="st">"Exponential"</span>, <span class="st">"Weibull"</span>, <span class="st">"Log-normal"</span>, <span class="st">"Log-logistic"</span>, <span class="st">"Generalised gamma"</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">AIC =</span> <span class="fu">sapply</span>(ajustes, AIC))[<span class="fu">order</span>(AIC)], <span class="at">digits =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Distribution</th>
+<th style="text-align: right;">AIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Generalised gamma</td>
+<td style="text-align: right;">1135.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Log-normal</td>
+<td style="text-align: right;">1151.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Log-logistic</td>
+<td style="text-align: right;">1156.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Exponential</td>
+<td style="text-align: right;">1182.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Weibull</td>
+<td style="text-align: right;">1183.6</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The generalised gamma has the lowest AIC, followed by the log-normal, while the exponential and the Weibull are clearly worse. The generalised gamma contains the other distributions as special cases, which is why the original work compared them with likelihood-ratio tests. The result describes the shape of the risk: it <strong>rises in the first months after the diagnosis and then falls</strong>, a pattern common in advanced cancers, and one that the Weibull, whose hazard can only go up or only go down, cannot represent. The real data show the same ranking (the log-normal fits about 30 AIC points better than the Weibull).</p>
+</section>
+</section>
+<section id="how-much-can-one-cohort-of-184-patients-vary" class="level2">
+<h2 class="anchored" data-anchor-id="how-much-can-one-cohort-of-184-patients-vary">How much can one cohort of 184 patients vary?</h2>
+<p>A synthetic cohort is one random draw. To know how much the result could change by chance alone, the generator simulated <strong>300 cohorts</strong> from the same model, in which the true hazard ratio of the protocol is the one estimated on the real data (1.09). This page uses the most typical of them, the one whose estimated HR is closest to the median of the 300.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(simulacoes, <span class="fu">aes</span>(hr)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">"#1d4ed8"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> reais<span class="sc">$</span>cox_ajust[<span class="dv">1</span>, HR], <span class="at">colour =</span> <span class="st">"#db2777"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Adjusted hazard ratio of the protocol in 300 simulated cohorts"</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Pink line: value estimated on the real data"</span>, <span class="at">x =</span> <span class="st">"Hazard ratio"</span>, <span class="at">y =</span> <span class="st">"Cohorts"</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project05_files/figure-html/simulacoes-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The estimates go from about 0.77 to 1.6 (90% of the cohorts), and 9% of them would show a “significant” log-rank test just by chance, although the true effect is practically null. With small samples, a single p-value says little.</p>
+</section>
+<section id="and-in-the-real-data" class="level2">
+<h2 class="anchored" data-anchor-id="and-in-the-real-data">And in the real data?</h2>
+<p>The same analysis was run on the real patients, on my machine. Only aggregated results leave it:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Analysis of the protocol</th>
+<th>Real data</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Log-rank (n = 178)</td>
+<td>p = 0.62</td>
+</tr>
+<tr class="even">
+<td>Unadjusted Cox</td>
+<td>HR = 1.09 (0.77 to 1.55)</td>
+</tr>
+<tr class="odd">
+<td>Cox adjusted for confounders</td>
+<td>HR = 1.09 (0.72 to 1.66)</td>
+</tr>
+<tr class="even">
+<td>Proportional hazards (Schoenfeld, global)</td>
+<td>p = 0.9</td>
+</tr>
+</tbody>
+</table>
+<p>The synthetic cohort reproduces the real results closely: in both, there is <strong>no evidence that survival changed after the protocol</strong> once the profile of the patients is taken into account.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<ol type="1">
+<li><strong>The protocol reached its main goal.</strong> Patients started treatment much faster: most of them in less than one month after the first consultation.</li>
+<li><strong>Survival did not change significantly.</strong> The adjusted hazard ratio is close to 1, with a confidence interval compatible with both a small benefit and a small harm.</li>
+<li><strong>The condition of the patient is what drives survival.</strong> Advanced stage and worse ECOG performance status are the strongest predictors of death.</li>
+<li><strong>A larger sample could go further.</strong> With 184 patients from a single hospital, small effects cannot be detected; a natural next question is whether time to treatment itself matters for survival.</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -117,6 +117,11 @@ Aqui estão alguns dos meus projetos:
       <td>Sampling plan and regression (PhD methodology)</td>
       <td>Contract (3 articles)</td>
     </tr>
+    <tr>
+      <td><a href="project05.html">Project 05</a></td>
+      <td>Survival analysis and adjusted Cox model</td>
+      <td>Contract (synthetic data)</td>
+    </tr>
   </tbody>
 </table>
 </div>

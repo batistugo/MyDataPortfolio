@@ -1,0 +1,185 @@
+paciente,protocolo,consulta_1,data_obito,obito,tempo_meses,estadiamento,ecog_c,faixa_etaria,sexo,fumante,etilismo,tempo_consulta_1_trat,tratamento
+P001,Pré Protocolo,2018-03-20,,0,52.17,Nível III,Nível 0,menos de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P002,Pré Protocolo,2018-02-22,2018-05-19,1,2.81,Nível III,Nível 0,menos de 60 anos,1,0,1,Mais de 2 meses,Bimodal
+P003,Pré Protocolo,2016-09-01,2020-02-06,1,41.16,Nível III,Nível 1,menos de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P004,Pré Protocolo,2017-04-28,2018-12-14,1,19.54,Nível III,Not recorded,menos de 60 anos,1,1,1,Menos de 1 mês,Bimodal
+P005,Pré Protocolo,2018-03-24,2020-11-22,1,32,Nível III,Nível 1,mais de 60 anos,1,0,1,Entre 1 e 2 meses,Bimodal
+P006,Pré Protocolo,2016-12-27,2018-08-20,1,19.75,Nível III,Not recorded,menos de 60 anos,1,1,0,Mais de 2 meses,Bimodal
+P007,Pré Protocolo,2016-01-20,2017-10-18,1,20.93,Nível III,Nível 1,mais de 60 anos,1,1,1,Entre 1 e 2 meses,Bimodal
+P008,Pré Protocolo,2016-05-19,,0,74.18,Nível III,Nível 1,menos de 60 anos,1,1,1,Entre 1 e 2 meses,Trimodal
+P009,Pré Protocolo,2018-01-30,2019-03-06,1,13.15,Nível III,Nível 2,mais de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P010,Pré Protocolo,2017-12-02,2018-12-04,1,12.07,Nível III,Not recorded,menos de 60 anos,2,1,1,Entre 1 e 2 meses,Trimodal
+P011,Pré Protocolo,2017-01-12,2018-01-31,1,12.61,Nível III,Nível 2,menos de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P012,Pré Protocolo,2017-04-10,2017-10-02,1,5.76,Nível II,Nível 2,menos de 60 anos,1,0,1,Entre 1 e 2 meses,Trimodal
+P013,Pré Protocolo,2017-08-26,,0,58.94,Nível III,Not recorded,mais de 60 anos,1,1,0,Mais de 2 meses,Bimodal
+P014,Pré Protocolo,2018-04-08,2018-11-19,1,7.4,Nível III,Not recorded,menos de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P015,Pré Protocolo,2017-03-13,2018-12-08,1,20.85,Nível III,Not recorded,menos de 60 anos,1,0,1,Menos de 1 mês,Trimodal
+P016,Pré Protocolo,2017-01-16,2018-08-19,1,19.06,Nível III,Nível 2,mais de 60 anos,1,0,0,Entre 1 e 2 meses,Bimodal
+P017,Pré Protocolo,2018-02-25,2021-09-22,1,42.86,Nível IV,Nível 1,menos de 60 anos,1,0,0,Entre 1 e 2 meses,Bimodal
+P018,Pré Protocolo,2016-02-15,2016-09-22,1,7.22,Nível III,Not recorded,menos de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P019,Pré Protocolo,2016-08-12,2017-07-07,1,10.81,Nível III,Not recorded,mais de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P020,Pré Protocolo,2018-02-22,2018-11-28,1,9.15,Nível III,Nível 1,mais de 60 anos,2,1,1,Entre 1 e 2 meses,Bimodal
+P021,Pré Protocolo,2018-02-19,,0,53.12,Nível III,Nível 0,menos de 60 anos,1,0,1,Mais de 2 meses,Trimodal
+P022,Pré Protocolo,2017-12-01,,0,55.75,Nível III,Not recorded,menos de 60 anos,1,1,1,Menos de 1 mês,Bimodal
+P023,Pré Protocolo,2017-01-07,,0,66.52,Nível III,Not recorded,mais de 60 anos,1,1,0,Menos de 1 mês,Bimodal
+P024,Pré Protocolo,2018-05-23,2018-11-28,1,6.22,Nível III,Nível 1,mais de 60 anos,1,1,1,Menos de 1 mês,Bimodal
+P025,Pré Protocolo,2016-11-18,2017-11-23,1,12.15,Nível II,Nível 0,menos de 60 anos,2,1,0,Mais de 2 meses,Bimodal
+P026,Pré Protocolo,2016-08-14,2018-04-01,1,19.56,Nível III,Nível 2,mais de 60 anos,1,0,1,Entre 1 e 2 meses,Bimodal
+P027,Pré Protocolo,2017-10-29,,0,56.83,Nível II,Not recorded,mais de 60 anos,1,0,0,Mais de 2 meses,Trimodal
+P028,Pré Protocolo,2016-11-08,2017-08-21,1,9.4,Nível III,Not recorded,menos de 60 anos,2,1,0,Entre 1 e 2 meses,Bimodal
+P029,Pré Protocolo,2018-07-08,2019-02-28,1,7.72,Nível III,Not recorded,mais de 60 anos,1,1,1,Menos de 1 mês,Trimodal
+P030,Pré Protocolo,2016-05-29,2017-01-26,1,7.96,Nível III,Nível 1,menos de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P031,Pré Protocolo,2017-02-09,,0,65.44,Nível III,Nível 0,menos de 60 anos,1,1,1,Entre 1 e 2 meses,Bimodal
+P032,Pré Protocolo,2017-08-16,2019-05-08,1,20.7,Nível III,Not recorded,menos de 60 anos,2,0,1,Mais de 2 meses,Bimodal
+P033,Pré Protocolo,2018-04-26,2019-03-20,1,10.77,Nível III,Nível 1,mais de 60 anos,1,1,0,Mais de 2 meses,Bimodal
+P034,Pré Protocolo,2016-02-16,,0,77.23,Nível II,Nível 1,menos de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P035,Pré Protocolo,2018-04-29,2020-04-13,1,23.49,Nível III,Nível 1,mais de 60 anos,1,0,1,Menos de 1 mês,Bimodal
+P036,Pré Protocolo,2016-05-21,2020-12-13,1,54.75,Nível III,Nível 1,mais de 60 anos,1,0,0,Entre 1 e 2 meses,Trimodal
+P037,Pré Protocolo,2016-12-01,2017-02-11,1,2.38,Nível IV,Nível 1,mais de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P038,Pré Protocolo,2016-12-28,,0,66.85,Nível III,Nível 1,mais de 60 anos,1,0,0,Entre 1 e 2 meses,Bimodal
+P039,Pré Protocolo,2018-05-03,2018-10-24,1,5.72,Nível III,Nível 1,menos de 60 anos,1,1,0,Entre 1 e 2 meses,Trimodal
+P040,Pré Protocolo,2016-12-21,2017-06-23,1,6.03,Nível III,Nível 1,mais de 60 anos,1,1,1,Menos de 1 mês,Bimodal
+P041,Pré Protocolo,2016-02-17,,0,77.2,Nível III,Not recorded,mais de 60 anos,1,1,0,Mais de 2 meses,Bimodal
+P042,Pré Protocolo,2016-09-17,2020-12-31,1,51.43,Nível III,Not recorded,mais de 60 anos,1,0,0,Mais de 2 meses,Bimodal
+P043,Pré Protocolo,2016-10-01,,0,69.74,Nível III,Nível 0,mais de 60 anos,2,1,0,Mais de 2 meses,Bimodal
+P044,Pré Protocolo,2017-04-21,2018-05-22,1,13,Nível III,Nível 0,mais de 60 anos,1,0,1,Mais de 2 meses,Bimodal
+P045,Pré Protocolo,2017-09-16,2018-04-18,1,7.04,Nível III,Not recorded,mais de 60 anos,1,1,1,Mais de 2 meses,Trimodal
+P046,Pré Protocolo,2017-05-19,2017-11-05,1,5.6,Nível III,Nível 2,menos de 60 anos,1,0,1,Mais de 2 meses,Bimodal
+P047,Pré Protocolo,2017-07-26,2019-05-15,1,21.61,Nível III,Nível 1,menos de 60 anos,1,1,0,Mais de 2 meses,Bimodal
+P048,Pré Protocolo,2016-11-28,2017-05-23,1,5.77,Nível II,Nível 0,mais de 60 anos,1,1,0,Mais de 2 meses,Bimodal
+P049,Pré Protocolo,2018-02-15,2021-12-18,1,46.05,Nível III,Not recorded,mais de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P050,Pré Protocolo,2016-07-18,,0,72.21,Nível III,Not recorded,mais de 60 anos,1,1,0,Entre 1 e 2 meses,Bimodal
+P051,Pré Protocolo,2016-01-16,2017-08-23,1,19.22,Nível III,Not recorded,menos de 60 anos,1,1,0,Mais de 2 meses,Bimodal
+P052,Pré Protocolo,2018-06-09,,0,49.51,Nível III,Nível 0,menos de 60 anos,1,0,0,Mais de 2 meses,Bimodal
+P053,Pré Protocolo,2017-06-02,,0,61.73,Nível III,Nível 1,mais de 60 anos,1,1,0,Entre 1 e 2 meses,Bimodal
+P054,Pré Protocolo,2017-02-12,,0,65.34,Nível III,Nível 0,mais de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P055,Pré Protocolo,2018-03-23,,0,52.07,Nível III,Not recorded,mais de 60 anos,1,1,1,Entre 1 e 2 meses,Bimodal
+P056,Pré Protocolo,2018-07-09,,0,48.52,Nível III,Nível 1,mais de 60 anos,1,1,1,Entre 1 e 2 meses,Trimodal
+P057,Pré Protocolo,2016-12-10,2018-05-02,1,16.7,Nível II,Not recorded,menos de 60 anos,1,1,0,Entre 1 e 2 meses,Trimodal
+P058,Pré Protocolo,2018-04-26,2020-12-31,1,32.18,Nível III,Nível 1,menos de 60 anos,2,0,0,Mais de 2 meses,Bimodal
+P059,Pré Protocolo,2018-02-01,2018-12-29,1,10.88,Nível III,Nível 1,menos de 60 anos,1,1,1,Menos de 1 mês,Trimodal
+P060,Pré Protocolo,2017-08-30,2018-06-02,1,9.06,Nível III,Nível 1,menos de 60 anos,2,1,1,Mais de 2 meses,Bimodal
+P061,Pré Protocolo,2018-06-19,2020-02-16,1,19.93,Nível III,Nível 1,menos de 60 anos,1,1,0,Mais de 2 meses,Bimodal
+P062,Pré Protocolo,2016-11-02,,0,68.69,Nível III,Nível 0,menos de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P063,Pré Protocolo,2017-12-19,2018-05-25,1,5.15,Nível III,Nível 1,mais de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P064,Pré Protocolo,2017-12-23,,0,55.03,Nível III,Nível 1,mais de 60 anos,2,1,1,Mais de 2 meses,Bimodal
+P065,Pré Protocolo,2017-04-13,2017-07-07,1,2.78,Nível III,Nível 1,mais de 60 anos,1,0,0,Entre 1 e 2 meses,Bimodal
+P066,Pré Protocolo,2016-07-03,,0,72.7,Nível III,Nível 1,menos de 60 anos,1,0,1,Mais de 2 meses,Bimodal
+P067,Pré Protocolo,2017-06-10,2017-09-02,1,2.77,Nível III,Nível 2,menos de 60 anos,1,1,0,Entre 1 e 2 meses,Bimodal
+P068,Pré Protocolo,2017-09-29,2020-05-29,1,31.95,Nível IV,Not recorded,menos de 60 anos,1,0,1,Mais de 2 meses,Trimodal
+P069,Pré Protocolo,2018-02-13,2018-07-11,1,4.87,Nível III,Nível 2,mais de 60 anos,1,0,1,Mais de 2 meses,Trimodal
+P070,Pré Protocolo,2016-04-08,2018-08-24,1,28.5,Nível III,Nível 1,mais de 60 anos,1,1,0,Entre 1 e 2 meses,Bimodal
+P071,Pré Protocolo,2016-04-16,2017-09-29,1,17.46,Nível III,Nível 1,mais de 60 anos,2,0,0,Entre 1 e 2 meses,Bimodal
+P072,Pré Protocolo,2016-01-16,2016-09-05,1,7.64,Nível III,Nível 2,mais de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P073,Pré Protocolo,2017-03-09,2017-05-06,1,1.89,Nível IV,Nível 1,mais de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P074,Pré Protocolo,2018-04-05,2018-11-02,1,6.94,Nível II,Not recorded,menos de 60 anos,1,1,1,Entre 1 e 2 meses,Bimodal
+P075,Pré Protocolo,2016-01-02,2016-12-14,1,11.39,Nível III,Nível 2,menos de 60 anos,1,0,1,Mais de 2 meses,Bimodal
+P076,Pré Protocolo,2018-06-25,2019-04-18,1,9.77,Nível II,Nível 1,menos de 60 anos,1,1,1,Mais de 2 meses,Trimodal
+P077,Pré Protocolo,2016-10-20,2017-06-09,1,7.62,Nível IV,Not recorded,menos de 60 anos,1,1,1,Entre 1 e 2 meses,Bimodal
+P078,Pré Protocolo,2016-10-31,2018-01-10,1,14.33,Nível IV,Not recorded,menos de 60 anos,1,0,1,Entre 1 e 2 meses,Trimodal
+P079,Pré Protocolo,2016-11-11,2018-10-07,1,22.82,Nível III,Not recorded,mais de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P080,Pré Protocolo,2017-04-03,2017-09-27,1,5.8,Nível III,Nível 1,mais de 60 anos,1,0,1,Mais de 2 meses,Bimodal
+P081,Pré Protocolo,2018-05-30,2019-08-12,1,14.43,Nível III,Nível 1,menos de 60 anos,2,1,0,Entre 1 e 2 meses,Bimodal
+P082,Pré Protocolo,2017-01-08,2017-04-23,1,3.45,Nível III,Nível 0,mais de 60 anos,1,1,0,Mais de 2 meses,Bimodal
+P083,Pré Protocolo,2016-10-13,2019-06-10,1,31.86,Nível III,Nível 1,mais de 60 anos,1,1,0,Entre 1 e 2 meses,Bimodal
+P084,Pré Protocolo,2017-09-28,2018-03-23,1,5.77,Nível III,Nível 1,menos de 60 anos,1,1,1,Menos de 1 mês,Bimodal
+P085,Pré Protocolo,2017-08-27,,0,58.9,Nível III,Nível 1,mais de 60 anos,1,1,0,Mais de 2 meses,Bimodal
+P086,Pré Protocolo,2016-04-15,2017-11-09,1,18.82,Nível III,Nível 1,menos de 60 anos,1,1,0,Entre 1 e 2 meses,Trimodal
+P087,Pré Protocolo,2017-08-30,2020-05-28,1,32.93,Nível III,Nível 0,menos de 60 anos,1,1,1,Entre 1 e 2 meses,Bimodal
+P088,Pré Protocolo,2017-05-19,2021-12-29,1,55.35,Nível III,Not recorded,mais de 60 anos,2,1,0,Mais de 2 meses,Bimodal
+P089,Pré Protocolo,2017-10-17,2018-09-19,1,11.06,Nível III,Not recorded,mais de 60 anos,1,0,1,Entre 1 e 2 meses,Bimodal
+P090,Pré Protocolo,2018-04-23,2018-11-09,1,6.57,Nível III,Not recorded,mais de 60 anos,1,1,0,Entre 1 e 2 meses,Bimodal
+P091,Pré Protocolo,2016-12-22,,0,67.05,Nível III,Nível 1,mais de 60 anos,1,0,1,Entre 1 e 2 meses,Bimodal
+P092,Pré Protocolo,2017-11-09,,0,56.47,Nível III,Nível 0,menos de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P093,Pré Protocolo,2016-09-04,,0,70.63,Nível II,Not recorded,menos de 60 anos,1,0,0,Entre 1 e 2 meses,Bimodal
+P094,Pré Protocolo,2016-01-23,2017-04-09,1,14.51,Nível III,Not recorded,mais de 60 anos,1,1,0,Mais de 2 meses,Trimodal
+P095,Pré Protocolo,2017-11-19,2018-02-25,1,3.23,Nível III,Nível 1,menos de 60 anos,1,0,0,Entre 1 e 2 meses,Trimodal
+P096,Pré Protocolo,2016-12-02,2020-05-14,1,41.36,Nível III,Nível 1,menos de 60 anos,1,1,1,Entre 1 e 2 meses,Bimodal
+P097,Pré Protocolo,2016-03-21,,0,76.12,Nível II,Not recorded,menos de 60 anos,1,1,1,Entre 1 e 2 meses,Bimodal
+P098,Pré Protocolo,2017-04-06,2017-06-18,1,2.41,Nível II,Nível 2,mais de 60 anos,1,0,1,Entre 1 e 2 meses,Bimodal
+P099,Pré Protocolo,2018-05-22,2019-05-28,1,12.18,Nível II,Nível 1,menos de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P100,Pós Protocolo,2019-10-18,2020-02-18,1,4.03,Nível III,Nível 0,menos de 60 anos,1,0,1,Menos de 1 mês,Trimodal
+P101,Pós Protocolo,2020-01-11,2020-08-06,1,6.82,Nível IV,Nível 2,mais de 60 anos,2,0,1,Menos de 1 mês,Bimodal
+P102,Pós Protocolo,2019-07-01,,0,36.79,Nível III,Nível 1,menos de 60 anos,2,1,0,Mais de 2 meses,Trimodal
+P103,Pós Protocolo,2019-03-04,2019-06-24,1,3.69,Nível III,Nível 2,mais de 60 anos,1,1,1,Entre 1 e 2 meses,Trimodal
+P104,Pós Protocolo,2019-04-02,2020-04-07,1,12.19,Nível III,Nível 1,menos de 60 anos,2,1,0,Entre 1 e 2 meses,Bimodal
+P105,Pós Protocolo,2020-11-30,2021-09-12,1,9.38,Nível III,Nível 2,mais de 60 anos,2,1,1,Entre 1 e 2 meses,Bimodal
+P106,Pós Protocolo,2019-09-21,,0,34.1,Nível III,Nível 1,menos de 60 anos,2,0,0,Menos de 1 mês,Bimodal
+P107,Pós Protocolo,2020-08-09,2021-01-10,1,5.07,Nível III,Nível 2,mais de 60 anos,1,1,1,Entre 1 e 2 meses,Bimodal
+P108,Pós Protocolo,2019-08-02,2019-12-19,1,4.55,Nível IV,Nível 1,mais de 60 anos,1,1,1,Menos de 1 mês,Bimodal
+P109,Pós Protocolo,2018-10-19,2020-01-02,1,14.45,Nível IV,Nível 1,mais de 60 anos,1,1,0,Entre 1 e 2 meses,Bimodal
+P110,Pós Protocolo,2019-11-12,,0,32.39,Nível II,Nível 1,menos de 60 anos,1,1,0,Menos de 1 mês,Bimodal
+P111,Pós Protocolo,2019-04-05,2020-07-02,1,14.9,Nível III,Nível 1,mais de 60 anos,1,1,1,Menos de 1 mês,Bimodal
+P112,Pós Protocolo,2019-09-02,2020-09-21,1,12.64,Nível IV,Nível 1,menos de 60 anos,1,1,1,Entre 1 e 2 meses,Bimodal
+P113,Pós Protocolo,2019-03-02,2021-10-30,1,31.97,Nível IV,Nível 1,mais de 60 anos,1,1,1,Entre 1 e 2 meses,Bimodal
+P114,Pós Protocolo,2019-03-16,2021-11-12,1,31.94,Nível IV,Nível 1,menos de 60 anos,1,1,0,Entre 1 e 2 meses,Bimodal
+P115,Pós Protocolo,2020-01-31,,0,29.76,Nível II,Nível 1,mais de 60 anos,1,1,1,Entre 1 e 2 meses,Bimodal
+P116,Pós Protocolo,2019-09-28,2020-10-30,1,13.08,Nível III,Nível 2,mais de 60 anos,1,1,1,Menos de 1 mês,Bimodal
+P117,Pós Protocolo,2019-11-06,2020-06-21,1,7.49,Nível IV,Nível 2,menos de 60 anos,1,0,0,Entre 1 e 2 meses,Bimodal
+P118,Pós Protocolo,2019-06-07,,0,37.58,Nível II,Nível 1,menos de 60 anos,2,0,0,Menos de 1 mês,Bimodal
+P119,Pós Protocolo,2019-02-06,2020-02-07,1,12.03,Nível II,Nível 1,mais de 60 anos,1,1,0,Menos de 1 mês,Trimodal
+P120,Pós Protocolo,2019-12-17,,0,31.24,Nível III,Nível 0,menos de 60 anos,1,1,1,Entre 1 e 2 meses,Bimodal
+P121,Pós Protocolo,2019-05-01,,0,38.8,Nível III,Nível 1,menos de 60 anos,2,1,0,Menos de 1 mês,Bimodal
+P122,Pós Protocolo,2020-10-17,2021-12-24,1,14.22,Nível IV,Nível 1,menos de 60 anos,1,0,1,Menos de 1 mês,Bimodal
+P123,Pós Protocolo,2020-05-09,,0,26.51,Nível IV,Not recorded,mais de 60 anos,1,0,1,Menos de 1 mês,Bimodal
+P124,Pós Protocolo,2020-10-20,,0,21.12,Nível III,Nível 1,mais de 60 anos,2,1,0,Menos de 1 mês,Bimodal
+P125,Pós Protocolo,2020-05-13,,0,26.38,Nível III,Nível 0,mais de 60 anos,2,1,0,Mais de 2 meses,Trimodal
+P126,Pós Protocolo,2018-12-18,2021-01-22,1,25.15,Nível III,Nível 2,menos de 60 anos,1,1,0,Menos de 1 mês,Trimodal
+P127,Pós Protocolo,2018-08-20,2018-12-03,1,3.46,Nível III,Nível 1,mais de 60 anos,2,0,0,Mais de 2 meses,Trimodal
+P128,Pós Protocolo,2020-08-16,2021-03-07,1,6.66,Nível II,Nível 1,menos de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P129,Pós Protocolo,2020-01-11,,0,30.42,Nível III,Nível 1,menos de 60 anos,1,0,0,Menos de 1 mês,Trimodal
+P130,Pós Protocolo,2019-12-20,2020-06-13,1,5.79,Nível III,Not recorded,menos de 60 anos,1,1,1,Menos de 1 mês,Bimodal
+P131,Pós Protocolo,2019-01-22,2020-06-23,1,17.02,Nível III,Nível 1,mais de 60 anos,1,1,0,Menos de 1 mês,Bimodal
+P132,Pós Protocolo,2018-10-12,,0,45.4,Nível III,Nível 0,mais de 60 anos,1,0,1,Entre 1 e 2 meses,Bimodal
+P133,Pós Protocolo,2018-09-03,2019-04-22,1,7.6,Nível IV,Nível 2,menos de 60 anos,2,1,1,Menos de 1 mês,Trimodal
+P134,Pós Protocolo,2020-10-02,2021-05-25,1,7.73,Nível IV,Nível 1,mais de 60 anos,1,1,1,Entre 1 e 2 meses,Bimodal
+P135,Pós Protocolo,2019-04-05,2020-01-17,1,9.44,Nível III,Nível 1,mais de 60 anos,1,1,1,Entre 1 e 2 meses,Bimodal
+P136,Pós Protocolo,2020-01-11,2020-09-17,1,8.2,Nível IV,Nível 1,menos de 60 anos,1,0,0,Menos de 1 mês,Bimodal
+P137,Pós Protocolo,2019-03-10,,0,40.51,Nível II,Not recorded,menos de 60 anos,1,1,0,Menos de 1 mês,Trimodal
+P138,Pós Protocolo,2019-05-24,,0,38.04,Nível II,Nível 1,mais de 60 anos,1,0,0,Menos de 1 mês,Bimodal
+P139,Pós Protocolo,2019-11-07,,0,32.56,Nível III,Nível 0,menos de 60 anos,2,1,1,Menos de 1 mês,Trimodal
+P140,Pós Protocolo,2019-06-13,2020-07-20,1,13.25,Nível IV,Nível 1,menos de 60 anos,1,1,1,Menos de 1 mês,Trimodal
+P141,Pós Protocolo,2019-10-30,2020-02-25,1,3.89,Nível II,Nível 1,menos de 60 anos,1,1,0,Menos de 1 mês,Bimodal
+P142,Pós Protocolo,2020-01-02,2022-04-22,1,27.63,Nível III,Nível 1,menos de 60 anos,2,1,0,Entre 1 e 2 meses,Bimodal
+P143,Pós Protocolo,2019-09-12,2020-05-03,1,7.68,Nível II,Nível 1,mais de 60 anos,1,0,0,Entre 1 e 2 meses,Trimodal
+P144,Pós Protocolo,2020-02-14,2022-01-07,1,22.78,Nível III,Nível 1,menos de 60 anos,1,1,0,Entre 1 e 2 meses,Trimodal
+P145,Pós Protocolo,2020-02-21,2020-08-23,1,6.06,Nível III,Nível 1,mais de 60 anos,1,0,0,Menos de 1 mês,Trimodal
+P146,Pós Protocolo,2018-10-19,2019-08-03,1,9.45,Nível II,Nível 1,menos de 60 anos,1,0,1,Menos de 1 mês,Trimodal
+P147,Pós Protocolo,2018-08-28,2019-04-04,1,7.2,Nível III,Nível 1,mais de 60 anos,1,0,0,Menos de 1 mês,Bimodal
+P148,Pós Protocolo,2019-12-22,,0,31.08,Nível IV,Nível 1,menos de 60 anos,2,0,0,Menos de 1 mês,Bimodal
+P149,Pós Protocolo,2020-07-19,2021-08-28,1,13.3,Nível III,Nível 2,menos de 60 anos,2,1,0,Menos de 1 mês,Trimodal
+P150,Pós Protocolo,2020-06-27,,0,24.9,Nível III,Nível 1,mais de 60 anos,2,1,0,Menos de 1 mês,Bimodal
+P151,Pós Protocolo,2020-06-28,,0,24.87,Nível IV,Nível 1,menos de 60 anos,2,1,1,Menos de 1 mês,Bimodal
+P152,Pós Protocolo,2020-10-23,2021-04-20,1,5.87,Nível III,Nível 2,menos de 60 anos,1,1,1,Menos de 1 mês,Bimodal
+P153,Pós Protocolo,2020-07-04,,0,24.67,Nível II,Nível 2,menos de 60 anos,1,1,0,Entre 1 e 2 meses,Bimodal
+P154,Pós Protocolo,2019-07-17,2021-10-18,1,27.08,Nível IV,Nível 1,mais de 60 anos,2,1,0,Menos de 1 mês,Trimodal
+P155,Pós Protocolo,2019-11-24,,0,32,Nível II,Nível 1,menos de 60 anos,1,1,0,Menos de 1 mês,Bimodal
+P156,Pós Protocolo,2020-06-17,2021-09-21,1,15.14,Nível III,Nível 1,menos de 60 anos,1,1,1,Menos de 1 mês,Trimodal
+P157,Pós Protocolo,2018-12-21,,0,43.1,Nível II,Nível 1,mais de 60 anos,2,1,1,Entre 1 e 2 meses,Bimodal
+P158,Pós Protocolo,2020-07-01,,0,24.77,Nível III,Nível 1,menos de 60 anos,2,1,0,Menos de 1 mês,Bimodal
+P159,Pós Protocolo,2020-11-20,,0,20.11,Nível II,Nível 1,mais de 60 anos,2,1,0,Menos de 1 mês,Trimodal
+P160,Pós Protocolo,2019-11-20,2020-12-09,1,12.64,Nível II,Nível 1,mais de 60 anos,1,1,0,Menos de 1 mês,Bimodal
+P161,Pós Protocolo,2020-05-21,2021-06-17,1,12.89,Nível III,Nível 1,mais de 60 anos,1,1,1,Menos de 1 mês,Trimodal
+P162,Pós Protocolo,2019-09-28,2020-02-09,1,4.41,Nível III,Nível 1,mais de 60 anos,1,1,0,Entre 1 e 2 meses,Bimodal
+P163,Pós Protocolo,2019-09-17,2020-06-08,1,8.71,Nível III,Nível 2,menos de 60 anos,1,1,1,Entre 1 e 2 meses,Bimodal
+P164,Pós Protocolo,2020-09-29,2022-05-30,1,19.97,Nível III,Nível 1,mais de 60 anos,1,0,0,Menos de 1 mês,Bimodal
+P165,Pós Protocolo,2019-07-21,2020-01-03,1,5.45,Nível IV,Nível 1,menos de 60 anos,1,1,0,Menos de 1 mês,Trimodal
+P166,Pós Protocolo,2020-10-20,,0,21.12,Nível III,Nível 0,mais de 60 anos,2,1,1,Entre 1 e 2 meses,Trimodal
+P167,Pós Protocolo,2020-06-26,2020-09-02,1,2.23,Nível III,Nível 1,mais de 60 anos,2,0,0,Menos de 1 mês,Bimodal
+P168,Pós Protocolo,2020-12-06,2022-02-24,1,14.61,Nível III,Nível 1,mais de 60 anos,1,1,1,Menos de 1 mês,Bimodal
+P169,Pós Protocolo,2019-11-29,2021-08-16,1,20.57,Nível III,Nível 1,menos de 60 anos,2,1,1,Menos de 1 mês,Bimodal
+P170,Pós Protocolo,2019-03-05,2020-02-18,1,11.49,Nível III,Nível 1,mais de 60 anos,1,1,1,Menos de 1 mês,Trimodal
+P171,Pós Protocolo,2018-11-09,2019-01-30,1,2.7,Nível IV,Nível 1,menos de 60 anos,1,1,1,Mais de 2 meses,Bimodal
+P172,Pós Protocolo,2020-09-04,2021-12-26,1,15.71,Nível IV,Nível 1,mais de 60 anos,1,0,1,Menos de 1 mês,Bimodal
+P173,Pós Protocolo,2020-06-14,,0,25.33,Nível III,Nível 1,menos de 60 anos,2,1,0,Mais de 2 meses,Bimodal
+P174,Pós Protocolo,2020-05-13,2021-04-21,1,11.26,Nível III,Nível 1,menos de 60 anos,1,1,1,Menos de 1 mês,Bimodal
+P175,Pós Protocolo,2020-11-06,2020-12-30,1,1.77,Nível III,Nível 1,menos de 60 anos,1,0,0,Menos de 1 mês,Bimodal
+P176,Pós Protocolo,2019-01-19,,0,42.15,Nível II,Nível 1,menos de 60 anos,1,1,0,Menos de 1 mês,Bimodal
+P177,Pós Protocolo,2019-05-10,2020-06-18,1,13.3,Nível IV,Nível 1,menos de 60 anos,2,1,0,Menos de 1 mês,Bimodal
+P178,Pós Protocolo,2019-09-17,2020-08-22,1,11.16,Nível III,Nível 1,mais de 60 anos,1,1,1,Entre 1 e 2 meses,Bimodal
+P179,Pós Protocolo,2020-12-26,2021-11-29,1,11.12,Nível III,Nível 1,mais de 60 anos,1,1,1,Menos de 1 mês,Bimodal
+P180,Pós Protocolo,2020-06-04,2020-10-28,1,4.81,Nível IV,Nível 1,menos de 60 anos,1,0,1,Menos de 1 mês,Bimodal
+P181,Pós Protocolo,2019-05-12,,0,38.44,Nível III,Nível 1,mais de 60 anos,2,1,1,Menos de 1 mês,Bimodal
+P182,Pós Protocolo,2018-09-15,2020-10-20,1,25.15,Nível II,Nível 1,mais de 60 anos,1,0,1,Entre 1 e 2 meses,Bimodal
+P183,Pós Protocolo,2020-02-12,2021-02-19,1,12.24,Nível III,Nível 1,mais de 60 anos,1,1,0,Menos de 1 mês,Trimodal
+P184,Pós Protocolo,2019-03-04,2020-05-09,1,14.2,Nível III,Nível 1,menos de 60 anos,1,0,0,Entre 1 e 2 meses,Bimodal
