@@ -1,0 +1,446 @@
+---
+pagetitle: "Mental Health in the Federal Highway Police"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 4
+    theme: cosmo
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+
+# returns the text in the language of the page being rendered
+tr <- function(en, pt) if (identical(Sys.getenv("QUARTO_PROFILE"), "pt")) pt else en
+
+# numbers written inside the text follow the language (0.48 in English, 0,48 in Portuguese)
+knitr::knit_hooks$set(inline = function(x) {
+  if (is.numeric(x)) x <- format(x, decimal.mark = tr(".", ","), big.mark = tr(",", "."), scientific = FALSE)
+  x
+})
+```
+
+::: {.content-visible when-profile="en"}
+::: {.h1 .page-title}
+Mental Health in the Federal Highway Police: two waves of the DASS-21 and the role of psychosocial care
+:::
+:::
+
+::: {.content-visible when-profile="pt"}
+::: {.h1 .page-title}
+Saúde Mental na Polícia Rodoviária Federal: duas ondas do DASS-21 e o papel do atendimento psicossocial
+:::
+:::
+
+*Hugo Batista da Silva*
+
+::: {.content-visible when-profile="en"}
+::: {.callout-note}
+**Projects 6.1 and 6.2** were made for the same client, a research group in work psychology of the Graduate Program in Psychology of the Federal University of Espírito Santo (UFES), but they use different databases and different analyses. [Project 6.1](project06_1.html) is a survey of bank workers; this page uses administrative data of the Federal Highway Police (PRF).
+:::
+
+## About the project
+The Federal Highway Police (PRF) applies the DASS-21 to its staff as a mental health screening, and it keeps a psychosocial care service, the CAAS, where the staff can be attended by psychologists. The research group received the DASS-21 of **2023 and 2024**, the records of the CAAS, the records of the attendance system (where each person reports their mood at the beginning and at the end of each shift) and the results of the physical fitness test (TAF), and asked questions such as:
+
+- Did mental health change between 2023 and 2024, and do the CAAS attendances explain these changes?
+- Is the mood reported in the attendance system an indicator of mental suffering?
+- Is the evolution of physical fitness related to the evolution of the DASS-21?
+
+I was responsible for linking the databases and for the statistical analysis, delivered in a series of reports. This page reproduces the main line of these analyses.
+
+## Theoretical framework
+| Construct | Measure | Role in the study |
+|-----------|---------|-------------------|
+| Mental health | DASS-21: depression, anxiety and stress (the same instrument of [Project 6.1](project06_1.html)) | Outcome, measured twice |
+| Psychosocial care | Attendance at the CAAS and number of attendances | Exposure of interest |
+| Momentary mood | Mood reported at the start and at the end of each shift (1 = very bad to 5 = very good) | Candidate early indicator |
+| Physical fitness | Mean score of the physical fitness test (TAF) | Candidate protective factor |
+
+Two methodological concepts are central in this page. A **change score** (DASS-21 of 2024 minus DASS-21 of 2023) measures the evolution of each person; positive values mean **more symptoms**, a worsening. And **regression to the mean**: people measured at an extreme level in the first wave tend to be closer to the average in the second one, even without any intervention, simply because part of any measurement is random variation.
+
+## Linking the databases
+The databases come from different systems and were linked by the registration number of each person. The number of people in each combination shows how the sample changes with each question:
+
+| Databases | People |
+|-----------|-------:|
+| DASS-21 2023 | 7,864 |
+| DASS-21 2024 | 8,164 |
+| CAAS (at least one attendance) | 6,013 |
+| Attendance system (mood) | 6,656 |
+| DASS-21 2023 and 2024 | 5,672 |
+| DASS-21 2023 and 2024 + CAAS | 2,619 |
+| DASS-21 2023 and 2024 + TAF | 5,693 |
+| DASS-21 2023 and 2024 + CAAS + attendance system + TAF | 1,337 |
+
+Each analysis uses the largest possible sample for its question, as agreed with the client, instead of restricting everything to the 1,337 people present in all the databases.
+
+## The dataset
+The data are real and protected by the Brazilian data protection law (LGPD). In the version published here **all sociodemographic and socio-professional characteristics were removed** (sex, age, race, marital status, children, state, unit, position, length of service, management position, loans), as well as dates and free text. The mood, the TAF and the number of CAAS attendances were aggregated per person **before** the registration number was discarded, and each person received a new random key.
+
+The original reports also included the sociodemographic characteristics as covariates. Since they are not available here, the models of this page focus on the questions about the CAAS, the mood and the TAF.
+:::
+
+::: {.content-visible when-profile="pt"}
+::: {.callout-note}
+**Os projetos 6.1 e 6.2** foram feitos para o mesmo cliente, um grupo de pesquisa em psicologia do trabalho do Programa de Pós-Graduação em Psicologia da Universidade Federal do Espírito Santo (UFES), mas usam bases de dados e análises diferentes. O [Projeto 6.1](project06_1.html) é um questionário com bancários; esta página usa dados administrativos da Polícia Rodoviária Federal (PRF).
+:::
+
+## Sobre o projeto
+A Polícia Rodoviária Federal (PRF) aplica o DASS-21 aos seus servidores como rastreamento de saúde mental e mantém um serviço de atendimento psicossocial, o CAAS, onde os servidores podem ser atendidos por psicólogos. O grupo de pesquisa recebeu o DASS-21 de **2023 e de 2024**, os registros do CAAS, os registros do sistema de frequência (em que cada pessoa informa o seu humor no início e no fim de cada turno) e os resultados do teste de aptidão física (TAF), e fez perguntas como:
+
+- A saúde mental mudou entre 2023 e 2024, e os atendimentos do CAAS explicam essas mudanças?
+- O humor informado no sistema de frequência é um indicador de sofrimento mental?
+- A evolução da aptidão física se relaciona com a evolução do DASS-21?
+
+Fui responsável por cruzar as bases e pela análise estatística, entregue em uma série de relatórios. Esta página reproduz a linha principal dessas análises.
+
+## Referencial teórico
+| Construto | Medida | Papel no estudo |
+|-----------|--------|-----------------|
+| Saúde mental | DASS-21: depressão, ansiedade e estresse (o mesmo instrumento do [Projeto 6.1](project06_1.html)) | Desfecho, medido duas vezes |
+| Atendimento psicossocial | Atendimento no CAAS e número de atendimentos | Exposição de interesse |
+| Humor momentâneo | Humor informado no início e no fim de cada turno (1 = péssimo a 5 = ótimo) | Candidato a indicador precoce |
+| Aptidão física | Nota média do teste de aptidão física (TAF) | Candidato a fator de proteção |
+
+Dois conceitos metodológicos são centrais nesta página. O **escore de mudança** (DASS-21 de 2024 menos DASS-21 de 2023) mede a evolução de cada pessoa; valores positivos significam **mais sintomas**, uma piora. E a **regressão à média**: pessoas medidas num nível extremo na primeira onda tendem a ficar mais perto da média na segunda, mesmo sem nenhuma intervenção, simplesmente porque parte de qualquer medida é variação aleatória.
+
+## Cruzamento das bases
+As bases vêm de sistemas diferentes e foram cruzadas pela matrícula de cada pessoa. O número de pessoas em cada combinação mostra como a amostra muda conforme a pergunta:
+
+| Bases | Pessoas |
+|-------|--------:|
+| DASS-21 2023 | 7.864 |
+| DASS-21 2024 | 8.164 |
+| CAAS (ao menos um atendimento) | 6.013 |
+| Sistema de frequência (humor) | 6.656 |
+| DASS-21 2023 e 2024 | 5.672 |
+| DASS-21 2023 e 2024 + CAAS | 2.619 |
+| DASS-21 2023 e 2024 + TAF | 5.693 |
+| DASS-21 2023 e 2024 + CAAS + sistema de frequência + TAF | 1.337 |
+
+Cada análise usa a maior amostra possível para a sua pergunta, como combinado com o cliente, em vez de restringir tudo às 1.337 pessoas presentes em todas as bases.
+
+## A base de dados
+Os dados são reais e protegidos pela LGPD. Na versão publicada aqui **todas as características sociodemográficas e socioprofissionais foram retiradas** (sexo, idade, raça, estado civil, filhos, UF, unidade, cargo, tempo de serviço, cargo de chefia, empréstimos), assim como datas e textos livres. O humor, o TAF e o número de atendimentos do CAAS foram agregados por pessoa **antes** de a matrícula ser descartada, e cada pessoa recebeu uma nova chave aleatória.
+
+Os relatórios originais também incluíam as características sociodemográficas como covariáveis. Como elas não estão disponíveis aqui, os modelos desta página se concentram nas perguntas sobre o CAAS, o humor e o TAF.
+:::
+
+```{r}
+library(data.table)
+library(lavaan)
+library(quantreg)
+library(lmtest)
+library(nortest)
+library(ggplot2)
+library(knitr)
+
+dataset <- fread("data/prf_dass21_caas.csv")
+dim(dataset)
+```
+
+::: {.content-visible when-profile="en"}
+## Data treatment
+The DASS-21 totals are calculated from the 21 items in both years (0 to 63), with the same cut-off points of [Project 6.1](project06_1.html). The CAAS attendance is classified in three groups: **no attendance**, attendance **only before** the DASS-21 of 2023, and attendance **between the two waves**, the group that matters for the change between 2023 and 2024.
+:::
+
+::: {.content-visible when-profile="pt"}
+## Tratamento dos dados
+Os totais do DASS-21 são calculados a partir dos 21 itens nos dois anos (0 a 63), com os mesmos pontos de corte do [Projeto 6.1](project06_1.html). O atendimento no CAAS é classificado em três grupos: **sem atendimento**, atendimento **apenas antes** do DASS-21 de 2023 e atendimento **entre as duas ondas**, o grupo que importa para a mudança entre 2023 e 2024.
+:::
+
+```{r}
+itens <- function(ano) paste0(rep(c("Est", "Ans", "Dep"), each = 7), 1:7, "_", ano)
+
+dataset[, dass23 := rowSums(.SD), .SDcols = itens(23)]
+dataset[, dass24 := rowSums(.SD), .SDcols = itens(24)]
+
+niveis_caas <- tr(c("No attendance", "Only before 2023", "Between the waves"),
+                  c("Sem atendimento", "Apenas antes de 2023", "Entre as ondas"))
+dataset[, caas := factor(fcase(caas_apos_dass23 == 1, niveis_caas[3],
+                               caas_atendido == 1, niveis_caas[2],
+                               caas_atendido == 2, niveis_caas[1]), niveis_caas)]
+
+niveis_dass <- tr(c("Normal", "Mild", "Moderate", "Severe", "Extremely severe"),
+                  c("Normal", "Leve", "Moderado", "Grave", "Extremamente grave"))
+classifica <- function(x) factor(findInterval(x, c(17, 21, 26, 30)) + 1, 1:5, niveis_dass, ordered = TRUE)
+dataset[, `:=`(classe23 = classifica(dass23), classe24 = classifica(dass24))]
+
+# people who answered the DASS-21 in both years
+pareados <- dataset[!is.na(dass23) & !is.na(dass24)]
+pareados[, mudanca := dass24 - dass23]
+nrow(pareados)
+```
+
+::: {.content-visible when-profile="en"}
+## Does the DASS-21 measure the same thing in both years?
+Before comparing the two waves, the structure of the DASS-21 is checked in each year with the same confirmatory model of [Project 6.1](project06_1.html): three first-order factors and a second-order factor, estimated by WLSMV on the ordinal items.
+:::
+
+::: {.content-visible when-profile="pt"}
+## O DASS-21 mede a mesma coisa nos dois anos?
+Antes de comparar as duas ondas, a estrutura do DASS-21 é verificada em cada ano com o mesmo modelo confirmatório do [Projeto 6.1](project06_1.html): três fatores de primeira ordem e um fator de segunda ordem, estimados por WLSMV sobre os itens ordinais.
+:::
+
+```{r}
+cfa_dass <- function(ano) {
+  v <- itens(ano)
+  modelo <- sprintf("estresse_f =~ %s\nansiedade_f =~ %s\ndepressao_f =~ %s\ndass_f =~ estresse_f + ansiedade_f + depressao_f",
+                    paste(v[1:7], collapse = " + "), paste(v[8:14], collapse = " + "), paste(v[15:21], collapse = " + "))
+  fit <- cfa(modelo, data = dataset[!is.na(get(v[1]))], estimator = "WLSMV", ordered = TRUE)
+  cargas <- as.data.table(standardizedSolution(fit))[op == "=~" & !rhs %in% lavNames(fit, "lv")]
+  c(ano = 2000 + ano, n = lavInspect(fit, "nobs"),
+    round(fitMeasures(fit, c("cfi.scaled", "tli.scaled", "rmsea.scaled", "srmr")), 3),
+    carga_min = round(min(cargas$est.std), 2),
+    omega_min = round(min(cargas[, sum(est.std)^2 / (sum(est.std)^2 + sum(1 - est.std^2)), by = lhs]$V1), 3))
+}
+cfas <- rbind(cfa_dass(23), cfa_dass(24))
+kable(cfas)
+```
+
+::: {.content-visible when-profile="en"}
+The structure is confirmed in both years, with robust CFI of `r cfas[1, "cfi.scaled"]` and `r cfas[2, "cfi.scaled"]`, all loadings above `r min(cfas[, "carga_min"])` and omega above `r min(cfas[, "omega_min"])` in every factor. The DASS-21 measures the same three dimensions in the two waves, as it did among the bank workers of Project 6.1, so the scores of 2023 and 2024 can be compared.
+
+## Did mental health change between 2023 and 2024?
+:::
+
+::: {.content-visible when-profile="pt"}
+A estrutura se confirma nos dois anos, com CFI robusto de `r cfas[1, "cfi.scaled"]` e `r cfas[2, "cfi.scaled"]`, todas as cargas acima de `r min(cfas[, "carga_min"])` e ômega acima de `r min(cfas[, "omega_min"])` em todos os fatores. O DASS-21 mede as mesmas três dimensões nas duas ondas, como entre os bancários do Projeto 6.1, então os escores de 2023 e 2024 podem ser comparados.
+
+## A saúde mental mudou entre 2023 e 2024?
+:::
+
+```{r}
+pareados[, .(media_2023 = mean(dass23), media_2024 = mean(dass24), mediana_2023 = median(dass23),
+             mediana_2024 = median(dass24), mudanca_media = mean(mudanca), desvio_mudanca = sd(mudanca))]
+wilcox.test(pareados$dass24, pareados$dass23, paired = TRUE)
+
+transicao <- dcast(pareados[, .N, by = .(classe23, classe24)][, pct := N / sum(N), by = classe23],
+                   classe23 ~ classe24, value.var = "pct", fill = 0)
+kable(transicao, digits = 2, caption = tr("Share of each 2023 class (rows) by 2024 class (columns)",
+                                          "Proporção de cada classe de 2023 (linhas) por classe de 2024 (colunas)"))
+```
+
+```{r, fig.width = 11, fig.height = 4.5}
+ggplot(pareados, aes(mudanca)) +
+  geom_histogram(binwidth = 1, fill = "steelblue") +
+  coord_cartesian(xlim = c(-30, 30)) +
+  theme(text = element_text(size = 15)) +
+  labs(title = tr("Change in the DASS-21 between 2023 and 2024", "Mudança do DASS-21 entre 2023 e 2024"),
+       x = tr("DASS-21 2024 minus DASS-21 2023 (positive = more symptoms)", "DASS-21 2024 menos DASS-21 2023 (positivo = mais sintomas)"),
+       y = tr("People", "Pessoas"))
+```
+
+```{r, include = FALSE}
+p_wilcox <- wilcox.test(pareados$dass24, pareados$dass23, paired = TRUE)$p.value
+continua_normal <- transicao[1, 2][[1]]
+graves_23 <- pareados[classe23 >= niveis_dass[4]]
+```
+
+::: {.content-visible when-profile="en"}
+On average, nothing changed: the mean change is `r round(mean(pareados$mudanca), 2)` points and the paired Wilcoxon test does not reject the null hypothesis (p = `r round(p_wilcox, 2)`). But the average hides a lot of movement. The change has a median of zero and a large dispersion (standard deviation of `r round(sd(pareados$mudanca), 1)` points), with people improving and getting worse by more than 20 points. In the transition table, `r round(100 * continua_normal)`% of those who were normal in 2023 remain normal in 2024, while among the `r nrow(graves_23)` people in the severe or extremely severe range in 2023, only `r round(100 * mean(graves_23$classe24 >= niveis_dass[4]))`% remain there in 2024.
+
+This last number is the first sign of **regression to the mean**: those who are at the extremes in one measurement tend to come back towards the average in the next one.
+
+## Is the mood of the attendance system an indicator of suffering?
+For each person, the mood reported at the start of the shifts is averaged, as well as the change of mood during the shift (mood at the end minus mood at the start).
+:::
+
+::: {.content-visible when-profile="pt"}
+Em média, nada mudou: a mudança média é de `r round(mean(pareados$mudanca), 2)` ponto e o teste de Wilcoxon pareado não rejeita a hipótese nula (p = `r round(p_wilcox, 2)`). Mas a média esconde muito movimento. A mudança tem mediana zero e grande dispersão (desvio padrão de `r round(sd(pareados$mudanca), 1)` pontos), com pessoas melhorando e piorando mais de 20 pontos. Na tabela de transição, `r round(100 * continua_normal)`% dos que eram normais em 2023 continuam normais em 2024, enquanto entre as `r nrow(graves_23)` pessoas na faixa grave ou extremamente grave em 2023, apenas `r round(100 * mean(graves_23$classe24 >= niveis_dass[4]))`% continuam nela em 2024.
+
+Este último número é o primeiro sinal de **regressão à média**: quem está nos extremos em uma medida tende a voltar em direção à média na seguinte.
+
+## O humor do sistema de frequência é um indicador de sofrimento?
+Para cada pessoa, é calculada a média do humor informado no início dos turnos, assim como a mudança de humor durante o turno (humor no fim menos humor no início).
+:::
+
+```{r, fig.width = 11, fig.height = 5}
+humor <- dataset[!is.na(dass23) & !is.na(humor_entrada)]
+humor[, variacao_humor := humor_saida - humor_entrada]
+
+cor(humor$dass23, humor$humor_entrada, method = "spearman")
+fit_humor <- lm(dass23 ~ humor_entrada + variacao_humor, data = humor)
+summary(fit_humor)
+
+humor[, faixa_humor := cut(humor_entrada, c(0, 3, 3.5, 4, 4.5, 5), include.lowest = TRUE)]
+ggplot(humor, aes(faixa_humor, dass23)) +
+  geom_boxplot(fill = "steelblue", alpha = 0.6, outlier.alpha = 0.3) +
+  theme(text = element_text(size = 15)) +
+  labs(title = tr("DASS-21 of 2023 by average mood at the start of the shifts", "DASS-21 de 2023 pela média do humor no início dos turnos"),
+       x = tr("Average mood (1 = very bad, 5 = very good)", "Humor médio (1 = péssimo, 5 = ótimo)"), y = "DASS-21 2023")
+```
+
+```{r, include = FALSE}
+coef_humor <- coef(fit_humor)
+```
+
+::: {.content-visible when-profile="en"}
+Yes. A single question answered at the start of each shift has a clear relationship with the DASS-21 (Spearman correlation of `r round(cor(humor$dass23, humor$humor_entrada, method = "spearman"), 2)`, `r nrow(humor)` people). Each point of average mood is associated with `r round(-coef_humor[["humor_entrada"]], 1)` points less in the DASS-21, and people whose mood falls during the shift have more symptoms. The two mood variables explain `r round(100 * summary(fit_humor)$r.squared)`% of the variability of the DASS-21, a lot for a measure that costs a few seconds per shift. The attendance system can work as a **continuous signal** to identify people who need a closer look between two applications of the DASS-21.
+
+## Is physical fitness related to mental health?
+:::
+
+::: {.content-visible when-profile="pt"}
+Sim. Uma única pergunta respondida no início de cada turno tem relação clara com o DASS-21 (correlação de Spearman de `r round(cor(humor$dass23, humor$humor_entrada, method = "spearman"), 2)`, `r nrow(humor)` pessoas). Cada ponto de humor médio se associa a `r round(-coef_humor[["humor_entrada"]], 1)` pontos a menos no DASS-21, e pessoas cujo humor cai durante o turno têm mais sintomas. As duas variáveis de humor explicam `r round(100 * summary(fit_humor)$r.squared)`% da variabilidade do DASS-21, muito para uma medida que custa alguns segundos por turno. O sistema de frequência pode funcionar como um **sinal contínuo** para identificar pessoas que precisam de um olhar mais atento entre duas aplicações do DASS-21.
+
+## A aptidão física se relaciona com a saúde mental?
+:::
+
+```{r}
+taf <- pareados[!is.na(taf_23) & !is.na(taf_24)]
+taf[, mudanca_taf := taf_24 - taf_23]
+nrow(taf)
+cor.test(taf$mudanca, taf$mudanca_taf, method = "spearman")
+cor.test(taf$dass23, taf$taf_23, method = "spearman")
+```
+
+::: {.content-visible when-profile="en"}
+No. Neither the level of the TAF nor its evolution is related to the DASS-21 in the `r nrow(taf)` people with the four measurements (correlations close to zero). In this population, physical fitness and mental health evolve independently, and the TAF cannot be used as an indicator of mental suffering.
+
+## The CAAS attendances
+This is the main question of the client. The first step is to compare the groups **before** any change:
+:::
+
+::: {.content-visible when-profile="pt"}
+Não. Nem o nível do TAF nem a sua evolução se relacionam com o DASS-21 nas `r nrow(taf)` pessoas com as quatro medidas (correlações próximas de zero). Nesta população, aptidão física e saúde mental evoluem de forma independente, e o TAF não pode ser usado como indicador de sofrimento mental.
+
+## Os atendimentos do CAAS
+Esta é a principal pergunta do cliente. O primeiro passo é comparar os grupos **antes** de qualquer mudança:
+:::
+
+```{r}
+grupos <- pareados[, .(pessoas = .N, dass_2023 = mean(dass23), dass_2024 = mean(dass24),
+                       mudanca_media = mean(mudanca), mudanca_mediana = median(mudanca), desvio = sd(mudanca)), by = caas][order(caas)]
+kable(grupos, digits = 2)
+```
+
+```{r, include = FALSE}
+g <- setNames(split(grupos, by = "caas"), c("sem", "antes", "entre"))
+```
+
+::: {.content-visible when-profile="en"}
+The groups are very different from the start: those attended between the waves had a DASS-21 of `r round(g$entre$dass_2023, 1)` in 2023, more than twice the `r round(g$sem$dass_2023, 1)` of those never attended. This is expected, since the CAAS attends people who need it, but it changes the interpretation of any comparison of change. The attended groups improved on average (`r round(g$entre$mudanca_media, 2)` points), and those not attended got slightly worse (`r round(g$sem$mudanca_media, 2)`). Read naively, this would be an effect of the CAAS. But people who start higher have more room to fall, and regression to the mean alone produces this pattern.
+
+### Linear regression for the change
+:::
+
+::: {.content-visible when-profile="pt"}
+Os grupos são muito diferentes desde o início: os atendidos entre as ondas tinham DASS-21 de `r round(g$entre$dass_2023, 1)` em 2023, mais que o dobro dos `r round(g$sem$dass_2023, 1)` de quem nunca foi atendido. Isso é esperado, já que o CAAS atende quem precisa, mas muda a interpretação de qualquer comparação de mudança. Os grupos atendidos melhoraram em média (`r round(g$entre$mudanca_media, 2)` ponto), e os não atendidos pioraram um pouco (`r round(g$sem$mudanca_media, 2)`). Lido de forma ingênua, isso seria um efeito do CAAS. Mas quem começa mais alto tem mais espaço para cair, e a regressão à média sozinha produz esse padrão.
+
+### Regressão linear para a mudança
+:::
+
+```{r}
+fit_bruto <- lm(mudanca ~ caas, data = pareados)
+fit_ajustado <- lm(mudanca ~ caas + dass23, data = pareados)
+summary(fit_bruto)$coefficients
+summary(fit_ajustado)$coefficients
+c(r2_bruto = summary(fit_bruto)$r.squared, r2_ajustado = summary(fit_ajustado)$r.squared)
+
+bptest(fit_ajustado)
+lillie.test(residuals(fit_ajustado))
+```
+
+```{r, include = FALSE}
+cb <- coef(fit_bruto); ca <- coef(fit_ajustado)
+entre <- grep("caas", names(cb))[2]
+```
+
+::: {.content-visible when-profile="en"}
+Without adjustment, attendance between the waves is associated with `r round(-cb[entre], 2)` points of improvement compared with those not attended. When the DASS-21 of 2023 enters the model, the sign is **reversed**: among people with the same initial level, those attended between the waves have `r round(ca[entre], 2)` points **more** in 2024. The coefficient of the baseline (`r round(ca[["dass23"]], 2)`) is the measure of regression to the mean: each point above the average in 2023 is followed by about half a point of "improvement" in 2024, for everyone. The baseline alone takes the R² from `r round(100 * summary(fit_bruto)$r.squared, 1)`% to `r round(100 * summary(fit_ajustado)$r.squared)`%.
+
+The residuals are far from normal and heteroscedastic, which was already seen in the original reports. The change of the DASS-21 is a variable with heavy tails, and the effect of the CAAS may not be the same for those who improve and for those who get worse. The appropriate tool for this is the **quantile regression**.
+
+### Quantile regression
+The quantile regression estimates the effect of each variable on different points of the distribution of the change: the low quantiles (τ = 0.1) are the people who improved most, the median is the typical person and the high quantiles (τ = 0.9) are those who got worse the most. Since the DASS-21 is a discrete score, the change has many ties (`r round(100 * mean(pareados$mudanca == 0))`% of the people have exactly zero), which makes the estimates of the quantiles unstable; a small uniform noise between -0.5 and 0.5 is added to the response (*jittering*, Machado and Santos Silva, 2005) to make it continuous without changing its quantiles in a relevant way.
+:::
+
+::: {.content-visible when-profile="pt"}
+Sem ajuste, o atendimento entre as ondas se associa a `r round(-cb[entre], 2)` ponto de melhora em relação a quem não foi atendido. Quando o DASS-21 de 2023 entra no modelo, o sinal **se inverte**: entre pessoas com o mesmo nível inicial, os atendidos entre as ondas têm `r round(ca[entre], 2)` pontos **a mais** em 2024. O coeficiente da linha de base (`r round(ca[["dass23"]], 2)`) é a medida da regressão à média: cada ponto acima da média em 2023 é seguido de cerca de meio ponto de "melhora" em 2024, para todos. Só a linha de base leva o R² de `r round(100 * summary(fit_bruto)$r.squared, 1)`% para `r round(100 * summary(fit_ajustado)$r.squared)`%.
+
+Os resíduos estão longe da normalidade e são heterocedásticos, o que já aparecia nos relatórios originais. A mudança do DASS-21 é uma variável de caudas pesadas, e o efeito do CAAS pode não ser o mesmo para quem melhora e para quem piora. A ferramenta adequada para isso é a **regressão quantílica**.
+
+### Regressão quantílica
+A regressão quantílica estima o efeito de cada variável em diferentes pontos da distribuição da mudança: os quantis baixos (τ = 0,1) são as pessoas que mais melhoraram, a mediana é a pessoa típica e os quantis altos (τ = 0,9) são as que mais pioraram. Como o DASS-21 é um escore discreto, a mudança tem muitos empates (`r round(100 * mean(pareados$mudanca == 0))`% das pessoas têm exatamente zero), o que torna as estimativas dos quantis instáveis; um pequeno ruído uniforme entre -0,5 e 0,5 é somado à resposta (*jittering*, Machado e Santos Silva, 2005) para torná-la contínua sem alterar os seus quantis de forma relevante.
+:::
+
+```{r, fig.width = 12, fig.height = 5.5}
+set.seed(2025)
+pareados[, mudanca_j := mudanca + runif(.N, -0.5, 0.5)]
+taus <- seq(0.1, 0.9, by = 0.1)
+
+coeficientes <- rbindlist(lapply(c(tr("Without baseline", "Sem linha de base"), tr("Adjusted for the 2023 DASS-21", "Ajustado pelo DASS-21 de 2023")), function(modelo) {
+  formula <- if (grepl("2023", modelo)) mudanca_j ~ caas + dass23 else mudanca_j ~ caas
+  rbindlist(lapply(taus, function(t) {
+    s <- summary(rq(formula, tau = t, data = pareados), se = "nid")$coefficients
+    linha <- grep("caas", rownames(s))[2]
+    data.table(modelo = modelo, tau = t, estimativa = s[linha, 1], erro = s[linha, 2])
+  }))
+}))
+
+ggplot(coeficientes, aes(tau, estimativa, colour = modelo, fill = modelo)) +
+  geom_hline(yintercept = 0, linetype = "dashed", colour = "grey50") +
+  geom_ribbon(aes(ymin = estimativa - 1.96 * erro, ymax = estimativa + 1.96 * erro), alpha = 0.15, colour = NA) +
+  geom_line(linewidth = 1.2) + geom_point(size = 2.5) +
+  scale_x_continuous(breaks = taus) +
+  theme(text = element_text(size = 15), legend.position = "top") +
+  labs(title = tr("Effect of attendance between the waves on each quantile of the change",
+                  "Efeito do atendimento entre as ondas em cada quantil da mudança"),
+       x = tr("Quantile τ (low = improved most, high = got worse the most)", "Quantil τ (baixo = mais melhorou, alto = mais piorou)"),
+       y = tr("Coefficient (DASS-21 points)", "Coeficiente (pontos do DASS-21)"), colour = NULL, fill = NULL)
+```
+
+```{r, include = FALSE}
+nome_bruto <- tr("Without baseline", "Sem linha de base"); nome_aj <- tr("Adjusted for the 2023 DASS-21", "Ajustado pelo DASS-21 de 2023")
+q_bruto <- coeficientes[modelo == nome_bruto]; q_aj <- coeficientes[modelo == nome_aj]
+```
+
+::: {.content-visible when-profile="en"}
+Without the baseline, the picture reproduces the heterogeneity found in the reports: attendance appears associated with **much more improvement** among those who improved most (`r round(q_bruto[tau == 0.1, estimativa], 1)` points at τ = 0.1) and with **more worsening** among those who got worse the most (`r round(q_bruto[tau == 0.9, estimativa], 1)` at τ = 0.9). This is the signature of a group that simply has a wider distribution of change because it starts at a higher level.
+
+Once the DASS-21 of 2023 is in the model, the "protective" effect in the low quantiles **disappears** (`r round(q_aj[tau == 0.1, estimativa], 1)` at τ = 0.1), and what remains is a positive coefficient that grows along the distribution (`r round(q_aj[tau == 0.9, estimativa], 1)` at τ = 0.9): among people with the same initial level, those attended between the waves are over-represented among those who got worse. The most plausible reading is not that the CAAS makes people worse, but the opposite direction: **people look for the CAAS, or are referred to it, when they get worse**.
+:::
+
+::: {.content-visible when-profile="pt"}
+Sem a linha de base, o quadro reproduz a heterogeneidade encontrada nos relatórios: o atendimento aparece associado a **muito mais melhora** entre os que mais melhoraram (`r round(q_bruto[tau == 0.1, estimativa], 1)` pontos em τ = 0,1) e a **mais piora** entre os que mais pioraram (`r round(q_bruto[tau == 0.9, estimativa], 1)` em τ = 0,9). Essa é a assinatura de um grupo que simplesmente tem uma distribuição de mudança mais larga porque começa num nível mais alto.
+
+Com o DASS-21 de 2023 no modelo, o efeito "protetor" nos quantis baixos **desaparece** (`r round(q_aj[tau == 0.1, estimativa], 1)` em τ = 0,1), e o que sobra é um coeficiente positivo que cresce ao longo da distribuição (`r round(q_aj[tau == 0.9, estimativa], 1)` em τ = 0,9): entre pessoas com o mesmo nível inicial, os atendidos entre as ondas estão super-representados entre os que pioraram. A leitura mais plausível não é que o CAAS piore as pessoas, mas a direção contrária: **as pessoas procuram o CAAS, ou são encaminhadas a ele, quando pioram**.
+:::
+
+```{r}
+dose <- pareados[caas == niveis_caas[3] & !is.na(qtd_atendimentos)]
+summary(dose$qtd_atendimentos)
+cor.test(dose$mudanca, dose$qtd_atendimentos, method = "spearman")
+```
+
+::: {.content-visible when-profile="en"}
+Among those attended between the waves, the number of attendances (median of `r median(dose$qtd_atendimentos)`) is not related to the change either (Spearman correlation of `r round(cor(dose$mudanca, dose$qtd_atendimentos, method = "spearman"), 2)`). Without a dose-response relationship and with a selection this strong, these data cannot measure the effect of the CAAS. To do so, it would be necessary to know the **date of each attendance** in relation to the two applications of the DASS-21, and to compare attended people with non-attended people with a similar trajectory, for example with a propensity score or with a third wave of the DASS-21.
+
+## How the analyses converge
+1. **The instrument is solid.** The DASS-21 has the same three-factor structure in the two waves of the PRF and among the bank workers of [Project 6.1](project06_1.html), with excellent reliability in all of them, which allows comparing years and populations.
+2. **The population is stable, the individuals are not.** The average does not change between 2023 and 2024, but individual changes are large in both directions, and the extremes come back towards the average.
+3. **Simple signals carry information.** A mood question at the start of the shift explains a relevant part of the DASS-21, while the physical fitness test does not.
+4. **The CAAS marks need, not effect.** Attended people start much higher, and after accounting for the initial level they are over-represented among those who got worse. Measuring the effect of the service requires a design that controls when and why people are attended.
+
+Together with Project 6.1, the picture is consistent: in both populations mental suffering is high and strongly related to the context of the work, and the statistical care needed to interpret it, validating the measures, adjusting for the baseline, looking beyond the average, is what turns these data into decisions.
+:::
+
+::: {.content-visible when-profile="pt"}
+Entre os atendidos entre as ondas, o número de atendimentos (mediana de `r median(dose$qtd_atendimentos)`) também não se relaciona com a mudança (correlação de Spearman de `r round(cor(dose$mudanca, dose$qtd_atendimentos, method = "spearman"), 2)`). Sem relação dose-resposta e com uma seleção tão forte, estes dados não conseguem medir o efeito do CAAS. Para isso seria preciso conhecer a **data de cada atendimento** em relação às duas aplicações do DASS-21 e comparar atendidos com não atendidos de trajetória parecida, por exemplo com escore de propensão ou com uma terceira onda do DASS-21.
+
+## Como as análises convergem
+1. **O instrumento é sólido.** O DASS-21 tem a mesma estrutura de três fatores nas duas ondas da PRF e entre os bancários do [Projeto 6.1](project06_1.html), com confiabilidade excelente em todas, o que permite comparar anos e populações.
+2. **A população é estável, os indivíduos não.** A média não muda entre 2023 e 2024, mas as mudanças individuais são grandes nas duas direções, e os extremos voltam em direção à média.
+3. **Sinais simples carregam informação.** Uma pergunta de humor no início do turno explica uma parte relevante do DASS-21, enquanto o teste de aptidão física não.
+4. **O CAAS marca necessidade, não efeito.** Os atendidos começam muito mais altos e, depois de considerar o nível inicial, estão super-representados entre os que pioraram. Medir o efeito do serviço exige um desenho que controle quando e por que as pessoas são atendidas.
+
+Junto com o Projeto 6.1, o quadro é coerente: nas duas populações o sofrimento mental é alto e fortemente ligado ao contexto de trabalho, e o cuidado estatístico necessário para interpretá-lo, validar as medidas, ajustar pela linha de base, olhar além da média, é o que transforma estes dados em decisões.
+:::
+
+```{r}
+#Cleaning the environment
+rm(humor, taf, dose, coeficientes)
+invisible(gc())
+```

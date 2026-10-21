@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Mental Health of Bank Workers – MyDataPortfolio</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-32643bc00688b413a4b4dac13675c875.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">MyDataPortfolio</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Perfil</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project01.html"> 
+<span class="menu-text">Projeto 01</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project02.html"> 
+<span class="menu-text">Projeto 02</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project03.html"> 
+<span class="menu-text">Projeto 03</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project04.html"> 
+<span class="menu-text">Projeto 04</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project05.html"> 
+<span class="menu-text">Projeto 05</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./project06_1.html" aria-current="page"> 
+<span class="menu-text">Projeto 6.1</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project06_2.html"> 
+<span class="menu-text">Projeto 6.2</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://batistugo.github.io/MyDataPortfolio/"> 
+<span class="menu-text">EN Version</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Nesta página</h2>
+   
+  <ul>
+  <li><a href="#sobre-o-projeto" id="toc-sobre-o-projeto" class="nav-link active" data-scroll-target="#sobre-o-projeto">Sobre o projeto</a></li>
+  <li><a href="#referencial-teórico" id="toc-referencial-teórico" class="nav-link" data-scroll-target="#referencial-teórico">Referencial teórico</a></li>
+  <li><a href="#a-base-de-dados" id="toc-a-base-de-dados" class="nav-link" data-scroll-target="#a-base-de-dados">A base de dados</a></li>
+  <li><a href="#escores-das-escalas" id="toc-escores-das-escalas" class="nav-link" data-scroll-target="#escores-das-escalas">Escores das escalas</a>
+  <ul class="collapse">
+  <li><a href="#qual-a-gravidade-dos-sintomas" id="toc-qual-a-gravidade-dos-sintomas" class="nav-link" data-scroll-target="#qual-a-gravidade-dos-sintomas">Qual a gravidade dos sintomas?</a></li>
+  </ul></li>
+  <li><a href="#análise-fatorial-confirmatória" id="toc-análise-fatorial-confirmatória" class="nav-link" data-scroll-target="#análise-fatorial-confirmatória">Análise fatorial confirmatória</a>
+  <ul class="collapse">
+  <li><a href="#saúde-mental-dass-21" id="toc-saúde-mental-dass-21" class="nav-link" data-scroll-target="#saúde-mental-dass-21">Saúde mental (DASS-21)</a></li>
+  <li><a href="#perfil-do-trabalho-eri-e-best-8" id="toc-perfil-do-trabalho-eri-e-best-8" class="nav-link" data-scroll-target="#perfil-do-trabalho-eri-e-best-8">Perfil do trabalho (ERI e BEST-8)</a></li>
+  <li><a href="#contexto-de-trabalho-eact-e-danos-relacionados-ao-trabalho-eadrt" id="toc-contexto-de-trabalho-eact-e-danos-relacionados-ao-trabalho-eadrt" class="nav-link" data-scroll-target="#contexto-de-trabalho-eact-e-danos-relacionados-ao-trabalho-eadrt">Contexto de trabalho (EACT) e danos relacionados ao trabalho (EADRT)</a></li>
+  </ul></li>
+  <li><a href="#relações-entre-os-construtos" id="toc-relações-entre-os-construtos" class="nav-link" data-scroll-target="#relações-entre-os-construtos">Relações entre os construtos</a></li>
+  <li><a href="#regressão-linear-para-o-dass-21" id="toc-regressão-linear-para-o-dass-21" class="nav-link" data-scroll-target="#regressão-linear-para-o-dass-21">Regressão linear para o DASS-21</a>
+  <ul class="collapse">
+  <li><a href="#diagnóstico" id="toc-diagnóstico" class="nav-link" data-scroll-target="#diagnóstico">Diagnóstico</a></li>
+  </ul></li>
+  <li><a href="#regressão-ordinal-para-a-classificação-do-dass-21" id="toc-regressão-ordinal-para-a-classificação-do-dass-21" class="nav-link" data-scroll-target="#regressão-ordinal-para-a-classificação-do-dass-21">Regressão ordinal para a classificação do DASS-21</a></li>
+  <li><a href="#mediação-e-moderação" id="toc-mediação-e-moderação" class="nav-link" data-scroll-target="#mediação-e-moderação">Mediação e moderação</a>
+  <ul class="collapse">
+  <li><a href="#superdedicação-como-mediadora-modelo-4" id="toc-superdedicação-como-mediadora-modelo-4" class="nav-link" data-scroll-target="#superdedicação-como-mediadora-modelo-4">Superdedicação como mediadora (modelo 4)</a></li>
+  <li><a href="#superdedicação-como-moderadora-modelo-5" id="toc-superdedicação-como-moderadora-modelo-5" class="nav-link" data-scroll-target="#superdedicação-como-moderadora-modelo-5">Superdedicação como moderadora (modelo 5)</a></li>
+  </ul></li>
+  <li><a href="#dano-psicológico" id="toc-dano-psicológico" class="nav-link" data-scroll-target="#dano-psicológico">Dano psicológico</a></li>
+  <li><a href="#como-as-análises-convergem" id="toc-como-as-análises-convergem" class="nav-link" data-scroll-target="#como-as-análises-convergem">Como as análises convergem</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<div class="h1 page-title">
+<p>Saúde Mental de Bancários: validação psicométrica e modelos do sofrimento relacionado ao trabalho</p>
+</div>
+<p><em>Hugo Batista da Silva</em></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Os projetos 6.1 e 6.2</strong> foram feitos para o mesmo cliente, um grupo de pesquisa em psicologia do trabalho do Programa de Pós-Graduação em Psicologia da Universidade Federal do Espírito Santo (UFES), mas usam bases de dados e análises diferentes. Esta página é a primeira; a segunda, com dados administrativos da Polícia Rodoviária Federal, é o <a href="project06_2.html">Projeto 6.2</a>.</p>
+</div>
+</div>
+<section id="sobre-o-projeto" class="level2">
+<h2 class="anchored" data-anchor-id="sobre-o-projeto">Sobre o projeto</h2>
+<p>Este estudo foi um projeto de pesquisa da UFES (edital PIIC 2023/2024) realizado com o Sindicato dos Bancários do Espírito Santo (Sindibancários-ES). O setor bancário passou por mudanças profundas nas últimas décadas: digitalização, metas de vendas, pressão por resultados e insegurança no emprego. O sindicato precisava de dados sobre a saúde mental da categoria, e o grupo de pesquisa elaborou um questionário online para entender <strong>como o sofrimento se constrói entre os bancários</strong>.</p>
+<p>O questionário recebeu 784 respostas. Mantendo apenas quem aceitou o termo de consentimento, quem é bancário da ativa e quem trabalha no Espírito Santo, restam <strong>665 questionários válidos</strong>. Fui responsável pela análise estatística: a validação das escalas, a análise descritiva e os modelos que relacionam o contexto de trabalho à saúde mental dos trabalhadores.</p>
+</section>
+<section id="referencial-teórico" class="level2">
+<h2 class="anchored" data-anchor-id="referencial-teórico">Referencial teórico</h2>
+<p>O questionário combina seis instrumentos. Cada um mede um <strong>construto</strong>, um conceito teórico que não pode ser observado diretamente e é medido por um conjunto de itens:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 25%">
+<col style="width: 21%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Construto</th>
+<th>Instrumento</th>
+<th>Dimensões</th>
+<th>Papel no estudo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Saúde mental</td>
+<td>DASS-21 (Lovibond &amp; Lovibond, 1995)</td>
+<td>Depressão, ansiedade, estresse</td>
+<td>Desfecho principal</td>
+</tr>
+<tr class="even">
+<td>Desequilíbrio esforço-recompensa</td>
+<td>ERI, versão reduzida (Siegrist)</td>
+<td>Esforço, recompensa (estima, promoção, segurança no emprego), superdedicação</td>
+<td>Risco psicossocial</td>
+</tr>
+<tr class="odd">
+<td>Sentimentos sobre o trabalho bancário</td>
+<td>BEST-8</td>
+<td>Pressão das metas de venda, conflito moral, perda de sentido</td>
+<td>Risco específico do setor</td>
+</tr>
+<tr class="even">
+<td>Contexto de trabalho</td>
+<td>EACT (Mendes &amp; Ferreira)</td>
+<td>Condições de trabalho, organização do trabalho, relações socioprofissionais</td>
+<td>Risco psicossocial</td>
+</tr>
+<tr class="odd">
+<td>Danos relacionados ao trabalho</td>
+<td>EADRT (Mendes &amp; Ferreira)</td>
+<td>Danos físicos, psicológicos e sociais</td>
+<td>Segundo desfecho</td>
+</tr>
+<tr class="even">
+<td>Assédio no trabalho</td>
+<td>Bloco de atos negativos do questionário</td>
+<td>Assédio frequente (sim / não)</td>
+<td>Risco psicossocial</td>
+</tr>
+</tbody>
+</table>
+<p>A ideia teórica que orienta a análise é uma cadeia: um <strong>contexto de trabalho</strong> adverso e um <strong>desequilíbrio entre o esforço exigido e a recompensa recebida</strong> geram tensão; a <strong>superdedicação</strong>, um padrão pessoal de dedicação excessiva ao trabalho, amplifica essa tensão; e o resultado aparece como <strong>sintomas de depressão, ansiedade e estresse</strong> e como <strong>danos à saúde física, psicológica e social</strong>.</p>
+</section>
+<section id="a-base-de-dados" class="level2">
+<h2 class="anchored" data-anchor-id="a-base-de-dados">A base de dados</h2>
+<p>Os dados são reais, mas protegidos pela LGPD. Na versão publicada aqui, <strong>todas as características sociodemográficas e socioprofissionais foram retiradas</strong> (idade, sexo, raça, escolaridade, filhos, cidade, banco, cargo, tempo de trabalho), assim como datas e respostas abertas, e cada pessoa recebeu uma nova chave aleatória. Permanecem apenas os itens das escalas e as variáveis de trabalho e saúde usadas nos modelos.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(semTools)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(semPlot)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nortest)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brant)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pscl)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">"data/bancarios_saude_mental.csv"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(dataset)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 665 111</code></pre>
+</div>
+</div>
+</section>
+<section id="escores-das-escalas" class="level2">
+<h2 class="anchored" data-anchor-id="escores-das-escalas">Escores das escalas</h2>
+<p>Os escores são calculados a partir dos itens, seguindo as regras de cada instrumento:</p>
+<ul>
+<li><strong>DASS-21:</strong> soma dos 21 itens (0 a 63); em cada subescala a soma dos seus 7 itens é multiplicada por 2, como recomendam os autores, e classificada pelos pontos de corte de Lovibond e Lovibond (1995). A classificação geral usa os pontos de corte no escore total definidos pela equipe de pesquisa.</li>
+<li><strong>ERI:</strong> somas de esforço (3 itens), recompensa (7 itens) e superdedicação (6 itens); a <strong>razão esforço-recompensa</strong> é <span class="math inline">\(ER = E / (R \times 3/7)\)</span>, em que <span class="math inline">\(3/7\)</span> corrige o número diferente de itens. Valores acima de 1 indicam mais esforço que recompensa.</li>
+<li><strong>EACT e EADRT:</strong> média dos itens de cada fator. Na EACT, <strong>escores mais altos significam um contexto pior</strong> (de 1 a 5, crítico acima de 2,3 e grave acima de 3,7).</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>soma <span class="ot">&lt;-</span> <span class="cf">function</span>(v) <span class="fu">rowSums</span>(dataset[, ..v])</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>media <span class="ot">&lt;-</span> <span class="cf">function</span>(v) <span class="fu">rowMeans</span>(dataset[, ..v])</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>itens_ans <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Ans"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>); itens_dep <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Dep"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>); itens_est <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Est"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>itens_rec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"RecEst1_4"</span>, <span class="st">"RecProm1_5"</span>, <span class="st">"RecSeg1_6"</span>, <span class="st">"RecSeg2_7"</span>, <span class="st">"RecEst2_8"</span>, <span class="st">"RecProm3_9"</span>, <span class="st">"RecProm3_10"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>dataset[, <span class="st">`</span><span class="at">:=</span><span class="st">`</span>(</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">dass21         =</span> <span class="fu">soma</span>(<span class="fu">c</span>(itens_ans, itens_dep, itens_est)),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ansiedade      =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">soma</span>(itens_ans),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">depressao      =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">soma</span>(itens_dep),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">estresse       =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">soma</span>(itens_est),</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">best8          =</span> <span class="fu">soma</span>(<span class="fu">paste0</span>(<span class="st">"BEST8_"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)),</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">esforco        =</span> <span class="fu">soma</span>(<span class="fu">paste0</span>(<span class="st">"Esfor"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">recompensa     =</span> <span class="fu">soma</span>(itens_rec),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">promocao       =</span> <span class="fu">soma</span>(<span class="fu">c</span>(<span class="st">"RecProm1_5"</span>, <span class="st">"RecProm3_9"</span>, <span class="st">"RecProm3_10"</span>)),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">seguranca      =</span> <span class="fu">soma</span>(<span class="fu">c</span>(<span class="st">"RecSeg1_6"</span>, <span class="st">"RecSeg2_7"</span>)),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">superdedicacao =</span> <span class="fu">soma</span>(<span class="fu">paste0</span>(<span class="st">"Superded_"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)),</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">condicoes      =</span> <span class="fu">media</span>(<span class="fu">paste0</span>(<span class="st">"CondTrab"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)),</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">organizacao    =</span> <span class="fu">media</span>(<span class="fu">paste0</span>(<span class="st">"OrgTrab"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>)),</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">relacoes       =</span> <span class="fu">media</span>(<span class="fu">paste0</span>(<span class="st">"RelSoc"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)),</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">dano_fisico    =</span> <span class="fu">media</span>(<span class="fu">paste0</span>(<span class="st">"Dano_fis"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>)),</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">dano_psico     =</span> <span class="fu">media</span>(<span class="fu">paste0</span>(<span class="st">"Dano_psi"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)),</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">dano_social    =</span> <span class="fu">media</span>(<span class="fu">paste0</span>(<span class="st">"Dano_soc"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)),</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">assedio        =</span> <span class="fu">fcase</span>(AssedFreq_29 <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, AssedFreq_29 <span class="sc">==</span> <span class="dv">2</span>, <span class="dv">0</span>),</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">acomp_psiq     =</span> <span class="fu">as.integer</span>(AcompPsiq <span class="sc">==</span> <span class="dv">1</span>),</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">afast_mental   =</span> <span class="fu">as.integer</span>(AfastSaudMent <span class="sc">%in%</span> <span class="dv">1</span>)   <span class="co"># asked only to who has been on sick leave</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>)]</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>dataset[, razao_er <span class="sc">:</span><span class="er">=</span> esforco <span class="sc">/</span> (recompensa <span class="sc">*</span> <span class="dv">3</span><span class="sc">/</span><span class="dv">7</span>)]</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>niveis_dass <span class="ot">&lt;-</span> <span class="fu">tr</span>(<span class="fu">c</span>(<span class="st">"Normal"</span>, <span class="st">"Mild"</span>, <span class="st">"Moderate"</span>, <span class="st">"Severe"</span>, <span class="st">"Extremely severe"</span>),</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">c</span>(<span class="st">"Normal"</span>, <span class="st">"Leve"</span>, <span class="st">"Moderado"</span>, <span class="st">"Grave"</span>, <span class="st">"Extremamente grave"</span>))</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>classifica <span class="ot">&lt;-</span> <span class="cf">function</span>(x, cortes) <span class="fu">factor</span>(<span class="fu">findInterval</span>(x, cortes) <span class="sc">+</span> <span class="dv">1</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, niveis_dass, <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>dataset[, <span class="st">`</span><span class="at">:=</span><span class="st">`</span>(</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">classe_dass21 =</span> <span class="fu">classifica</span>(dass21, <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">21</span>, <span class="dv">26</span>, <span class="dv">30</span>)),</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">classe_dep    =</span> <span class="fu">classifica</span>(depressao, <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">14</span>, <span class="dv">21</span>, <span class="dv">28</span>)),</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">classe_ans    =</span> <span class="fu">classifica</span>(ansiedade, <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>)),</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">classe_est    =</span> <span class="fu">classifica</span>(estresse, <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">19</span>, <span class="dv">26</span>, <span class="dv">34</span>)),</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">classe_relacoes =</span> <span class="fu">factor</span>(<span class="fu">findInterval</span>(relacoes, <span class="fu">c</span>(<span class="fl">2.3</span>, <span class="fl">3.7</span>)) <span class="sc">+</span> <span class="dv">1</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">tr</span>(<span class="fu">c</span>(<span class="st">"Satisfactory"</span>, <span class="st">"Critical"</span>, <span class="st">"Severe"</span>), <span class="fu">c</span>(<span class="st">"Satisfatória"</span>, <span class="st">"Crítica"</span>, <span class="st">"Grave"</span>)))</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>)]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="qual-a-gravidade-dos-sintomas" class="level3">
+<h3 class="anchored" data-anchor-id="qual-a-gravidade-dos-sintomas">Qual a gravidade dos sintomas?</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dataset_aux <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(<span class="fu">list</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  dataset[, .N, <span class="at">by =</span> .(<span class="at">classe =</span> classe_dep)][, <span class="at">escala :=</span> <span class="fu">tr</span>(<span class="st">"Depression"</span>, <span class="st">"Depressão"</span>)],</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  dataset[, .N, <span class="at">by =</span> .(<span class="at">classe =</span> classe_ans)][, <span class="at">escala :=</span> <span class="fu">tr</span>(<span class="st">"Anxiety"</span>, <span class="st">"Ansiedade"</span>)],</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  dataset[, .N, <span class="at">by =</span> .(<span class="at">classe =</span> classe_est)][, <span class="at">escala :=</span> <span class="fu">tr</span>(<span class="st">"Stress"</span>, <span class="st">"Estresse"</span>)],</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  dataset[, .N, <span class="at">by =</span> .(<span class="at">classe =</span> classe_dass21)][, <span class="at">escala :=</span> <span class="st">"DASS-21"</span>]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>dataset_aux[, pct <span class="sc">:</span><span class="er">=</span> N <span class="sc">/</span> <span class="fu">sum</span>(N), by <span class="ot">=</span> escala]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dataset_aux, <span class="fu">aes</span>(<span class="at">x =</span> escala, <span class="at">y =</span> pct, <span class="at">fill =</span> classe)) <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">reverse =</span> <span class="cn">TRUE</span>)) <span class="sc">+</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">ifelse</span>(pct <span class="sc">&gt;=</span> <span class="fl">0.04</span>, scales<span class="sc">::</span><span class="fu">percent</span>(pct, <span class="at">accuracy =</span> <span class="dv">1</span>), <span class="st">""</span>)),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">reverse =</span> <span class="cn">TRUE</span>), <span class="at">size =</span> <span class="fl">4.5</span>) <span class="sc">+</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"RdYlGn"</span>, <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Severity of the symptoms (DASS-21)"</span>, <span class="st">"Gravidade dos sintomas (DASS-21)"</span>),</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project06_1_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>O quadro é alarmante: <strong>50% dos bancários estão na faixa grave ou extremamente grave</strong> da classificação geral do DASS-21, e 14% já se afastaram do trabalho por motivo de saúde mental. As três dimensões são afetadas de forma parecida: entre 40% e 43% dos trabalhadores estão na faixa grave ou extremamente grave de depressão, ansiedade e estresse.</p>
+<p>Antes de relacionar esses sintomas ao contexto de trabalho, é preciso verificar se as escalas realmente medem o que se propõem a medir.</p>
+</section>
+</section>
+<section id="análise-fatorial-confirmatória" class="level2">
+<h2 class="anchored" data-anchor-id="análise-fatorial-confirmatória">Análise fatorial confirmatória</h2>
+<p>Cada escala foi construída com uma estrutura teórica: quais itens pertencem a qual fator. A <strong>análise fatorial confirmatória (AFC)</strong> testa se as respostas desses 665 bancários reproduzem essa estrutura. Como os itens são ordinais (escalas Likert), os modelos são estimados por <strong>WLSMV</strong> (mínimos quadrados ponderados com ajuste de média e variância) sobre as correlações policóricas, e o ajuste é avaliado pelas versões <strong>robustas (scaled)</strong> dos índices, as adequadas para esse estimador:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Índice</th>
+<th>Bom ajuste</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CFI e TLI</td>
+<td>≥ 0,90 (aceitável), ≥ 0,95 (bom)</td>
+</tr>
+<tr class="even">
+<td>RMSEA</td>
+<td>≤ 0,08 (aceitável), ≤ 0,05 (bom)</td>
+</tr>
+<tr class="odd">
+<td>SRMR</td>
+<td>≤ 0,08</td>
+</tr>
+<tr class="even">
+<td>Cargas fatoriais padronizadas</td>
+<td>≥ 0,60</td>
+</tr>
+<tr class="odd">
+<td>Ômega (ω) e alfa (α)</td>
+<td>≥ 0,70</td>
+</tr>
+<tr class="even">
+<td>Variância média extraída (AVE)</td>
+<td>≥ 0,50</td>
+</tr>
+</tbody>
+</table>
+<p>A função abaixo ajusta um modelo e reúne em uma tabela os índices de ajuste e a confiabilidade de cada fator:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ajusta_cfa <span class="ot">&lt;-</span> <span class="cf">function</span>(modelo) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cfa</span>(modelo, <span class="at">data =</span> dataset, <span class="at">estimator =</span> <span class="st">"WLSMV"</span>, <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>resumo_cfa <span class="ot">&lt;-</span> <span class="cf">function</span>(fit) {</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  ajuste <span class="ot">&lt;-</span> <span class="fu">fitMeasures</span>(fit, <span class="fu">c</span>(<span class="st">"chisq.scaled"</span>, <span class="st">"df"</span>, <span class="st">"cfi.scaled"</span>, <span class="st">"tli.scaled"</span>, <span class="st">"rmsea.scaled"</span>, <span class="st">"srmr"</span>))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># reliability of the first-order factors on the latent-response scale (ordinal items):</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ordinal alpha from the polychoric correlations, McDonald's omega and AVE from the standardised loadings</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  cargas <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>(<span class="fu">standardizedSolution</span>(fit))[op <span class="sc">==</span> <span class="st">"=~"</span> <span class="sc">&amp;</span> <span class="sc">!</span>rhs <span class="sc">%in%</span> <span class="fu">lavNames</span>(fit, <span class="st">"lv"</span>)]</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  policoricas <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(fit, <span class="st">"sampstat"</span>)<span class="sc">$</span>cov</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  alfa_ordinal <span class="ot">&lt;-</span> <span class="cf">function</span>(v) { r <span class="ot">&lt;-</span> policoricas[v, v]; k <span class="ot">&lt;-</span> <span class="fu">length</span>(v); k <span class="sc">/</span> (k <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> k <span class="sc">/</span> <span class="fu">sum</span>(r)) }</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  confiab <span class="ot">&lt;-</span> cargas[, .(<span class="at">itens =</span> .N,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                        <span class="at">alfa =</span> <span class="fu">alfa_ordinal</span>(rhs),</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>                        <span class="at">omega =</span> <span class="fu">sum</span>(est.std)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="fu">sum</span>(est.std)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">sum</span>(<span class="dv">1</span> <span class="sc">-</span> est.std<span class="sc">^</span><span class="dv">2</span>)),</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>                        <span class="at">ave =</span> <span class="fu">mean</span>(est.std<span class="sc">^</span><span class="dv">2</span>),</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                        <span class="at">carga_min =</span> <span class="fu">min</span>(est.std),</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>                        <span class="at">carga_max =</span> <span class="fu">max</span>(est.std)), by <span class="ot">=</span> .(<span class="at">fator =</span> lhs)]</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">ajuste =</span> <span class="fu">round</span>(<span class="fu">c</span>(ajuste, <span class="st">"chisq/df"</span> <span class="ot">=</span> ajuste[[<span class="st">"chisq.scaled"</span>]] <span class="sc">/</span> ajuste[[<span class="st">"df"</span>]]), <span class="dv">3</span>),</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">fatores =</span> confiab,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">admissivel =</span> <span class="fu">lavInspect</span>(fit, <span class="st">"post.check"</span>))</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="saúde-mental-dass-21" class="level3">
+<h3 class="anchored" data-anchor-id="saúde-mental-dass-21">Saúde mental (DASS-21)</h3>
+<p>O DASS-21 é modelado com seus três fatores de primeira ordem e um fator de segunda ordem, o sofrimento geral, como propõe o modelo tripartido.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>modelo_dass <span class="ot">&lt;-</span> <span class="st">"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="st">ansiedade_f =~ Ans1 + Ans2 + Ans3 + Ans4 + Ans5 + Ans6 + Ans7</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">depressao_f =~ Dep1 + Dep2 + Dep3 + Dep4 + Dep5 + Dep6 + Dep7</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">estresse_f  =~ Est1 + Est2 + Est3 + Est4 + Est5 + Est6 + Est7</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">dass_f      =~ ansiedade_f + depressao_f + estresse_f</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>fit_dass <span class="ot">&lt;-</span> <span class="fu">ajusta_cfa</span>(modelo_dass)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>res_dass <span class="ot">&lt;-</span> <span class="fu">resumo_cfa</span>(fit_dass)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>res_dass<span class="sc">$</span>ajuste</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>chisq.scaled           df   cfi.scaled   tli.scaled rmsea.scaled         srmr 
+     863.753      186.000        0.986        0.984        0.074        0.030 
+    chisq/df 
+       4.644 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(res_dass<span class="sc">$</span>fatores, <span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">fator</th>
+<th style="text-align: right;">itens</th>
+<th style="text-align: right;">alfa</th>
+<th style="text-align: right;">omega</th>
+<th style="text-align: right;">ave</th>
+<th style="text-align: right;">carga_min</th>
+<th style="text-align: right;">carga_max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ansiedade_f</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.958</td>
+<td style="text-align: right;">0.96</td>
+<td style="text-align: right;">0.775</td>
+<td style="text-align: right;">0.819</td>
+<td style="text-align: right;">0.940</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">depressao_f</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.958</td>
+<td style="text-align: right;">0.96</td>
+<td style="text-align: right;">0.776</td>
+<td style="text-align: right;">0.846</td>
+<td style="text-align: right;">0.920</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">estresse_f</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.956</td>
+<td style="text-align: right;">0.96</td>
+<td style="text-align: right;">0.774</td>
+<td style="text-align: right;">0.824</td>
+<td style="text-align: right;">0.935</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">semPaths</span>(fit_dass, <span class="st">"std"</span>, <span class="at">layout =</span> <span class="st">"tree"</span>, <span class="at">rotation =</span> <span class="dv">2</span>, <span class="at">residuals =</span> <span class="cn">FALSE</span>, <span class="at">intercepts =</span> <span class="cn">FALSE</span>, <span class="at">thresholds =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">edge.label.cex =</span> <span class="fl">0.75</span>, <span class="at">sizeMan =</span> <span class="dv">4</span>, <span class="at">sizeLat =</span> <span class="dv">8</span>, <span class="at">nCharNodes =</span> <span class="dv">0</span>, <span class="at">edge.color =</span> <span class="st">"steelblue"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project06_1_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A estrutura do DASS-21 se confirma: todas as cargas ficam entre 0,82 e 0,94, os três fatores têm ômega acima de 0,95 e AVE acima de 0,77, e o CFI robusto é 0,986, com RMSEA de 0,074. O teste qui-quadrado rejeita o ajuste exato, o que é esperado com uma amostra desse tamanho, e os demais índices mostram um modelo adequado.</p>
+</section>
+<section id="perfil-do-trabalho-eri-e-best-8" class="level3">
+<h3 class="anchored" data-anchor-id="perfil-do-trabalho-eri-e-best-8">Perfil do trabalho (ERI e BEST-8)</h3>
+<p>O modelo teórico original tem seis fatores de primeira ordem (BEST-8, esforço, estima, promoção, segurança no emprego e superdedicação), com estima, promoção e segurança agrupados em um fator de segunda ordem de <strong>recompensa</strong>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>modelo_perfil <span class="ot">&lt;-</span> <span class="st">"</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="st">best8_f      =~ BEST8_1 + BEST8_2 + BEST8_3 + BEST8_4 + BEST8_5 + BEST8_6 + BEST8_7 + BEST8_8 + BEST8_9 + BEST8_10</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="st">esforco_f    =~ Esfor1 + Esfor2 + Esfor3</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="st">estima_f     =~ RecEst1_4 + RecEst2_8</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="st">promocao_f   =~ RecProm1_5 + RecProm3_9 + RecProm3_10</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="st">seguranca_f  =~ RecSeg1_6 + RecSeg2_7</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="st">superded_f   =~ Superded_1 + Superded_2 + Superded_3 + Superded_4 + Superded_5 + Superded_6</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>fit_perfil_2ordem <span class="ot">&lt;-</span> <span class="fu">ajusta_cfa</span>(<span class="fu">paste</span>(modelo_perfil, <span class="st">"recompensa_f =~ estima_f + promocao_f + seguranca_f"</span>))</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># is the solution admissible? and the loadings of the second-order factor</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">lavInspect</span>(fit_perfil_2ordem, <span class="st">"post.check"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.table</span>(<span class="fu">standardizedSolution</span>(fit_perfil_2ordem))[lhs <span class="sc">==</span> <span class="st">"recompensa_f"</span> <span class="sc">&amp;</span> op <span class="sc">==</span> <span class="st">"=~"</span>, .(lhs, rhs, est.std)]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            lhs         rhs  est.std
+         &lt;char&gt;      &lt;char&gt;    &lt;num&gt;
+1: recompensa_f    estima_f 0.622551
+2: recompensa_f  promocao_f 0.677381
+3: recompensa_f seguranca_f 1.077468</code></pre>
+</div>
+</div>
+<p>O modelo de segunda ordem produz uma <strong>solução imprópria</strong> (um caso de Heywood): a carga de segurança no emprego sobre recompensa é maior que 1, o que implica uma variância residual negativa. As correlações entre os fatores de primeira ordem mostram o porquê:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fit_perfil <span class="ot">&lt;-</span> <span class="fu">ajusta_cfa</span>(modelo_perfil)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">lavInspect</span>(fit_perfil, <span class="st">"cor.lv"</span>), <span class="dv">2</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            bst8_f esfrc_ estm_f prmc_f sgrnc_ sprdd_
+best8_f       1.00                                   
+esforco_f     0.70   1.00                            
+estima_f     -0.37  -0.36   1.00                     
+promocao_f   -0.41  -0.41   0.80   1.00              
+seguranca_f  -0.74  -0.77   0.45   0.49   1.00       
+superded_f    0.68   0.84  -0.43  -0.43  -0.73   1.00</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>res_perfil <span class="ot">&lt;-</span> <span class="fu">resumo_cfa</span>(fit_perfil)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>res_perfil<span class="sc">$</span>admissivel</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>res_perfil<span class="sc">$</span>ajuste</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>chisq.scaled           df   cfi.scaled   tli.scaled rmsea.scaled         srmr 
+    2444.471      284.000        0.925        0.914        0.107        0.073 
+    chisq/df 
+       8.607 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(res_perfil<span class="sc">$</span>fatores, <span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">fator</th>
+<th style="text-align: right;">itens</th>
+<th style="text-align: right;">alfa</th>
+<th style="text-align: right;">omega</th>
+<th style="text-align: right;">ave</th>
+<th style="text-align: right;">carga_min</th>
+<th style="text-align: right;">carga_max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">best8_f</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.936</td>
+<td style="text-align: right;">0.952</td>
+<td style="text-align: right;">0.669</td>
+<td style="text-align: right;">0.579</td>
+<td style="text-align: right;">0.915</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">esforco_f</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.893</td>
+<td style="text-align: right;">0.892</td>
+<td style="text-align: right;">0.735</td>
+<td style="text-align: right;">0.782</td>
+<td style="text-align: right;">0.918</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">estima_f</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.742</td>
+<td style="text-align: right;">0.752</td>
+<td style="text-align: right;">0.606</td>
+<td style="text-align: right;">0.684</td>
+<td style="text-align: right;">0.863</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">promocao_f</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.602</td>
+<td style="text-align: right;">0.633</td>
+<td style="text-align: right;">0.367</td>
+<td style="text-align: right;">0.559</td>
+<td style="text-align: right;">0.667</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">seguranca_f</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.604</td>
+<td style="text-align: right;">0.606</td>
+<td style="text-align: right;">0.435</td>
+<td style="text-align: right;">0.631</td>
+<td style="text-align: right;">0.686</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">superded_f</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.911</td>
+<td style="text-align: right;">0.923</td>
+<td style="text-align: right;">0.675</td>
+<td style="text-align: right;">0.528</td>
+<td style="text-align: right;">0.923</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>A segurança no emprego está mais fortemente (e negativamente) relacionada à superdedicação (r = -0,73), ao esforço (r = -0,77) e ao BEST-8 (r = -0,74) do que às outras duas dimensões da recompensa. Nesta população, o medo de perder o emprego se comporta mais como parte da pressão do trabalho do que como uma recompensa. Por isso o modelo foi reespecificado com <strong>fatores de primeira ordem correlacionados</strong>, o que gera uma solução admissível.</p>
+<p>O ajuste deste construto é o mais fraco do estudo (RMSEA robusto de 0,107), e as dimensões da recompensa, com apenas dois ou três itens cada, são o ponto fraco: promoção e segurança no emprego têm confiabilidade baixa (ω perto de 0,6) e AVE abaixo de 0,5. Estima, BEST-8, esforço e superdedicação têm confiabilidade de adequada a excelente. Essas limitações são consideradas na interpretação dos modelos.</p>
+</section>
+<section id="contexto-de-trabalho-eact-e-danos-relacionados-ao-trabalho-eadrt" class="level3">
+<h3 class="anchored" data-anchor-id="contexto-de-trabalho-eact-e-danos-relacionados-ao-trabalho-eadrt">Contexto de trabalho (EACT) e danos relacionados ao trabalho (EADRT)</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>itens <span class="ot">&lt;-</span> <span class="cf">function</span>(prefixo, n) <span class="fu">paste0</span>(prefixo, <span class="dv">1</span><span class="sc">:</span>n, <span class="at">collapse =</span> <span class="st">" + "</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>fit_contexto <span class="ot">&lt;-</span> <span class="fu">ajusta_cfa</span>(<span class="fu">paste0</span>(<span class="st">"condicoes_f =~ "</span>, <span class="fu">itens</span>(<span class="st">"CondTrab"</span>, <span class="dv">10</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"organizacao_f =~ "</span>, <span class="fu">itens</span>(<span class="st">"OrgTrab"</span>, <span class="dv">11</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"relacoes_f =~ "</span>, <span class="fu">itens</span>(<span class="st">"RelSoc"</span>, <span class="dv">10</span>)))</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>fit_danos <span class="ot">&lt;-</span> <span class="fu">ajusta_cfa</span>(<span class="fu">paste0</span>(<span class="st">"dano_fisico_f =~ "</span>, <span class="fu">itens</span>(<span class="st">"Dano_fis"</span>, <span class="dv">12</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"dano_psico_f =~ "</span>, <span class="fu">itens</span>(<span class="st">"Dano_psi"</span>, <span class="dv">10</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"dano_social_f =~ "</span>, <span class="fu">itens</span>(<span class="st">"Dano_soc"</span>, <span class="dv">7</span>)))</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>res_contexto <span class="ot">&lt;-</span> <span class="fu">resumo_cfa</span>(fit_contexto)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>res_danos <span class="ot">&lt;-</span> <span class="fu">resumo_cfa</span>(fit_danos)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">rbind</span>(res_contexto<span class="sc">$</span>fatores, res_danos<span class="sc">$</span>fatores), <span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">fator</th>
+<th style="text-align: right;">itens</th>
+<th style="text-align: right;">alfa</th>
+<th style="text-align: right;">omega</th>
+<th style="text-align: right;">ave</th>
+<th style="text-align: right;">carga_min</th>
+<th style="text-align: right;">carga_max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">condicoes_f</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.942</td>
+<td style="text-align: right;">0.946</td>
+<td style="text-align: right;">0.637</td>
+<td style="text-align: right;">0.711</td>
+<td style="text-align: right;">0.859</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">organizacao_f</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">0.909</td>
+<td style="text-align: right;">0.921</td>
+<td style="text-align: right;">0.531</td>
+<td style="text-align: right;">0.278</td>
+<td style="text-align: right;">0.910</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">relacoes_f</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.940</td>
+<td style="text-align: right;">0.947</td>
+<td style="text-align: right;">0.641</td>
+<td style="text-align: right;">0.605</td>
+<td style="text-align: right;">0.889</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dano_fisico_f</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.937</td>
+<td style="text-align: right;">0.941</td>
+<td style="text-align: right;">0.573</td>
+<td style="text-align: right;">0.583</td>
+<td style="text-align: right;">0.902</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">dano_psico_f</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.977</td>
+<td style="text-align: right;">0.980</td>
+<td style="text-align: right;">0.830</td>
+<td style="text-align: right;">0.853</td>
+<td style="text-align: right;">0.957</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dano_social_f</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.934</td>
+<td style="text-align: right;">0.942</td>
+<td style="text-align: right;">0.702</td>
+<td style="text-align: right;">0.674</td>
+<td style="text-align: right;">0.907</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(<span class="at">contexto =</span> res_contexto<span class="sc">$</span>ajuste, <span class="at">danos =</span> res_danos<span class="sc">$</span>ajuste)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         chisq.scaled  df cfi.scaled tli.scaled rmsea.scaled  srmr chisq/df
+contexto     2289.400 431      0.937      0.932        0.081 0.061    5.312
+danos        2170.548 374      0.970      0.968        0.085 0.053    5.804</code></pre>
+</div>
+</div>
+<p>Os dois construtos se confirmam: os fatores têm confiabilidade excelente (ômega acima de 0,92) e AVE acima de 0,53, com CFI robusto de 0,937 e 0,97. Os valores de RMSEA ficam um pouco acima de 0,08, resultado comum em escalas longas, e o SRMR fica dentro do limite. No fator organização do trabalho, três itens têm cargas baixas (OrgTrab9, OrgTrab6 e OrgTrab10, de cerca de 0,3 a 0,5); eles foram mantidos para preservar o instrumento validado, e o fator continua com boa confiabilidade, mas são candidatos a revisão em aplicações futuras.</p>
+<p>Com as medidas validadas, os escores calculados antes podem ser usados nos modelos.</p>
+</section>
+</section>
+<section id="relações-entre-os-construtos" class="level2">
+<h2 class="anchored" data-anchor-id="relações-entre-os-construtos">Relações entre os construtos</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>escores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dass21"</span>, <span class="st">"best8"</span>, <span class="st">"esforco"</span>, <span class="st">"recompensa"</span>, <span class="st">"superdedicacao"</span>, <span class="st">"razao_er"</span>,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">"condicoes"</span>, <span class="st">"organizacao"</span>, <span class="st">"relacoes"</span>, <span class="st">"dano_fisico"</span>, <span class="st">"dano_psico"</span>, <span class="st">"dano_social"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>matriz <span class="ot">&lt;-</span> <span class="fu">cor</span>(dataset[, ..escores], <span class="at">method =</span> <span class="st">"spearman"</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(matriz) <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">list</span>(<span class="fu">tr</span>(</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"DASS-21"</span>, <span class="st">"BEST-8"</span>, <span class="st">"Effort"</span>, <span class="st">"Reward"</span>, <span class="st">"Overcommitment"</span>, <span class="st">"Effort/reward"</span>, <span class="st">"Conditions"</span>, <span class="st">"Organisation"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Relations"</span>, <span class="st">"Physical damage"</span>, <span class="st">"Psych. damage"</span>, <span class="st">"Social damage"</span>),</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"DASS-21"</span>, <span class="st">"BEST-8"</span>, <span class="st">"Esforço"</span>, <span class="st">"Recompensa"</span>, <span class="st">"Superdedicação"</span>, <span class="st">"Esforço/recompensa"</span>, <span class="st">"Condições"</span>, <span class="st">"Organização"</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Relações"</span>, <span class="st">"Dano físico"</span>, <span class="st">"Dano psicológico"</span>, <span class="st">"Dano social"</span>))), <span class="dv">2</span>)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(matriz, <span class="at">method =</span> <span class="st">"color"</span>, <span class="at">type =</span> <span class="st">"lower"</span>, <span class="at">addCoef.col =</span> <span class="st">"black"</span>, <span class="at">number.cex =</span> <span class="fl">0.75</span>, <span class="at">tl.col =</span> <span class="st">"black"</span>, <span class="at">tl.srt =</span> <span class="dv">45</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project06_1_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="1056"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Todos os fatores de risco vão na direção esperada: superdedicação, esforço, BEST-8 e as três dimensões do contexto de trabalho se correlacionam positivamente com o DASS-21, enquanto a recompensa se correlaciona negativamente. A superdedicação é o construto mais correlacionado com os sintomas, e o DASS-21 tem forte correlação com o dano psicológico, os dois desfechos do estudo.</p>
+</section>
+<section id="regressão-linear-para-o-dass-21" class="level2">
+<h2 class="anchored" data-anchor-id="regressão-linear-para-o-dass-21">Regressão linear para o DASS-21</h2>
+<p>O primeiro modelo explica o escore total do DASS-21. As variáveis foram selecionadas entre os fatores de risco do referencial teórico, mantendo as que têm contribuição significativa e sem multicolinearidade. A pergunta sobre assédio tem respostas faltantes, então o modelo usa os 546 bancários que a responderam.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>fit_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(dass21 <span class="sc">~</span> superdedicacao <span class="sc">+</span> relacoes <span class="sc">+</span> seguranca <span class="sc">+</span> assedio <span class="sc">+</span> best8, <span class="at">data =</span> dataset)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_lm)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = dass21 ~ superdedicacao + relacoes + seguranca + 
+    assedio + best8, data = dataset)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-37.544  -7.946  -0.563   7.800  45.496 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    -12.21451    3.95401  -3.089 0.002111 ** 
+superdedicacao   1.45914    0.14033  10.398  &lt; 2e-16 ***
+relacoes         2.55511    0.76577   3.337 0.000906 ***
+seguranca       -1.04408    0.43006  -2.428 0.015519 *  
+assedio          6.80403    1.30153   5.228 2.46e-07 ***
+best8            0.28937    0.05702   5.075 5.33e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 12.4 on 540 degrees of freedom
+  (119 observations deleted due to missingness)
+Multiple R-squared:  0.5816,    Adjusted R-squared:  0.5777 
+F-statistic: 150.1 on 5 and 540 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(fit_lm)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     2.5 %     97.5 %
+(Intercept)    -19.9816234 -4.4473908
+superdedicacao   1.1834768  1.7348028
+relacoes         1.0508507  4.0593606
+seguranca       -1.8888788 -0.1992774
+assedio          4.2473512  9.3607158
+best8            0.1773722  0.4013715</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(fit_lm)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>superdedicacao       relacoes      seguranca        assedio          best8 
+      1.824714       1.781635       1.521907       1.480227       1.932177 </code></pre>
+</div>
+</div>
+<p>O modelo explica 57,8% da variabilidade do DASS-21 (R² ajustado), todos os coeficientes são significativos e os valores de VIF ficam abaixo de 2, sem multicolinearidade. Mantendo as demais variáveis constantes:</p>
+<ul>
+<li>cada ponto de <strong>superdedicação</strong> acrescenta 1,46 pontos ao DASS-21;</li>
+<li>cada ponto no escore de <strong>relações socioprofissionais</strong> acrescenta 2,56 pontos. Como na EACT um escore maior significa um contexto pior, <strong>relações de trabalho piores se associam a mais sintomas</strong>;</li>
+<li>cada ponto de <strong>segurança no emprego</strong> retira 1,04 pontos, um fator de proteção;</li>
+<li>sofrer <strong>assédio frequente</strong> acrescenta 6,8 pontos, o maior efeito do modelo;</li>
+<li>cada ponto do <strong>BEST-8</strong> acrescenta 0,29 pontos.</li>
+</ul>
+<section id="diagnóstico" class="level3">
+<h3 class="anchored" data-anchor-id="diagnóstico">Diagnóstico</h3>
+<p>Os pressupostos do modelo são verificados: observações influentes, normalidade e homocedasticidade dos resíduos.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nobs</span>(fit_lm)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">coef</span>(fit_lm))</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>cook <span class="ot">&lt;-</span> <span class="fu">cooks.distance</span>(fit_lm)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>influentes <span class="ot">&lt;-</span> <span class="fu">which</span>(cook <span class="sc">&gt;</span> <span class="dv">4</span> <span class="sc">/</span> n)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">hatvalues</span>(fit_lm), <span class="at">type =</span> <span class="st">"h"</span>, <span class="at">xlab =</span> <span class="fu">tr</span>(<span class="st">"Observation"</span>, <span class="st">"Observação"</span>), <span class="at">ylab =</span> <span class="fu">tr</span>(<span class="st">"Leverage"</span>, <span class="st">"Alavancagem"</span>))</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">2</span> <span class="sc">*</span> k <span class="sc">/</span> n, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cook, <span class="at">type =</span> <span class="st">"h"</span>, <span class="at">xlab =</span> <span class="fu">tr</span>(<span class="st">"Observation"</span>, <span class="st">"Observação"</span>), <span class="at">ylab =</span> <span class="fu">tr</span>(<span class="st">"Cook's distance"</span>, <span class="st">"Distância de Cook"</span>))</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">4</span> <span class="sc">/</span> n, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">fitted</span>(fit_lm), <span class="fu">rstandard</span>(fit_lm), <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">xlab =</span> <span class="fu">tr</span>(<span class="st">"Fitted values"</span>, <span class="st">"Valores ajustados"</span>),</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="fu">tr</span>(<span class="st">"Standardised residuals"</span>, <span class="st">"Resíduos padronizados"</span>))</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project06_1_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="1344"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>residuos <span class="ot">&lt;-</span> <span class="fu">rstandard</span>(fit_lm)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>testes <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">lillie.test</span>(residuos), <span class="fu">shapiro.test</span>(residuos), <span class="fu">ad.test</span>(residuos), <span class="fu">cvm.test</span>(residuos))</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.table</span>(<span class="at">teste =</span> <span class="fu">sapply</span>(testes, <span class="st">`</span><span class="at">[[</span><span class="st">`</span>, <span class="st">"method"</span>), <span class="at">p_valor =</span> <span class="fu">round</span>(<span class="fu">sapply</span>(testes, <span class="st">`</span><span class="at">[[</span><span class="st">`</span>, <span class="st">"p.value"</span>), <span class="dv">4</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                            teste p_valor
+                                           &lt;char&gt;   &lt;num&gt;
+1: Lilliefors (Kolmogorov-Smirnov) normality test  0.7653
+2:                    Shapiro-Wilk normality test  0.5203
+3:                Anderson-Darling normality test  0.6283
+4:                Cramer-von Mises normality test  0.5852</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(fit_lm)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    studentized Breusch-Pagan test
+
+data:  fit_lm
+BP = 6.5305, df = 5, p-value = 0.258</code></pre>
+</div>
+</div>
+<p>Os resíduos não mostram evidência contra a normalidade, e o teste de Breusch-Pagan não rejeita a homocedasticidade. 36 observações têm distância de Cook acima de <span class="math inline">\(4/n\)</span>. Em vez de simplesmente excluí-las, o modelo é ajustado novamente sem elas como <strong>análise de sensibilidade</strong>, para verificar se as conclusões dependem desses pontos:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>fit_lm_sem <span class="ot">&lt;-</span> <span class="fu">update</span>(fit_lm, <span class="at">data =</span> dataset[<span class="sc">!</span><span class="fu">is.na</span>(assedio)][<span class="sc">-</span>influentes])</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data.table</span>(<span class="at">variavel =</span> <span class="fu">names</span>(<span class="fu">coef</span>(fit_lm)), <span class="at">completo =</span> <span class="fu">coef</span>(fit_lm), <span class="at">sem_influentes =</span> <span class="fu">coef</span>(fit_lm_sem))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         variavel    completo sem_influentes
+           &lt;char&gt;       &lt;num&gt;          &lt;num&gt;
+1:    (Intercept) -12.2145071    -14.7463647
+2: superdedicacao   1.4591398      1.5847582
+3:       relacoes   2.5551056      2.9174134
+4:      seguranca  -1.0440781     -1.1365112
+5:        assedio   6.8040335      6.4370779
+6:          best8   0.2893719      0.2691352</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">r2_completo =</span> <span class="fu">summary</span>(fit_lm)<span class="sc">$</span>adj.r.squared, <span class="at">r2_sem_influentes =</span> <span class="fu">summary</span>(fit_lm_sem)<span class="sc">$</span>adj.r.squared)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      r2_completo r2_sem_influentes 
+        0.5777460         0.6743118 </code></pre>
+</div>
+</div>
+<p>Todos os coeficientes mantêm sinais e magnitudes parecidas. O R² ajustado sobe para 0,67 porque os pontos retirados são justamente os casos que o modelo explica pior, mas as conclusões sobre cada fator não dependem deles, por isso o modelo completo é mantido.</p>
+</section>
+</section>
+<section id="regressão-ordinal-para-a-classificação-do-dass-21" class="level2">
+<h2 class="anchored" data-anchor-id="regressão-ordinal-para-a-classificação-do-dass-21">Regressão ordinal para a classificação do DASS-21</h2>
+<p>Na prática, o DASS-21 também é usado pela sua classificação (normal, leve, moderado, grave, extremamente grave). Uma <strong>regressão logística ordinal (modelo de chances proporcionais)</strong> estima como cada fator muda a chance de estar numa categoria mais grave. Aqui as relações socioprofissionais entram pela classificação da EACT.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>fit_ord <span class="ot">&lt;-</span> <span class="fu">polr</span>(classe_dass21 <span class="sc">~</span> promocao <span class="sc">+</span> superdedicacao <span class="sc">+</span> seguranca <span class="sc">+</span> best8 <span class="sc">+</span> classe_relacoes,</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> dataset, <span class="at">Hess =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_ord)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+polr(formula = classe_dass21 ~ promocao + superdedicacao + seguranca + 
+    best8 + classe_relacoes, data = dataset, Hess = TRUE)
+
+Coefficients:
+                          Value Std. Error t value
+promocao               -0.15142   0.040991  -3.694
+superdedicacao          0.21455   0.023398   9.170
+seguranca              -0.16635   0.071512  -2.326
+best8                   0.04689   0.009085   5.161
+classe_relacoesCrítica  0.27573   0.258271   1.068
+classe_relacoesGrave    0.94934   0.309962   3.063
+
+Intercepts:
+                         Value   Std. Error t value
+Normal|Leve               2.7668  0.6958     3.9763
+Leve|Moderado             3.3824  0.7010     4.8254
+Moderado|Grave            3.9827  0.7069     5.6341
+Grave|Extremamente grave  4.4448  0.7110     6.2513
+
+Residual Deviance: 1307.662 
+AIC: 1327.662 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>razoes <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">cbind</span>(<span class="at">OR =</span> <span class="fu">coef</span>(fit_ord), <span class="fu">confint</span>(fit_ord)))</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(razoes, <span class="dv">3</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                          OR 2.5 % 97.5 %
+promocao               0.859 0.793  0.931
+superdedicacao         1.239 1.185  1.299
+seguranca              0.847 0.736  0.974
+best8                  1.048 1.030  1.067
+classe_relacoesCrítica 1.317 0.796  2.195
+classe_relacoesGrave   2.584 1.409  4.758</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pR2</span>(fit_ord)[<span class="fu">c</span>(<span class="st">"McFadden"</span>, <span class="st">"r2CU"</span>)]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>fitting null model for pseudo-r2</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> McFadden      r2CU 
+0.2523261 0.5226933 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">brant</span>(fit_ord)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>------------------------------------------------------------ 
+Test for            X2  df  probability 
+------------------------------------------------------------ 
+Omnibus             21.41   18  0.26
+promocao            5.18    3   0.16
+superdedicacao          3.09    3   0.38
+seguranca           4.84    3   0.18
+best8               1.33    3   0.72
+classe_relacoesCrítica  2.32    3   0.51
+classe_relacoesGrave        2.26    3   0.52
+------------------------------------------------------------ 
+
+H0: Parallel Regression Assumption holds</code></pre>
+</div>
+</div>
+<p>O teste de Brant não rejeita o <strong>pressuposto de chances proporcionais</strong>, nem no geral nem para nenhuma variável, então o modelo é adequado. As razões de chances contam a mesma história do modelo linear:</p>
+<ul>
+<li>cada ponto de <strong>superdedicação</strong> aumenta em 24% a chance de estar numa categoria mais grave;</li>
+<li><strong>promoção</strong> e <strong>segurança no emprego</strong> são fatores de proteção: cada ponto reduz a chance em 14% e 15%;</li>
+<li>cada ponto do <strong>BEST-8</strong> aumenta a chance em 5%;</li>
+<li>bancários com <strong>relações socioprofissionais graves</strong> têm 2,58 vezes a chance daqueles com relações satisfatórias.</li>
+</ul>
+</section>
+<section id="mediação-e-moderação" class="level2">
+<h2 class="anchored" data-anchor-id="mediação-e-moderação">Mediação e moderação</h2>
+<p>As regressões mostram quais fatores se associam aos sintomas; o referencial teórico também propõe <strong>como</strong> eles agem. Foram testados dois modelos do referencial de Hayes (PROCESS), estimados aqui com o <code>lavaan</code> e intervalos de confiança por <strong>bootstrap</strong> (1.000 reamostragens) para os efeitos indiretos.</p>
+<section id="superdedicação-como-mediadora-modelo-4" class="level3">
+<h3 class="anchored" data-anchor-id="superdedicação-como-mediadora-modelo-4">Superdedicação como mediadora (modelo 4)</h3>
+<p>O desequilíbrio esforço-recompensa aumenta os sintomas em parte <em>por meio</em> da superdedicação?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>modelo_4 <span class="ot">&lt;-</span> <span class="st">"</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="st">superdedicacao ~ a * razao_er</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="st">dass21         ~ c * razao_er + b * superdedicacao</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="st">indireto := a * b</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="st">total    := c + a * b</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>fit_m4 <span class="ot">&lt;-</span> <span class="fu">sem</span>(modelo_4, <span class="at">data =</span> dataset, <span class="at">se =</span> <span class="st">"bootstrap"</span>, <span class="at">bootstrap =</span> <span class="dv">1000</span>)</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>efeitos_m4 <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>(<span class="fu">parameterEstimates</span>(fit_m4, <span class="at">boot.ci.type =</span> <span class="st">"perc"</span>))[label <span class="sc">!=</span> <span class="st">""</span>, .(label, est, ci.lower, ci.upper, pvalue)]</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>efeitos_m4</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      label       est  ci.lower  ci.upper       pvalue
+     &lt;char&gt;     &lt;num&gt;     &lt;num&gt;     &lt;num&gt;        &lt;num&gt;
+1:        a  4.492533  4.063386  4.979373 0.000000e+00
+2:        c  7.626224  5.580213  9.646547 3.190781e-13
+3:        b  1.785085  1.529959  2.086356 0.000000e+00
+4: indireto  8.019552  6.745036  9.560305 0.000000e+00
+5:    total 15.645776 14.002100 17.343593 0.000000e+00</code></pre>
+</div>
+</div>
+<p>O desequilíbrio entre esforço e recompensa aumenta a superdedicação (a = 4,49), e a superdedicação aumenta os sintomas (b = 1,79). O <strong>efeito indireto</strong> é de 8,02, com intervalo bootstrap que não contém o zero, e o efeito direto continua significativo: a superdedicação <strong>medeia parcialmente</strong> o efeito do desequilíbrio, carregando cerca de 51% do efeito total.</p>
+</section>
+<section id="superdedicação-como-moderadora-modelo-5" class="level3">
+<h3 class="anchored" data-anchor-id="superdedicação-como-moderadora-modelo-5">Superdedicação como moderadora (modelo 5)</h3>
+<p>No modelo 5, o esforço age sobre os sintomas por meio da recompensa (mediação), e o seu efeito direto pode depender do nível de superdedicação (moderação).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>percentis <span class="ot">&lt;-</span> <span class="fu">quantile</span>(dataset<span class="sc">$</span>superdedicacao, <span class="fu">c</span>(<span class="fl">0.16</span>, <span class="fl">0.50</span>, <span class="fl">0.84</span>))</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>dataset[, esforco_x_superded <span class="sc">:</span><span class="er">=</span> esforco <span class="sc">*</span> superdedicacao]</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>modelo_5 <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">"</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="st">recompensa ~ a * esforco</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="st">dass21     ~ c1 * esforco + c2 * superdedicacao + c3 * esforco_x_superded + b * recompensa</span></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="st">indireto     := a * b</span></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a><span class="st">direto_baixo := c1 + c3 * %f</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="st">direto_medio := c1 + c3 * %f</span></span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a><span class="st">direto_alto  := c1 + c3 * %f</span></span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>, percentis[<span class="dv">1</span>], percentis[<span class="dv">2</span>], percentis[<span class="dv">3</span>])</span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>fit_m5 <span class="ot">&lt;-</span> <span class="fu">sem</span>(modelo_5, <span class="at">data =</span> dataset, <span class="at">se =</span> <span class="st">"bootstrap"</span>, <span class="at">bootstrap =</span> <span class="dv">1000</span>)</span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>efeitos_m5 <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>(<span class="fu">parameterEstimates</span>(fit_m5, <span class="at">boot.ci.type =</span> <span class="st">"perc"</span>))[label <span class="sc">!=</span> <span class="st">""</span>, .(label, est, ci.lower, ci.upper, pvalue)]</span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>efeitos_m5</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          label        est    ci.lower   ci.upper       pvalue
+         &lt;char&gt;      &lt;num&gt;       &lt;num&gt;      &lt;num&gt;        &lt;num&gt;
+1:            a -0.6846525 -0.81033690 -0.5653562 0.000000e+00
+2:           c1 -0.8145171 -1.82713998  0.1363586 1.016763e-01
+3:           c2  0.4288241 -0.28650790  1.2154721 2.495692e-01
+4:           c3  0.1381314  0.06486704  0.2100559 1.733682e-04
+5:            b -1.0093881 -1.27942483 -0.7282087 1.401768e-12
+6:     indireto  0.6910801  0.46679597  0.9316762 4.030283e-09
+7: direto_baixo  0.7049283  0.22012747  1.1849800 4.375682e-03
+8: direto_medio  1.5337167  0.92384455  2.1653400 9.047985e-07
+9:  direto_alto  2.3293536  1.36817413  3.2411187 8.612269e-07</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>e5 <span class="ot">&lt;-</span> <span class="fu">setNames</span>(efeitos_m5<span class="sc">$</span>est, efeitos_m5<span class="sc">$</span>label)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>dataset_aux <span class="ot">&lt;-</span> <span class="fu">CJ</span>(<span class="at">esforco =</span> <span class="fu">seq</span>(<span class="fu">min</span>(dataset<span class="sc">$</span>esforco), <span class="fu">max</span>(dataset<span class="sc">$</span>esforco), <span class="at">length.out =</span> <span class="dv">20</span>), <span class="at">nivel =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>dataset_aux[, superdedicacao <span class="sc">:</span><span class="er">=</span> percentis[nivel]]</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>dataset_aux[, dass_previsto <span class="sc">:</span><span class="er">=</span> e5[[<span class="st">"c1"</span>]] <span class="sc">*</span> esforco <span class="sc">+</span> e5[[<span class="st">"c2"</span>]] <span class="sc">*</span> superdedicacao <span class="sc">+</span> e5[[<span class="st">"c3"</span>]] <span class="sc">*</span> esforco <span class="sc">*</span> superdedicacao]</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>dataset_aux[, dass_previsto <span class="sc">:</span><span class="er">=</span> dass_previsto <span class="sc">-</span> dass_previsto[<span class="dv">1</span>], by <span class="ot">=</span> nivel]</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>dataset_aux[, nivel <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(nivel, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">tr</span>(<span class="fu">c</span>(<span class="st">"Low (p16)"</span>, <span class="st">"Medium (p50)"</span>, <span class="st">"High (p84)"</span>), <span class="fu">c</span>(<span class="st">"Baixa (p16)"</span>, <span class="st">"Média (p50)"</span>, <span class="st">"Alta (p84)"</span>)))]</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dataset_aux, <span class="fu">aes</span>(esforco, dass_previsto, <span class="at">colour =</span> nivel)) <span class="sc">+</span></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.3</span>) <span class="sc">+</span></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">tr</span>(<span class="st">"Direct effect of effort on the DASS-21 by level of overcommitment"</span>,</span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Efeito direto do esforço sobre o DASS-21 por nível de superdedicação"</span>),</span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="fu">tr</span>(<span class="st">"Effort"</span>, <span class="st">"Esforço"</span>), <span class="at">y =</span> <span class="fu">tr</span>(<span class="st">"Change in the predicted DASS-21"</span>, <span class="st">"Variação do DASS-21 previsto"</span>),</span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="fu">tr</span>(<span class="st">"Overcommitment"</span>, <span class="st">"Superdedicação"</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project06_1_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>O esforço reduz a recompensa percebida (a = -0,68), e menos recompensa significa mais sintomas (b = -1,01), um efeito indireto de 0,69 por ponto de esforço. A interação entre esforço e superdedicação é significativa: o efeito direto do esforço é de 0,7 para bancários com superdedicação baixa e cresce para 2,33 para os de superdedicação alta. <strong>O mesmo esforço faz mais mal a quem se dedica excessivamente ao trabalho.</strong></p>
+</section>
+</section>
+<section id="dano-psicológico" class="level2">
+<h2 class="anchored" data-anchor-id="dano-psicológico">Dano psicológico</h2>
+<p>Os mesmos fatores também explicam o segundo desfecho do estudo. No modelo para o dano psicológico (EADRT), o DASS-21 entra como preditor, junto com superdedicação, assédio, relações socioprofissionais e acompanhamento psiquiátrico:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>fit_dano <span class="ot">&lt;-</span> <span class="fu">lm</span>(dano_psico <span class="sc">~</span> superdedicacao <span class="sc">+</span> acomp_psiq <span class="sc">+</span> assedio <span class="sc">+</span> relacoes <span class="sc">+</span> dass21, <span class="at">data =</span> dataset)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_dano)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = dano_psico ~ superdedicacao + acomp_psiq + assedio + 
+    relacoes + dass21, data = dataset)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.1704 -0.7205 -0.0595  0.7054  3.5389 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    -0.966477   0.232898  -4.150 3.87e-05 ***
+superdedicacao  0.080330   0.013808   5.817 1.02e-08 ***
+acomp_psiq      0.488420   0.117971   4.140 4.03e-05 ***
+assedio         0.358799   0.127461   2.815  0.00506 ** 
+relacoes        0.319809   0.072526   4.410 1.25e-05 ***
+dass21          0.057260   0.004101  13.963  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.186 on 540 degrees of freedom
+  (119 observations deleted due to missingness)
+Multiple R-squared:  0.6968,    Adjusted R-squared:  0.694 
+F-statistic: 248.3 on 5 and 540 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(fit_dano)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>superdedicacao     acomp_psiq        assedio       relacoes         dass21 
+      1.931761       1.173024       1.552246       1.747386       2.373434 </code></pre>
+</div>
+</div>
+<p>O modelo explica 69,4% do dano psicológico. O DASS-21 é de longe o preditor mais forte (coeficiente padronizado de 0,5), seguido pela superdedicação e pelas relações socioprofissionais. O acompanhamento psiquiátrico aparece com coeficiente positivo: ele não causa dano, ele marca os casos que já são mais graves e estão em tratamento.</p>
+</section>
+<section id="como-as-análises-convergem" class="level2">
+<h2 class="anchored" data-anchor-id="como-as-análises-convergem">Como as análises convergem</h2>
+<p>Cada análise responde a uma pergunta diferente, e juntas apontam na mesma direção:</p>
+<ol type="1">
+<li><strong>As medidas funcionam.</strong> A análise fatorial confirmatória valida o DASS-21, o contexto de trabalho e os danos relacionados ao trabalho. O único ponto frágil é a recompensa do ERI, em que a segurança no emprego se comporta como parte da pressão do trabalho.</li>
+<li><strong>A superdedicação é o fator central.</strong> É o construto mais correlacionado com os sintomas, tem o efeito mais forte nas regressões linear e ordinal, medeia o efeito do desequilíbrio esforço-recompensa e amplifica o efeito do esforço.</li>
+<li><strong>O contexto de trabalho importa para além do indivíduo.</strong> Assédio, relações socioprofissionais ruins e a pressão das metas de venda (BEST-8) aumentam os sintomas em todos os modelos, e segurança no emprego e promoção protegem.</li>
+<li><strong>Sintomas e danos são duas faces do mesmo sofrimento.</strong> O DASS-21 explica a maior parte do dano psicológico, o que fecha a cadeia proposta pelo referencial teórico: um contexto de trabalho adverso, filtrado pela superdedicação, vira sintomas e depois dano à saúde.</li>
+</ol>
+<p>O mesmo instrumento, o DASS-21, e o mesmo tipo de pergunta, o que se associa ao sofrimento mental no trabalho, aparecem no <a href="project06_2.html">Projeto 6.2</a>, agora com dados administrativos e duas medições ao longo do tempo.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Cleaning the environment</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(dataset_aux, matriz, fit_perfil_2ordem)</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">gc</span>())</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<style>
+
+/* language switch: a highlighted button on the right side of the navbar */
+
+a.nav-link.lang-switch {
+
+  background-color: #2780e3;
+
+  color: #fff !important;
+
+  border-radius: 999px;
+
+  padding: 0.3rem 1rem !important;
+
+  margin: 0.25rem 0;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+}
+
+a.nav-link.lang-switch:hover,
+
+a.nav-link.lang-switch:focus {
+
+  background-color: #1a68c2;
+
+  color: #fff !important;
+
+}
+
+/* on small screens the menu collapses: a copy of the button is shown at the top of the page */
+
+.lang-switch-bar { display: none; }
+
+@media (max-width: 991.98px) {
+
+  .lang-switch-bar { display: block; text-align: right; margin: 0 0 0.75rem 0; }
+
+  .lang-switch-bar a.nav-link.lang-switch { display: inline-block; font-size: 0.9rem; margin: 0; }
+
+  li.lang-switch-item { display: none; }
+
+}
+
+</style>
+
+
+
+<script>
+
+// 1) the browser tab shows the title of the page in its own language
+
+// 2) the language button of the navbar opens the same page in the other language
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  var titulo = document.querySelector("main .page-title");
+
+  if (titulo) document.title = titulo.textContent.trim().replace(/\s+/g, " ") + " – MyDataPortfolio";
+
+
+
+  var isPt = (document.documentElement.lang || "").indexOf("pt") === 0;
+
+  var page = location.pathname.split("/").pop() || "index.html";
+
+  document.querySelectorAll("a.nav-link").forEach(function (a) {
+
+    var text = a.textContent.trim();
+
+    if ((isPt && text === "EN Version") || (!isPt && text === "Versão em PT")) {
+
+      a.classList.add("lang-switch");
+
+      a.setAttribute("href", (isPt ? "../" : "pt/") + page);
+
+      a.setAttribute("title", isPt ? "Read this page in English" : "Ler esta página em português");
+
+      a.setAttribute("lang", isPt ? "en" : "pt-BR");
+
+      a.parentElement.classList.add("lang-switch-item");
+
+
+
+      var main = document.querySelector("main");
+
+      if (main) {
+
+        var barra = document.createElement("div");
+
+        barra.className = "lang-switch-bar";
+
+        barra.appendChild(a.cloneNode(true));
+
+        main.insertBefore(barra, main.firstChild);
+
+      }
+
+    }
+
+  });
+
+});
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

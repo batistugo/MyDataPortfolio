@@ -7,6 +7,8 @@ project:
     - project03.qmd
     - project04.qmd
     - project05.Rmd
+    - project06_1.Rmd
+    - project06_2.Rmd
 
 # two languages, rendered by render.ps1 / render.sh (English first, then Portuguese):
 #   quarto render --profile en   ->  docs/      (English, current URLs)

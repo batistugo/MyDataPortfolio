@@ -21,6 +21,10 @@ website:
         href: project04.qmd
       - text: "Project 05"
         href: project05.Rmd
+      - text: "Project 6.1"
+        href: project06_1.Rmd
+      - text: "Project 6.2"
+        href: project06_2.Rmd
     right:
       - text: "Versão em PT"
         href: https://batistugo.github.io/MyDataPortfolio/pt/

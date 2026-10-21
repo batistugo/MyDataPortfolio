@@ -1,0 +1,675 @@
+---
+pagetitle: "Mental Health of Bank Workers"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 4
+    theme: cosmo
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+
+# returns the text in the language of the page being rendered
+tr <- function(en, pt) if (identical(Sys.getenv("QUARTO_PROFILE"), "pt")) pt else en
+
+# numbers written inside the text follow the language (0.48 in English, 0,48 in Portuguese)
+knitr::knit_hooks$set(inline = function(x) {
+  if (is.numeric(x)) x <- format(x, decimal.mark = tr(".", ","), scientific = FALSE)
+  x
+})
+```
+
+::: {.content-visible when-profile="en"}
+::: {.h1 .page-title}
+Mental Health of Bank Workers: psychometric validation and models of work-related suffering
+:::
+:::
+
+::: {.content-visible when-profile="pt"}
+::: {.h1 .page-title}
+Saúde Mental de Bancários: validação psicométrica e modelos do sofrimento relacionado ao trabalho
+:::
+:::
+
+*Hugo Batista da Silva*
+
+::: {.content-visible when-profile="en"}
+::: {.callout-note}
+**Projects 6.1 and 6.2** were made for the same client, a research group in work psychology of the Graduate Program in Psychology of the Federal University of Espírito Santo (UFES), but they use different databases and different analyses. This page is the first one; the second one, with administrative data of the Federal Highway Police, is [Project 6.2](project06_2.html).
+:::
+
+## About the project
+This study was a research project of UFES (PIIC 2023/2024 call) carried out with the bank workers' union of Espírito Santo (Sindibancários-ES). The banking sector has gone through deep changes in the last decades: digitalisation, sales targets, pressure for results and job insecurity. The union needed data about the mental health of its members, and the research group designed an online survey to find out **how suffering is built among bank workers**.
+
+The survey received 784 answers. After keeping only the people who accepted the consent form, who are active bank workers and who work in Espírito Santo, **665 valid questionnaires** remain. I was responsible for the statistical analysis: the validation of the scales, the descriptive analysis and the models that relate the work context to the mental health of the workers.
+
+## Theoretical framework
+The questionnaire combines six instruments. Each one measures a **construct**, a theoretical concept that cannot be observed directly and is measured through a set of items:
+
+| Construct | Instrument | Dimensions | Role in the study |
+|-----------|------------|------------|-------------------|
+| Mental health | DASS-21 (Lovibond & Lovibond, 1995) | Depression, anxiety, stress | Main outcome |
+| Effort-reward imbalance | ERI, short version (Siegrist) | Effort, reward (esteem, promotion, job security), overcommitment | Psychosocial risk |
+| Feelings about bank work | BEST-8 | Pressure of sales targets, moral conflict, loss of meaning | Risk specific to the sector |
+| Work context | EACT (Mendes & Ferreira) | Working conditions, work organisation, socio-professional relations | Psychosocial risk |
+| Work-related damage | EADRT (Mendes & Ferreira) | Physical, psychological and social damage | Second outcome |
+| Workplace harassment | Negative acts block of the questionnaire | Frequent harassment (yes / no) | Psychosocial risk |
+
+The theoretical idea that guides the analysis is a chain: an adverse **work context** and an **imbalance between the effort demanded and the reward received** generate tension; **overcommitment**, a personal pattern of excessive dedication to work, amplifies this tension; and the result appears as **symptoms of depression, anxiety and stress** and as **damage to physical, psychological and social health**.
+
+## The dataset
+The data are real, but they are protected by the Brazilian data protection law (LGPD). In the version published here, **all sociodemographic and socio-professional characteristics were removed** (age, sex, race, education, children, city, bank, position, length of service), as well as dates and free-text answers, and each person received a new random key. Only the items of the scales and the work and health variables used in the models remain.
+:::
+
+::: {.content-visible when-profile="pt"}
+::: {.callout-note}
+**Os projetos 6.1 e 6.2** foram feitos para o mesmo cliente, um grupo de pesquisa em psicologia do trabalho do Programa de Pós-Graduação em Psicologia da Universidade Federal do Espírito Santo (UFES), mas usam bases de dados e análises diferentes. Esta página é a primeira; a segunda, com dados administrativos da Polícia Rodoviária Federal, é o [Projeto 6.2](project06_2.html).
+:::
+
+## Sobre o projeto
+Este estudo foi um projeto de pesquisa da UFES (edital PIIC 2023/2024) realizado com o Sindicato dos Bancários do Espírito Santo (Sindibancários-ES). O setor bancário passou por mudanças profundas nas últimas décadas: digitalização, metas de vendas, pressão por resultados e insegurança no emprego. O sindicato precisava de dados sobre a saúde mental da categoria, e o grupo de pesquisa elaborou um questionário online para entender **como o sofrimento se constrói entre os bancários**.
+
+O questionário recebeu 784 respostas. Mantendo apenas quem aceitou o termo de consentimento, quem é bancário da ativa e quem trabalha no Espírito Santo, restam **665 questionários válidos**. Fui responsável pela análise estatística: a validação das escalas, a análise descritiva e os modelos que relacionam o contexto de trabalho à saúde mental dos trabalhadores.
+
+## Referencial teórico
+O questionário combina seis instrumentos. Cada um mede um **construto**, um conceito teórico que não pode ser observado diretamente e é medido por um conjunto de itens:
+
+| Construto | Instrumento | Dimensões | Papel no estudo |
+|-----------|-------------|-----------|-----------------|
+| Saúde mental | DASS-21 (Lovibond & Lovibond, 1995) | Depressão, ansiedade, estresse | Desfecho principal |
+| Desequilíbrio esforço-recompensa | ERI, versão reduzida (Siegrist) | Esforço, recompensa (estima, promoção, segurança no emprego), superdedicação | Risco psicossocial |
+| Sentimentos sobre o trabalho bancário | BEST-8 | Pressão das metas de venda, conflito moral, perda de sentido | Risco específico do setor |
+| Contexto de trabalho | EACT (Mendes & Ferreira) | Condições de trabalho, organização do trabalho, relações socioprofissionais | Risco psicossocial |
+| Danos relacionados ao trabalho | EADRT (Mendes & Ferreira) | Danos físicos, psicológicos e sociais | Segundo desfecho |
+| Assédio no trabalho | Bloco de atos negativos do questionário | Assédio frequente (sim / não) | Risco psicossocial |
+
+A ideia teórica que orienta a análise é uma cadeia: um **contexto de trabalho** adverso e um **desequilíbrio entre o esforço exigido e a recompensa recebida** geram tensão; a **superdedicação**, um padrão pessoal de dedicação excessiva ao trabalho, amplifica essa tensão; e o resultado aparece como **sintomas de depressão, ansiedade e estresse** e como **danos à saúde física, psicológica e social**.
+
+## A base de dados
+Os dados são reais, mas protegidos pela LGPD. Na versão publicada aqui, **todas as características sociodemográficas e socioprofissionais foram retiradas** (idade, sexo, raça, escolaridade, filhos, cidade, banco, cargo, tempo de trabalho), assim como datas e respostas abertas, e cada pessoa recebeu uma nova chave aleatória. Permanecem apenas os itens das escalas e as variáveis de trabalho e saúde usadas nos modelos.
+:::
+
+```{r}
+library(data.table)
+library(lavaan)
+library(semTools)
+library(semPlot)
+library(MASS)
+library(car)
+library(lmtest)
+library(nortest)
+library(brant)
+library(pscl)
+library(corrplot)
+library(ggplot2)
+library(knitr)
+
+dataset <- fread("data/bancarios_saude_mental.csv")
+dim(dataset)
+```
+
+::: {.content-visible when-profile="en"}
+## Scores of the scales
+The scores are calculated from the items, following the rules of each instrument:
+
+- **DASS-21:** sum of the 21 items (0 to 63); for each subscale the sum of its 7 items is multiplied by 2, as recommended by the authors, and classified with the cut-off points of Lovibond and Lovibond (1995). The overall classification uses the cut-off points on the total score defined by the research team.
+- **ERI:** sums of effort (3 items), reward (7 items) and overcommitment (6 items); the **effort-reward ratio** is $ER = E / (R \times 3/7)$, where $3/7$ corrects the different number of items. Values above 1 indicate more effort than reward.
+- **EACT and EADRT:** mean of the items of each factor. In the EACT, **higher scores mean a worse context** (from 1 to 5, critical above 2.3 and severe above 3.7).
+:::
+
+::: {.content-visible when-profile="pt"}
+## Escores das escalas
+Os escores são calculados a partir dos itens, seguindo as regras de cada instrumento:
+
+- **DASS-21:** soma dos 21 itens (0 a 63); em cada subescala a soma dos seus 7 itens é multiplicada por 2, como recomendam os autores, e classificada pelos pontos de corte de Lovibond e Lovibond (1995). A classificação geral usa os pontos de corte no escore total definidos pela equipe de pesquisa.
+- **ERI:** somas de esforço (3 itens), recompensa (7 itens) e superdedicação (6 itens); a **razão esforço-recompensa** é $ER = E / (R \times 3/7)$, em que $3/7$ corrige o número diferente de itens. Valores acima de 1 indicam mais esforço que recompensa.
+- **EACT e EADRT:** média dos itens de cada fator. Na EACT, **escores mais altos significam um contexto pior** (de 1 a 5, crítico acima de 2,3 e grave acima de 3,7).
+:::
+
+```{r}
+soma <- function(v) rowSums(dataset[, ..v])
+media <- function(v) rowMeans(dataset[, ..v])
+
+itens_ans <- paste0("Ans", 1:7); itens_dep <- paste0("Dep", 1:7); itens_est <- paste0("Est", 1:7)
+itens_rec <- c("RecEst1_4", "RecProm1_5", "RecSeg1_6", "RecSeg2_7", "RecEst2_8", "RecProm3_9", "RecProm3_10")
+
+dataset[, `:=`(
+  dass21         = soma(c(itens_ans, itens_dep, itens_est)),
+  ansiedade      = 2 * soma(itens_ans),
+  depressao      = 2 * soma(itens_dep),
+  estresse       = 2 * soma(itens_est),
+  best8          = soma(paste0("BEST8_", 1:10)),
+  esforco        = soma(paste0("Esfor", 1:3)),
+  recompensa     = soma(itens_rec),
+  promocao       = soma(c("RecProm1_5", "RecProm3_9", "RecProm3_10")),
+  seguranca      = soma(c("RecSeg1_6", "RecSeg2_7")),
+  superdedicacao = soma(paste0("Superded_", 1:6)),
+  condicoes      = media(paste0("CondTrab", 1:10)),
+  organizacao    = media(paste0("OrgTrab", 1:11)),
+  relacoes       = media(paste0("RelSoc", 1:10)),
+  dano_fisico    = media(paste0("Dano_fis", 1:12)),
+  dano_psico     = media(paste0("Dano_psi", 1:10)),
+  dano_social    = media(paste0("Dano_soc", 1:7)),
+  assedio        = fcase(AssedFreq_29 == 1, 1, AssedFreq_29 == 2, 0),
+  acomp_psiq     = as.integer(AcompPsiq == 1),
+  afast_mental   = as.integer(AfastSaudMent %in% 1)   # asked only to who has been on sick leave
+)]
+dataset[, razao_er := esforco / (recompensa * 3/7)]
+
+niveis_dass <- tr(c("Normal", "Mild", "Moderate", "Severe", "Extremely severe"),
+                  c("Normal", "Leve", "Moderado", "Grave", "Extremamente grave"))
+classifica <- function(x, cortes) factor(findInterval(x, cortes) + 1, 1:5, niveis_dass, ordered = TRUE)
+
+dataset[, `:=`(
+  classe_dass21 = classifica(dass21, c(17, 21, 26, 30)),
+  classe_dep    = classifica(depressao, c(10, 14, 21, 28)),
+  classe_ans    = classifica(ansiedade, c(8, 10, 15, 20)),
+  classe_est    = classifica(estresse, c(15, 19, 26, 34)),
+  classe_relacoes = factor(findInterval(relacoes, c(2.3, 3.7)) + 1, 1:3,
+                           tr(c("Satisfactory", "Critical", "Severe"), c("Satisfatória", "Crítica", "Grave")))
+)]
+```
+
+::: {.content-visible when-profile="en"}
+### How severe are the symptoms?
+:::
+
+::: {.content-visible when-profile="pt"}
+### Qual a gravidade dos sintomas?
+:::
+
+```{r, fig.width = 12, fig.height = 5}
+dataset_aux <- rbindlist(list(
+  dataset[, .N, by = .(classe = classe_dep)][, escala := tr("Depression", "Depressão")],
+  dataset[, .N, by = .(classe = classe_ans)][, escala := tr("Anxiety", "Ansiedade")],
+  dataset[, .N, by = .(classe = classe_est)][, escala := tr("Stress", "Estresse")],
+  dataset[, .N, by = .(classe = classe_dass21)][, escala := "DASS-21"]
+))
+dataset_aux[, pct := N / sum(N), by = escala]
+
+ggplot(dataset_aux, aes(x = escala, y = pct, fill = classe)) +
+  geom_col(position = position_stack(reverse = TRUE)) +
+  geom_text(aes(label = ifelse(pct >= 0.04, scales::percent(pct, accuracy = 1), "")),
+            position = position_stack(vjust = 0.5, reverse = TRUE), size = 4.5) +
+  scale_fill_brewer(palette = "RdYlGn", direction = -1) +
+  scale_y_continuous(labels = scales::percent) +
+  coord_flip() +
+  theme(text = element_text(size = 15), legend.position = "bottom") +
+  labs(title = tr("Severity of the symptoms (DASS-21)", "Gravidade dos sintomas (DASS-21)"),
+       x = NULL, y = NULL, fill = NULL)
+```
+
+```{r, include = FALSE}
+pct_grave <- round(100 * mean(dataset$classe_dass21 >= niveis_dass[4]))
+pct_afast <- round(100 * mean(dataset$afast_mental))
+pct_sub <- round(100 * sapply(dataset[, .(classe_dep, classe_ans, classe_est)], function(x) mean(x >= niveis_dass[4])))
+```
+
+::: {.content-visible when-profile="en"}
+The picture is alarming: **`r pct_grave`% of the bank workers are in the severe or extremely severe range** of the overall DASS-21 classification, and `r pct_afast`% have already been on sick leave for mental health reasons. The three dimensions are affected in a similar way: between `r min(pct_sub)`% and `r max(pct_sub)`% of the workers are in the severe or extremely severe range of depression, anxiety and stress.
+
+Before relating these symptoms to the work context, it is necessary to verify that the scales really measure what they claim to measure.
+
+## Confirmatory factor analysis
+Each scale was built with a theoretical structure: which items belong to which factor. The **confirmatory factor analysis (CFA)** tests whether the answers of these 665 bank workers reproduce this structure. Since the items are ordinal (Likert scales), the models are estimated with **WLSMV** (weighted least squares with mean and variance adjustment) on the polychoric correlations, and the fit is evaluated with the **robust (scaled)** versions of the indices, the appropriate ones for this estimator:
+
+| Index | Good fit |
+|-------|----------|
+| CFI and TLI | ≥ 0.90 (acceptable), ≥ 0.95 (good) |
+| RMSEA | ≤ 0.08 (acceptable), ≤ 0.05 (good) |
+| SRMR | ≤ 0.08 |
+| Standardised loadings | ≥ 0.60 |
+| Omega (ω) and alpha (α) | ≥ 0.70 |
+| Average variance extracted (AVE) | ≥ 0.50 |
+
+The function below fits a model and gathers the fit indices and the reliability of each factor in one table:
+:::
+
+::: {.content-visible when-profile="pt"}
+O quadro é alarmante: **`r pct_grave`% dos bancários estão na faixa grave ou extremamente grave** da classificação geral do DASS-21, e `r pct_afast`% já se afastaram do trabalho por motivo de saúde mental. As três dimensões são afetadas de forma parecida: entre `r min(pct_sub)`% e `r max(pct_sub)`% dos trabalhadores estão na faixa grave ou extremamente grave de depressão, ansiedade e estresse.
+
+Antes de relacionar esses sintomas ao contexto de trabalho, é preciso verificar se as escalas realmente medem o que se propõem a medir.
+
+## Análise fatorial confirmatória
+Cada escala foi construída com uma estrutura teórica: quais itens pertencem a qual fator. A **análise fatorial confirmatória (AFC)** testa se as respostas desses 665 bancários reproduzem essa estrutura. Como os itens são ordinais (escalas Likert), os modelos são estimados por **WLSMV** (mínimos quadrados ponderados com ajuste de média e variância) sobre as correlações policóricas, e o ajuste é avaliado pelas versões **robustas (scaled)** dos índices, as adequadas para esse estimador:
+
+| Índice | Bom ajuste |
+|--------|------------|
+| CFI e TLI | ≥ 0,90 (aceitável), ≥ 0,95 (bom) |
+| RMSEA | ≤ 0,08 (aceitável), ≤ 0,05 (bom) |
+| SRMR | ≤ 0,08 |
+| Cargas fatoriais padronizadas | ≥ 0,60 |
+| Ômega (ω) e alfa (α) | ≥ 0,70 |
+| Variância média extraída (AVE) | ≥ 0,50 |
+
+A função abaixo ajusta um modelo e reúne em uma tabela os índices de ajuste e a confiabilidade de cada fator:
+:::
+
+```{r}
+ajusta_cfa <- function(modelo) {
+  cfa(modelo, data = dataset, estimator = "WLSMV", ordered = TRUE)
+}
+
+resumo_cfa <- function(fit) {
+  ajuste <- fitMeasures(fit, c("chisq.scaled", "df", "cfi.scaled", "tli.scaled", "rmsea.scaled", "srmr"))
+  # reliability of the first-order factors on the latent-response scale (ordinal items):
+  # ordinal alpha from the polychoric correlations, McDonald's omega and AVE from the standardised loadings
+  cargas <- as.data.table(standardizedSolution(fit))[op == "=~" & !rhs %in% lavNames(fit, "lv")]
+  policoricas <- lavInspect(fit, "sampstat")$cov
+  alfa_ordinal <- function(v) { r <- policoricas[v, v]; k <- length(v); k / (k - 1) * (1 - k / sum(r)) }
+  confiab <- cargas[, .(itens = .N,
+                        alfa = alfa_ordinal(rhs),
+                        omega = sum(est.std)^2 / (sum(est.std)^2 + sum(1 - est.std^2)),
+                        ave = mean(est.std^2),
+                        carga_min = min(est.std),
+                        carga_max = max(est.std)), by = .(fator = lhs)]
+  list(ajuste = round(c(ajuste, "chisq/df" = ajuste[["chisq.scaled"]] / ajuste[["df"]]), 3),
+       fatores = confiab,
+       admissivel = lavInspect(fit, "post.check"))
+}
+```
+
+::: {.content-visible when-profile="en"}
+### Mental health (DASS-21)
+The DASS-21 is modelled with its three first-order factors and a second-order factor, general distress, as proposed by the tripartite model.
+:::
+
+::: {.content-visible when-profile="pt"}
+### Saúde mental (DASS-21)
+O DASS-21 é modelado com seus três fatores de primeira ordem e um fator de segunda ordem, o sofrimento geral, como propõe o modelo tripartido.
+:::
+
+```{r, fig.width = 12, fig.height = 7}
+modelo_dass <- "
+ansiedade_f =~ Ans1 + Ans2 + Ans3 + Ans4 + Ans5 + Ans6 + Ans7
+depressao_f =~ Dep1 + Dep2 + Dep3 + Dep4 + Dep5 + Dep6 + Dep7
+estresse_f  =~ Est1 + Est2 + Est3 + Est4 + Est5 + Est6 + Est7
+dass_f      =~ ansiedade_f + depressao_f + estresse_f
+"
+fit_dass <- ajusta_cfa(modelo_dass)
+res_dass <- resumo_cfa(fit_dass)
+res_dass$ajuste
+kable(res_dass$fatores, digits = 3)
+
+semPaths(fit_dass, "std", layout = "tree", rotation = 2, residuals = FALSE, intercepts = FALSE, thresholds = FALSE,
+         edge.label.cex = 0.75, sizeMan = 4, sizeLat = 8, nCharNodes = 0, edge.color = "steelblue")
+```
+
+::: {.content-visible when-profile="en"}
+The structure of the DASS-21 is confirmed: all loadings are between `r round(min(res_dass$fatores$carga_min), 2)` and `r round(max(res_dass$fatores$carga_max), 2)`, the three factors have omega above `r floor(100 * min(res_dass$fatores$omega)) / 100` and AVE above `r floor(100 * min(res_dass$fatores$ave)) / 100`, and the robust CFI is `r round(res_dass$ajuste[["cfi.scaled"]], 3)` with RMSEA of `r round(res_dass$ajuste[["rmsea.scaled"]], 3)`. The chi-square test rejects the exact fit, which is expected with a sample of this size, and the other indices show an adequate model.
+
+### Work profile (ERI and BEST-8)
+The original theoretical model has six first-order factors (BEST-8, effort, esteem, promotion, job security and overcommitment), with esteem, promotion and job security grouped in a second-order **reward** factor.
+:::
+
+::: {.content-visible when-profile="pt"}
+A estrutura do DASS-21 se confirma: todas as cargas ficam entre `r round(min(res_dass$fatores$carga_min), 2)` e `r round(max(res_dass$fatores$carga_max), 2)`, os três fatores têm ômega acima de `r floor(100 * min(res_dass$fatores$omega)) / 100` e AVE acima de `r floor(100 * min(res_dass$fatores$ave)) / 100`, e o CFI robusto é `r round(res_dass$ajuste[["cfi.scaled"]], 3)`, com RMSEA de `r round(res_dass$ajuste[["rmsea.scaled"]], 3)`. O teste qui-quadrado rejeita o ajuste exato, o que é esperado com uma amostra desse tamanho, e os demais índices mostram um modelo adequado.
+
+### Perfil do trabalho (ERI e BEST-8)
+O modelo teórico original tem seis fatores de primeira ordem (BEST-8, esforço, estima, promoção, segurança no emprego e superdedicação), com estima, promoção e segurança agrupados em um fator de segunda ordem de **recompensa**.
+:::
+
+```{r}
+modelo_perfil <- "
+best8_f      =~ BEST8_1 + BEST8_2 + BEST8_3 + BEST8_4 + BEST8_5 + BEST8_6 + BEST8_7 + BEST8_8 + BEST8_9 + BEST8_10
+esforco_f    =~ Esfor1 + Esfor2 + Esfor3
+estima_f     =~ RecEst1_4 + RecEst2_8
+promocao_f   =~ RecProm1_5 + RecProm3_9 + RecProm3_10
+seguranca_f  =~ RecSeg1_6 + RecSeg2_7
+superded_f   =~ Superded_1 + Superded_2 + Superded_3 + Superded_4 + Superded_5 + Superded_6
+"
+fit_perfil_2ordem <- ajusta_cfa(paste(modelo_perfil, "recompensa_f =~ estima_f + promocao_f + seguranca_f"))
+
+# is the solution admissible? and the loadings of the second-order factor
+lavInspect(fit_perfil_2ordem, "post.check")
+as.data.table(standardizedSolution(fit_perfil_2ordem))[lhs == "recompensa_f" & op == "=~", .(lhs, rhs, est.std)]
+```
+
+::: {.content-visible when-profile="en"}
+The second-order model produces an **improper solution** (a Heywood case): the loading of job security on reward is greater than 1, which implies a negative residual variance. The correlations between the first-order factors show why:
+:::
+
+::: {.content-visible when-profile="pt"}
+O modelo de segunda ordem produz uma **solução imprópria** (um caso de Heywood): a carga de segurança no emprego sobre recompensa é maior que 1, o que implica uma variância residual negativa. As correlações entre os fatores de primeira ordem mostram o porquê:
+:::
+
+```{r}
+fit_perfil <- ajusta_cfa(modelo_perfil)
+round(lavInspect(fit_perfil, "cor.lv"), 2)
+res_perfil <- resumo_cfa(fit_perfil)
+res_perfil$admissivel
+res_perfil$ajuste
+kable(res_perfil$fatores, digits = 3)
+```
+
+```{r, include = FALSE}
+cor_lv <- lavInspect(fit_perfil, "cor.lv")
+```
+
+::: {.content-visible when-profile="en"}
+Job security is more strongly (and negatively) related to overcommitment (r = `r round(cor_lv["seguranca_f", "superded_f"], 2)`), effort (r = `r round(cor_lv["seguranca_f", "esforco_f"], 2)`) and BEST-8 (r = `r round(cor_lv["seguranca_f", "best8_f"], 2)`) than to the other two dimensions of reward. In this population, the fear of losing the job behaves more like a part of the pressure of the work than like a reward. The model was therefore re-specified with **correlated first-order factors**, which gives an admissible solution.
+
+The fit of this construct is the weakest of the study (robust RMSEA of `r round(res_perfil$ajuste[["rmsea.scaled"]], 3)`), and the reward dimensions, with only two or three items each, are the weak point: promotion and job security have low reliability (ω close to 0.6) and AVE below 0.5. Esteem, BEST-8, effort and overcommitment have adequate to excellent reliability. These limitations are taken into account in the interpretation of the models.
+
+### Work context (EACT) and work-related damage (EADRT)
+:::
+
+::: {.content-visible when-profile="pt"}
+A segurança no emprego está mais fortemente (e negativamente) relacionada à superdedicação (r = `r round(cor_lv["seguranca_f", "superded_f"], 2)`), ao esforço (r = `r round(cor_lv["seguranca_f", "esforco_f"], 2)`) e ao BEST-8 (r = `r round(cor_lv["seguranca_f", "best8_f"], 2)`) do que às outras duas dimensões da recompensa. Nesta população, o medo de perder o emprego se comporta mais como parte da pressão do trabalho do que como uma recompensa. Por isso o modelo foi reespecificado com **fatores de primeira ordem correlacionados**, o que gera uma solução admissível.
+
+O ajuste deste construto é o mais fraco do estudo (RMSEA robusto de `r round(res_perfil$ajuste[["rmsea.scaled"]], 3)`), e as dimensões da recompensa, com apenas dois ou três itens cada, são o ponto fraco: promoção e segurança no emprego têm confiabilidade baixa (ω perto de 0,6) e AVE abaixo de 0,5. Estima, BEST-8, esforço e superdedicação têm confiabilidade de adequada a excelente. Essas limitações são consideradas na interpretação dos modelos.
+
+### Contexto de trabalho (EACT) e danos relacionados ao trabalho (EADRT)
+:::
+
+```{r}
+itens <- function(prefixo, n) paste0(prefixo, 1:n, collapse = " + ")
+
+fit_contexto <- ajusta_cfa(paste0("condicoes_f =~ ", itens("CondTrab", 10), "\n",
+                                  "organizacao_f =~ ", itens("OrgTrab", 11), "\n",
+                                  "relacoes_f =~ ", itens("RelSoc", 10)))
+fit_danos <- ajusta_cfa(paste0("dano_fisico_f =~ ", itens("Dano_fis", 12), "\n",
+                               "dano_psico_f =~ ", itens("Dano_psi", 10), "\n",
+                               "dano_social_f =~ ", itens("Dano_soc", 7)))
+res_contexto <- resumo_cfa(fit_contexto)
+res_danos <- resumo_cfa(fit_danos)
+
+kable(rbind(res_contexto$fatores, res_danos$fatores), digits = 3)
+rbind(contexto = res_contexto$ajuste, danos = res_danos$ajuste)
+```
+
+::: {.content-visible when-profile="en"}
+Both constructs are confirmed: the factors have excellent reliability (omega above `r floor(100 * min(c(res_contexto$fatores$omega, res_danos$fatores$omega))) / 100`) and AVE above `r floor(100 * min(c(res_contexto$fatores$ave, res_danos$fatores$ave))) / 100`, with robust CFI of `r round(res_contexto$ajuste[["cfi.scaled"]], 3)` and `r round(res_danos$ajuste[["cfi.scaled"]], 3)`. The RMSEA values are slightly above 0.08, a common result in long scales, and the SRMR stays within the limit. In the work organisation factor, three items have low loadings (OrgTrab9, OrgTrab6 and OrgTrab10, from about 0.3 to 0.5); they were kept to preserve the validated instrument, and the factor still has good reliability, but they are candidates for revision in future applications.
+
+With the measures validated, the scores calculated before can be used in the models.
+
+## Relationships between the constructs
+:::
+
+::: {.content-visible when-profile="pt"}
+Os dois construtos se confirmam: os fatores têm confiabilidade excelente (ômega acima de `r floor(100 * min(c(res_contexto$fatores$omega, res_danos$fatores$omega))) / 100`) e AVE acima de `r floor(100 * min(c(res_contexto$fatores$ave, res_danos$fatores$ave))) / 100`, com CFI robusto de `r round(res_contexto$ajuste[["cfi.scaled"]], 3)` e `r round(res_danos$ajuste[["cfi.scaled"]], 3)`. Os valores de RMSEA ficam um pouco acima de 0,08, resultado comum em escalas longas, e o SRMR fica dentro do limite. No fator organização do trabalho, três itens têm cargas baixas (OrgTrab9, OrgTrab6 e OrgTrab10, de cerca de 0,3 a 0,5); eles foram mantidos para preservar o instrumento validado, e o fator continua com boa confiabilidade, mas são candidatos a revisão em aplicações futuras.
+
+Com as medidas validadas, os escores calculados antes podem ser usados nos modelos.
+
+## Relações entre os construtos
+:::
+
+```{r, fig.width = 11, fig.height = 10}
+escores <- c("dass21", "best8", "esforco", "recompensa", "superdedicacao", "razao_er",
+             "condicoes", "organizacao", "relacoes", "dano_fisico", "dano_psico", "dano_social")
+matriz <- cor(dataset[, ..escores], method = "spearman")
+dimnames(matriz) <- rep(list(tr(
+  c("DASS-21", "BEST-8", "Effort", "Reward", "Overcommitment", "Effort/reward", "Conditions", "Organisation",
+    "Relations", "Physical damage", "Psych. damage", "Social damage"),
+  c("DASS-21", "BEST-8", "Esforço", "Recompensa", "Superdedicação", "Esforço/recompensa", "Condições", "Organização",
+    "Relações", "Dano físico", "Dano psicológico", "Dano social"))), 2)
+corrplot(matriz, method = "color", type = "lower", addCoef.col = "black", number.cex = 0.75, tl.col = "black", tl.srt = 45)
+```
+
+::: {.content-visible when-profile="en"}
+All risk factors go in the expected direction: overcommitment, effort, BEST-8 and the three dimensions of the work context are positively correlated with the DASS-21, while reward is negatively correlated. Overcommitment is the construct most correlated with the symptoms, and the DASS-21 is strongly correlated with psychological damage, the two outcomes of the study.
+
+## Linear regression for the DASS-21
+The first model explains the total score of the DASS-21. The variables were selected among the risk factors of the theoretical framework, keeping those with a significant contribution and no multicollinearity. Harassment has missing answers, so the model uses the `r sum(!is.na(dataset$assedio))` bank workers who answered this question.
+:::
+
+::: {.content-visible when-profile="pt"}
+Todos os fatores de risco vão na direção esperada: superdedicação, esforço, BEST-8 e as três dimensões do contexto de trabalho se correlacionam positivamente com o DASS-21, enquanto a recompensa se correlaciona negativamente. A superdedicação é o construto mais correlacionado com os sintomas, e o DASS-21 tem forte correlação com o dano psicológico, os dois desfechos do estudo.
+
+## Regressão linear para o DASS-21
+O primeiro modelo explica o escore total do DASS-21. As variáveis foram selecionadas entre os fatores de risco do referencial teórico, mantendo as que têm contribuição significativa e sem multicolinearidade. A pergunta sobre assédio tem respostas faltantes, então o modelo usa os `r sum(!is.na(dataset$assedio))` bancários que a responderam.
+:::
+
+```{r}
+fit_lm <- lm(dass21 ~ superdedicacao + relacoes + seguranca + assedio + best8, data = dataset)
+summary(fit_lm)
+confint(fit_lm)
+vif(fit_lm)
+```
+
+```{r, include = FALSE}
+coef_lm <- coef(fit_lm)
+```
+
+::: {.content-visible when-profile="en"}
+The model explains `r round(100 * summary(fit_lm)$adj.r.squared, 1)`% of the variability of the DASS-21 (adjusted R²), all coefficients are significant and the VIF values are below 2, with no multicollinearity. Holding the other variables constant:
+
+- each point of **overcommitment** adds `r round(coef_lm[["superdedicacao"]], 2)` points to the DASS-21;
+- each point of the **socio-professional relations** score adds `r round(coef_lm[["relacoes"]], 2)` points. Since in the EACT a higher score means a worse context, **worse relations at work are associated with more symptoms**;
+- each point of **job security** removes `r round(-coef_lm[["seguranca"]], 2)` points, a protective factor;
+- suffering **frequent harassment** adds `r round(coef_lm[["assedio"]], 2)` points, the largest effect of the model;
+- each point of the **BEST-8** adds `r round(coef_lm[["best8"]], 2)` points.
+
+### Diagnostics
+The assumptions of the model are checked: influential observations, normality and homoscedasticity of the residuals.
+:::
+
+::: {.content-visible when-profile="pt"}
+O modelo explica `r round(100 * summary(fit_lm)$adj.r.squared, 1)`% da variabilidade do DASS-21 (R² ajustado), todos os coeficientes são significativos e os valores de VIF ficam abaixo de 2, sem multicolinearidade. Mantendo as demais variáveis constantes:
+
+- cada ponto de **superdedicação** acrescenta `r round(coef_lm[["superdedicacao"]], 2)` pontos ao DASS-21;
+- cada ponto no escore de **relações socioprofissionais** acrescenta `r round(coef_lm[["relacoes"]], 2)` pontos. Como na EACT um escore maior significa um contexto pior, **relações de trabalho piores se associam a mais sintomas**;
+- cada ponto de **segurança no emprego** retira `r round(-coef_lm[["seguranca"]], 2)` pontos, um fator de proteção;
+- sofrer **assédio frequente** acrescenta `r round(coef_lm[["assedio"]], 2)` pontos, o maior efeito do modelo;
+- cada ponto do **BEST-8** acrescenta `r round(coef_lm[["best8"]], 2)` pontos.
+
+### Diagnóstico
+Os pressupostos do modelo são verificados: observações influentes, normalidade e homocedasticidade dos resíduos.
+:::
+
+```{r, fig.width = 14, fig.height = 5}
+n <- nobs(fit_lm)
+k <- length(coef(fit_lm))
+cook <- cooks.distance(fit_lm)
+influentes <- which(cook > 4 / n)
+
+par(mfrow = c(1, 3))
+plot(hatvalues(fit_lm), type = "h", xlab = tr("Observation", "Observação"), ylab = tr("Leverage", "Alavancagem"))
+abline(h = 2 * k / n, col = "red", lty = 2)
+plot(cook, type = "h", xlab = tr("Observation", "Observação"), ylab = tr("Cook's distance", "Distância de Cook"))
+abline(h = 4 / n, col = "red", lty = 2)
+plot(fitted(fit_lm), rstandard(fit_lm), pch = 20, xlab = tr("Fitted values", "Valores ajustados"),
+     ylab = tr("Standardised residuals", "Resíduos padronizados"))
+abline(h = c(-2, 2), col = "red", lty = 2)
+
+residuos <- rstandard(fit_lm)
+testes <- list(lillie.test(residuos), shapiro.test(residuos), ad.test(residuos), cvm.test(residuos))
+data.table(teste = sapply(testes, `[[`, "method"), p_valor = round(sapply(testes, `[[`, "p.value"), 4))
+bptest(fit_lm)
+```
+
+::: {.content-visible when-profile="en"}
+The residuals show no evidence against normality, and the Breusch-Pagan test does not reject homoscedasticity. `r length(influentes)` observations have a Cook's distance above $4/n$. Instead of simply deleting them, the model is fitted again without them as a **sensitivity analysis**, to check whether the conclusions depend on these points:
+:::
+
+::: {.content-visible when-profile="pt"}
+Os resíduos não mostram evidência contra a normalidade, e o teste de Breusch-Pagan não rejeita a homocedasticidade. `r length(influentes)` observações têm distância de Cook acima de $4/n$. Em vez de simplesmente excluí-las, o modelo é ajustado novamente sem elas como **análise de sensibilidade**, para verificar se as conclusões dependem desses pontos:
+:::
+
+```{r}
+fit_lm_sem <- update(fit_lm, data = dataset[!is.na(assedio)][-influentes])
+data.table(variavel = names(coef(fit_lm)), completo = coef(fit_lm), sem_influentes = coef(fit_lm_sem))
+c(r2_completo = summary(fit_lm)$adj.r.squared, r2_sem_influentes = summary(fit_lm_sem)$adj.r.squared)
+```
+
+::: {.content-visible when-profile="en"}
+All coefficients keep their signs and similar magnitudes. The adjusted R² rises to `r round(summary(fit_lm_sem)$adj.r.squared, 2)` because the removed points are precisely the cases the model explains worst, but the conclusions about each factor do not depend on them, so the complete model is kept.
+
+## Ordinal regression for the DASS-21 classification
+The DASS-21 is also used in practice through its classification (normal, mild, moderate, severe, extremely severe). An **ordinal logistic regression (proportional odds model)** estimates how each factor changes the chance of being in a more severe category. Here the socio-professional relations enter through the EACT classification.
+:::
+
+::: {.content-visible when-profile="pt"}
+Todos os coeficientes mantêm sinais e magnitudes parecidas. O R² ajustado sobe para `r round(summary(fit_lm_sem)$adj.r.squared, 2)` porque os pontos retirados são justamente os casos que o modelo explica pior, mas as conclusões sobre cada fator não dependem deles, por isso o modelo completo é mantido.
+
+## Regressão ordinal para a classificação do DASS-21
+Na prática, o DASS-21 também é usado pela sua classificação (normal, leve, moderado, grave, extremamente grave). Uma **regressão logística ordinal (modelo de chances proporcionais)** estima como cada fator muda a chance de estar numa categoria mais grave. Aqui as relações socioprofissionais entram pela classificação da EACT.
+:::
+
+```{r}
+fit_ord <- polr(classe_dass21 ~ promocao + superdedicacao + seguranca + best8 + classe_relacoes,
+                data = dataset, Hess = TRUE)
+summary(fit_ord)
+
+razoes <- exp(cbind(OR = coef(fit_ord), confint(fit_ord)))
+round(razoes, 3)
+pR2(fit_ord)[c("McFadden", "r2CU")]
+brant(fit_ord)
+```
+
+::: {.content-visible when-profile="en"}
+The Brant test does not reject the **proportional odds assumption**, neither globally nor for any variable, so the model is adequate. The odds ratios tell the same story as the linear model:
+
+- each point of **overcommitment** increases by `r round(100 * (razoes["superdedicacao", "OR"] - 1))`% the odds of being in a more severe category;
+- **promotion** and **job security** are protective: each point reduces the odds by `r round(100 * (1 - razoes["promocao", "OR"]))`% and `r round(100 * (1 - razoes["seguranca", "OR"]))`%;
+- each point of the **BEST-8** increases the odds by `r round(100 * (razoes["best8", "OR"] - 1))`%;
+- bank workers with **severe socio-professional relations** have `r round(razoes[grep("relacoes", rownames(razoes))[2], "OR"], 2)` times the odds of those with satisfactory relations.
+
+## Mediation and moderation
+The regressions show which factors are associated with the symptoms; the theoretical framework also proposes **how** they act. Two models of the Hayes framework (PROCESS) were tested, estimated here with `lavaan` and confidence intervals by **bootstrap** (1,000 resamples) for the indirect effects.
+
+### Overcommitment as mediator (model 4)
+Does the effort-reward imbalance increase symptoms partly *through* overcommitment?
+:::
+
+::: {.content-visible when-profile="pt"}
+O teste de Brant não rejeita o **pressuposto de chances proporcionais**, nem no geral nem para nenhuma variável, então o modelo é adequado. As razões de chances contam a mesma história do modelo linear:
+
+- cada ponto de **superdedicação** aumenta em `r round(100 * (razoes["superdedicacao", "OR"] - 1))`% a chance de estar numa categoria mais grave;
+- **promoção** e **segurança no emprego** são fatores de proteção: cada ponto reduz a chance em `r round(100 * (1 - razoes["promocao", "OR"]))`% e `r round(100 * (1 - razoes["seguranca", "OR"]))`%;
+- cada ponto do **BEST-8** aumenta a chance em `r round(100 * (razoes["best8", "OR"] - 1))`%;
+- bancários com **relações socioprofissionais graves** têm `r round(razoes[grep("relacoes", rownames(razoes))[2], "OR"], 2)` vezes a chance daqueles com relações satisfatórias.
+
+## Mediação e moderação
+As regressões mostram quais fatores se associam aos sintomas; o referencial teórico também propõe **como** eles agem. Foram testados dois modelos do referencial de Hayes (PROCESS), estimados aqui com o `lavaan` e intervalos de confiança por **bootstrap** (1.000 reamostragens) para os efeitos indiretos.
+
+### Superdedicação como mediadora (modelo 4)
+O desequilíbrio esforço-recompensa aumenta os sintomas em parte *por meio* da superdedicação?
+:::
+
+```{r}
+modelo_4 <- "
+superdedicacao ~ a * razao_er
+dass21         ~ c * razao_er + b * superdedicacao
+indireto := a * b
+total    := c + a * b
+"
+set.seed(2024)
+fit_m4 <- sem(modelo_4, data = dataset, se = "bootstrap", bootstrap = 1000)
+efeitos_m4 <- as.data.table(parameterEstimates(fit_m4, boot.ci.type = "perc"))[label != "", .(label, est, ci.lower, ci.upper, pvalue)]
+efeitos_m4
+```
+
+```{r, include = FALSE}
+e4 <- setNames(efeitos_m4$est, efeitos_m4$label)
+```
+
+::: {.content-visible when-profile="en"}
+The imbalance between effort and reward increases overcommitment (a = `r round(e4[["a"]], 2)`), and overcommitment increases the symptoms (b = `r round(e4[["b"]], 2)`). The **indirect effect** is `r round(e4[["indireto"]], 2)`, with a bootstrap interval that does not contain zero, and the direct effect remains significant: overcommitment **partially mediates** the effect of the imbalance, carrying about `r round(100 * e4[["indireto"]] / e4[["total"]])`% of the total effect.
+
+### Overcommitment as moderator (model 5)
+In model 5, effort acts on the symptoms through reward (mediation), and its direct effect may depend on the level of overcommitment (moderation).
+:::
+
+::: {.content-visible when-profile="pt"}
+O desequilíbrio entre esforço e recompensa aumenta a superdedicação (a = `r round(e4[["a"]], 2)`), e a superdedicação aumenta os sintomas (b = `r round(e4[["b"]], 2)`). O **efeito indireto** é de `r round(e4[["indireto"]], 2)`, com intervalo bootstrap que não contém o zero, e o efeito direto continua significativo: a superdedicação **medeia parcialmente** o efeito do desequilíbrio, carregando cerca de `r round(100 * e4[["indireto"]] / e4[["total"]])`% do efeito total.
+
+### Superdedicação como moderadora (modelo 5)
+No modelo 5, o esforço age sobre os sintomas por meio da recompensa (mediação), e o seu efeito direto pode depender do nível de superdedicação (moderação).
+:::
+
+```{r}
+percentis <- quantile(dataset$superdedicacao, c(0.16, 0.50, 0.84))
+dataset[, esforco_x_superded := esforco * superdedicacao]
+
+modelo_5 <- sprintf("
+recompensa ~ a * esforco
+dass21     ~ c1 * esforco + c2 * superdedicacao + c3 * esforco_x_superded + b * recompensa
+indireto     := a * b
+direto_baixo := c1 + c3 * %f
+direto_medio := c1 + c3 * %f
+direto_alto  := c1 + c3 * %f
+", percentis[1], percentis[2], percentis[3])
+
+set.seed(2024)
+fit_m5 <- sem(modelo_5, data = dataset, se = "bootstrap", bootstrap = 1000)
+efeitos_m5 <- as.data.table(parameterEstimates(fit_m5, boot.ci.type = "perc"))[label != "", .(label, est, ci.lower, ci.upper, pvalue)]
+efeitos_m5
+```
+
+```{r, fig.width = 10, fig.height = 5}
+e5 <- setNames(efeitos_m5$est, efeitos_m5$label)
+dataset_aux <- CJ(esforco = seq(min(dataset$esforco), max(dataset$esforco), length.out = 20), nivel = 1:3)
+dataset_aux[, superdedicacao := percentis[nivel]]
+dataset_aux[, dass_previsto := e5[["c1"]] * esforco + e5[["c2"]] * superdedicacao + e5[["c3"]] * esforco * superdedicacao]
+dataset_aux[, dass_previsto := dass_previsto - dass_previsto[1], by = nivel]
+dataset_aux[, nivel := factor(nivel, 1:3, tr(c("Low (p16)", "Medium (p50)", "High (p84)"), c("Baixa (p16)", "Média (p50)", "Alta (p84)")))]
+
+ggplot(dataset_aux, aes(esforco, dass_previsto, colour = nivel)) +
+  geom_line(linewidth = 1.3) +
+  theme(text = element_text(size = 15)) +
+  labs(title = tr("Direct effect of effort on the DASS-21 by level of overcommitment",
+                  "Efeito direto do esforço sobre o DASS-21 por nível de superdedicação"),
+       x = tr("Effort", "Esforço"), y = tr("Change in the predicted DASS-21", "Variação do DASS-21 previsto"),
+       colour = tr("Overcommitment", "Superdedicação"))
+```
+
+::: {.content-visible when-profile="en"}
+Effort reduces the perceived reward (a = `r round(e5[["a"]], 2)`), and less reward means more symptoms (b = `r round(e5[["b"]], 2)`), an indirect effect of `r round(e5[["indireto"]], 2)` per point of effort. The interaction between effort and overcommitment is significant: the direct effect of effort is `r round(e5[["direto_baixo"]], 2)` for bank workers with low overcommitment and grows to `r round(e5[["direto_alto"]], 2)` for those with high overcommitment. **The same effort hurts more those who dedicate themselves excessively to the work.**
+
+## Psychological damage
+The same factors also explain the second outcome of the study. In the model for psychological damage (EADRT), the DASS-21 enters as a predictor, together with overcommitment, harassment, socio-professional relations and psychiatric follow-up:
+:::
+
+::: {.content-visible when-profile="pt"}
+O esforço reduz a recompensa percebida (a = `r round(e5[["a"]], 2)`), e menos recompensa significa mais sintomas (b = `r round(e5[["b"]], 2)`), um efeito indireto de `r round(e5[["indireto"]], 2)` por ponto de esforço. A interação entre esforço e superdedicação é significativa: o efeito direto do esforço é de `r round(e5[["direto_baixo"]], 2)` para bancários com superdedicação baixa e cresce para `r round(e5[["direto_alto"]], 2)` para os de superdedicação alta. **O mesmo esforço faz mais mal a quem se dedica excessivamente ao trabalho.**
+
+## Dano psicológico
+Os mesmos fatores também explicam o segundo desfecho do estudo. No modelo para o dano psicológico (EADRT), o DASS-21 entra como preditor, junto com superdedicação, assédio, relações socioprofissionais e acompanhamento psiquiátrico:
+:::
+
+```{r}
+fit_dano <- lm(dano_psico ~ superdedicacao + acomp_psiq + assedio + relacoes + dass21, data = dataset)
+summary(fit_dano)
+vif(fit_dano)
+```
+
+```{r, include = FALSE}
+beta_dano <- coef(lm(scale(dano_psico) ~ scale(superdedicacao) + acomp_psiq + assedio + scale(relacoes) + scale(dass21), data = dataset))
+```
+
+::: {.content-visible when-profile="en"}
+The model explains `r round(100 * summary(fit_dano)$adj.r.squared, 1)`% of the psychological damage. The DASS-21 is by far the strongest predictor (a standardised coefficient of `r round(beta_dano[["scale(dass21)"]], 2)`), followed by overcommitment and the socio-professional relations. Psychiatric follow-up appears with a positive coefficient: it does not cause damage, it marks the cases that are already more serious and in treatment.
+
+## How the analyses converge
+Each analysis answers a different question, and together they point in the same direction:
+
+1. **The measures work.** The confirmatory factor analysis validates the DASS-21, the work context and the work-related damage. The only fragile point is the reward of the ERI, where job security behaves as a part of the pressure of the work.
+2. **Overcommitment is the central factor.** It is the construct most correlated with the symptoms, it has the strongest effect in the linear and ordinal regressions, it mediates the effect of the effort-reward imbalance and it amplifies the effect of effort.
+3. **The work context matters beyond the individual.** Harassment, poor socio-professional relations and the pressure of sales targets (BEST-8) increase the symptoms in every model, and job security and promotion protect.
+4. **Symptoms and damage are two faces of the same suffering.** The DASS-21 explains most of the psychological damage, which closes the chain proposed by the theoretical framework: an adverse work context, filtered by overcommitment, becomes symptoms and then damage to health.
+
+The same instrument, the DASS-21, and the same type of question, what is associated with mental suffering at work, appear in [Project 6.2](project06_2.html), now with administrative data and two measurements over time.
+:::
+
+::: {.content-visible when-profile="pt"}
+O modelo explica `r round(100 * summary(fit_dano)$adj.r.squared, 1)`% do dano psicológico. O DASS-21 é de longe o preditor mais forte (coeficiente padronizado de `r round(beta_dano[["scale(dass21)"]], 2)`), seguido pela superdedicação e pelas relações socioprofissionais. O acompanhamento psiquiátrico aparece com coeficiente positivo: ele não causa dano, ele marca os casos que já são mais graves e estão em tratamento.
+
+## Como as análises convergem
+Cada análise responde a uma pergunta diferente, e juntas apontam na mesma direção:
+
+1. **As medidas funcionam.** A análise fatorial confirmatória valida o DASS-21, o contexto de trabalho e os danos relacionados ao trabalho. O único ponto frágil é a recompensa do ERI, em que a segurança no emprego se comporta como parte da pressão do trabalho.
+2. **A superdedicação é o fator central.** É o construto mais correlacionado com os sintomas, tem o efeito mais forte nas regressões linear e ordinal, medeia o efeito do desequilíbrio esforço-recompensa e amplifica o efeito do esforço.
+3. **O contexto de trabalho importa para além do indivíduo.** Assédio, relações socioprofissionais ruins e a pressão das metas de venda (BEST-8) aumentam os sintomas em todos os modelos, e segurança no emprego e promoção protegem.
+4. **Sintomas e danos são duas faces do mesmo sofrimento.** O DASS-21 explica a maior parte do dano psicológico, o que fecha a cadeia proposta pelo referencial teórico: um contexto de trabalho adverso, filtrado pela superdedicação, vira sintomas e depois dano à saúde.
+
+O mesmo instrumento, o DASS-21, e o mesmo tipo de pergunta, o que se associa ao sofrimento mental no trabalho, aparecem no [Projeto 6.2](project06_2.html), agora com dados administrativos e duas medições ao longo do tempo.
+:::
+
+```{r}
+#Cleaning the environment
+rm(dataset_aux, matriz, fit_perfil_2ordem)
+invisible(gc())
+```
